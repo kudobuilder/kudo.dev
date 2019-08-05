@@ -7,7 +7,7 @@ type: docs
 
 ## Dependencies
 
-Kafka depends on Zookeeper so we need to run it first. Follow the [Zookeeper example](/docs/examples/apache-zookeeper/) to run a basic cluster.
+Kafka depends on Zookeeper so we need to run it first. Follow the [Zookeeper example](apache-zookeeper.md) to run a basic cluster.
 
 ## Run Kafka
 
@@ -29,7 +29,7 @@ kafka-deploy-91712000   13s
 zk-deploy-392770000     3m
 ```
 
-The statefulset defined in the `OperatorVersion` comes up with 3 pods:
+The stateful set defined in the `OperatorVersion` comes up with 3 pods:
 
 ```bash
 $ kubectl get statefulset kafka-kafka
@@ -48,4 +48,4 @@ zk-zookeeper-1   1/1     Running   0          6m56s
 zk-zookeeper-2   1/1     Running   0          6m56s
 ```
 
-You can find more details around configuring Kafka Cluster in [KUDO Kafka documentation](https://github.com/kudobuilder/operators/tree/master/repository/kafka)
+You can find more details around configuring a Kafka Cluster in the [KUDO Kafka documentation](https://github.com/kudobuilder/operators/tree/master/repository/kafka).

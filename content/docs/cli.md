@@ -1,41 +1,20 @@
----
-title: CLI Usage
-type: docs
-menu: docs
----
 # CLI Usage
 
 This document demonstrates how to use the CLI but also shows what happens in KUDO under the hood, which can be helpful when troubleshooting.
 
-## Table of Contents
+<h2>Table of Contents</h2>
 
-   * [CLI Usage](#cli-usage)
-      * [Table of Contents](#table-of-contents)
-      * [Kubectl KUDO Plugin](#kubectl-kudo-plugin)
-         * [Requirements](#requirements)
-         * [Install](#install)
-         * [Commands](#commands)
-         * [Flags](#flags)
-         * [Environment Variables](#environment-variables)
-         * [Examples](#examples)
-            * [Install a Package](#install-a-package)
-            * [Install a package overriding instance name and parameters](#install-a-package-overriding-instance-name-and-parameters)
-            * [Get Instances](#get-instances)
-            * [Get the Status of an Instance](#get-the-status-of-an-instance)
-            * [Delete an Instance](#delete-an-instance)
-            * [Get the History to PlanExecutions](#get-the-history-to-planexecutions)
-            * [Package an Operator](#package-an-operator)
-
+[[toc]]
 
 ## Setup the KUDO Kubectl Plugin
 
 ### Requirements
 
 - `kubectl` version `1.13.0` or newer
-- KUDO CRDs installed to your cluster and KUDO controller is running. See the [getting started guide](/docs/getting-started/) for instructions
+- KUDO CRDs installed to your cluster and KUDO controller is running. See the [getting started guide](README.md) for instructions
 - `kubectl kudo` is running outside your cluster
 
-### Install
+### Installation
 
 You can either install the CLI plugin using `brew`:
 
@@ -52,39 +31,78 @@ make cli-install
 
 ## Commands
 
-| Syntax                                     | Description                                                                                   |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| `kubectl kudo install <name> [flags]`      | Install an Operator from the official [KUDO repo](https://github.com/kudobuilder/operators). |
-| `kubectl kudo get instances [flags]`       | Show all available instances.                                                                 |
-| `kubectl kudo package <operator_folder> [flags]` | Packages an operator in a folder into a tgz file                                        |
-| `kubectl kudo plan status [flags]`         | View all available plans.                                                                     |
-| `kubectl kudo plan history <name> [flags]` | View all available plans.                                                                     |
-| `kubectl kudo version`                     | Print the current KUDO package version.                                                       |
-| `kubectl kudo update`                      | Update installed operator parameters.
-| `kubectl kudo upgrade`                     | Upgrade installed operator from one version to another.
+::: flag kubectl kudo install &lt;name&gt; [flags]
+Install an Operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
+:::
+
+::: flag kubectl kudo get instances [flags]
+Show all available instances.
+:::
+
+::: flag kubectl kudo package &lt;operator_folder&gt; [flags]
+Packages an operator in a folder into a tgz file.
+:::
+
+::: flag kubectl kudo plan status [flags]
+View all available plans.
+:::
+
+::: flag kubectl kudo plan history &lt;name&gt; [flags]
+View all available plans.
+:::
+
+::: flag kubectl kudo version
+Print the current KUDO package version.
+:::
+
+::: flag kubectl kudo update
+Update installed operator parameters.
+:::
+
+::: flag kubectl kudo upgrade
+Upgrade installed operator from one version to another.
+:::
 
 ## Flags
 
-```
-Usage:
-  kubectl-kudo install <name> [flags]
+::: tip Usage
+`kubectl-kudo install <name> [flags]`
+:::
 
-Flags:
-      --auto-approve              Skip interactive approval when existing version found. (default "false")
-  -h, --help                      help for install
-      --instance string           The instance name. (default to Operator name)
-      --kubeconfig string         The file path to Kubernetes configuration file. (default "$HOME/.kube/config")
-      --namespace string          The namespace used for the operator installation. (default "default")
-      --package-version string    A specific package version on the official GitHub repo. (default to the most recent)
-  -p, --parameter stringArray     The parameter name and value separated by '='
-```
+::: flag --auto-approve
+Skip interactive approval when existing version found. (default `false`)
+:::
+
+::: flag -h, --help
+help for install
+:::
+
+::: flag --instance (string)
+The instance name. (default: Operator name)
+:::
+
+::: flag --kubeconfig (string)
+The file path to Kubernetes configuration file. (default: "$HOME/.kube/config")
+:::
+
+::: flag --namespace (string)
+The namespace used for the operator installation. (default: "default")
+:::
+
+::: flag --package-version (string)
+A specific package version on the official GitHub repo. (default to the most recent)
+:::
+
+::: flag -p, --parameter (stringArray)
+The parameter name and value separated by '='
+:::
 
 ## Examples
 
 ### Install a Package
 
 There are four options how to install a package. For development you can install packages from your local filesystem or local tgz file.
-For testing or working without a repository it is possible to install via a url location. The last option is installation from the package repository.
+For testing, or working without a repository, it is possible to install from a URL. Another option is to install from the package repository.
 
 Installation during development can use a relative or absolute path to the package folder.
 ```bash
@@ -103,9 +121,9 @@ To install official kafka package you have to do the following:
 kubectl kudo install kafka
 ```
 
-Both of these options will install new instance of that operator into your cluster. By default the instance name will be generated.
+Both of these options will install new instance of that operator into your cluster. By default, the instance name will be generated.
 
-#### Install a package overriding instance name and parameters
+### Install a package overriding instance name and parameters
 
 Use `--instance` and `--parameter`/`-p` for setting an Instance name and Parameters, respectively:
 
@@ -126,7 +144,7 @@ my-kafka-name   6s
 You can use the `get` command to get a list of all current instances:
 
 ```bash
-kubectl kudo get instances --namespace=<default> --kubeconfig=<$HOME/.kube/config>`
+kubectl kudo get instances --namespace=<default> --kubeconfig=<$HOME/.kube/config>
 ```
 
 Example:

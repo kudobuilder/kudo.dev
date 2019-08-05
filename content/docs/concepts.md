@@ -1,9 +1,3 @@
----
-title: Concepts
-type: docs
-menu: docs
----
-
 # Concepts
 
 ## Application

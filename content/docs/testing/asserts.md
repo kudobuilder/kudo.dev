@@ -9,7 +9,7 @@ weight: 4
 
 # Asserts
 
-Test asserts are the part of a [test step](/docs/testing/steps) that define the state to wait for Kubernetes to reach. It is possible to match specific objects by name as well as match any object that matches a defined state.
+Test asserts are the part of a [test step](steps.md) that define the state to wait for Kubernetes to reach. It is possible to match specific objects by name as well as match any object that matches a defined state.
 
 * [Format](#format)
 * [Getting a resource from the cluster](#getting-a-resource-from-the-cluster)
@@ -19,7 +19,7 @@ Test asserts are the part of a [test step](/docs/testing/steps) that define the 
 
 The test assert file for a test step is found at `$index-assert.yaml`. So, if the test step index is `00`, the assert should be called `00-assert.yaml`. This file can contain any number of objects to match on. If the objects have a namespace set, it will be respected, but if a namespace is not set, then the test harness will look for the objects in the test case's namespace.
 
-By default, a test step will wait for up to 30 seconds for the defined state to reached, see the [configuration reference](/docs/testing/reference#TestAssert) for documentation on configuring test asserts.
+By default, a test step will wait for up to 30 seconds for the defined state to reached, see the [configuration reference](reference.md#testassert) for documentation on configuring test asserts.
 
 Note that an assertion file is optional, if it is not present, the test step will be considered successful immediately, once the objects in the test step have been created. It is also valid to create a test step that does not create any objects, but only has an assertion file.
 

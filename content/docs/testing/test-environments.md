@@ -1,12 +1,3 @@
----
-title: Test Environments
-type: docs
-menu:
-  docs:
-    parent: 'Testing'
-weight: 2
----
-
 # Test Environments
 
 The kudo test harness can run tests against several different test environments, allowing your test suites to be used in many different environments.
@@ -106,7 +97,7 @@ kubectl:
 
 The above configuration would start kind, install all of the CRDs in `tests/crds/`, and run all of the commands defined in `kubectl` before running the tests in `testDirs`.
 
-See the [configuration reference](/docs/testing/reference#TestSuite) for documentation on configuring test suites.
+See the [configuration reference](reference.md#testsuite) for documentation on configuring test suites.
 
 ## Starting KUDO
 

@@ -1,8 +1,4 @@
----
-title: Developing operators
-type: docs
-menu: docs
----
+# Developing operators
 
 This guide will provide introduction to creating KUDO operators, you will learn about the structure of the package and the template language to use.
 
@@ -72,7 +68,7 @@ spec:
             - containerPort: 80
 ```
 
-This is a pretty normal kubernetes yaml file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `{{ .Params.Replicas }}`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
+This is a pretty normal kubernetes yaml file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.Replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
 
 ```yaml
 replicas:
@@ -80,7 +76,7 @@ replicas:
   default: 2
 ```
 
-Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](https://kudo.dev/docs/cli/), if you haven't already.
+Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already.
 
 **Note:** If you want to install the result of the following steps with doing them manually, you can clone the KUDO repository and run the example from there:
 
@@ -196,10 +192,10 @@ Everything that is placed into the templates folder is treated as a template and
 
 ### Variables provided by KUDO
 
-- `{{ .OperatorName }}` - name of the operator the template belongs to
-- `{{ .Name }}` - name of the instance to which kubernetes objects created from this template will belong to
-- `{{ .Namespace }}` - namespace in which instances are created
-- `{{ .Params }}` - an object containing the list of parameters you defined in `params.yaml` with values you specified, or provided via overrides during installation
+- `.OperatorName` - name of the operator the template belongs to
+- `.Name` - name of the instance to which kubernetes objects created from this template will belong to
+- `.Namespace` - namespace in which instances are created
+- `.Params` - an object containing the list of parameters you defined in `params.yaml` with values you specified, or provided via overrides during installation
 
 A more complex example using some of the built-in variables could look like the following `templates/service.yaml`
 
@@ -230,4 +226,4 @@ spec:
 
 ## Testing your operator
 
-You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](/docs/testing).
+You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](testing.md).

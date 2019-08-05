@@ -10,7 +10,7 @@ menu: docs
 This demo uses a different toy operator described in the `../config/samples/upgrade.yaml` file.  There are two `Operator` versions defined for this `Operator`, and each `OperatorVersion` has three plans: `deploy`, `update` and `upgrade`.
 
 
-# Deploy Plan
+## Deploy Plan
 
 The deploy plan is automatically run for new instances:
 
@@ -38,11 +38,11 @@ deploy for v1
 Going to sleep for 15 seconds
 ```
 
-# Update the Instance
+## Update the Instance
 
 An update of the instance is run when the Spec of the Instance is changed, but the OperatorVersion remains the same:
 
-```
+```bash
 kubectl patch instance up -p '{"spec":{"parameters":{"SLEEP":"60"}}}' --type=merge
 instance.kudo.dev/up patched
 ```
@@ -60,7 +60,7 @@ update for v1
 Going to sleep for 60 seconds
 ```
 
-# Upgrade
+## Upgrade
 
 Upgrades occur when the `OperatorVersion` is changed.  The Upgrade from the NEW `OperatorVersion` is executed:
 

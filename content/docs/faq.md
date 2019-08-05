@@ -1,29 +1,6 @@
----
-title: FAQ
-type: docs
-menu: docs
----
-
 # Frequently Asked Questions
 
-## Table of Contents
-
-- [Frequently Asked Questions](#frequently-asked-questions)
-  - [Table of Contents](#table-of-contents)
-  - [What is KUDO?](#what-is-kudo)
-  - [When would you use KUDO?](#when-would-you-use-kudo)
-  - [What is an Operator?](#what-is-an-operator)
-  - [What is a deployable service?](#what-is-a-deployable-service)
-  - [What is an OperatorVersion?](#what-is-an-operatorversion)
-  - [What is an Instance?](#what-is-an-instance)
-  - [What is a Plan?](#what-is-a-plan)
-  - [What is a PlanExecution?](#what-is-a-planexecution)
-  - [What is a Parameter?](#what-is-a-parameter)
-  - [What is a Deployment Strategy?](#what-is-a-deployment-strategy)
-  - [What is a Trigger?](#what-is-a-trigger)
-  - [When I create an Operator, will it automatically create new CRDs?](#when-i-create-an-operator-will-it-automatically-create-new-crds)
-  - [How does it work from a RBAC perspective?](#how-does-it-work-from-a-rbac-perspective)
-  - [Is the dependency model an individual controller per workload?](#is-the-dependency-model-an-individual-controller-per-workload)
+[[toc]]
 
 ## What is KUDO?
 
@@ -41,7 +18,7 @@ KUDO should be used any time you would use an Operator. It can provide an advanc
 `Operator` is the high-level description of a deployable service which is represented as an CRD object. An example `Operator` is the [kafka-operator.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/kafka-operator.yaml) that you find in the [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
 
 Kafka Operator Example
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: Operator
 metadata:
@@ -68,7 +45,7 @@ An `OperatorVersion` is the particular implementation of an `Operator` containin
 
 An example for an `OperatorVersion` is the [kafka-operatorversion.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/kafka-operatorversion.yaml) that you find in the [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: OperatorVersion
 metadata:
@@ -111,7 +88,7 @@ An `Instance` is a CRD object used as *linker* which ties an application instant
 
 Plans are how KUDO operators convey progress through service management operations, such as repairing failed tasks and/or rolling out changes to the service’s configuration. Each Plan is a tree with a fixed three-level hierarchy of the Plan itself, its Phases, and Steps within those Phases. These are all collectively referred to as “Elements”. The fixed tree hierarchy was chosen in order to simplify building user interfaces that display plan content. This three-level hierarchy can look as follows:
 
-```bash
+```
 Plan foo
 ├─ Phase bar
 │  ├─ Step qux
@@ -151,9 +128,9 @@ When a Parameter is updated in an `Instance` object, it defines the "update stra
 
 That is the eventual goal. We want each OperatorVersion (those versions of an Operator) to be a different API version of a command CRD that gets mapped to the Operator (see also image below). An Operator creates a CRD and then the versions of those are defined by the OperatorVersion.
 
-![KUDO dynamic CRD](../images/kudo-dymanic-crd.png?10x20)
+![KUDO dynamic CRD](/images/kudo-dymanic-crd.png?10x20)
 
-## How does it work from a RBAC perspective?
+## How does it work from an RBAC perspective?
 
 Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion`,`Instance` and `PlanExecution` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
 

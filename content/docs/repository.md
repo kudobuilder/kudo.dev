@@ -1,9 +1,4 @@
----
-title: Operator repository
-type: docs
-menu: docs
----
-# Operator repository
+# Operator Repository
 
 KUDO CLI comes with built-in official repository of verified operators. Every time you use `kudo install ...` command, it pulls the package from this repository.
 

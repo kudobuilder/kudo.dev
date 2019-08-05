@@ -1,10 +1,7 @@
 ---
-title: Get Involved !
-weight: 1
-type: community
-menu: "community"
-aliases: ["/community/"]
 ---
+
+# Get Involved!
 
 ## Online Community Meetings
 
@@ -33,7 +30,7 @@ Contribute to KUDO development
 
 Learn more about KUDO by attending a talk or meetup. 
 
-- [Events](/community/events)
+- [Events](events.md)
 
 ## Community Content
 

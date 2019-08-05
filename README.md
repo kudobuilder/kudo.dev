@@ -16,4 +16,4 @@ The KUDO web site is build using [VuePress](https://v1.vuepress.vuejs.org/)
 
 ### Custom Components
 
-Custom components that you should consider using when writing documentation are described [here](/internal-docs/).
+Custom components that you should consider using when writing documentation are described [here](content/internal-docs/README.md).

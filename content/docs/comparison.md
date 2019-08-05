@@ -1,15 +1,8 @@
----
-title: Comparison
-menu: docs
----
-# Comparison to other App Def templates
-
+# Comparison
 
 ##  KUDO
 
- KUDO focuses on multi-step (plan) applications that require the order to be specific to function
-
-
+KUDO focuses on multi-step (plan) applications that require the order to be specific to function
 
 Developer Focused Vs App Operator Focused
 Developer focused tools have great use case in sync-ing code with runtime for testing.  App Operators focus on Application packaging for reusability/transparency/upgradability/application lifecycle management
@@ -64,7 +57,7 @@ What are the control mechanisms?  CRDs allow for RBAC control at a namespace lev
 
 ## Discoverable Repo for Applications
 
-It should be easy to convert a Helm chart into an OperatorVersion since we can just "render" the chart.  Additionally we plan to build the Universe Shim to accept any DC/OS operator.  Thus we should be able to pull from either of these public repos of apps (and any internally hosted app site)
+It should be easy to convert a Helm chart into an OperatorVersion since we can just "render" the chart. Additionally we plan to build the Universe Shim to accept any DC/OS operator. Thus we should be able to pull from either of these public repos of apps (and any internally hosted app site)
 
 
 ## Comparison Table

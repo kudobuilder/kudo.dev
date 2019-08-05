@@ -40,7 +40,7 @@ The test harness would run test step `00` and once completed, run test step `01`
 
 A namespace is created by the test harness for each test case, so if an object in the step does not have a namespace set, then it will be created in the test case's namespace. If a namespace is set, then that namespace will be respected throughout the tests (making it possible to test resources that reside in standardized namespaces).
 
-See the [configuration reference](/docs/testing/reference#TestStep) for documentation on configuring test steps.
+See the [configuration reference](reference.md#teststep) for documentation on configuring test steps.
 
 # Creating objects
 
