@@ -1,9 +1,12 @@
 ---
-title: Announcing KUDO 0.3.0
 date: 2019-06-28
 ---
 
+# Announcing KUDO 0.3.0
+
 We are proud to announce the release of KUDO v0.3.0! This release introduces a new package format, a package repository, and introduces a test harness to help with end-to-end testing. It also deprecates the term "Framework" in favor of "Operator".
+
+<!-- more -->
 
 ## What is KUDO?
 
@@ -58,7 +61,7 @@ This release also introduces a repository which allows for automatic discovery o
 kudoctl install now supports `--skip-instance` flag which skips installing an Instance when installing Operator and OperatorVersions. This is useful in a testing scenario - we install all of the Operators and OperatorVersions but don't want to install the Instances until later.
 
 ### Test Harness
-The test harness outlined in [KEP-8](https://github.com/kudobuilder/kudo/blob/v0.3.0/keps/0008-operator-testing.md) has been implemented. The [test harness](https://kudo.dev/docs/testing) provides a mechanism for operator developers to declaratively create end-to-end integration tests for their operators using only Kubernetes YAML. [Example tests](https://github.com/kudobuilder/operators/tree/v0.3.0/repository/zookeeper/tests/zookeeper-upgrade-test) are provided for the zookeeper operator.
+The test harness outlined in [KEP-8](https://github.com/kudobuilder/kudo/blob/v0.3.0/keps/0008-operator-testing.md) has been implemented. The [test harness](../docs/testing) provides a mechanism for operator developers to declaratively create end-to-end integration tests for their operators using only Kubernetes YAML. [Example tests](https://github.com/kudobuilder/operators/tree/v0.3.0/repository/zookeeper/tests/zookeeper-upgrade-test) are provided for the zookeeper operator.
 
 ### Operator Dependency Management Removed (For Now)
 The proper handling of operator dependencies is more complex than first imagined / implemented. This fact was called out in [Issue 438](https://github.com/kudobuilder/kudo/issues/438). For this reason we have removed the `all-dependencies` flag from `kudoctl`. This feature needs to be designed through the KEP process and will be implemented properly in the future.
@@ -67,10 +70,10 @@ The proper handling of operator dependencies is more complex than first imagined
 
 Additionally, the team closed dozens of issues related to bugs and performance issues.
 
-To see the full changelog and the list of contributors who contribued to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.3.0) page.
+To see the full changelog and the list of contributors who contribtued to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.3.0) page.
 
 ## What's Next?
 
 Now that KUDO v0.3.0 has shipped, the team will begin planning and executing on v0.4.0. The focus of v0.4.0 is to provide operator extensions to provide KUDO's sequencing logic to formats including Helm Charts and [CNAB](https://cnab.io) bundles. v0.4.0 will also focus on the operator release process for operators being released into the repository.
 
-[Get started](/docs/getting-started) with KUDO today. Our [community](/community) is ready for feedback to make KUDO even better!
+[Get started](../docs/README.md) with KUDO today. Our [community](../community/README.md) is ready for feedback to make KUDO even better!

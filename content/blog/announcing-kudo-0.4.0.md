@@ -1,9 +1,12 @@
 ---
-title: Announcing KUDO 0.4.0
 date: 2019-07-31
 ---
 
+# Announcing KUDO 0.4.0
+
 We are proud to announce the release of KUDO v0.4.0! This release enhances the test harness and includes changes to make KUDO a good citizen, most notably the `apiVersion` fields were updated from the `k8s.io` domain to the `kudo.dev` domain.
+
+<!-- more -->
 
 ## Release Highlights
 
@@ -33,7 +36,7 @@ Read the [test docs](https://github.com/kudobuilder/kudo/blob/master/test/README
 
 KUDO now allows for the installation of an operator from an URL to a tgz bundle. Installation previous supported installation from the local file system which was great for a developer and installation from the repository which is great after an operator is released. Installation from an URL is seen as a way to get help from testers prior to release.
 
-To install:  `kubectl kudo install http://kudo.dev/zk.tar.gz`
+To install: `kubectl kudo install http://kudo.dev/zk.tar.gz`
 
 ### Remove interactive install
 
@@ -51,11 +54,11 @@ It is not possible anymore to pass multiple arguments to `kudo install` command.
 
 Additionally, the team closed dozens of issues related to bugs and performance issues.
 
-To see the full changelog and the list of contributors who contribued to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.4.0) page.
+To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.4.0) page.
 
 ## What's Next?
 
 Now that KUDO v0.4.0 has shipped, we will shortly after follow with v0.5.0 containing features like kudo upgrade or test harness enhanced with ability to execute kubectl commands. After that, in 0.6.0, we will focus on implementing extensions as described in [KEP-12](https://github.com/kudobuilder/kudo/blob/master/keps/0012-operator-extensions.md) as well as improvements for observability and debugging.
 See the [KUDO Roadmap](https://github.com/orgs/kudobuilder/projects/2) for details.
 
-[Get started](/docs/getting-started) with KUDO today. Our [community](/community) is ready for feedback to make KUDO even better!
+[Get started](../docs/README.md) with KUDO today. Our [community](../community/README.md) is ready for feedback to make KUDO even better!
