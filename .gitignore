@@ -1,43 +1,12 @@
-### Project specific
-bin/
-vendor/
-hack/code-gen
-hack/controller-gen
-test/.git-credentials
+### build tooling
+node_modules/
+dist/
+
+### IDE
+.idea/
 
 ### mac
 .DS_Store
-
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-
-### Go tooling
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-
-### Goland IDEA
-.idea/
-
-### gorelease
-dist/
-
-### VS Code
-.vscode/
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
 
 ### vim
 # Swap
@@ -49,13 +18,3 @@ dist/
 
 # Session
 Session.vim
-
-# Temporary
-.netrwhist
-*~
-# Auto-generated tag files
-tags
-# Persistent undo
-[._]*.un~
-kubeconfig
-.kube

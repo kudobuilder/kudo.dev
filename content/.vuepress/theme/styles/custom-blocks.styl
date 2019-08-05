@@ -1,0 +1,27 @@
+.custom-block
+  .custom-block-title
+    font-weight 600
+    margin-bottom -0.4rem
+  &.tip, &.warning, &.danger
+    padding .1rem 1.5rem
+    border-left-width .5rem
+    border-left-style solid
+    margin 1rem 0
+    color $textColor
+    a
+      color $accentColor
+  &.tip
+    background-color $tipBackgroundColor
+    border-color $tipHighlightColor
+    .custom-block-title
+      color $tipHighlightColor
+  &.warning
+    background-color $warnBackgroundColor
+    border-color $warnHighlightColor
+    .custom-block-title
+      color $warnHighlightColor
+  &.danger
+    background-color $dangerBackgroundColor
+    border-color $dangerHighlightColor
+    .custom-block-title
+      color $dangerHighlightColor

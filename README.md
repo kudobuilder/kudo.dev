@@ -12,8 +12,8 @@ The KUDO web site is build using [VuePress](https://v1.vuepress.vuejs.org/)
 
 ## Documentation Guidelines
 
-**TODO:** add or link high level documentation guidelines, like 
+**TODO:** add or link high level documentation guidelines. 
 
-## Custom Components
+### Custom Components
 
-**TODO:** list custom components and their usage.
+Custom components that you should consider using when writing documentation are described [here](/internal-docs/).
