@@ -1,6 +1,6 @@
 module.exports = {
     title: 'KUDO',
-    base: '/www/',
+    base: '/',
     themeConfig: {
         logo: '/images/kudo_horizontal_color@2x.png',
         sidebar: {
