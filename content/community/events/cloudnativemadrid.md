@@ -1,0 +1,12 @@
+---
+event: Cloud Native Madrid
+topic: KUDO - Kubernetes Operators, the easy way
+speaker: Nick Jones
+date: 2019-07-09
+location: Madrid, Spain
+url: https://www.meetup.com/Cloud-Native-Madrid/events/262410811/
+---
+
+<!-- some more info about the event could go here -->
+
+<!-- more -->

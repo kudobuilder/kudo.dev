@@ -1,0 +1,12 @@
+---
+event: Kubernetes and Cloud Native Arkansas Meetup
+topic: KUDO
+speaker: Chris Mays
+date: 2019-09-17
+location: Arkansas, US
+url: https://www.meetup.com/Kubernetes-and-Cloud-Native-Arkansas/events/263806108
+---
+
+<!-- some more info about the event could go here -->
+
+<!-- more -->

@@ -1,17 +1,19 @@
-# KUDO
+# KUDO Website
 
-<img src="https://kudo.dev/images/kudo_horizontal_color@2x.png" srcset="https://kudo.dev/images/kudo_horizontal_color@2x.png 2x" width="256">
+The KUDO web site is build using [VuePress](https://v1.vuepress.vuejs.org/)
 
-[![CircleCI](https://circleci.com/gh/kudobuilder/kudo.svg?style=svg)](https://circleci.com/gh/kudobuilder/kudo)
+## Building the site
 
-Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes Operators covering the entire application lifecycle.
+### Prerequisites
 
-## Getting Started
+* Install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 
-Please refer to the [getting started guide](https://kudo.dev/docs/getting-started/) on the website.
+**TODO:** add installation steps
 
-![Quick Start](docs/images/quickstart-0.1.0.gif)
+## Documentation Guidelines
 
-## Community, Discussion, Contribution, and Support
+**TODO:** add or link high level documentation guidelines, like 
 
-Learn how to engage with the KUDO community on the [community page](https://kudo.dev/community/).
+## Custom Components
+
+**TODO:** list custom components and their usage.
