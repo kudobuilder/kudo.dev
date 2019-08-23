@@ -1,9 +1,9 @@
 # Events
 
-Events are [rendered](../community/events.md) from simple markdown pages via the `EventsIndex` component with only a few things you need to know:
+Events are [rendered](../community/events.md) via the `EventsIndex` [component](https://github.com/kudobuilder/www/blob/master/content/.vuepress/components/EventsIndex.vue) from simple markdown pages located in the [events folder](https://github.com/kudobuilder/www/tree/master/content/community/events). The format is as follows:
 
 ```markdown
-<!-- event.md -->
+<!-- 2019-07-kubernetes-edinburgh.md -->
 ---
 event: Kubernetes Edinburgh
 topic: KUDO - Kubernetes Operators, the easy way
@@ -19,7 +19,7 @@ Please don't use headers here.
 <!-- more -->
 ```
 
-Posts will be ordered by date with the more recent posts naturally listed first.
+Events will be ordered by date with the next upcoming events naturally listed first.
 
 ## Properties
 
@@ -46,7 +46,7 @@ The location in format `<City, Country>`
 :::
 
 ::: flag url
-(optional) A URL providing more information (e.g. the meetup event URL).
+(optional) A URL providing more information (e.g. the meetup event URL). If you don't know the URL yet, leave it empty.
 :::
 
 ::: flag excerpt
