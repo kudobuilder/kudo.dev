@@ -3,7 +3,7 @@
 Events are [rendered](../community/events.md) via the `EventsIndex` [component](https://github.com/kudobuilder/www/blob/master/content/.vuepress/components/EventsIndex.vue) from simple markdown pages located in the [events folder](https://github.com/kudobuilder/www/tree/master/content/community/events). The format is as follows:
 
 ```markdown
-<!-- 2019-07-kubernetes-edinburgh.md -->
+<!-- kubernetes-edinburgh-2019-07.md -->
 ---
 event: Kubernetes Edinburgh
 topic: KUDO - Kubernetes Operators, the easy way
@@ -59,8 +59,7 @@ An excerpt will only be rendered, if such comment exists. Please do not use head
 
 ## Naming Convention
 
-Events will be sorted according to their date. In order to easily find a file in a growing list, please name them according to this naming convention: `<YYYY-MM>-<event>.md`. Add dashes for readability, for example  
-`2019-07-cloud-native-bulgaria.md`
+Events will be sorted according to their date, but when searching for a specific one to edit, you'll likely have the **event** in mind, not so much the date. In order to easily find a file in a growing list, please name them according to this naming convention: `<event>-<YYYY-MM>.md`. Add dashes for readability, for example `kubernetes-edinburgh-2019-07.md`.
 
 ## Component Properties
 
