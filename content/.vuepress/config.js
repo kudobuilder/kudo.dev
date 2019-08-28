@@ -6,6 +6,7 @@ module.exports = {
         sidebar: {
             '/docs/': [
               '',
+              'architecture',
               'cli',
               'comparison',
               'concepts',
