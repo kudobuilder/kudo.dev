@@ -33,7 +33,7 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 * Watch Kubernetes KUDO objects and ensure desired state
 * Create KUDO operators and invoke operator plans
 
-Read [concepts](concepts) for more details around operator, operator version and Instances.
+Read [concepts](concepts) for more details around operator, operator version and instance CRDs.
 
 **KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read [repository article](repository) for more details on repositories and operator layout.
 
