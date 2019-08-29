@@ -1,8 +1,8 @@
 ---
 name: Enhancement Request
-about: Suggest an enhancement to the KUDO project
+about: Suggest an enhancement to the KUDO site
 title: ''
-labels: kind/enhancement
+labels: ''
 assignees: ''
 
 ---
