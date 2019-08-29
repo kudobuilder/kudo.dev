@@ -2,7 +2,7 @@
 
 ## The Purpose of KUDO
 
-KUDO is built to help Dev/Ops teams managed Day 2 Operations of Services on Kubernetes, including stateful services through the management of operators. Day 2 in this context refers to the need to support more than just installation. KUDO is built to support upgrades of services along with backup, recovery and the needs of observability. Building Kubernetes operators requires deep knowledge of the underlying service in addition to a deep knowledge of Kubernetes APIs. KUDO is built as an abstraction such that developers can build an operator without focusing on keeping up with the fast past of Kubernetes API changes. To this end KUDO supports the following:
+KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kubernetes, including stateful services through the management of operators. Day 2 in this context refers to the need to support more than just installation. KUDO is built to support upgrades of services along with backup, recovery and the needs of observability. Building Kubernetes operators requires deep knowledge of the underlying service in addition to a deep knowledge of Kubernetes APIs. KUDO is built as an abstraction such that developers can build an operator without focusing on keeping up with the fast past of Kubernetes API changes. To this end KUDO supports the following:
 
 * Create new KUDO operator packages
 * Package operators in tarballs
@@ -17,20 +17,19 @@ KUDO is built to help Dev/Ops teams managed Day 2 Operations of Services on Kube
 
 ## Components
 
-**kudoctl** or `kubectl-kudo` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client. The client is used to aid developers in creating KUDO operators and is used by operators to manage operators in a Kubernetes cluster. The client is capable of:
+**kudoctl** or `kubectl-kudo` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client. The client is used to aid developers in creating KUDO operators and is used ops teams to manage operators in a Kubernetes cluster. The client is capable of:
 
 * Operator development
 * Repository development and management
 * Interacting with the deployed KUDO controller via the KUDO CRDs
   * Installing, Uninstalling operator CRDs and operators
   * Starting or getting status of an operator plan
-  * Upgrading, backing up or restoring operators
+  * Upgrading, updating, backing up or restoring operators
 
 **KUDO CRDs** Extends the Kubernetes API to support KUDO
 
 **KUDO Controller** Is the collection of controllers deployed into the cluster providing the service defined by the KUDO CRDs. It manages the KUDO operators. By default, there is one KUDO controller in the `kudo-system` namespace, however the architecture is flexible allowing for many KUDO controllers in different namespaces if desired. The KUDO controller is responsible for the following:
 
-* Listen to incoming requests from the kudoctl
 * Watch Kubernetes KUDO objects and ensure desired state
 * Create KUDO operators and invoke operator plans
 
@@ -40,8 +39,8 @@ Read [concepts](concepts) for more details around operator, operator version and
 
 ## Implementation
 
-KUDO CLI and controller are written in Go. The CLI uses Kubernetes [client-go](https://github.com/kubernetes/client-go) to communicate to the KUDO controller.
+KUDO CLI and controller are written in Go. The CLI uses Kubernetes [client-go](https://github.com/kubernetes/client-go) to communicate to controller and uses HTTP to communicate to the repository.
 
-The KUDO controller uses the [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime) to communicate to Kubernetes. All state needed for KUDO is stored in CRDs. A separate database is not needed.
+The KUDO controller is built using the [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime) and it's transitive dependencies to communicate to Kubernetes. All state needed for KUDO is stored in CRDs. A separate database is not needed.
 
 KUDO Operators are written in YAML.
