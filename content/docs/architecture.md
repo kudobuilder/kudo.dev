@@ -6,7 +6,7 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 
 * Create new KUDO operator packages
 * Package operators in tarballs
-* Search, Install, Uninstall operators
+* Search, install, uninstall operators
 * Perform backup, restore and upgrade plans
 * Invoke other arbitrary packaged operator plans
 * Creating operator repositories with index files
@@ -20,15 +20,16 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 **kudoctl** or `kubectl-kudo` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client. The client is used to aid developers in creating KUDO operators and is used ops teams to manage operators in a Kubernetes cluster. The client is capable of:
 
 * Operator development
+* Provides end to end test harness execution
 * Repository development and management
 * Interacting with the deployed KUDO controller via the KUDO CRDs
-  * Installing, Uninstalling operator CRDs and operators
+  * Installing, uninstalling operator CRDs and operators
   * Starting or getting status of an operator plan
   * Upgrading, updating, backing up or restoring operators
 
-**KUDO CRDs** Extends the Kubernetes API to support KUDO
+**KUDO CRDs** extends the Kubernetes API to support KUDO
 
-**KUDO Controller** Is the collection of controllers deployed into the cluster providing the service defined by the KUDO CRDs. It manages the KUDO operators. By default, there is one KUDO controller in the `kudo-system` namespace, however the architecture is flexible allowing for many KUDO controllers in different namespaces if desired. The KUDO controller is responsible for the following:
+**KUDO Controller** is a collection of controllers deployed into the cluster into the `kudo-system` namespace providing the service defined by the KUDO CRDs, managing the KUDO operators. The KUDO controller is responsible for the following:
 
 * Watch Kubernetes KUDO objects and ensure desired state
 * Create KUDO operators and invoke operator plans
