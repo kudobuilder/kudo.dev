@@ -1,4 +1,4 @@
-# KUDO Architecture
+# Architecture
 
 ## The Purpose of KUDO
 
