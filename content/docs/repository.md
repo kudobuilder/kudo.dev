@@ -1,12 +1,12 @@
 # Operator Repository
 
-KUDO CLI comes with built-in official repository of verified operators. Every time you use `kudo install ...` command, it pulls the package from this repository.
+The [KUDO CLI](cli.md) comes with a built-in official repository of verified operators. Every time you use the `kudo install <operator>` command, it pulls the specified package from this repository.
 
-## Repository implementation
+## Layout
 
-KUDO can work with any repository exposed over HTTP that conforms the expected structure. The official repository is hosted on Google Cloud Storage.
+KUDO can work with any repository that conforms the expected structure and is exposed over HTTP. The official repository is hosted on Google Cloud Storage.
 
-In the root of the repository we expect `index.yaml` file similar to the following example:
+In the root of a repository we expect an `index.yaml` file similar to the following example:
 
 ```yaml
 apiVersion: v1
@@ -20,12 +20,8 @@ entries:
     version: 0.1.0
 ```
 
-The url leads to a location where the tarball package is hosted. It could be internal as well as external url (inside that repository or outside).
+The `url` points to a location where a tarball package is hosted. These locations can be within the repository, or outside of it.
 
-## How to add new package
+## Managing packages
 
-All official packages right now are mirrored from the [github repository](https://github.com/kudobuilder/operators). To add new operator, create a PR against that repo.
-
-## How to update package
-
-The process here is the same as for adding new package. You need to create PR against the [github repository](https://github.com/kudobuilder/operators).
+As of now, all official packages are mirrored from the [github repository](https://github.com/kudobuilder/operators). To add new operators, or to update an existing operator, create a PR against that repository.

@@ -1,15 +1,15 @@
-# KUDO Architecture
+# Architecture
 
 ## The Purpose of KUDO
 
-KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kubernetes, including stateful services through the management of operators. Day 2 in this context refers to the need to support more than just installation. KUDO is built to support upgrades of services along with backup, recovery and the needs of observability. Building Kubernetes operators requires deep knowledge of the underlying service in addition to a deep knowledge of Kubernetes APIs. KUDO is built as an abstraction such that developers can build an operator without focusing on keeping up with the fast past of Kubernetes API changes. To this end KUDO supports the following:
+KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kubernetes, including stateful services through the management of operators. Day 2 in this context refers to the need to support more than just installation. KUDO is built to support upgrades of services along with backup, recovery and the needs of observability. Building Kubernetes operators requires deep knowledge of the underlying service in addition to a deep knowledge of Kubernetes APIs. KUDO is built as an abstraction such that developers can build an operator without focusing on keeping up with the fast pace of Kubernetes API changes. To this end KUDO supports the following:
 
 * Create new KUDO operator packages
 * Package operators in tarballs
 * Search, install, uninstall operators
 * Perform backup, restore and upgrade plans
 * Invoke other arbitrary packaged operator plans
-* Creating operator repositories with index files
+* Create operator repositories with index files
 
 ## Architecture Diagram
 
@@ -17,26 +17,26 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 
 ## Components
 
-**kudoctl** or `kubectl-kudo` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client. The client is used to aid developers in creating KUDO operators and is used ops teams to manage operators in a Kubernetes cluster. The client is capable of:
+**kubectl-kudo** is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client, which is invoked by `kubectl kudo`. The client is built to aid developers in creating KUDO operators and is used by ops teams to manage operators in a Kubernetes cluster. The client is capable of:
 
 * Operator development
-* Provides end to end test harness execution
+* End to end test harness execution
 * Repository development and management
-* Interacting with the deployed KUDO controller via the KUDO CRDs
-  * Installing, uninstalling operator CRDs and operators
-  * Starting or getting status of an operator plan
-  * Upgrading, updating, backing up or restoring operators
+* Interacting with the deployed KUDO controller via KUDO CRDs
+  * Installing and uninstalling operator CRDs and operators
+  * Starting operator plans and querying their status 
+  * Upgrading, updating, backing up and restoring operators
 
-**KUDO CRDs** extends the Kubernetes API to support KUDO
+**KUDO CRDs** extend the Kubernetes API to support KUDO
 
-**KUDO Controller** is a collection of controllers deployed into the cluster into the `kudo-system` namespace providing the service defined by the KUDO CRDs, managing the KUDO operators. The KUDO controller is responsible for the following:
+**KUDO Controller** is a collection of controllers deployed into the cluster into the `kudo-system` namespace. The KUDO Controller provides the service defined by the related KUDO CRDs, and is managing KUDO operators. The KUDO controller is responsible for:
 
-* Watch Kubernetes KUDO objects and ensure desired state
-* Create KUDO operators and invoke operator plans
+* Watching Kubernetes KUDO objects and ensuring desired state
+* Creating KUDO operators and invoking operator plans
 
-Read [concepts](concepts) for more details around operator, operator version and instance CRDs.
+Read about KUDO's [concepts](concepts.md) for more details around operators, operator versions and instance CRDs.
 
-**KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read [repository article](repository) for more details on repositories and operator layout.
+**KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read about the [operator repository](repository.md) for more details on repositories and operator layout.
 
 ## Implementation
 
