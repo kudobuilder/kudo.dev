@@ -17,7 +17,7 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 
 ## Components
 
-**kudoctl** or `kubectl-kudo` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client. The client is built to aid developers in creating KUDO operators and is used by ops teams to manage operators in a Kubernetes cluster. The client is capable of:
+**kubectl-kudo** is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) command-line client, which is invoked by `kubectl kudo`. The client is built to aid developers in creating KUDO operators and is used by ops teams to manage operators in a Kubernetes cluster. The client is capable of:
 
 * Operator development
 * End to end test harness execution
