@@ -1,32 +1,20 @@
 ---
 name: Bug report
-about: Report a bug encountered while operating KUDO
+about: Report a bug on the KUDO docs site
 title: ''
-labels: kind/bug
-assignees: ''
+labels: ''
+assignees: meichstedt
 
 ---
 
-<!-- Please use this template while reporting a bug and provide as much info as possible. Not doing so may result in your bug not being addressed in a timely manner. Thanks!
-If the matter is security sensitive, please disclose it privately to a security contact: https://github.com/kudobuilder/kudo/blob/master/SECURITY_CONTACTS
+<!-- Please use this template while reporting a docs bug and provide the device used to read the docs,  and a link to the site that's broken plus, if useful, a screenshot. Thanks!
 -->
 
 
-**What happened**:
+**Which page is affected?**:
 
-**What you expected to happen**:
+**What exactly is broken?**:
 
-**How to reproduce it (as minimally and precisely as possible)**:
+**Which device do you use?**:
 
 **Anything else we need to know?**:
-
-**Environment**:
-- Kubernetes version (use `kubectl version`):
-- Kudo version (use `kubectl kudo version`): 
-- Operator:
-- operatorVersion:
-- Cloud provider or hardware configuration:
-- OS (e.g. from /etc/os-release):
-- Kernel (e.g. `uname -a`):
-- Install tools:
-- Others:
