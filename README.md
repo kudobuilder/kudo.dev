@@ -15,6 +15,22 @@ yarn docs:dev
 
 The output will inform you about the address the site is served (usually http://localhost:8080).
 
+#### Via Docker
+You can choose to install and run the above dependencies in a Docker container instead, if you do not wish to pollute your local environment.
+
+First, build the development image with:
+
+```bash
+make dev-image
+```
+
+And then run VuePress in a container from this image by doing:
+
+```bash
+make dev
+```
+
+
 ## Documentation Guidelines
 
 Please follow the [documentation guidelines](https://kudo.dev/internal-docs/#general-guidelines), which are pretty high level for now.
