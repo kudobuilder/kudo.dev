@@ -55,10 +55,10 @@
     },
     methods: {
       displayDay(dateString) {
-        return new Date(dateString).toLocaleDateString('en-US', { day: '2-digit' })
+        return new Date(dateString).toLocaleDateString('en-US', { timeZone: 'UTC', day: '2-digit' })
       },
       displayMonth(dateString) {
-        return new Date(dateString).toLocaleDateString('en-US', { month: 'short' })
+        return new Date(dateString).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short' })
       }
     }
   }
