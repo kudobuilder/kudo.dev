@@ -16,7 +16,7 @@ We use Zoom and every meeting is recorded for those unable to join live.
 Engage with the KUDO community.
 
 
-- [Slack](https://kubernetes.slack.com/messages/kudo/)
+- [Slack](https://kubernetes.slack.com/messages/kudo/) (join k8s slack via [self-invitation link](https://slack.k8s.io/))
 - [Mailing List](https://groups.google.com/d/forum/kudobuilder)
 - [@kudobuilder on Twitter](https://twitter.com/kudobuilder)
 
