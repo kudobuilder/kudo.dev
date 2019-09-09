@@ -7,7 +7,7 @@ Before you get started using KUDO, you need to have a running Kubernetes cluster
 - Setup a Kubernetes Cluster in version `1.13` or later (if you plan to use [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/), please see the notes [below](#notes-on-minikube))
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) in version `1.13` or later.
 
-## Install KUDO into your cluster
+## Install KUDO Into Your Cluster
 
 Once you have a running cluster with `kubectl` installed, you can install KUDO like so:
 
@@ -19,11 +19,11 @@ kubectl create -f https://raw.githubusercontent.com/kudobuilder/kudo/842c7f19a0a
 
 You can optionally install the `kubectl kudo` plugin, which provides a convenient set of commands that make using KUDO even easier. To do so, please follow the [CLI plugin installation instructions](cli.md).
 
-## Deploy your first Operator
+## Deploy Your First Operator
 
 Follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) to deploy a Kafka cluster along with its dependency Zookeeper.
 
-## Create your first operator
+## Create Your First Operator
 
 To see the powers of KUDO unleashed in full, you should try [creating your own operator](developing-operators.md). 
 

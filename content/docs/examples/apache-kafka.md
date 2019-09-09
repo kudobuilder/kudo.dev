@@ -19,7 +19,7 @@ operatorversion.kudo.dev/v1alpha1/kafka-0.2.0 created
 instance.kudo.dev/v1alpha1/kafka created
 ```
 
-`kudo install kafka` creates the `Operator`, `OperatorVersion` and `Instance` CRDs of the Kafka package.
+`kubectl kudo install kafka` creates the `Operator`, `OperatorVersion` and `Instance` CRDs of the Kafka package.
 When an instance is created, the default `deploy` plan is executed
 
 ```
@@ -48,4 +48,4 @@ zk-zookeeper-1   1/1     Running   0          6m56s
 zk-zookeeper-2   1/1     Running   0          6m56s
 ```
 
-You can find more details around configuring a Kafka Cluster in the [KUDO Kafka documentation](https://github.com/kudobuilder/operators/tree/master/repository/kafka).
+You can find more details around configuring a Kafka cluster in the [KUDO Kafka documentation](https://github.com/kudobuilder/operators/tree/master/repository/kafka).

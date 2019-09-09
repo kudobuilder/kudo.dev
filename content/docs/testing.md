@@ -6,7 +6,7 @@ menu: docs
 
 # KUDO Test Harness
 
-KUDO includes a declarative integration testing harness for testing Operators, KUDO, and any other Kubernetes applications or controllers. Test cases are written as plain Kubernetes resources and can be run against a mocked control plane, locally in KIND, or any other Kubernetes cluster.
+KUDO includes a declarative integration testing harness for testing operators, KUDO, and any other Kubernetes applications or controllers. Test cases are written as plain Kubernetes resources and can be run against a mocked control plane, locally in kind, or any other Kubernetes cluster.
 
 Whether you are developing an application, controller, operator, or deploying Kubernetes clusters the KUDO test harness helps you easily write portable end-to-end, integration, and conformance tests for Kubernetes without needing to write any code.
 
@@ -22,7 +22,7 @@ The test harness CLI is included in the KUDO CLI, to install we can install the 
 krew install kudo
 ```
 
-You can now invoke the kudo test CLI:
+You can now invoke the KUDO test CLI:
 
 ```bash
 kubectl kudo test --help
@@ -30,16 +30,16 @@ kubectl kudo test --help
 
 See the [KUDO installation guide](cli.md#installation) for alternative installation methods.
 
-## Writing your first test
+## Writing Your First Test
 
-Now that the kudo CLI is installed, we can write a test. The KUDO test CLI organizes tests into suites:
+Now that the KUDO CLI is installed, we can write a test. The KUDO test CLI organizes tests into suites:
 
 * A "test step" defines a set of Kubernetes manifests to apply and a state to assert on (wait for or expect).
 * A "test case" is a collection of test steps that are run serially - if any test step fails then the entire test case is considered failed.
 * A "test suite" is comprised of many test cases that are run in parallel.
 * The "test harness" is the tool that runs test suites (the KUDO CLI).
 
-### Create a test case
+### Create a Test Case
 
 First, let's create a directory for our test suite, let's call it `tests/e2e`:
 
@@ -79,7 +79,7 @@ spec:
         - containerPort: 80
 ```
 
-Note that in this example, the Deployment does not have a `namespace` set. The test harness will create a namespace for each test case and run all of the test steps inside of it. However, if a resource already has a namespace set (or is not a namespaced resource), then the harness will respect the namespace that is set.
+Note that in this example, the deployment does not have a `namespace` set. The test harness will create a namespace for each test case and run all of the test steps inside of it. However, if a resource already has a namespace set (or is not a namespaced resource), then the harness will respect the namespace that is set.
 
 Each filename in the test case directory should start with an index (in this example `00`) that indicates which test step the file is a part of. Files that do not start with a step index are ignored and can be used for documentation or other test data. Test steps are run in order and each must be successful for the test case to be considered successful.
 
@@ -96,7 +96,7 @@ status:
 
 This test step will be considered completed once the pod matches the state that we have defined. If the state is not reached by the time the assert's timeout has expired (30 seconds, by default), then the test step and case will be considered failed.
 
-### Run the tests
+### Run the Tests
 
 Let's run this test suite:
 
@@ -106,14 +106,14 @@ kubectl kudo test --start-kind=true ./tests/e2e/
 
 Running this command will:
 
-* Start a [kind (kubernetes-in-docker) cluster](https://github.com/kubernetes-sigs/kind), if there is not already one running.
+* Start a [kind (Kubernetes-in-Docker) cluster](https://github.com/kubernetes-sigs/kind), if there is not already one running.
 * Create a new namespace for the test case.
 * Create the resources defined in `tests/e2e/example-test/00-install.yaml`.
 * Wait for the state defined in `tests/e2e/example-test/00-assert.yaml` to be reached.
 * Collect the kind cluster's logs.
-* Tear down the kind cluster (or you can run kudo test with `--skip-cluster-delete` to keep the cluster around after the tests run).
+* Tear down the kind cluster (or you can run `kubectl kudo test` with `--skip-cluster-delete` to keep the cluster around after the tests run).
 
-### Write a second test step
+### Write a Second Test Step
 
 Now that we have successfully written a test case, let's add another step to it. In this step, let's increase the number of replicas on the deployment we created in the first step from 3 to 4.
 
@@ -145,7 +145,7 @@ Run the test suite again and the test will pass:
 kubectl kudo test --start-kind=true ./tests/e2e/
 ```
 
-### Test suite configuration
+### Test Suite Configuration
 
 To add this test suite to your project, create a `kudo-test.yaml` file:
 

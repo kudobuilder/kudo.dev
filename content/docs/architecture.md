@@ -44,4 +44,4 @@ KUDO CLI and controller are written in Go. The CLI uses Kubernetes [client-go](h
 
 The KUDO controller is built using the [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime) and it's transitive dependencies to communicate to Kubernetes. All state needed for KUDO is stored in CRDs. A separate database is not needed.
 
-KUDO Operators are written in YAML.
+KUDO operators are written in YAML.
