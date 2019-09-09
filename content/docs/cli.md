@@ -32,7 +32,7 @@ make cli-install
 ## Commands
 
 ::: flag kubectl kudo install &lt;name&gt; [flags]
-Install an Operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
+Install an Operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
 :::
 
 ::: flag kubectl kudo get instances [flags]
