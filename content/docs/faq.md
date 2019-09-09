@@ -4,14 +4,14 @@
 
 ## What is KUDO?
 
-Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes [Operators](https://coreos.com/operators/). It is an operator that is specifically designed to help provide operations to operators. We want to capture the actions that are required for managing applications in production as part of the definition for the applications themselves. Further we want to embed those best practices in the operator [CRD](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes [operators](https://coreos.com/operators/). It is an operator that is specifically designed to help provide operations to operators. We want to capture the actions that are required for managing applications in production as part of the definition for the applications themselves. Further we want to embed those best practices in the operator [CRD](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-KUDO-based Operators don’t require any code in most cases, which significantly accelerates the development of Operators. It also eliminates sources of error and code duplication.
+KUDO-based operators don’t require any code in most cases, which significantly accelerates the development of operators. It also eliminates sources of error and code duplication.
 
 ## When would you use KUDO?
 
 You would use KUDO when `kubectl apply -f` isn't quite enough to manage your application. If you are just applying the same YAML on updates you probably won't need the extra business logic KUDO gives you.
-KUDO should be used any time you would use an Operator. It can provide an advanced user experience, automating such features as updates, backups and scaling.
+KUDO should be used any time you would use an operator. It can provide an advanced user experience, automating such features as updates, backups and scaling.
 
 ## What is an Operator?
 
@@ -27,12 +27,12 @@ metadata:
   name: kafka
 ```
 
-More examples can be found in the [https://github.com/kudobuilder/operators](https://github.com/kudobuilder/operators) project and include: [flink](https://flink.apache.org/), [kafka](https://kafka.apache.org/), and [zookeeper](https://zookeeper.apache.org/).
+More examples can be found in the [https://github.com/kudobuilder/operators](https://github.com/kudobuilder/operators) project and include: [Flink](https://flink.apache.org/), [Kafka](https://kafka.apache.org/), and [Zookeeper](https://zookeeper.apache.org/).
 
 
-## What is a deployable service?
+## What is a Deployable Service?
 
-A deployable service is simply a service that is deployed on a cluster. Some services are more conceptual than that, which is what KUDO aims to help with. Cassandra for instance is a service, however, in another sense, it is a concept: a collection of data service nodes. It is the collection of these instances that make up Cassandra. A Cassandra Operator would capture the concept that you want to manage a Cassandra cluster. The OperatorVersion is the specific version of Cassandra along with any special plans to manage that cluster as outlined below.
+A deployable service is simply a service that is deployed on a cluster. Some services are more conceptual than that, which is what KUDO aims to help with. Cassandra for instance is a service, however, in another sense, it is a concept: a collection of data service nodes. It is the collection of these instances that make up Cassandra. A Cassandra operator would capture the concept that you want to manage a Cassandra cluster. The `OperatorVersion` is the specific version of Cassandra along with any special plans to manage that cluster as outlined below.
 
 
 ## What is an OperatorVersion?
@@ -78,7 +78,7 @@ plans:
                - deploy      
 ```
 
-The purpose of the OperatorVersion is to provide the details necessary for KUDO to become an operator for a specific capability (such as Kafka) for a version of the operator. As the operator it will execute a `Plan` to establish all the instances of Kakfa components in the cluster as defined in the Operator yaml. In the example provided, it would make sure there are 3 brokers deployed.
+The purpose of the `OperatorVersion` is to provide the details necessary for KUDO to become an operator for a specific capability (such as Kafka) for a version of the operator. As the operator it will execute a `Plan` to establish all the instances of Kakfa components in the cluster as defined in the operator YAML. In the example provided, it would make sure there are 3 brokers deployed.
 
 ## What is an Instance?
 
@@ -86,7 +86,7 @@ An `Instance` is a CRD object used as *linker* which ties an application instant
 
 ## What is a Plan?
 
-Plans are how KUDO operators convey progress through service management operations, such as repairing failed tasks and/or rolling out changes to the service’s configuration. Each Plan is a tree with a fixed three-level hierarchy of the Plan itself, its Phases, and Steps within those Phases. These are all collectively referred to as “Elements”. The fixed tree hierarchy was chosen in order to simplify building user interfaces that display plan content. This three-level hierarchy can look as follows:
+Plans are how KUDO operators convey progress through service management operations, such as repairing failed tasks and/or rolling out changes to the service’s configuration. Each plan is a tree with a fixed three-level hierarchy of the plan itself, its phases, and steps within those phases. These are all collectively referred to as “Elements”. The fixed tree hierarchy was chosen in order to simplify building user interfaces that display plan content. This three-level hierarchy can look as follows:
 
 ```
 Plan foo
@@ -99,38 +99,38 @@ Plan foo
    └─ Step grault
 ```
 
-The status of the execution of a Plan is captured as a [PlanExecution](#what-is-a-planexecution) CRD. Each execution of a Plan has intentionally its own `PlanExecution` CRD. Plans drive the transition between current and desired states, and are built based on the current progress of that transition. They are not themselves part of those states.
+The status of the execution of a plan is captured as a [PlanExecution](#what-is-a-planexecution) CRD. Each execution of a plan has intentionally its own `PlanExecution` CRD. Plans drive the transition between current and desired states, and are built based on the current progress of that transition. They are not themselves part of those states.
 
-KUDO expects by default the `deploy` Plan.
+KUDO expects by default the `deploy` plan.
 
 ## What is a PlanExecution?
 
-This CRD captures the status of the execution of a Plan defined in an `OperatorVersion` on an `Instance`. The Plan status is solely determined based on the statuses of its child Phases, and the Phases in turn determine their statuses based on their Steps.
+This CRD captures the status of the execution of a plan defined in an `OperatorVersion` on an `Instance`. The plan status is solely determined based on the statuses of its child phases, and the phases in turn determine their statuses based on their steps.
 
 ## What is a Parameter?
 
-Parameters provide configuration for the Instance.
+Parameters provide configuration for the instance.
 
 ## What is a Deployment Strategy?
 
-A deployments strategy indicates the way in which a Plan or Step must be executed. If a Step requires another Step to complete first, it is necessary to declare them as `serial`. The following strategies are available by default and can be used in an `OperatorVersion` YAML definition:
+A deployments strategy indicates the way in which a plan or step must be executed. If a step requires another step to complete first, it is necessary to declare them as `serial`. The following strategies are available by default and can be used in an `OperatorVersion` YAML definition:
 
 - `serial`
-  An example for a `serial` Plan is [kafka-operatorversion.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/kafka-operatorversion.yaml).
+  An example for a `serial` plan is [kafka-operatorversion.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/kafka-operatorversion.yaml).
 - `parallel`
-  An example for a `parallel` Plan is [zookeeper-operatorversion.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/zookeeper-operatorversion.yaml)`
+  An example for a `parallel` plan is [zookeeper-operatorversion.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/zookeeper-operatorversion.yaml).
 
 ## What is a Trigger?
 
-When a Parameter is updated in an `Instance` object, it defines the "update strategy" for the Parameter in the `OperatorVersion`. This also gives you the option to customize your Plan a little bit further. For instance, a change of a specific value can trigger a pre-defined Plan, for example the `update` plan. You can define distinct update strategies for different Parameters. For example, you might trigger the `update` Plan when `image` is changed, and another Plan when `replicas` is changed.
+When a parameter is updated in an `Instance` object, it defines the "update strategy" for the parameter in the `OperatorVersion`. This also gives you the option to customize your plan a little bit further. For instance, a change of a specific value can trigger a pre-defined plan, for example the `update` plan. You can define distinct update strategies for different parameters. For example, you might trigger the `update` plan when `image` is changed, and another plan when `replicas` is changed.
 
-## When I create an Operator, will it automatically create new CRDs?
+## When I Create an Operator, Will It Automatically Create New CRDs?
 
-That is the eventual goal. We want each OperatorVersion (those versions of an Operator) to be a different API version of a command CRD that gets mapped to the Operator (see also image below). An Operator creates a CRD and then the versions of those are defined by the OperatorVersion.
+That is the eventual goal. We want each `OperatorVersion` (those versions of an `Operator`) to be a different API version of a command CRD that gets mapped to the operator (see also image below). An `Operator` creates a CRD and then the versions of those are defined by the `OperatorVersion`.
 
 ![KUDO dynamic CRD](/images/kudo-dymanic-crd.png?10x20)
 
-## How does it work from an RBAC perspective?
+## How Does It Work From an RBAC Perspective?
 
 Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion`,`Instance` and `PlanExecution` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
 

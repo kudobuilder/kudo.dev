@@ -16,25 +16,25 @@ This demo follows the outline provided by the [DC/OS](https://github.com/dcos/de
 
 ### Architecture
 
-We should modify the demo image to have everything run on K8s
+We should modify the demo image to have everything run on Kubernetes.
 
 ## Prerequisites
 
-Install the Kafka Operator and OperatorVersion
+Install the Kafka `Operator` and `OperatorVersion`.
 
 ```bash
 kubectl apply -f config/samples/kafka-operator.yaml
 kubectl apply -f config/samples/kafka-operatorversion.yaml
 ```
 
-Install the Flink Operator and OperatorVersion
+Install the Flink `Operator` and `OperatorVersion`.
 ```bash
 kubectl apply -f config/samples/flink.yaml
 ```
 
 
 ## Deploy Plan
-The deployplan has several stages that can be read from the Flink file, but we ouline the Phases and steps here:
+The `deploy` plan has several stages that can be read from the Flink file, but we ouline the phases and steps here:
 
 ### Kafka Phase
 
@@ -43,7 +43,7 @@ The first phase is to create and deploy a Kafka instance:
 
 #### Create Topic Step
 
-The second Step in the phase runs a `Job` that creates a topic
+The second step in the phase runs a `Job` that creates a topic
 
 ### Flink Phase
 
@@ -52,7 +52,7 @@ Now we need to install Flink on Kubernetes
 
 ### Flink Generator Phase
 
-This phase deplos a `Flink` Genenerator that mirrors the deployment [here](https://github.com/dcos/demos/blob/master/flink-k8s/1.11/generator/flink-demo-generator.yaml)
+This phase deploys a Flink generator that mirrors the deployment [here](https://github.com/dcos/demos/blob/master/flink-k8s/1.11/generator/flink-demo-generator.yaml)
 
 
 ### Upload Flink Job to Flink
@@ -60,11 +60,11 @@ This phase deplos a `Flink` Genenerator that mirrors the deployment [here](https
 We need to figure this out, but it could be a simple image that
 
 * downloads file from a URL that's an environment variable
-* uses CURL to upload the file into Flink
+* uses cURL to upload the file into Flink
 
 ### Flink Actor Phase
 
-This phase deploys a `Flink` actor that mirrors the deployment [here](kubectl apply -f https://raw.githubusercontent.com/dcos/demos/master/flink-k8s/1.11/actor/flink-demo-actor.yaml)
+This phase deploys a Flink actor that mirrors the deployment [here](https://raw.githubusercontent.com/dcos/demos/master/flink-k8s/1.11/actor/flink-demo-actor.yaml)
 
 
 

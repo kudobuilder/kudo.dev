@@ -32,7 +32,7 @@ make cli-install
 ## Commands
 
 ::: flag kubectl kudo install &lt;name&gt; [flags]
-Install an Operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
+Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
 :::
 
 ::: flag kubectl kudo get instances [flags]
@@ -74,7 +74,7 @@ Skip interactive approval when existing version found. (default `false`)
 :::
 
 ::: flag -h, --help
-help for install
+Help for install
 :::
 
 ::: flag --instance (string)
@@ -109,13 +109,13 @@ Installation during development can use a relative or absolute path to the packa
 kubectl kudo install pkg/kudoctl/bundle/testdata/zk
 ```
 
-To support the installation of operators not yet in the repository, it is possible to install directly from a url.
+To support the installation of operators not yet in the repository, it is possible to install directly from a URL.
 ```bash
 kubectl kudo install http://kudo.dev/zk.tgz
 ```
 
 For normal operations it is recommended to use the official packages provided through the [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
-To install official kafka package you have to do the following:
+To install official Kafka package you have to do the following:
 
 ```bash
 kubectl kudo install kafka
@@ -123,9 +123,9 @@ kubectl kudo install kafka
 
 Both of these options will install new instance of that operator into your cluster. By default, the instance name will be generated.
 
-### Install a package overriding instance name and parameters
+### Install a Package Overriding Instance Name and Parameters
 
-Use `--instance` and `--parameter`/`-p` for setting an Instance name and Parameters, respectively:
+Use `--instance` and `--parameter`/`-p` for setting an instance name and parameters, respectively:
 
 ```bash
 $ kubectl kudo install kafka --instance=my-kafka-name --parameter ZOOKEEPER_URI=zk-zk-0.zk-hs:2181,zk-zk-1.zk-hs:2181,zk-zk-2.zk-hs:2181 --parameter ZOOKEEPER_PATH=/small -p BROKERS_COUNTER=3
@@ -399,7 +399,7 @@ This includes the previous history but also all OperatorVersions that have been 
 
 ### Package an Operator
 
-You can use the `package` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files.  The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
+You can use the `package` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
 
 `kubectl kudo package zookeeper --destination=target`
 
@@ -410,7 +410,7 @@ $ kubectl kudo package ../operators/repository/zookeeper/operator/ --destination
   Package created: /Users/kensipe/zookeeper-0.1.0.tgz
 ```
 
-### Update parameters on running operator instance
+### Update Parameters on Running Operator Instance
 
 Every operator can define overridable parameters in `params.yaml`. When installing an operator and deploying an instance, you can use the defaults or override them with `-p` parameters to `kudo install`.
 
@@ -418,12 +418,12 @@ The `kudo update` command allows you to change these parameters even on an alrea
 
 `kubectl kudo update --instance dev-flink -p param=value`
 
-### Upgrade running operator from one version to another
+### Upgrade Running Operator from One Version to Another
 
 Following the same example from the previous section, having a `dev-flink` instance installed, we can upgrade it to a newer version with the following command:
 
 `kubectl kudo upgrade flink --instance dev-flink -p param=xxx`
 
-A new version of that operator is installed to the cluster and `upgrade` (or `deploy`) plan is started to roll out new flink pods.
+A new version of that operator is installed to the cluster and `upgrade` (or `deploy`) plan is started to roll out new Flink pods.
 
 At the same time, we're overriding the value of the parameter `param`. That is optional and you can always do it in a separate step via `kudo update`.

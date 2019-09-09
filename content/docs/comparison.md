@@ -2,7 +2,7 @@
 
 KUDO, a [Template Defined Application](#template-defined-application) tool developed with a focus on operators rather than developers, is used for multi-step (plan) applications that require the order of operations to be specific in order to function.
 
-## Comparison To Other Kubernetes Application Lifecycle Management Tools
+## Comparison to Other Kubernetes Application Lifecycle Management Tools
 
 ### Application Operator Focused
 
@@ -43,8 +43,8 @@ By using CRDs instead of opening up a gRPC service like it's Tiller counterpart,
 
 #### Finalizers
 
-With KUDO's dependency management, Finalizers[^finalizers] can be placed on KUDO Operators that are depended on by other applications.
-Zookeeper, for example, may have a Finalizer placed on it by the Kafka KUDO operator to prevent Zookeeper from being removed while Kafka is still using it.
+With KUDO's dependency management, finalizers[^finalizers] can be placed on KUDO Operators that are depended on by other applications.
+Zookeeper, for example, may have a finalizer placed on it by the Kafka KUDO operator to prevent Zookeeper from being removed while Kafka is still using it.
 This functionality is unique to KUDO.
 
 #### Object Ownership (cascade delete/cleanup)

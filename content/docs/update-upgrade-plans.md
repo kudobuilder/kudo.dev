@@ -7,7 +7,7 @@ menu: docs
 # Update and Upgrade Plans
 
 
-This demo uses a different toy operator described in the `../config/samples/upgrade.yaml` file.  There are two `Operator` versions defined for this `Operator`, and each `OperatorVersion` has three plans: `deploy`, `update` and `upgrade`.
+This demo uses a different toy operator described in the `../config/samples/upgrade.yaml` file. There are two `Operator` versions defined for this `Operator`, and each `OperatorVersion` has three plans: `deploy`, `update` and `upgrade`.
 
 
 ## Deploy Plan
@@ -22,7 +22,7 @@ operatorversion.kudo.dev/upgrade-v2 created
 instance.kudo.dev/up created
 ```
 
-The PlanExecution object that gets created gets suffixed with a timestamp for uniqueness.
+The `PlanExecution` object that gets created gets suffixed with a timestamp for uniqueness.
 
 ```bash
 $ kubectl get planexecutions -l instance=up
@@ -40,7 +40,7 @@ Going to sleep for 15 seconds
 
 ## Update the Instance
 
-An update of the instance is run when the Spec of the Instance is changed, but the OperatorVersion remains the same:
+An update of the instance is run when the `Spec` of the instance is changed, but the `OperatorVersion` remains the same:
 
 ```bash
 kubectl patch instance up -p '{"spec":{"parameters":{"SLEEP":"60"}}}' --type=merge
@@ -62,7 +62,7 @@ Going to sleep for 60 seconds
 
 ## Upgrade
 
-Upgrades occur when the `OperatorVersion` is changed.  The Upgrade from the NEW `OperatorVersion` is executed:
+Upgrades occur when the `OperatorVersion` is changed. The upgrade from the NEW `OperatorVersion` is executed:
 
 
 ```bash

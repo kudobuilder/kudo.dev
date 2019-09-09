@@ -22,6 +22,6 @@ entries:
 
 The `url` points to a location where a tarball package is hosted. These locations can be within the repository, or outside of it.
 
-## Managing packages
+## Managing Packages
 
 As of now, all official packages are mirrored from the [github repository](https://github.com/kudobuilder/operators). To add new operators, or to update an existing operator, create a PR against that repository.

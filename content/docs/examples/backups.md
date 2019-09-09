@@ -13,7 +13,7 @@ Watch the explained demo video of the steps beneath [here](https://youtu.be/e_xU
 
 ## MySQL
 
-Create an instance of MySQL using the provided sample Operator:
+Create an instance of MySQL using the provided sample operator:
 
 ```bash
 $ kubectl apply -f config/samples/mysql.yaml
@@ -40,7 +40,7 @@ kubectl exec -it $MYSQL_POD -- mysql -ppassword  -e "select * from example;" kud
 ```
 
 
-## Take a backup
+## Take a Backup
 Define and execute a custom plan in order to take a backup:
 
 ```bash
@@ -63,14 +63,14 @@ EOF
 ```
 
 
-## Delete data from the database
+## Delete Data from the Database
 
 ```bash
 kubectl exec -it $MYSQL_POD -- mysql -ppassword  -e "delete from example;" kudo
 kubectl exec -it $MYSQL_POD -- mysql -ppassword  -e "select * from example;" kudo
 ```
 
-## Perform a restore
+## Perform a Restore
 Similar to the backup step, define and execute the restore:
 
 ```bash
