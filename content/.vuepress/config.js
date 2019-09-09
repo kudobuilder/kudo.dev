@@ -10,11 +10,31 @@ module.exports = {
               'cli',
               'comparison',
               'concepts',
+              'contributing',
               'controlled-parameter-changes',
               'developing-operators',
+              {
+                title: 'Examples',
+                children: [
+                  'examples/apache-flink',
+                  'examples/apache-kafka',
+                  'examples/apache-zookeeper',
+                  'examples/backups'
+                ]
+              },
               'faq',
               'repository',
-              'testing',
+              {
+                title: 'Testing',
+                children: [
+                  'testing',
+                  'testing/asserts',
+                  'testing/reference',
+                  'testing/steps',
+                  'testing/test-environments',
+                  'testing/tips'
+                ]
+              },
               'update-upgrade-plans'
             ],
             '/blog/': [
