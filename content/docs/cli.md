@@ -66,7 +66,7 @@ Upgrade installed operator from one version to another.
 ## Flags
 
 ::: tip Usage
-`kubectl-kudo install <name> [flags]`
+`kubectl kudo install <name> [flags]`
 :::
 
 ::: flag --auto-approve
