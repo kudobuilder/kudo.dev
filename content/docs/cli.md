@@ -31,12 +31,20 @@ make cli-install
 
 ## Commands
 
-::: flag kubectl kudo install &lt;name&gt; [flags]
-Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
-:::
-
 ::: flag kubectl kudo get instances [flags]
 Show all available instances.
+:::
+
+::: flag kubectl kudo help [command] [flags]
+Provides general help or help on a specific command
+:::
+
+::: flag kubectl kudo init [flags]
+Initialize KUDO on both the client and server
+:::
+
+::: flag kubectl kudo install &lt;name&gt; [flags]
+Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
 :::
 
 ::: flag kubectl kudo package &lt;operator_folder&gt; [flags]
@@ -51,8 +59,16 @@ View all available plans.
 View all available plans.
 :::
 
-::: flag kubectl kudo version
-Print the current KUDO package version.
+::: flag kubectl kudo repo add|context|remove|list
+Manages local cache of repositories.
+:::
+
+::: flag kubectl kudo repo index
+Generates an index file given a directory containing KUDO packages.
+:::
+
+::: flag kubectl kudo test
+Test KUDO and Operators.
 :::
 
 ::: flag kubectl kudo update
@@ -61,6 +77,10 @@ Update installed operator parameters.
 
 ::: flag kubectl kudo upgrade
 Upgrade installed operator from one version to another.
+:::
+
+::: flag kubectl kudo version
+Print the current KUDO package version.
 :::
 
 ## Flags
