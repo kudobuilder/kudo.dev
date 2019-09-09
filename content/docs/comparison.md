@@ -14,7 +14,7 @@ KUDO's focus on AppOps fills a need that has not been well represented.
 ### In Cluster Components
 
 KUDO requires a component installed in the cluster, like Helm v2 requires Tiller.
-This has been a controversial issue througout the community due to usability and security concerns.
+This has been a controversial issue throughout the community due to usability and security concerns.
 Because of these concerns, Helm v3, ksonnett, kustomize, etc, operate outside the cluster and thus only have the permissions of the person executing the command.
 KUDO and Helm v2 operate as cluster administrators.
 
@@ -44,7 +44,7 @@ By using CRDs instead of opening up a gRPC service like it's Tiller counterpart,
 #### Finalizers
 
 With KUDO's dependency management, Finalizers[^finalizers] can be placed on KUDO Operators that are depended on by other applications.
-Zookeeper, for example, may have a Finalizer placed on it by the Kafka KUDO operator to prevent Zookeeper from being removed whike Kafka is still using it.
+Zookeeper, for example, may have a Finalizer placed on it by the Kafka KUDO operator to prevent Zookeeper from being removed while Kafka is still using it.
 This functionality is unique to KUDO.
 
 #### Object Ownership (cascade delete/cleanup)
@@ -56,7 +56,7 @@ This functionality is unique to KUDO.
 #### Part of Namespace Backups
 
 Because of the use of CRDs, the definition of the state of your application is part of the state of the cluster.
-Backing up a namespace (using a tool like Velero for example) will also backup the defitions associated with that namespaces desired state, allowing the KUDO operator to reconcile that state upon restoration.
+Backing up a namespace (using a tool like Velero for example) will also backup the definitions associated with that namespaces desired state, allowing the KUDO operator to reconcile that state upon restoration.
 
 ### Discoverable Repo for Applications
 

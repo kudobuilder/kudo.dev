@@ -15,7 +15,7 @@ The overall structure of a package looks following:
     └── ...
 ```
 
-The `operator.yaml` is the main yaml file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overriden allowing customization. `templates` folder contain all templated kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
+The `operator.yaml` is the main yaml file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
 ### Your first KUDO operator
 First let’s create `operator.yaml` and place it in a `first-operator` folder.

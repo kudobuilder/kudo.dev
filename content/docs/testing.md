@@ -111,7 +111,7 @@ Running this command will:
 * Create the resources defined in `tests/e2e/example-test/00-install.yaml`.
 * Wait for the state defined in `tests/e2e/example-test/00-assert.yaml` to be reached.
 * Collect the kind cluster's logs.
-* Tear down the kind cluster (or you can run kudo test with `--skip-cluster-delete` to keep the cluster around after the tests run).
+* Tear down the kind cluster (or you can run `kubectl kudo test` with `--skip-cluster-delete` to keep the cluster around after the tests run).
 
 ### Write a second test step
 
