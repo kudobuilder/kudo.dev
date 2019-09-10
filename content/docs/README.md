@@ -18,7 +18,7 @@ $ brew install kudo-cli
 
 ## Install KUDO into your cluster
 
-Once you have a running cluster with `kubectl` installed with KUDO CLI, you can install KUDO like so:
+Once you have a running cluster with `kubectl` installed along with the KUDO CLI plugin, you can install KUDO like so:
 
 ```
 kubectl kudo init
