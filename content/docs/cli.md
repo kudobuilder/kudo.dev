@@ -130,12 +130,12 @@ The name of the repository in the `repo list` configuration to use. (default to 
 
 ### KUDO Init
 
-KUDO itself is a Kubernetes operator. As such it requires the installation of a CRD and the deployment of KUDO, in addition to the establishment of certain prerequisites like setting the namespace. All of this can be handled by the KUDO CLI (assuming that kubectl has been configured to the desired cluster.).  This is accomplished with `kubectl kudo init`.  Some variations on this might include:
+KUDO itself is a Kubernetes operator. As such it requires the installation of CRDs and the deployment of KUDO, in addition to the establishment of certain prerequisites like creating the namespace to install in. All of this can be handled by the KUDO CLI. To accomplish this, run `kubectl kudo init`.  Some variations on this might include:
 
 * `kubectl kudo init --wait --wait-timeout 600` which will install CRDS, install KUDO and will wait up to 600 seconds for KUDO to be responsive.
 * `kubectl kudo init --dry-run --output=yaml > kudo-install.yaml` which will not install anything but will output YAML to a file which can be applied manually to the server.
 * `kubectl kudo init --version=0.5.0` which will install the `0.5.0` into the cluster using the image `kudobuilder/controller:v0.5.0`
-* `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for certified images or air-gapped alternative images to be installed.
+* `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
 * `kudoctl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
 
 
