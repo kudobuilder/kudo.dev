@@ -49,7 +49,7 @@ minikube start --cpus=4 --memory=10240 --disk-size=40g
 
 ## Notes on KIND
 
-In order to use KIND with storage operators, it is necessary to modify it's Persistence Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
+In order to use KIND with storage operators, it is necessary to modify its Persistent Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
 
 Here is an example of setting up a new cluster:
 
