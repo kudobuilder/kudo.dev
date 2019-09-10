@@ -97,6 +97,10 @@ Skip interactive approval when existing version found. (default `false`)
 Help for install
 :::
 
+::: flag --home (string)
+The file path to KUDO configuration folder. (default: "$HOME/.kudo")
+:::
+
 ::: flag --instance (string)
 The instance name. (default: Operator name)
 :::
@@ -117,7 +121,23 @@ A specific package version on the official GitHub repo. (default to the most rec
 The parameter name and value separated by '='
 :::
 
+::: flag --repo (string)
+The name of the repository in the `repo list` configuration. (default to configured repository context)
+:::
+
+
 ## Examples
+
+### KUDO Init
+
+KUDO itself is a Kubernetes operator. As such it requires the installation of a CRD and the deployment of KUDO, in addition to the establishment of certain prerequisites like setting the namespace. All of this can be handled by the KUDO CLI (assuming that kubectl has been configured to the desired cluster.).  This is accomplished with `kubectl kudo init`.  Some variations on this might include:
+
+* `kubectl kudo init --wait --wait-timeout 600` which will install CRDS, install KUDO and will wait up to 600 seconds for KUDO to be responsive.
+* `kubectl kudo init --dry-run --output=yaml > kudo-install.yaml` which will not install anything but will output YAML to a file which can be applied manually to the server.
+* `kubectl kudo init --version=0.5.0` which will install the `0.5.0` into the cluster using the image `kudobuilder/controller:v0.5.0`
+* `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for certified images or air-gapped alternative images to be installed.
+* `kudoctl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
+
 
 ### Install a Package
 
@@ -429,6 +449,74 @@ Example:
 $ kubectl kudo package ../operators/repository/zookeeper/operator/ --destination=~
   Package created: /Users/kensipe/zookeeper-0.1.0.tgz
 ```
+
+### Creating a Repository Index File
+
+A repository is a set of operator packages (tarballs) which are indexed in an index file. To create an index file, execute `kubectl kudo repo index operators` where `operators` is a folder container operator package files.  
+
+```bash
+# example folder
+ls ~/repo
+kafka-0.1.2.tgz		kafka-0.2.0.tgz
+
+# repo index
+kubectl kudo repo index ~/repo
+index /Users/kensipe/repo/index.yaml created.
+
+cat ~/repo/index.yaml
+apiVersion: v1
+entries:
+  kafka:
+  - digest: f81ffdad2caea40c8fc19c676b1e51b598d1472de5563c0ae8308e649c8ea159
+    maintainers:
+    - name: Zain Malik <zmalikshxil@gmail.com>
+    name: kafka
+    urls:
+    - http://localhost/kafka-0.2.0.tgz
+    version: 0.2.0
+  - appVersion: 2.2.1
+    digest: fbff9679cd0070bf10dcafc8d5e1e7d13a5c1651154165162c543508895a37c0
+    maintainers:
+    - name: Zain Malik <zmalikshxil@gmail.com>
+    name: kafka
+    urls:
+    - http://localhost/kafka-0.1.2.tgz
+    version: 0.1.2
+```
+
+It can be useful when overwriting a file to use `--overwrite`.  It is also useful to use `--url=http://kudo.dev/repo` to supply the desired URL the operator packages will be hosted on.
+
+### Managing Repositories
+
+After KUDO has initialized a client, `kubectl kudo init` or `kubectl kudo init --client-only`, it is possible to configure other repositories. Let's start with a `repo list` using:
+
+```
+kubectl kudo repo list
+NAME      	URL                                           
+*community	https://kudo-repository.storage.googleapis.com
+```
+The default installation is shown here showing that we have one repository configured with the name "community".  The `*` indicates that this is the default repository to use (unless the flag `--repo=xyz` is used).  This is considered the current context.
+
+When a repository is added it, the url provided will be used to access the index.yaml file which will be validated.  If the url is not reachable or the index file is currupt the repository entry will fail.  It is possible to skip this check with the `--skip-check` flag.  You can add a repository in the following way.  `kubectl kudo repo add local http://localhost --skip-check`. Resulting in:
+
+```
+kubectl kudo repo list
+NAME      	URL                                           
+*community	https://kudo-repository.storage.googleapis.com
+local       	http://localhost
+```
+
+In order to set the local repository as the current context execute: `kubectl kudo repo context local`, resulting in:
+```
+kubectl kudo repo list
+NAME      	URL                                           
+community	https://kudo-repository.storage.googleapis.com
+*local       	http://localhost
+```
+Now all installs and upgrades will default to the local repository.
+
+In order to remove a repository simply run `kubectl kudo repo remove foo`
+
 
 ### Update Parameters on Running Operator Instance
 
