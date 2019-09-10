@@ -495,9 +495,9 @@ kubectl kudo repo list
 NAME      	URL                                           
 *community	https://kudo-repository.storage.googleapis.com
 ```
-The default installation is shown here showing that we have one repository configured with the name "community".  The `*` indicates that this is the default repository to use (unless the flag `--repo=xyz` is used).  This is considered the current context.
+The default installation shown shows one repository configured with the name "community".  The `*` indicates that this is the default repository to use (unless the flag `--repo=xyz` is used).  This is considered the current context.
 
-When a repository is added it, the url provided will be used to access the index.yaml file which will be validated.  If the url is not reachable or the index file is currupt the repository entry will fail.  It is possible to skip this check with the `--skip-check` flag.  You can add a repository in the following way.  `kubectl kudo repo add local http://localhost --skip-check`. Resulting in:
+When a repository is added using `kudo add ...`, the url provided will be used to access the index.yaml file which will be validated.  If the url is not reachable or the index file is corrupt the repository entry will fail to be added.  It is possible to skip this check with the `--skip-check` flag.  You can add a repository in the following way.  `kubectl kudo repo add local http://localhost --skip-check`. Resulting in:
 
 ```
 kubectl kudo repo list
