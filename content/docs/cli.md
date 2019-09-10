@@ -122,7 +122,7 @@ The parameter name and value separated by '='
 :::
 
 ::: flag --repo (string)
-The name of the repository in the `repo list` configuration. (default to configured repository context)
+The name of the repository in the `repo list` configuration to use. (default to configured repository context)
 :::
 
 
