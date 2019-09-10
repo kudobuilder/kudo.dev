@@ -24,7 +24,7 @@ Once you have a running cluster with `kubectl` installed along with the KUDO CLI
 kubectl kudo init
 ```
 
-If you want to manage the installation by hand the follow is also possible:
+If you want to manage the installation by hand the following is also possible:
 
 ```
 kubectl kudo init --dry-run -o=yaml > kudo.yaml
@@ -38,11 +38,26 @@ Follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) 
 ## Create Your First Operator
 
 To see the powers of KUDO unleashed in full, you should try [creating your own operator](developing-operators.md).
-
+```
 ## Notes on Minikube
 
 If you plan on developing and testing KUDO locally via Minikube, you'll need to launch your cluster with a reasonable amount of memory allocated. By default, Minikube runs with 2GB - we recommend at least 10GB, especially if you're working with applications such as [Kafka](examples/apache-kafka.md). You can start Minikube with some suitable resource adjustments as follows:
 
 ```bash
 minikube start --cpus=4 --memory=10240 --disk-size=40g
+```
+
+## Notes on KIND
+
+In order to use KIND with storage operators, it is necessary to modify it's Persistence Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
+
+Here is an example of setting up a new cluster:
+
+```
+# create kind cluster
+kind create cluster
+export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+kubectl delete storageclass standard
+kubectl apply -f https://github.com/kudobuilder/operators/blob/master/test/manifests/local-path-storage.yaml
+kubectl annotate storageclass --overwrite local-path storageclass.kubernetes.io/is-default-class=true
 ```
