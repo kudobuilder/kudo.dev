@@ -60,7 +60,7 @@ View all available plans.
 :::
 
 ::: flag kubectl kudo repo add|context|remove|list
-Manages local cache of repositories.
+Manages local cache of repository configurations.
 :::
 
 ::: flag kubectl kudo repo index
