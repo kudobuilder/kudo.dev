@@ -6,7 +6,7 @@ menu: docs
 
 # KUDO Test Harness
 
-KUDO includes a declarative integration testing harness for testing operators, KUDO, and any other Kubernetes applications or controllers. Test cases are written as plain Kubernetes resources and can be run against a mocked control plane, locally in kind, or any other Kubernetes cluster.
+KUDO includes a declarative integration testing harness for testing operators, KUDO, [Helm charts](testing/tips.md#helm-testing), and any other Kubernetes applications or controllers. Test cases are written as plain Kubernetes resources and can be run against a mocked control plane, locally in kind, or any other Kubernetes cluster.
 
 Whether you are developing an application, controller, operator, or deploying Kubernetes clusters the KUDO test harness helps you easily write portable end-to-end, integration, and conformance tests for Kubernetes without needing to write any code.
 
