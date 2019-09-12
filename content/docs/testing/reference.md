@@ -36,6 +36,7 @@ manifestDirs      | list of strings | Paths to manifests to install before runni
 testDirs          | list of strings | Directories containing test cases to run.                                                | 
 startControlPlane | bool            | Whether or not to start a local etcd and kubernetes API server for the tests.            | false
 startKIND         | bool            | Whether or not to start a local kind cluster for the tests.                              | false
+kindNodeCache     | bool            | If set, each node defined in the kind configuration will have a docker volume mounted into it to persist pulled container images across test runs | false
 kindConfig        | string          | Path to the KIND configuration file to use.                                              | 
 kindContext       | string          | KIND context to use.                                                                     | "kind"
 startKUDO         | bool            | Whether or not to start the KUDO controller for the tests.                               | false

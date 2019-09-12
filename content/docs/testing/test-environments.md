@@ -36,11 +36,14 @@ Or specify it in your `kudo-test.yaml`:
 apiVersion: kudo.k8s.io/v1alpha1
 kind: TestSuite
 startKIND: true
+kindNodeCache: true
 ```
 
 By default KUDO will use the default kind cluster name of "kind". If a kind cluster is already running with that name, it will use the existing cluster.
 
 The kind cluster name can be overriden by setting either `kindContext` in your configuration or `--kind-context` on the command line.
+
+By setting `kindNodeCache`, the containerd directories will be mounted into a Docker volume in order to persist the images pulled during a test run across test runs.
 
 It is also possible to provide a custom kind configuration file. For example, to override the Kubernetes cluster version, create a kind configuration file called `kind.yaml`:
 
