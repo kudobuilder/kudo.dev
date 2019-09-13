@@ -15,7 +15,7 @@ KUDO should be used any time you would use an operator. It can provide an advanc
 
 ## What is an Operator?
 
-`Operator` is the high-level description of a deployable service which is represented as an CRD object. An example `Operator` is the [kafka-operator.yaml](https://github.com/kudobuilder/operators/blob/master/repo/stable/kafka/versions/0/kafka-operator.yaml) that you find in the [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
+`Operator` is the high-level description of a deployable service which is represented as an CRD object. An example `Operator` is the [Kafka Operator](https://github.com/kudobuilder/operators/blob/master/repository/kafka/operator/) that you find in the [kudobuilder/operators](https://github.com/kudobuilder/operators) repository.
 
 Kafka Operator Example
 ```yaml
