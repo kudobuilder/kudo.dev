@@ -46,8 +46,8 @@ skipClusterDelete | bool             | If set, do not delete the mocked control 
 timeout           | int              | Override the default timeout of 30 seconds (in seconds).                                 | 30
 parallel          | int              | The maximum number of tests to run at once.                                              | 8
 artifactsDir      | string           | The directory to output artifacts to (current working directory if not specified).       | .
-commands          | list of [Command](#command) | Commands to run prior to running the tests.                                              | []
-kubectl           | list of strings  | Kubectl specifies a list of kubectl commands to run prior to running the tests.          | []
+commands          | list of [Command](#command) | Commands to run prior to running the tests.                                   | []
+kubectl           | list of strings  | Kubectl specifies a list of kubectl commands to run prior to running the tests and after commands. | []
 
 # TestStep
 
@@ -71,7 +71,7 @@ Field    |          Type             | Description
 delete   | list of object references | A list of objects to delete, if they do not already exist, at the beginning of the test step. The test harness will wait for the objects to be successfully deleted before applying the objects in the step.
 index    | int                       | Override the test step's index.
 commands | list of [Command](#command) | Commands to run prior at the beginning of the test step.
-kubectl  | list of strings           | Kubectl specifies a list of kubectl commands to run at the beginning of the test step.
+kubectl  | list of strings           | Kubectl specifies a list of kubectl commands to run at the beginning of the test step and after commands.
 
 Object Reference:
 
@@ -106,5 +106,5 @@ The `Command` object is used by `TestSteps` and `TestSuites` to enable running c
 Field         |   Type | Description
 --------------|--------|---------------------------------------------------------------------
 command       | string | The command and argument to run as a string.
-namespaced    | bool   | If set, the `--namespace` flag will be appended to the command with the namespace to use.
+namespaced    | bool   | If set, the `--namespace` flag will be appended to the command with the namespace to use (the test namespace for a test step or "default" for the test suite).
 ignoreFailure | bool   | If set, failures will be ignored.
