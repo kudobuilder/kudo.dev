@@ -38,15 +38,19 @@ module.exports = {
               'update-upgrade-plans'
             ],
             '/blog/': [
-              '',
-              'announcing-kudo-0.5.0',
-              'announcing-kudo-0.4.0',
-              'announcing-kudo-0.3.0',
-              'announcing-kudo-0.2.0'
+              {
+                title: 'Blog',
+                collapsable: false,
+                children: [
+                  'announcing-kudo-0.5.0',
+                  'announcing-kudo-0.4.0',
+                  'announcing-kudo-0.3.0',
+                  'announcing-kudo-0.2.0'
+                ]
+              }
             ],
             '/community/': [
-              '',
-              'events'
+              ''
             ],
             '/internal-docs/': [
               '',
