@@ -76,6 +76,7 @@ module.exports = {
         lineNumbers: false,
         extendMarkdown: md => {
             md.use(require('markdown-it-footnote'))
+            md.use(require('markdown-it-vuepress-code-snippet-enhanced'))
         }
     },
     plugins: [
