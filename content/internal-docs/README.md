@@ -23,6 +23,7 @@ This documentation uses a few custom components which are meant to help writing 
 - The [EventsIndex](events-index.md) component is used to render upcoming and past events.
 - The [CustomBadge](custom-badge.md) should be used to highlight software versions capability (e.g. introduction or deprecation).
 - The [custom block](custom-blocks.md) `flag` notation should be used to document command line flags, CLI commands, or other code related functionality.
+- The [CommunityResources](community-resources.md) component lists resources like tutorials, videos, etc., from a JSON file.
 
 ## VuePress native functionality
 
