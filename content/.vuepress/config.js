@@ -1,3 +1,38 @@
+const feed_options = {
+  enable: false,
+  canonical_base: 'https://kudo.dev/',
+  count: 20,
+  feeds: {
+    rss2: {
+      enable: true,
+      file_name: 'rss.xml',
+      head_link: {
+        enable: true,
+        type: 'application/rss+xml',
+        title: '%%site_title%% RSS Feed',
+      }
+    },
+    atom1: {
+      enable: true,
+      file_name: 'feed.atom',
+      head_link: {
+        enable: true,
+        type: 'application/atom+xml',
+        title: '%%site_title%% Atom Feed',
+      }
+    },
+    json1: {
+      enable: true,
+      file_name: 'feed.json',
+      head_link: {
+        enable: true,
+        type: 'application/json',
+        title: '%%site_title%% JSON Feed',
+      }
+    },
+  }
+};
+
 module.exports = {
     title: 'KUDO',
     base: '/',
@@ -88,5 +123,6 @@ module.exports = {
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
             after: '</div>',
         }],
+        [ 'feed', feed_options ]
     ]
 };
