@@ -10,7 +10,7 @@ A default environment for the tests can be defined in `kudo-test.yaml` allowing 
 * [Environment setup](#environment-setup)
    * [Starting KUDO](#starting-kudo)
 
-# Live Cluster
+## Live Cluster
 
 If no configuration is provided, the tests will run against your default cluster context using whatever Kubernetes cluster is configured in your kubeconfig.
 
@@ -20,7 +20,7 @@ You can also provide an alternative kubeconfig file by either setting `$KUBECONF
 kubectl kudo test --kubeconfig=mycluster.yaml
 ```
 
-# Kubernetes-in-docker
+## Kubernetes-in-docker
 
 The KDUO test harness has a built in integration with [kind](https://github.com/kubernetes-sigs/kind) to start and interact with kubernetes-in-docker clusters.
 
@@ -65,7 +65,7 @@ kubectl kudo test --kind-config=kind.yaml
 
 *Note*: Once the tests have been completed, the test harness will collect the kind cluster's logs and then delete it, unless `--skip-cluster-delete` has been set.
 
-# Mocked Control Plane
+## Mocked Control Plane
 
 The above environments are great for end to end testing, however, for integration test use-cases it may be unnecessary to create actual pods or other resources. This can make the tests a lot more flaky or slow than they need to be.
 
@@ -79,7 +79,7 @@ To start the mocked control plane, specify either `--start-control-plane` on the
 kubectl kudo test --start-control-plane
 ```
 
-# Environment Setup
+## Environment Setup
 
 Before running a test suite, it may be necessary to setup the Kubernetes cluster - typically, either installing required services or custom resource definitions.
 
@@ -102,7 +102,7 @@ The above configuration would start kind, install all of the CRDs in `tests/crds
 
 See the [configuration reference](reference.md#testsuite) for documentation on configuring test suites.
 
-## Starting KUDO
+### Starting KUDO
 
 In some test suites, it may be useful to have the KUDO controller running. To start the KUDO controller, specify either `--start-kudo` on the command line or `startKUDO` in the configuration file:
 

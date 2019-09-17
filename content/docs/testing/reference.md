@@ -14,7 +14,7 @@ weight: 6
 * [TestAssert](#testassert)
 * [Command](#command)
 
-# TestSuite
+## TestSuite
 
 The `TestSuite` object specifies the settings for the entire test suite and should live in the test suite configuration file (`kudo-test.yaml` by default, or `--config`):
 
@@ -49,7 +49,7 @@ artifactsDir      | string           | The directory to output artifacts to (cur
 commands          | list of [Command](#command) | Commands to run prior to running the tests.                                   | []
 kubectl           | list of strings  | Kubectl specifies a list of kubectl commands to run prior to running the tests and after commands. | []
 
-# TestStep
+## TestStep
 
 The `TestStep` object can be used to specify settings for a test step and can be specified in any test step YAML.
 
@@ -83,7 +83,7 @@ name       | string | If specified, the name of the object to delete. If not spe
 namespace  | string | The namespace of the objects to delete.
 labels     | map    | If specified, a label selector to use when looking up objects to delete. If both labels and name are unspecified, then all resources of the specified kind in the namespace will be deleted.
 
-# TestAssert
+## TestAssert
 
 The `TestAssert` object can be used to specify settings for a test step's assert and must be specified in the test step's assert YAML.
 
@@ -99,7 +99,7 @@ Field   | Type | Description                                           | Default
 --------|------|-------------------------------------------------------|-------------
 timeout | int  | Number of seconds that the test is allowed to run for | 30
 
-# Command
+## Command
 
 The `Command` object is used by `TestSteps` and `TestSuites` to enable running commands in tests:
 

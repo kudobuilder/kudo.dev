@@ -16,7 +16,7 @@ This document contains some tips and gotchas that can be helpful when writing te
 * [Helm testing](#helm-testing)
 * [Image caching](#image-caching-in-kind)
 
-# Kubernetes Events
+## Kubernetes Events
 
 Kubernetes events are regular Kubernetes objects and can be asserted on just like any other object:
 
@@ -32,7 +32,7 @@ involvedObject:
   name: my-pod
 ```
 
-# Custom Resource Definitions
+## Custom Resource Definitions
 
 New Custom Resource Definitions are not immediately available for use in the Kubernetes API until the Kubernetes API has acknowledged them. 
 
@@ -84,7 +84,7 @@ spec:
 
 Note that CRDs created via the `crdDir` test suite configuration are available for use immediately and do not require an assert like this.
 
-# Helm testing
+## Helm testing
 
 You can test a Helm chart by installing it in either a test step or your test suite:
 
@@ -106,7 +106,7 @@ startKIND: true
 kindNodeCache: true
 ```
 
-# Image caching in kind
+## Image caching in kind
 
 By default, [kind](https://kind.sigs.k8s.io/) does not persist its containerd directory, meaning that on every test run you will have to download all of the images defined in the tests. However, the kudo test harness supports creating a named Docker volume for each node specified in the kind configuration (or the default node if no nodes or configuration are specified) that will be used for each test run:
 
