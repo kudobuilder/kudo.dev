@@ -1,7 +1,5 @@
 ---
 title: Testing
-type: docs
-menu: docs
 ---
 
 # KUDO Test Harness

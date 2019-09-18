@@ -1,24 +1,14 @@
----
-title: Configuration Reference
-type: docs
-menu:
-  docs:
-    parent: 'Testing'
-weight: 6
----
-
 # Configuration Reference
 
-* [TestSuite](#testsuite)
-* [TestStep](#teststep)
-* [TestAssert](#testassert)
-* [Command](#command)
+<h2>Table of Contents</h2>
+
+[[toc]]
 
 ## TestSuite
 
 The `TestSuite` object specifies the settings for the entire test suite and should live in the test suite configuration file (`kudo-test.yaml` by default, or `--config`):
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestSuite
 startKIND: true
@@ -53,7 +43,7 @@ kubectl           | list of strings  | Kubectl specifies a list of kubectl comma
 
 The `TestStep` object can be used to specify settings for a test step and can be specified in any test step YAML.
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestStep
 delete:
@@ -87,7 +77,7 @@ labels     | map    | If specified, a label selector to use when looking up obje
 
 The `TestAssert` object can be used to specify settings for a test step's assert and must be specified in the test step's assert YAML.
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestAssert
 timeout: 30

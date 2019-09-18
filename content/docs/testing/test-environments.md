@@ -4,11 +4,7 @@ The KUDO test harness can run tests against several different test environments,
 
 A default environment for the tests can be defined in `kudo-test.yaml` allowing each test suite or project to easily use the correct environment.
 
-* [Live cluster](#live-cluster)
-* [Kubernetes-in-docker](#kubernetes-in-docker)
-* [Mocked control plane](#mocked-control-plane)
-* [Environment setup](#environment-setup)
-   * [Starting KUDO](#starting-kudo)
+[[toc]]
 
 ## Live Cluster
 
@@ -16,7 +12,7 @@ If no configuration is provided, the tests will run against your default cluster
 
 You can also provide an alternative kubeconfig file by either setting `$KUBECONFIG` or the `--kubeconfig` flag:
 
-```
+```bash
 kubectl kudo test --kubeconfig=mycluster.yaml
 ```
 
@@ -26,13 +22,13 @@ The KDUO test harness has a built in integration with [kind](https://github.com/
 
 To start a kind cluster in your tests either specify it on the command line:
 
-```
+```bash
 kubectl kudo test --start-kind=true
 ```
 
 Or specify it in your `kudo-test.yaml`:
 
-```
+```yaml
 apiVersion: kudo.k8s.io/v1alpha1
 kind: TestSuite
 startKIND: true
@@ -47,7 +43,7 @@ By setting `kindNodeCache`, the containerd directories will be mounted into a Do
 
 It is also possible to provide a custom kind configuration file. For example, to override the Kubernetes cluster version, create a kind configuration file called `kind.yaml`:
 
-```
+```yaml
 kind: Cluster
 apiVersion: kind.sigs.k8s.io/v1alpha3
 nodes:
@@ -59,7 +55,7 @@ See the [kind documentation](https://kind.sigs.k8s.io/docs/user/quick-start/#con
 
 Now specify either `--kind-config` or `kindConfig` in your configuration file:
 
-```
+```bash
 kubectl kudo test --kind-config=kind.yaml
 ```
 
@@ -75,7 +71,7 @@ Currently, the only supported controller in this environment is the KUDO control
 
 To start the mocked control plane, specify either `--start-control-plane` on the CLI or `startControlPlane` in the configuration file:
 
-```
+```bash
 kubectl kudo test --start-control-plane
 ```
 
@@ -85,7 +81,7 @@ Before running a test suite, it may be necessary to setup the Kubernetes cluster
 
 Your `kudo-test.yaml` can specify the settings needed to setup the cluster:
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestSuite
 startKIND: true
@@ -106,7 +102,7 @@ See the [configuration reference](reference.md#testsuite) for documentation on c
 
 In some test suites, it may be useful to have the KUDO controller running. To start the KUDO controller, specify either `--start-kudo` on the command line or `startKUDO` in the configuration file:
 
-```
+```bash
 kubectl kudo test --start-kudo=true
 ```
 
