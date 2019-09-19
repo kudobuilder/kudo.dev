@@ -38,12 +38,12 @@ Follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) 
 ## Create Your First Operator
 
 To see the powers of KUDO unleashed in full, you should try [creating your own operator](developing-operators.md).
-```
+
 ## Notes on Minikube
 
 If you plan on developing and testing KUDO locally via Minikube, you'll need to launch your cluster with a reasonable amount of memory allocated. By default, Minikube runs with 2GB - we recommend at least 10GB, especially if you're working with applications such as [Kafka](examples/apache-kafka.md). You can start Minikube with some suitable resource adjustments as follows:
 
-```bash
+```
 minikube start --cpus=4 --memory=10240 --disk-size=40g
 ```
 
