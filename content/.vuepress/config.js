@@ -53,8 +53,8 @@ module.exports = {
                 children: [
                   'examples/apache-flink',
                   'examples/apache-kafka',
-                  'examples/apache-zookeeper',
-                  'examples/backups'
+                  'examples/apache-zookeeper'
+                  // 'examples/backups'
                 ]
               },
               'faq',
