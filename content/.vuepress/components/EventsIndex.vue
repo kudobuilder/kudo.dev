@@ -40,15 +40,17 @@
     },
     computed: {
       events() {
+        var today = new Date();
+        today.setHours(0,0,0,0);
         if (this.subset === 'upcoming') {
           return this.$site.pages
             .filter(x => x.path.startsWith('/community/events/') && x.frontmatter.event)
-            .filter(x => new Date(x.frontmatter.date) >= new Date())
+            .filter(x => new Date(x.frontmatter.date) >= today)
             .sort((a, b) => new Date(a.frontmatter.date) - new Date(b.frontmatter.date));
         } else {
           return this.$site.pages
             .filter(x => x.path.startsWith('/community/events/') && x.frontmatter.event)
-            .filter(x => new Date(x.frontmatter.date) < new Date())
+            .filter(x => new Date(x.frontmatter.date) < today)
             .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
         }
       },
