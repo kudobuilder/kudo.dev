@@ -28,7 +28,7 @@ KUDO content from around the web:
 
 ## Online Meetings
 
-KUDO community meetings take place every Wednesday. We may vary the time of day to cater to people in different time zones. We use Zoom and every meeting is recorded for those unable to join live.
+KUDO community meetings take place every other Wednesday. We may vary the time of day to cater to people in different time zones. We use Zoom and every meeting is recorded for those unable to join live.
 
 - [Zoom link](https://mesosphere.zoom.us/j/443128842)
 - [Community Meeting Agenda and Past Recordings](https://docs.google.com/document/d/1UqgtCMUHSsOohZYF8K7zX8WcErttuMSx7NbvksIbZgg/edit).
