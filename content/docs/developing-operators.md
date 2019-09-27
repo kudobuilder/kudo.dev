@@ -86,7 +86,7 @@ cd kudo
 kubectl kudo install ./config/samples/first-operator
 ```
 
-In order to see what's happen in your cluster you chan run the following command:
+In order to see what's happen in your cluster you can run the following command:
 
 ```bash
 # Get Instances
