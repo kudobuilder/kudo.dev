@@ -139,12 +139,12 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 * `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
 * `kubectl kudo init --crd-only` will create crds in the cluster.
 
-**Note**: Looking to delete kubernetes objects created via init, try:
+**Note**: Looking to delete kubernetes objects created via init, run:
 
-* `kubectl kudo init --dry-run -o yaml | kubectl delete -f -` which will delete all kubernetes objects create with init or
+* `kubectl kudo init --dry-run -o yaml | kubectl delete -f -` which will delete all kubernetes objects created with init or
 * `kubectl kudo init --dry-run -o yaml --crd-only | kubectl delete -f -` which will only delete the KUDO CRDs.
 
-**Note**: If you want to ensure all components are installed... just init again. It will cycle through all objects and ensure they are created.
+**Note**: If you want to ensure all components are installed, just init again. It will cycle through all objects and ensure they are created.
 
 ### Install a Package
 
