@@ -17,9 +17,9 @@ instance.kudo.dev/v1alpha1/zk created
 When an instance is created, the default `deploy` plan is executed
 
 ```
-$ kubectl get planexecutions
+$ kubectl get instances
 NAME                  AGE
-zk-deploy-392770000   11s
+zk   11s
 ```
 
 The `statefulset` defined in the `OperatorVersion` comes up with 3 pods:
