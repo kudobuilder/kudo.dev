@@ -57,6 +57,8 @@ A blog post that notifies of a release should follow this format:
 - The following content should be copied/pasted from the Github release page
 - The blog post should close with a link to the changelog and ideally an overview of the next release.
 
+You can find a template [here](https://raw.githubusercontent.com/kudobuilder/www/master/content/internal-docs/release-post-template.md).
+
 ::: warning Link Your Post
 We haven't added a dynamic sidebar yet so each blog post must be manually added to the blog section of the sidebar in [config.js](https://github.com/kudobuilder/www/blob/0a160e629e21593a10e5fa1bb18353ddf1c34d2b/content/.vuepress/config.js#L80-L83).
 :::
