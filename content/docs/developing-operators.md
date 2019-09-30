@@ -55,7 +55,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: {{ .Params.Replicas }} # tells deployment to run X pods matching the template
+  replicas: {{ .Params.replicas }} # tells deployment to run X pods matching the template
   template:
     metadata:
       labels:
@@ -84,6 +84,22 @@ Now your first operator is ready and you can install it to your cluster. You can
 git clone https://github.com/kudobuilder/kudo.git
 cd kudo
 kubectl kudo install ./config/samples/first-operator
+```
+
+In order to see what's happen in your cluster you can run the following command:
+
+```bash
+# Get Instances
+kubectl get instances
+
+# OR
+kudoctl kudo get instances
+```
+
+If all worked fine, you should see 2 pods running 
+
+```bash
+kubectl get pods
 ```
 
 ## Operator.yaml File
