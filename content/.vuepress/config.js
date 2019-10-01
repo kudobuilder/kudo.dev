@@ -75,6 +75,7 @@ module.exports = {
                 title: 'Blog',
                 collapsable: false,
                 children: [
+                  'blog-2019-10-01-kensipe',
                   'announcing-kudo-0.6.0',
                   'announcing-kudo-0.5.0',
                   'announcing-kudo-0.4.0',
