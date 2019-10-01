@@ -43,3 +43,22 @@ In order to keep previews slim, any headers within the excerpt will be hidden, a
 Posts will be sorted according to their date. In order to find easily tell apart release announcements from other posts, please follow the following naming convention:
 - **Release announcements**: `announcing-kudo-<version>.md`
 - **Other blog posts**: `blog-YYYY-MM-<name>.md`
+
+## Release Posts
+
+A blog post that notifies of a release should follow this format:
+
+- The title should be _Announcing KUDO x.y.z_
+- The first paragraph should summarize the high level additions in this release and must be followed by an html comment line:
+  ```
+  <!-- more -->
+  ```
+  This will use this forst paragraph as an excerpt for rendering the blog posts overview and rss feed summary.
+- The following content should be copied/pasted from the Github release page
+- The blog post should close with a link to the changelog and ideally an overview of the next release.
+
+You can find a template [here](https://raw.githubusercontent.com/kudobuilder/www/master/content/internal-docs/release-post-template.md).
+
+::: warning Link Your Post
+We haven't added a dynamic sidebar yet so each blog post must be manually added to the blog section of the sidebar in [config.js](https://github.com/kudobuilder/www/blob/0a160e629e21593a10e5fa1bb18353ddf1c34d2b/content/.vuepress/config.js#L80-L83).
+:::
