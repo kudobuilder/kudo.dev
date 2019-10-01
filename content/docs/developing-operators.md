@@ -76,7 +76,7 @@ Plan foo
 
 Plans consists of one or more `phases`. `Phases` consists of one or more `steps`. `Steps` contain one or more `tasks` (those are defined in the section we talked about in the last paragraph). Both phases and also steps can be configured with an execution `strategy`, either `serial` or `parallel`.
 
-The sample has a `deploy` plan with a `main` and a `everything`. From `everything` the `app` is referenced. This task gets executed when an instance is created using the operator.
+The sample has a `deploy` plan with a phase `main` and a step `everything`. From `everything` the `app` is referenced. This task gets executed when an instance is created using the operator.
 
 At the same time, `deploy` plan is the most important plan within your operator because that is the default plan that every operator has to have and also the plan that gets executed when you install an instance of your operator into the cluster. Another important plan that you might consider having is `update` (run when instance metadata is updated) or `upgrade` (run when instance is upgraded from one version of the operator to another). If you don't provide `update` and/or `upgrade` plans for your operator, the fallback is always `deploy`.
 
