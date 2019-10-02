@@ -61,7 +61,7 @@ module.exports = {
                 title: 'Testing',
                 children: [
                   'testing',
-                  'testing/asserts',
+                  'testing/asserts-errors',
                   'testing/reference',
                   'testing/steps',
                   'testing/test-environments',
