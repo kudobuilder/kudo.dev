@@ -8,6 +8,7 @@ KUDO v0.6.0 makes it more convenient than ever to create operator packages, and 
 
 <!-- more -->
 
+To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.6.0) page.
 
 ## Release Highlights
 
