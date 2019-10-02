@@ -6,9 +6,9 @@ date: 2019-10-01
 
 KUDO v0.7.0+ focuses on developer productivity, user debugging, Kubernetes controller best practices and is updated to the latest Kubernetes 1.16 standards. We are happy to announce the release of v0.7.2.
 
-
 <!-- more -->
 
+To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.7.2) page.
 
 ## Release Highlights
 
@@ -70,7 +70,6 @@ Go 1.13.1 provided a security release for [an issue](https://github.com/golang/g
 ### Updated to Latest Kubernetes API
 
 StatefulSets in KUDO were previously accessed through v1beta2 APIs which has been removed from Kubernetes 1.16. Now KUDO uses the AppsV1 API.
-
 
 ## Docker images
 

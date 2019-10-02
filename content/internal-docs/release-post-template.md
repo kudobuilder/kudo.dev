@@ -8,13 +8,11 @@ This paragraph should describe the added functionality in this release in one to
 
 <!-- more -->
 
+To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/$VERSION$) page.
+
 ## Release Highlights
 
 Copy the Github release page in here with h3 headers
-
-## Changelog
-
-To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/$VERSION$) page.
 
 ## What's Next?
 

@@ -8,6 +8,8 @@ We are proud to announce the release of KUDO v0.5.0! This release enhances the t
 
 <!-- more -->
 
+To see the full changelog and the list of contributors who contributed to this release, visit [the Github Release](https://github.com/kudobuilder/kudo/releases/tag/v0.5.0) page.
+
 ## Release Highlights
 
 ### kudo upgrade command
