@@ -1,0 +1,17 @@
+{
+  "authors": [
+    {
+      "alias": "kensipe",
+      "name": "Ken Sipe",
+      "about": "Ken has several decades of experience with web services in both traditional software as well as distributed systems. He is based out of Saint Charles, Missouri.",
+      "avatar": "kensipe_200x200.jpg",
+      "twitter": "kensipe"
+    },
+    {
+      "alias": "meichstedt",
+      "name": "Matthias Eichstedt",
+      "about": "Matthias is mostly harmless.",
+      "avatar": "meichstedt_200x200.jpg"
+    }
+  ]
+}
