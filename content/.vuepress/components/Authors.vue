@@ -1,63 +1,72 @@
 <template>
     <div class="author">
-        <div v-for="author in authors">
-            <div v-if="author.alias" class="about">
-                <img v-if="author.avatar" class="image clip-circle" :src="image(author.avatar)" :alt="author.name" align="right" />
+        <div v-for="page in authors">
+            <div v-if="page.frontmatter.alias" class="about">
+                <img v-if="page.frontmatter.avatar" class="image clip-circle" :src="image(page.frontmatter.avatar)" :alt="page.frontmatter.name" align="right" />
                 <strong v-if="alias">About the author</strong>
-                <strong v-else>{{author.name}}</strong>
+                <strong v-else>{{page.frontmatter.name}}</strong>
                 <br/>
-                <span>{{author.about}}</span>
+                <span v-if="page.excerpt" v-html="excerptWithoutHeader(page)" />
                 <!-- at least alias is expected to be always be set for lookup -->
-                <span v-if="author.alias">Find {{author.name}} on</span>
-                <span v-if="author.alias">
-                <a v-bind:href="'https://github.com/' + author.alias"
-                   target="_blank"
-                   rel="noopener noreferrer">GitHub</a><OutboundLink/>
-            </span>
+                <span v-if="page.frontmatter.alias">Find <router-link :to="page.path">{{page.frontmatter.name}}</router-link> on</span>
+                <span v-if="page.frontmatter.alias">
+                    <a v-bind:href="'https://github.com/' + page.frontmatter.alias"
+                       target="_blank"
+                       rel="noopener noreferrer">GitHub</a><OutboundLink/>
+                </span>
                 <!-- twitter alias is optional -->
-                <span v-if="author.twitter">
-                <a v-bind:href="'https://twitter.com/' + author.twitter"
-                   target="_blank"
-                   rel="noopener noreferrer">Twitter</a><OutboundLink/>
-            </span>
+                <span v-if="page.frontmatter.twitter">
+                    <a v-bind:href="'https://twitter.com/' + page.frontmatter.twitter"
+                       target="_blank"
+                       rel="noopener noreferrer">Twitter</a><OutboundLink/>
+                </span>
             </div>
-            <div v-else class="about">{{author.name}}</div>
+            <div v-else class="about">{{page.frontmatter.name}}</div>
         </div>
     </div>
 </template>
 
 <script>
-  import json from '../../community/assets/authors.json';
   export default {
     props: {
-      // the author's github alias
+      // the author's github alias, if the list should be filtered to display just this one
       alias: {
         type: String
       }
     },
-    data(){
-      return{
-        allAuthors: json.authors
-      }
-    },
     computed: {
       authors() {
+        const allAuthors = this.$site.pages.filter(x => x.frontmatter.author);
+        console.log(allAuthors);
         if (this.alias) {
-          const matches = this.allAuthors.filter(x => x.alias === this.alias);
+          const matches = allAuthors.filter(x => x.frontmatter.alias === this.alias);
           if (matches.length !== 0) {
             return matches
           } else {
-            return [{ name: "No author found for <" + this.alias + ">" }]
+            return [{
+              // if no page is found, create a dummy frontmatter to at least surface the error:
+              frontmatter: {
+                name: "Authored by " + this.alias
+              }
+            }]
           }
         } else {
-          console.log(this.allAuthors)
-          return this.allAuthors
+          return allAuthors
         }
-      }
+      },
     },
     methods: {
       image(file) {
         return this.$withBase("/images/authors/" + file)
+      },
+      /**
+       * @param item the item that is rendered
+       * @returns A {string} without headers, and paragraphs replaced with spans
+       */
+      excerptWithoutHeader(item) {
+        return item.excerpt
+          .replace(/<(\/?)h\d/g, "<$1span hidden") // hide any headers from the excerpt
+          .replace(/<(\/?)p/g, "<$1span") // make the paragraph a span instead so we can format better
       }
     }
   }
