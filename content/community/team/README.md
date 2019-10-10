@@ -1,5 +1,7 @@
 # Team
 
-Even though KUDO is an open source community project actively seeking and encouraging contributions, there's a dedicated team of full time engineers. Meet those great people virtually:
+KUDO is an open source community project actively seeking and encouraging contributions. There's also a dedicated team, some of which work on KUDO or the KUDO documentation full-time.
+
+Meet those good people virtually:
 
 <Authors />

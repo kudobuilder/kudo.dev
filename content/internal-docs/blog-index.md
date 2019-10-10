@@ -114,4 +114,4 @@ Finally, reference the author using the given `alias` at the and of your blog po
 ```
 You can see how this will render at the end of this page.
 
-<Authors alias="meichstedt" />
+<Authors about="meichstedt" />

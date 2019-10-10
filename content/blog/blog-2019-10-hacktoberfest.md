@@ -28,4 +28,4 @@ Even though it's hacktober, don't be scared! New at development?  New to Go?  Ne
 
 Let the Hacking Begin!!!
 
-<Authors alias="kensipe" />
+<Authors about="kensipe" />
