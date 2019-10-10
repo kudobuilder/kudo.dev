@@ -83,7 +83,7 @@ Add metadata about the author to [authors.md](https://github.com/kudobuilder/www
 The full list of possible properties is as follows:
 
 ::: flag alias
-The authors GitHub alias, and the ID for looking up authors in this documentation.
+The authors GitHub alias, and the ID for looking up authors in this documentation. If no alias is given, all authors will be rendered.
 :::
 
 ::: flag name
@@ -109,9 +109,9 @@ If you want to render an image using the `avatar` property, add it to the [autho
 ### Reference The Author
 
 Finally, reference the author using the given `alias` at the and of your blog post like so:
-  ```yaml
-  <Author alias="meichstedt" />
-  ```
-  You can see how this will render at the end of this page.
+```yaml
+<Authors alias="meichstedt" />
+```
+You can see how this will render at the end of this page.
 
-<Author alias="meichstedt" />
+<Authors alias="meichstedt" />
