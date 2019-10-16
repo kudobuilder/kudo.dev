@@ -4,7 +4,7 @@ alias: zen-dog
 name: Alex
 avatar: alex.jpg
 about:
-  Alex is simply awesome, but someone has yet to put his awesomeness into a brief and meaningful summary.
+  Alex is an engineer and he solves problems. Sometimes this involves writing code.
 ---
 
 # Alex
