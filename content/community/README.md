@@ -22,6 +22,7 @@ Contribute to KUDO development:
 
 KUDO content from around the web:
 
+- [CNCF Webinar series: Introducing the Kubernetes Universal Declarative Operator](https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/), presented by Gerred Dillon
 - [KUDO tutorial by Michael Beisiegel](https://github.com/realmbgl/kudo-tutorial)
 - [Cloud Native London 2019: Introducing KUDO – Kubernetes Operators the easy way by Matt Jarvis](https://skillsmatter.com/skillscasts/14045-kubernetes-operators-the-easy-way)
 - [OSDC 2019: Introducing KUDO – Kubernetes Operators the easy way by Matt Jarvis](https://youtu.be/qAUmRfbd300)
