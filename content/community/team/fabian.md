@@ -1,6 +1,7 @@
 ---
 author: true
 alias: fabianbaier
+twitter: baiersf
 name: Fabian
 avatar: fabian.jpg
 about:
