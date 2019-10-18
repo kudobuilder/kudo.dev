@@ -59,5 +59,4 @@ kind create cluster
 export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
 kubectl delete storageclass standard
 kubectl apply -f https://raw.githubusercontent.com/kudobuilder/operators/master/test/manifests/local-path-storage.yaml
-kubectl annotate storageclass --overwrite local-path storageclass.kubernetes.io/is-default-class=true
 ```
