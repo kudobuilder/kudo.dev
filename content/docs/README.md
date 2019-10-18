@@ -57,6 +57,5 @@ Here is an example of setting up a new cluster:
 # create kind cluster
 kind create cluster
 export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl delete storageclass standard
 kubectl apply -f https://raw.githubusercontent.com/kudobuilder/operators/master/test/manifests/local-path-storage.yaml
 ```
