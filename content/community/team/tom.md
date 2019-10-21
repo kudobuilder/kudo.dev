@@ -3,8 +3,9 @@ author: true
 alias: runyontr
 name: Tom
 avatar: tom.jpg
+twitter: tommyrunyon
 about:
-  Tom is simply awesome, but someone has yet to put his awesomeness into a brief and meaningful summary.
+  Tom is a Kubernetes consultant providing expertise to application operation teams deploying and running applications in production and expertise to infrastructure teams configuring Kubernetes and building custom extensions to Kubernetes to meet business requirements.
 ---
 
 # Tom
