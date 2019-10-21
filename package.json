@@ -1,7 +1,7 @@
 {
   "license": "Apache-2.0",
   "devDependencies": {
-    "vuepress": "^1.0.2"
+    "vuepress": "^1.2.0"
   },
   "scripts": {
     "docs:dev": "vuepress dev content",
