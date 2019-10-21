@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: alenkacz
 name: Alena
 avatar: alena.png

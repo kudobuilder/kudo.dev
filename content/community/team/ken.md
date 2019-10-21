@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: kensipe
 name: Ken
 avatar: ken.jpg

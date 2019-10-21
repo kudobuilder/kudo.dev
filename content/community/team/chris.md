@@ -1,5 +1,6 @@
 ---
 author: true
+kind: other
 alias: chrisgaun
 name: Chris
 avatar: chris.jpg

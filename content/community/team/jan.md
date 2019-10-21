@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: nfnt
 name: Jan
 avatar: jan.jpg

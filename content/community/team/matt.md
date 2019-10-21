@@ -1,5 +1,6 @@
 ---
 author: true
+kind: other
 alias: mattj-io
 name: Matt
 avatar: matt.png

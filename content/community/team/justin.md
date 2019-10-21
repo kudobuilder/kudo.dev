@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: jbarrick-mesosphere
 name: Justin
 avatar: justin.jpg

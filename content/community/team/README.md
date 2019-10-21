@@ -4,4 +4,10 @@ KUDO is an open source community project actively seeking and encouraging contri
 
 Meet those good people virtually:
 
-<Authors />
+## Core Contributors
+
+<Authors kind="contributor"/>
+
+## Otherwise Involved 
+
+<Authors kind="other"/>

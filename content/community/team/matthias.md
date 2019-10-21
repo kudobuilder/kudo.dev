@@ -1,5 +1,6 @@
 ---
 author: true
+kind: other
 alias: meichstedt
 name: Matthias Eichstedt
 avatar: matthias.jpg

@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: gerred
 name: Gerred
 avatar: gerred.jpg

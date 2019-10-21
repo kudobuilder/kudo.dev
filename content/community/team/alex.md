@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: zen-dog
 name: Alex
 avatar: alex.jpg

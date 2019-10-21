@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: runyontr
 name: Tom
 avatar: tom.jpg

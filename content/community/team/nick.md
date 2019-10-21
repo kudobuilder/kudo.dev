@@ -1,5 +1,6 @@
 ---
 author: true
+kind: other
 alias: yankcrime
 name: Nick
 avatar: nick.png

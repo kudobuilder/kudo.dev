@@ -1,5 +1,6 @@
 ---
 author: true
+kind: contributor
 alias: fabianbaier
 twitter: baiersf
 name: Fabian
