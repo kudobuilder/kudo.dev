@@ -20,17 +20,17 @@ The `operator.yaml` is the main YAML file defining both operator metadata as the
 ### Your First KUDO Operator
 First let’s create `operator.yaml` and place it in a `first-operator` folder.
 
-@[code](@/kudo/config/samples/first-operator/operator.yaml)
+<<< @/kudo/config/samples/first-operator/operator.yaml
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install instance of this operator into cluster.
 
 You can see that the task `nginx` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
 
-@[code](@/kudo/config/samples/first-operator/templates/deployment.yaml)
+<<< @/kudo/config/samples/first-operator/templates/deployment.yaml
 
 This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.Replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
 
-@[code](@/kudo/config/samples/first-operator/params.yaml)
+<<< @/kudo/config/samples/first-operator/params.yaml
 
 Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
 
@@ -61,16 +61,11 @@ kubectl get pods
 ## Operator.yaml File
 
 This is the main piece of every operator. It consists of two main parts. First one defines metadata about your operator.
-
-@[code transclude={1-5}](@/kudo/config/samples/first-operator/operator.yaml)
-
 Most of these are provided as a form of documentation. `kudoVersion` and `kubernetesVersion` use semver constraints to define minimal or maximal version of Kubernetes or KUDO that this operator supports. Under the hood, we use [this library](https://github.com/Masterminds/semver) to evaluate the constraints.
 
 ### Tasks Section
 
 Another part of `operator.yaml` is the tasks section. Tasks are the smallest pieces of work that get executed together. You usually group Kubernetes manifests that should be applied at once into one task. An example can be an app that will result in `deployment.yaml` being applied to your cluster.
-
-@[code transclude={6-9}](@/kudo/config/samples/first-operator/operator.yaml)
 
 ### Plans Section
 
@@ -95,8 +90,6 @@ Plans consists of one or more `phases`. `Phases` consists of one or more `steps`
 The sample has a `deploy` plan with a phase `main` and a step `everything`. From `everything` the `app` is referenced. This task gets executed when an instance is created using the operator.
 
 At the same time, `deploy` plan is the most important plan within your operator because that is the default plan that every operator has to have and also the plan that gets executed when you install an instance of your operator into the cluster. Another important plan that you might consider having is `update` (run when instance metadata is updated) or `upgrade` (run when instance is upgraded from one version of the operator to another). If you don't provide `update` and/or `upgrade` plans for your operator, the fallback is always `deploy`.
-
-@[code transclude={10-19}](@/kudo/config/samples/first-operator/operator.yaml)
 
 Plans allow operators to see what the operator is currently doing, and to visualize the broader operation such as for a config rollout. The fixed structure of that information meanwhile makes it straightforward to build UIs and tooling on top.
 
