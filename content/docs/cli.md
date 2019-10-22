@@ -136,8 +136,15 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 * `kubectl kudo init --dry-run --output=yaml > kudo-install.yaml` which will not install anything but will output YAML to a file which can be applied manually to the server.
 * `kubectl kudo init --version=0.5.0` which will install the `0.5.0` into the cluster using the image `kudobuilder/controller:v0.5.0`
 * `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
-* `kudoctl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
+* `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
+* `kubectl kudo init --crd-only` will create crds in the cluster.
 
+**Note**: Looking to delete kubernetes objects created via init, run:
+
+* `kubectl kudo init --dry-run -o yaml | kubectl delete -f -` which will delete all kubernetes objects created with init or
+* `kubectl kudo init --dry-run -o yaml --crd-only | kubectl delete -f -` which will only delete the KUDO CRDs.
+
+**Note**: If you want to ensure all components are installed, just init again. It will cycle through all objects and ensure they are created.
 
 ### Install a Package
 

@@ -23,10 +23,9 @@ instance.kudo.dev/v1alpha1/kafka created
 When an instance is created, the default `deploy` plan is executed
 
 ```
-$ kubectl get planexecutions
+$ kubectl get instances
 NAME                    AGE
-kafka-deploy-91712000   13s
-zk-deploy-392770000     3m
+kafka   13s
 ```
 
 The stateful set defined in the `OperatorVersion` comes up with 3 pods:

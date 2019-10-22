@@ -1,10 +1,10 @@
 ---
-event: Cloud Native London Meetup
+event: Open Infra Days Nordics
 topic: KUDO - Kubernetes Operators, the easy way
 speaker: Matt Jarvis
-date: 2019-12-10
-location: London, UK
-url: https://www.meetup.com/Cloud-Native-London/
+date: 2019-10-03
+location: Stockholm, SE
+url: https://openinfranordics.com/
 ---
 
 <!-- some more info about the event could go here -->

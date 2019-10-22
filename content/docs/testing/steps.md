@@ -1,25 +1,14 @@
----
-title: Steps
-type: docs
-menu:
-  docs:
-    parent: 'Testing'
-weight: 3
----
-
 # Steps
-
-* [Format](#format)
-* [Creating objects](#creating-objects)
-* [Updating objects](#updating-objects)
-* [Deleting objects](#deleting-objects)
-* [Kubectl commands](#kubectl-commands)
 
 Each test case is broken down into test steps. Test steps within a test case are run sequentially: if any of the test steps fail, the entire test case is considered failed.
 
 A test step can create, update, and delete objects as well as run any kubectl command.
 
-# Format
+<h2>Table of Contents</h2>
+
+[[toc]]
+
+## Format
 
 A test step can include many YAML files and each YAML file can contain many Kubernetes objects. In a test case's directory, each file that begins with the same index is considered a part of the same test step. All objects inside of a test step are operated on by the test harness simultaneously, so use separate test steps to order operations.
 
@@ -42,17 +31,17 @@ A namespace is created by the test harness for each test case, so if an object i
 
 See the [configuration reference](reference.md#teststep) for documentation on configuring test steps.
 
-# Creating Objects
+## Creating Objects
 
 Any objects specified in a test step will be created if they do not already exist.
 
-# Updating Objects
+## Updating Objects
 
 If an object does already exist in Kubernetes, then the object in Kubernetes will be updated with the changes specified.
 
 The test harness uses merge patching for updating objects, so it is possible to specify minimal updates. For example, to change the replicas on a deployment but leave all other settings untouched, a step could be written:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -61,11 +50,11 @@ spec:
   replicas: 4
 ```
 
-# Deleting Objects
+## Deleting Objects
 
 To delete objects at the beginning of a test step, you can specify object references to delete in your `TestStep` configuration. In a test step file, add a `TestStep` object:
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestStep
 delete:
@@ -91,11 +80,11 @@ The `delete` object references can delete:
 
 The test harness will wait for the objects to be successfully deleted, if they exist, before continuing with the test step - if the objects do not get deleted before the timeout has expired the test step is considered failed.
 
-# Kubectl Commands
+## Kubectl Commands
 
 A `TestStep` configuration can also specify kubectl commands to run before running the step:
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestStep
 kubectl:
@@ -104,7 +93,7 @@ kubectl:
 
 It is also possible to use any installed kubectl plugin when calling kubectl commands:
 
-```
+```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestStep
 kubectl:

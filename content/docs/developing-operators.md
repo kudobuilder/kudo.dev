@@ -5,7 +5,7 @@ This guide will provide introduction to creating KUDO operators, you will learn 
 ## Getting Started
 In this section we’ll start by developing your first operator and we’ll follow up with in-depth explanation of the underlying concepts.
 
-The overall structure of a package looks following:
+A package bundles all files needed to describe an operator. The overall structure of a package looks following:
 ```bash
 .
 ├── operator.yaml
@@ -32,7 +32,7 @@ This is a pretty normal Kubernetes YAML file defining a deployment. However, you
 
 @[code](@/kudo/config/samples/first-operator/params.yaml)
 
-Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already.
+Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
 
 **Note:** If you want to install the result of the following steps with doing them manually, you can clone the KUDO repository and run the example from there:
 
@@ -40,6 +40,22 @@ Now your first operator is ready and you can install it to your cluster. You can
 git clone https://github.com/kudobuilder/kudo.git
 cd kudo
 kubectl kudo install ./config/samples/first-operator
+```
+
+In order to see what's happen in your cluster you can run the following command:
+
+```bash
+# Get Instances
+kubectl get instances
+
+# OR
+kudoctl kudo get instances
+```
+
+If all worked fine, you should see 2 pods running 
+
+```bash
+kubectl get pods
 ```
 
 ## Operator.yaml File
