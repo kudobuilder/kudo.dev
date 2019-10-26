@@ -22,6 +22,10 @@ For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the
 You can find more recordings, tutorials, etc on our [community page](community/README.md#community-content). 
 :::
 
+# Testimonials
+
+<Testimonials />
+
 # There's more to life than Kubernetes
 
 Software like databases weren't built only to run on Kubernetes. They already have a rich set of tooling for deployment and operations, no matter where they are deployed. These tools are written, tested, and maintained by the experts who know this software best. 
