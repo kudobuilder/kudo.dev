@@ -1,10 +1,10 @@
 <template>
     <div>
         <div v-for="ref in testimonials" class="testimonial">
-            <p class="text">
+            <div class="text">
                 <img class="image" height="40" :src="image(ref.frontmatter.logo)" :alt="ref.frontmatter.company" />
                 <span v-html="ref.excerpt"></span>
-            </p>
+            </div>
             <span class="name">– {{ref.frontmatter.name}}&emsp;</span>
             <span class="position">{{ref.frontmatter.position}}</span>
         </div>
