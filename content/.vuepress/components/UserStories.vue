@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div v-for="ref in testimonials" class="testimonial">
+        <div v-for="story in stories" class="story">
             <div class="text">
-                <img class="image" height="40" :src="image(ref.frontmatter.logo)" :alt="ref.frontmatter.company" />
-                <span v-html="ref.excerpt"></span>
+                <img class="image" height="40" :src="image(story.frontmatter.logo)" :alt="story.frontmatter.company" />
+                <span v-html="story.excerpt"></span>
             </div>
-            <span class="name">– {{ref.frontmatter.name}}&emsp;</span>
-            <span class="position">{{ref.frontmatter.position}}</span>
+            <span class="name">– {{story.frontmatter.name}}&emsp;</span>
+            <span class="position">{{story.frontmatter.position}}</span>
         </div>
     </div>
 </template>
@@ -14,21 +14,21 @@
 <script>
   export default {
     computed: {
-      testimonials() {
+      stories() {
         return this.$site.pages
-          .filter(x => x.path.startsWith('/community/testimonials/'));
+          .filter(x => x.path.startsWith('/community/stories/'));
       }
     },
     methods: {
       image(file) {
-        return this.$withBase("/images/testimonials/" + file)
+        return this.$withBase("/images/logos/" + file)
       }
     }
   }
 </script>
 
 <style lang="stylus" scoped>
-    .testimonial
+    .story
         margin 2rem 0
         padding .5rem 2rem
         .text

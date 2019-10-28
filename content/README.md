@@ -22,9 +22,9 @@ For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the
 You can find more recordings, tutorials, etc on our [community page](community/README.md#community-content). 
 :::
 
-# Testimonials
+# User Stories
 
-<Testimonials />
+<UserStories />
 
 # There's more to life than Kubernetes
 
