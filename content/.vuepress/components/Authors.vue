@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-for="page in authors">
-            <Author :author="page.frontmatter" :link="page.path" :about="about !== undefined" />
+        <div v-for="author in authors">
+            <Author :author="author.frontmatter" :link="author.path" :about="about !== undefined" />
         </div>
     </div>
 </template>
@@ -24,7 +24,12 @@
     computed: {
       authors() {
         const allAuthors = this.$site.pages
-          .filter(x => x.path.startsWith('/community/team/') && x.frontmatter.author);
+          .filter(x => x.path.startsWith('/community/team/') && x.frontmatter.author)
+          .sort(function(a, b){
+            if(a.frontmatter.alias < b.frontmatter.firstname) { return -1; }
+            if(a.frontmatter.alias > b.frontmatter.firstname) { return 1; }
+            return 0;
+          });
         if (this.about) {
           return allAuthors.filter(x => x.frontmatter.alias === this.about);
         } else {
