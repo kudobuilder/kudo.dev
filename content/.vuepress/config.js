@@ -86,7 +86,8 @@ module.exports = {
               }
             ],
             '/community/': [
-              ''
+              '',
+              'team/'
             ],
             '/internal-docs/': [
               '',

@@ -27,3 +27,5 @@ The KUDO team wants to contribute back as well. The top 5 contributors to the KU
 Even though it's hacktober, don't be scared! New at development?  New to Go?  New to Kubernetes? No worries! The KUDO team would love to chat over slack or zoom to help get you started!
 
 Let the Hacking Begin!!!
+
+<Authors about="kensipe" />
