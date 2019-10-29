@@ -26,8 +26,8 @@
         const allAuthors = this.$site.pages
           .filter(x => x.path.startsWith('/community/team/') && x.frontmatter.author)
           .sort(function(a, b){
-            if(a.frontmatter.alias < b.frontmatter.alias) { return -1; }
-            if(a.frontmatter.alias > b.frontmatter.alias) { return 1; }
+            if(a.frontmatter.name < b.frontmatter.name) { return -1; }
+            if(a.frontmatter.name > b.frontmatter.name) { return 1; }
             return 0;
           });
         if (this.about) {
