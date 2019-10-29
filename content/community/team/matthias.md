@@ -5,7 +5,7 @@ alias: meichstedt
 name: Matthias
 avatar: matthias.jpg
 about:
-  Matthias is mostly harmless, takes care about documentation and tries to make the team as effective as possible.
+  Matthias is fueled by bitter-sweet coffee, mostly harmless, and manages the Orchestration team at D2iQ whenever he's not fiddling with the KUDO site or trying to make his Andalusian Hounds behave like proper dogs.
 ---
 
 # Matthias
