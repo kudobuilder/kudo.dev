@@ -5,7 +5,7 @@ alias: nfnt
 name: Jan
 avatar: jan.jpg
 about:
-  Jan is simply awesome, but someone has yet to put his awesomeness into a brief and meaningful summary.
+  Jan is a distributed systems expert, skilled in designing and building complex software systems for the cloud. He's an open source contributor, Kubernetes and Apache Mesos specialist.
 ---
 
 # Jan
