@@ -24,8 +24,7 @@
     computed: {
       authors() {
         const allAuthors = this.$site.pages
-          .filter(x => x.path.startsWith('/community/team/') && x.frontmatter.author)
-          .sort();
+          .filter(x => x.path.startsWith('/community/team/') && x.frontmatter.author);
         if (this.about) {
           return allAuthors.filter(x => x.frontmatter.alias === this.about);
         } else {
