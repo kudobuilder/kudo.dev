@@ -6,7 +6,7 @@ name: Tobi
 avatar: tobi.jpg
 twitter: superguenter
 about:
-  Tobi Knaup is Co-Founder & CTO of D2iQ. He previously helped scale Airbnb to millions of users worldwide as technical lead; has done research work on internet-scale sentiment analysis using online knowledge, linguistic analysis, and machine learning.
+  Tobi Knaup is Co-Founder & CTO of D2iQ. He is one of the creators of KUDO and assembled the original team. These days he spends his time evangelizing the project.
 ---
 
 # Tobi
