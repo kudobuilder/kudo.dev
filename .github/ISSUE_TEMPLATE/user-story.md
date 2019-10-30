@@ -7,10 +7,13 @@ labels: ''
 assignees: ''
 
 ---
+## Your Name
+
+## Your Position
 
 ## Name of your company
 
 ## Tell us about how you are using KUDO in a couple of sentences
 
 
-Add your logo to the issue as an attachment - JPEG or PNG, and less than 10MB please
+Add your logo to the issue as an attachment - SVG preferred, and less than 10MB please
