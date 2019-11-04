@@ -21,15 +21,20 @@ The `operator.yaml` is the main YAML file defining both operator metadata as the
 First let’s create `operator.yaml` and place it in a `first-operator` folder.
 
 ```yaml
+apiVersion: kudo.dev/v1beta1
 name: "first-operator"
 version: "0.1.0"
+kubernetesVersion: 1.13.0
 maintainers:
-- Your name <your@email.com>
+  - name: Your name
+    email: <your@email.com>
 url: https://kudo.dev
 tasks:
-  nginx:
-    resources:
-      - deployment.yaml
+  - name: app
+    kind: Apply
+    spec:
+      resources:
+        - deployment.yaml
 plans:
   deploy:
     strategy: serial
@@ -39,7 +44,7 @@ plans:
         steps:
           - name: everything
             tasks:
-              - nginx
+              - app
 ```
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
@@ -71,9 +76,11 @@ spec:
 This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.Replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
 
 ```yaml
-replicas:
-  description: Number of replicas that should be run as part of the deployment
-  default: 2
+apiVersion: kudo.dev/v1beta1
+parameters:
+  - name: replicas
+    description: Number of replicas that should be run as part of the deployment
+    default: 2
 ```
 
 Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
@@ -81,9 +88,15 @@ Now your first operator is ready and you can install it to your cluster. You can
 **Note:** If you want to install the result of the following steps with doing them manually, you can clone the KUDO repository and run the example from there:
 
 ```bash
-git clone https://github.com/kudobuilder/kudo.git
-cd kudo
-kubectl kudo install ./config/samples/first-operator
+git clone https://github.com/kudobuilder/operators.git
+cd operators
+kubectl kudo install ./repository/first-operator/operator/
+```
+
+or you can just simply do
+
+```bash
+kubectl kudo install first-operator
 ```
 
 In order to see what's happen in your cluster you can run the following command:
@@ -107,15 +120,14 @@ kubectl get pods
 This is the main piece of every operator. It consists of two main parts. First one defines metadata about your operator.
 
 ```yaml
-name: operator
-description: my first super awesome operator
-version: "5.7"
-kudoVersion: ">= 0.2.0"
-kubernetesVersion: ">= 1.14"
+apiVersion: kudo.dev/v1beta1
+name: "first-operator"
+version: "0.1.0"
+kubernetesVersion: 1.13.0
 maintainers:
-  - Bob <bob@example.com>
-  - Alice <alice@example.com>
-url: https://github.com/myoperator/myoperator
+  - name: Your name
+    email: <your@email.com>
+url: https://kudo.dev
 ```
 
 Most of these are provided as a form of documentation. `kudoVersion` and `kubernetesVersion` use semver constraints to define minimal or maximal version of Kubernetes or KUDO that this operator supports. Under the hood, we use [this library](https://github.com/Masterminds/semver) to evaluate the constraints.
@@ -126,10 +138,12 @@ Another part of `operator.yaml` is the tasks section. Tasks are the smallest pie
 
 ```yaml
 tasks:
-  deploy-task:
-    resources:
-      - config.yaml
-      - pod.yaml
+  - name: app
+    kind: Apply
+    spec:
+      resources:
+        - pod.yaml
+        - config.yaml
 ```
 
 ### Plans Section
