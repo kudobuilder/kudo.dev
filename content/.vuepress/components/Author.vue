@@ -18,13 +18,19 @@
                     <a v-bind:href="'https://github.com/' + author.alias"
                        target="_blank"
                        rel="noopener noreferrer">GitHub</a><OutboundLink/>
-                </span>
+            </span>
             <!-- twitter alias is optional -->
             <span v-if="author.twitter">
                     <a v-bind:href="'https://twitter.com/' + author.twitter"
                        target="_blank"
                        rel="noopener noreferrer">Twitter</a><OutboundLink/>
-                </span>
+            </span>
+            <!-- linkedin alias is also optional -->
+            <span v-if="author.linkedin">
+                    <a v-bind:href="'https://linkedin.com/in/' + author.linkedin"
+                       target="_blank"
+                       rel="noopener noreferrer">LinkedIn</a><OutboundLink/>
+            </span>
         </div>
 
     </div>
