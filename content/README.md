@@ -17,7 +17,7 @@ footer: Written in Go, maintained by good people.
 ---
 
 ::: teaser Featured Content
-For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the Kubernetes Universal Declarative Operator](https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/) by [Gerred Dillon](community/team/gerred.md). In order to get an idea about the history of KUDO, a high level comparison between KUDO and Mesos frameworks, and to learn something about Gerred's chickens, listen to the [Kubernetes Podcast #78](https://kubernetespodcast.com/episode/078-kudo/) (KUDO, with Gerred Dillon).
+For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the Kubernetes Universal Declarative Operator](https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/). In order to get an idea about the history of KUDO, a high level comparison between KUDO and Mesos frameworks, listen to the [Kubernetes Podcast #78](https://kubernetespodcast.com/episode/078-kudo/).
 
 You can find more recordings, tutorials, etc on our [community page](community/README.md#community-content). 
 :::
