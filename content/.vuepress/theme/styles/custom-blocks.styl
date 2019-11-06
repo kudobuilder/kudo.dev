@@ -2,7 +2,7 @@
   .custom-block-title
     font-weight 600
     margin-bottom -0.4rem
-  &.tip, &.warning, &.danger
+  &.tip, &.warning, &.danger, &.teaser
     padding .1rem 1.5rem
     border-left-width .5rem
     border-left-style solid
@@ -25,3 +25,9 @@
     border-color $dangerHighlightColor
     .custom-block-title
       color $dangerHighlightColor
+  &.teaser
+    background-color $teaserBackgroundColor
+    border-color $teaserHighlightColor
+    .custom-block-title
+      font-size 1.4em
+      color $teaserHighlightColor
