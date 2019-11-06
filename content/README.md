@@ -22,7 +22,7 @@ For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the
 You can find more recordings, tutorials, etc on our [community page](community/README.md#community-content). 
 :::
 
-## User Stories
+<SpecialHeader text="User Stories" />
 
 <UserStories />
 
@@ -31,7 +31,7 @@ Tell us your stories by raising a [Github issue](https://github.com/kudobuilder/
 :::
 
 
-## There's more to life than Kubernetes
+<SpecialHeader text="There's more to life than Kubernetes" />
 
 Software like databases weren't built only to run on Kubernetes. They already have a rich set of tooling for deployment and operations, no matter where they are deployed. These tools are written, tested, and maintained by the experts who know this software best. 
 
@@ -39,7 +39,7 @@ KUDO encourages you to build operators that take advantage of this work.
 
 Instead of re-writing all of these tooling in Go, KUDO allows you to encapsulate your operations into plans. As a operator developer, plans are your route for exposing batteries-included operations for your software. As a user, run plans like backup and restore in confidence that these plans work and are tested. 
 
-## Complicated lifecycle? Keep it simple
+<SpecialHeader text="Complicated lifecycle? Keep it simple" />
 
 Software with complicated lifecycles is the kind of software KUDO optimizes for. In many cases, submitting a bunch of manifests and letting pods crash until other pods have run creates additional complexity in the deployment and maintenance of this software.
  
@@ -47,7 +47,7 @@ Init Containers go awry, binaries get wrapped in esoteric launch scripts that ar
 
 KUDO brings sequencing of complicated software lifecycles without having to build software to do it for you. Plans contain phases, steps, and tasks, allowing plans to represent the full lifecycle of your application's stages.
  
-## Just Kubernetes
+ <SpecialHeader text="Just Kubernetes" />
 
 Other tools require learning a programming language, learning the API, or learning a DSL specific for building operators. For many teams, this doesn't overlap with their core competencies.
 

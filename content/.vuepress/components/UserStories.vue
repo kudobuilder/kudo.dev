@@ -1,12 +1,16 @@
 <template>
     <div>
-        <div v-for="story in stories" class="story">
-            <div class="text">
-                <img class="image" height="40" :src="image(story.frontmatter.logo)" :alt="story.frontmatter.company" />
-                <span v-html="story.excerpt"></span>
+        <div v-for="story in stories">
+            <div class="story">
+                <img class="image" :src="image(story.frontmatter.logo)" :alt="story.frontmatter.company" />
+
+                <span class="title">{{story.frontmatter.company}}</span>
+                <div class="inner">
+                    <span v-html="story.excerpt"></span>
+                    <span class="name">– {{story.frontmatter.name}}&emsp;</span>
+                    <span class="position">{{story.frontmatter.position}}</span>
+                </div>
             </div>
-            <span class="name">– {{story.frontmatter.name}}&emsp;</span>
-            <span class="position">{{story.frontmatter.position}}</span>
         </div>
     </div>
 </template>
@@ -29,19 +33,39 @@
 
 <style lang="stylus" scoped>
     .story
-        margin 2rem 0
-        padding .5rem 2rem
-        .text
-            font-style italic
+        padding 1rem
+        margin-top .2rem
+        background-color $codeBgColor
+        font-style: italic
+        line-height 1.7em
+        img
+            width 100px
+        .title
+            color $teaserHighlightColor
+            font-weight bold
+            font-size 1.4rem
+        .image
+            float right
+            margin .8rem
+            width 5rem
+        .inner
+            padding-left 1rem
             margin-block-start 0em;
+            font-weight lighter
+            font-style italic
+            font-size 0.9rem
         .name
             font-weight bold
             font-style italic
             font-size 1.0rem
-            color $inlineCodeColor
+            color $teaserHighlightColor
         .position
             font-weight lighter
             font-style italic
             font-size 1.0rem
-            color $inlineCodeColor
+            color $teaserHighlightColor
+    .story::after
+        content ""
+        clear both
+        display table
 </style>
