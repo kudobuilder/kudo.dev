@@ -4,8 +4,8 @@
             <div class="story">
                 <img class="image" :src="image(story.frontmatter.logo)" :alt="story.frontmatter.company" />
 
-                <span class="title">{{story.frontmatter.company}}</span>
                 <div class="inner">
+                    <span class="title">{{story.frontmatter.company}}</span>
                     <span v-html="story.excerpt"></span>
                     <span class="name">– {{story.frontmatter.name}}&emsp;</span>
                     <span class="position">{{story.frontmatter.position}}</span>
@@ -52,16 +52,13 @@
             padding-left 1rem
             margin-block-start 0em;
             font-weight lighter
-            font-style italic
             font-size 0.9rem
         .name
             font-weight bold
-            font-style italic
             font-size 1.0rem
             color $teaserHighlightColor
         .position
             font-weight lighter
-            font-style italic
             font-size 1.0rem
             color $teaserHighlightColor
     .story::after
