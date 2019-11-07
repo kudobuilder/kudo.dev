@@ -211,7 +211,7 @@ Everything that is placed into the templates folder is treated as a template and
 
 - `.OperatorName` - name of the operator the template belongs to
 - `.Name` - name of the instance to which Kubernetes objects created from this template will belong to
-- `.AppVersion` - version of the image that would be used as the container image tag. 
+- `.AppVersion` - version of the image that could be used as the container image tag in statefulset.yaml or deployment.yaml
 - `.Namespace` - namespace in which instances are created
 - `.Params` - an object containing the list of parameters you defined in `params.yaml` with values you specified, or provided via overrides during installation
 
