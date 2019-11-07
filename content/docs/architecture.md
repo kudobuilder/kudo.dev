@@ -24,7 +24,7 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 * Repository development and management
 * Interacting with the deployed KUDO controller via KUDO CRDs
   * Installing and uninstalling operator CRDs and operators
-  * Starting operator plans and querying their status
+  * Starting operator plans and querying their status 
   * Upgrading, updating, backing up and restoring operators
 
 **KUDO CRDs** extend the Kubernetes API to support KUDO
@@ -35,8 +35,6 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 * Creating KUDO operators and invoking operator plans
 
 Read about KUDO's [concepts](concepts.md) for more details around operators, operator versions and instance CRDs.
-
-**Stakater/Reloader Controller** is a [controller](https://github.com/stakater/Reloader) in the KUDO pod responsible for watching for changes in ConfigMap and Secrets and do rolling upgrades on operators managed by the KUDO controller. More details on the [Stakater](https://www.stakater.com/projects-overview.html) project site.
 
 **KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read about the [operator repository](repository.md) for more details on repositories and operator layout.
 
