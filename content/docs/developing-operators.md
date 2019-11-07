@@ -23,6 +23,7 @@ First let’s create `operator.yaml` and place it in a `first-operator` folder.
 ```yaml
 name: "first-operator"
 version: "0.1.0"
+appVersion: "1.7.9"
 maintainers:
 - Your name <your@email.com>
 url: https://kudo.dev
@@ -63,7 +64,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.7.9
+          image: nginx:{{ .AppVersion }} # templated from operator.yaml definition
           ports:
             - containerPort: 80
 ```
