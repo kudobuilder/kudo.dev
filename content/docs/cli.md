@@ -16,7 +16,7 @@ This document demonstrates how to use the CLI but also shows what happens in KUD
 
 ### Installation
 
-You can either install the CLI plugin using `brew`:
+You can either download CLI binaries for linux or MacOS from our [release page](https://github.com/kudobuilder/kudo/releases), or install the CLI plugin using `brew`:
 
 ```bash
 brew tap kudobuilder/tap
