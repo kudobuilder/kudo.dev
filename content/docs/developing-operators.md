@@ -23,6 +23,7 @@ First let’s create `operator.yaml` and place it in a `first-operator` folder.
 ```yaml
 name: "first-operator"
 version: "0.1.0"
+appVersion: "1.7.9" 
 maintainers:
 - Your name <your@email.com>
 url: https://kudo.dev
@@ -63,7 +64,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.7.9
+          image: nginx:{{ .AppVersion }} # templated from operator.yaml (appVersion) definition
           ports:
             - containerPort: 80
 ```
@@ -210,6 +211,7 @@ Everything that is placed into the templates folder is treated as a template and
 
 - `.OperatorName` - name of the operator the template belongs to
 - `.Name` - name of the instance to which Kubernetes objects created from this template will belong to
+- `.AppVersion` - version of the image that could be used as the container image tag in statefulset.yaml or deployment.yaml
 - `.Namespace` - namespace in which instances are created
 - `.Params` - an object containing the list of parameters you defined in `params.yaml` with values you specified, or provided via overrides during installation
 
