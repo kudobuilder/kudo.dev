@@ -21,16 +21,20 @@ The `operator.yaml` is the main YAML file defining both operator metadata as the
 First let’s create `operator.yaml` and place it in a `first-operator` folder.
 
 ```yaml
+apiVersion: kudo.dev/v1beta1
 name: "first-operator"
 version: "0.1.0"
-appVersion: "1.7.9" 
+kubernetesVersion: 1.13.0
 maintainers:
-- Your name <your@email.com>
+  - name: Your name
+    email: <your@email.com>
 url: https://kudo.dev
 tasks:
-  nginx:
-    resources:
-      - deployment.yaml
+  - name: app
+    kind: Apply
+    spec:
+      resources:
+        - deployment.yaml
 plans:
   deploy:
     strategy: serial
@@ -40,7 +44,7 @@ plans:
         steps:
           - name: everything
             tasks:
-              - nginx
+              - app
 ```
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
@@ -56,7 +60,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: {{ .Params.replicas }} # tells deployment to run X pods matching the template
+  replicas: {{ .Params.replicas }}
   template:
     metadata:
       labels:
@@ -64,17 +68,19 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:{{ .AppVersion }} # templated from operator.yaml (appVersion) definition
+          image: nginx:1.7.9
           ports:
             - containerPort: 80
 ```
 
-This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.Replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
+This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
 
 ```yaml
-replicas:
-  description: Number of replicas that should be run as part of the deployment
-  default: 2
+apiVersion: kudo.dev/v1beta1
+parameters:
+  - name: replicas
+    description: Number of replicas that should be run as part of the deployment
+    default: 2
 ```
 
 Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
@@ -179,25 +185,28 @@ Plans allow operators to see what the operator is currently doing, and to visual
 A more detailed example of `params.yaml` may look as following:
 
 ```yaml
-backupFile:
-  description: "The name of the backup file"
-  default: backup.sql
-optionalParam:
-  description: "This parameter is not required"
-  required: false
-requiredParam:
-  description: "This parameter is required but does not have default provided"
-password:
-  default: password
-  description: "Password for the mysql instance"
-  trigger: deploy
+apiVersion: kudo.dev/v1beta1
+parameters:
+  - name: BACKUP_FILE
+    description: "Filename to save the backups to"
+    default: "backup.sql"
+    displayName: "BackupFile"
+  - name: PASSWORD
+    default: "password"
+    trigger: backup
+  - name: OPTIONAL_PARAM
+    description: "This parameter is not required"
+    required: False
+  - name: REQUIRED_PARAM
+    description: "This parameter is required but does not have a default value"
+    required: True
 ```
 
 Let's look at these parameters:
-* The `backupFile` parameter provides a default value, so a user does not need to specify anything unless they want to change that value.
-* The `optionalParam` is explicitly not required, so even though it doesn't come with a default value, not providing a value for this parameter won't fail the installation.
-* The `requiredParam` is required but does not provide a default value. For such parameters, users are expected to provide a value for `kubectl kudo install youroperator -p requiredParam=value`.
-* The `password` parameter exposes one more feature of `params.yaml`: you can `trigger` specific plans when changing a parameter.
+* The `BACKUP_FILE` parameter provides a default value, so a user does not need to specify anything unless they want to change that value.
+* The `OPTIONAL_PARAM` is explicitly not required, so even though it doesn't come with a default value, not providing a value for this parameter won't fail the installation.
+* The `REQUIRED_PARAM` is required but does not provide a default value. For such parameters, users are expected to provide a value for `kubectl kudo install youroperator -p REQUIRED_PARAM=value`.
+* The `PASSWORD` parameter exposes one more feature of `params.yaml`: you can `trigger` specific plans when changing a parameter.
 
 ### Triggers
 
@@ -221,7 +230,8 @@ A more complex example using some of the built-in variables could look like the 
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc
+  name: {{ .Name }}-svc
+  namespace: {{ .Namespace }}
   {{ if eq .Params.METRICS_ENABLED "true" }}
   labels:
     "kudo.dev/servicemonitor": "true"
@@ -230,6 +240,10 @@ spec:
   ports:
     - port: {{ .Params.BROKER_PORT }}
       name: server
+    {{ if eq .Params.TRANSPORT_ENCRYPTION_ENABLED "true" }}
+    - port: {{ .Params.BROKER_PORT_TLS }}
+      name: server-tls
+    {{ end }}
     - port: {{ .Params.CLIENT_PORT }}
       name: client
     {{ if eq .Params.METRICS_ENABLED "true" }}
@@ -239,7 +253,7 @@ spec:
   clusterIP: None
   selector:
     app: kafka
-    instance: {{ .Name }}
+    kudo.dev/instance: {{ .Name }}
 ```
 
 ## Testing Your Operator
