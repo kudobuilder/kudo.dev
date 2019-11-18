@@ -18,7 +18,7 @@ A package bundles all files needed to describe an operator. The overall structur
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
 ### Your First KUDO Operator
-First let’s create `operator.yaml` and place it in a `first-operator` folder.
+First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -68,12 +68,12 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.7.9
+          image: nginx:{{ .AppVersion }} # templated from operator.yaml (appVersion) definition
           ports:
             - containerPort: 80
 ```
 
-This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
+This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml` (which goes into the root first-operator folder next to `operator.yaml`).
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -88,9 +88,9 @@ Now your first operator is ready and you can install it to your cluster. You can
 **Note:** If you want to install the result of the following steps with doing them manually, you can clone the KUDO repository and run the example from there:
 
 ```bash
-git clone https://github.com/kudobuilder/kudo.git
-cd kudo
-kubectl kudo install ./config/samples/first-operator
+git clone https://github.com/kudobuilder/operators.git
+cd operators
+kubectl kudo install ./repository/first-operator/operator/
 ```
 
 In order to see what's happen in your cluster you can run the following command:
@@ -100,7 +100,7 @@ In order to see what's happen in your cluster you can run the following command:
 kubectl get instances
 
 # OR
-kudoctl kudo get instances
+kubectl kudo get instances
 ```
 
 If all worked fine, you should see 2 pods running
@@ -120,8 +120,8 @@ version: "5.7"
 kudoVersion: ">= 0.2.0"
 kubernetesVersion: ">= 1.14"
 maintainers:
-  - Bob <bob@example.com>
-  - Alice <alice@example.com>
+  - name: Your name
+    email: <your@email.com>
 url: https://github.com/myoperator/myoperator
 ```
 
@@ -133,10 +133,12 @@ Another part of `operator.yaml` is the tasks section. Tasks are the smallest pie
 
 ```yaml
 tasks:
-  deploy-task:
-    resources:
-      - config.yaml
-      - pod.yaml
+  - name: app
+    kind: Apply
+    spec:
+      resources:
+        - pod.yaml
+        - config.yaml
 ```
 
 ### Plans Section
