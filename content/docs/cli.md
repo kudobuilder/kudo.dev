@@ -71,6 +71,10 @@ Generates an index file given a directory containing KUDO packages.
 Test KUDO and Operators.
 :::
 
+::: flag kubectl kudo uninstall
+Uninstall operator instances.
+:::
+
 ::: flag kubectl kudo update
 Update installed operator parameters.
 :::
@@ -419,7 +423,7 @@ Apparently, KUDO's tree view makes this information easier to understand and pre
 
 ### Delete an Instance
 
-You can delete an instance (i.e. uninstall it from the cluster) using `kubectl delete instances <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
+You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
 ### Get the History to PlanExecutions
 
