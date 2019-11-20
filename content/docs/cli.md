@@ -16,7 +16,7 @@ This document demonstrates how to use the CLI but also shows what happens in KUD
 
 ### Installation
 
-You can either install the CLI plugin using `brew`:
+You can either download CLI binaries for linux or MacOS from our [release page](https://github.com/kudobuilder/kudo/releases), or install the CLI plugin using `brew`:
 
 ```bash
 brew tap kudobuilder/tap
@@ -69,6 +69,10 @@ Generates an index file given a directory containing KUDO packages.
 
 ::: flag kubectl kudo test
 Test KUDO and Operators.
+:::
+
+::: flag kubectl kudo uninstall
+Uninstall operator instances.
 :::
 
 ::: flag kubectl kudo update
@@ -419,7 +423,7 @@ Apparently, KUDO's tree view makes this information easier to understand and pre
 
 ### Delete an Instance
 
-You can delete an instance (i.e. uninstall it from the cluster) using `kubectl delete instances <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
+You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
 ### Get the History to PlanExecutions
 

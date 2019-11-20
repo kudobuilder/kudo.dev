@@ -18,17 +18,17 @@ A package bundles all files needed to describe an operator. The overall structur
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
 ### Your First KUDO Operator
-First let’s create `operator.yaml` and place it in a `first-operator` folder.
+First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
 <<< @/kudo/config/samples/first-operator/operator.yaml
 
-This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install instance of this operator into cluster.
+This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
 
 You can see that the task `nginx` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
 
 <<< @/kudo/config/samples/first-operator/templates/deployment.yaml
 
-This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.Replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml`.
+This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml` (which goes into the root first-operator folder next to `operator.yaml`).
 
 <<< @/kudo/config/samples/first-operator/params.yaml
 
@@ -37,9 +37,9 @@ Now your first operator is ready and you can install it to your cluster. You can
 **Note:** If you want to install the result of the following steps with doing them manually, you can clone the KUDO repository and run the example from there:
 
 ```bash
-git clone https://github.com/kudobuilder/kudo.git
-cd kudo
-kubectl kudo install ./config/samples/first-operator
+git clone https://github.com/kudobuilder/operators.git
+cd operators
+kubectl kudo install ./repository/first-operator/operator/
 ```
 
 In order to see what's happen in your cluster you can run the following command:
@@ -49,10 +49,10 @@ In order to see what's happen in your cluster you can run the following command:
 kubectl get instances
 
 # OR
-kudoctl kudo get instances
+kubectl kudo get instances
 ```
 
-If all worked fine, you should see 2 pods running 
+If all worked fine, you should see 2 pods running
 
 ```bash
 kubectl get pods
@@ -100,25 +100,28 @@ Plans allow operators to see what the operator is currently doing, and to visual
 A more detailed example of `params.yaml` may look as following:
 
 ```yaml
-backupFile:
-  description: "The name of the backup file"
-  default: backup.sql
-optionalParam:
-  description: "This parameter is not required"
-  required: false
-requiredParam:
-  description: "This parameter is required but does not have default provided"
-password:
-  default: password
-  description: "Password for the mysql instance"
-  trigger: deploy
-``` 
+apiVersion: kudo.dev/v1beta1
+parameters:
+  - name: BACKUP_FILE
+    description: "Filename to save the backups to"
+    default: "backup.sql"
+    displayName: "BackupFile"
+  - name: PASSWORD
+    default: "password"
+    trigger: backup
+  - name: OPTIONAL_PARAM
+    description: "This parameter is not required"
+    required: False
+  - name: REQUIRED_PARAM
+    description: "This parameter is required but does not have a default value"
+    required: True
+```
 
 Let's look at these parameters:
-* The `backupFile` parameter provides a default value, so a user does not need to specify anything unless they want to change that value.
-* The `optionalParam` is explicitly not required, so even though it doesn't come with a default value, not providing a value for this parameter won't fail the installation.
-* The `requiredParam` is required but does not provide a default value. For such parameters, users are expected to provide a value for `kubectl kudo install youroperator -p requiredParam=value`.
-* The `password` parameter exposes one more feature of `params.yaml`: you can `trigger` specific plans when changing a parameter.
+* The `BACKUP_FILE` parameter provides a default value, so a user does not need to specify anything unless they want to change that value.
+* The `OPTIONAL_PARAM` is explicitly not required, so even though it doesn't come with a default value, not providing a value for this parameter won't fail the installation.
+* The `REQUIRED_PARAM` is required but does not provide a default value. For such parameters, users are expected to provide a value for `kubectl kudo install youroperator -p REQUIRED_PARAM=value`.
+* The `PASSWORD` parameter exposes one more feature of `params.yaml`: you can `trigger` specific plans when changing a parameter.
 
 ### Triggers
 
@@ -132,6 +135,7 @@ Everything that is placed into the templates folder is treated as a template and
 
 - `.OperatorName` - name of the operator the template belongs to
 - `.Name` - name of the instance to which Kubernetes objects created from this template will belong to
+- `.AppVersion` - version of the image that could be used as the container image tag in statefulset.yaml or deployment.yaml
 - `.Namespace` - namespace in which instances are created
 - `.Params` - an object containing the list of parameters you defined in `params.yaml` with values you specified, or provided via overrides during installation
 
@@ -141,7 +145,8 @@ A more complex example using some of the built-in variables could look like the 
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc
+  name: {{ .Name }}-svc
+  namespace: {{ .Namespace }}
   {{ if eq .Params.METRICS_ENABLED "true" }}
   labels:
     "kudo.dev/servicemonitor": "true"
@@ -150,6 +155,10 @@ spec:
   ports:
     - port: {{ .Params.BROKER_PORT }}
       name: server
+    {{ if eq .Params.TRANSPORT_ENCRYPTION_ENABLED "true" }}
+    - port: {{ .Params.BROKER_PORT_TLS }}
+      name: server-tls
+    {{ end }}
     - port: {{ .Params.CLIENT_PORT }}
       name: client
     {{ if eq .Params.METRICS_ENABLED "true" }}
@@ -159,7 +168,7 @@ spec:
   clusterIP: None
   selector:
     app: kafka
-    instance: {{ .Name }}
+    kudo.dev/instance: {{ .Name }}
 ```
 
 ## Testing Your Operator

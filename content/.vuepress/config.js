@@ -75,6 +75,7 @@ module.exports = {
                 title: 'Blog',
                 collapsable: false,
                 children: [
+                  'blog-2019-10-kudo-team',
                   'blog-2019-10-hacktoberfest',
                   'announcing-kudo-0.7.2',
                   'announcing-kudo-0.6.0',
@@ -86,7 +87,8 @@ module.exports = {
               }
             ],
             '/community/': [
-              ''
+              '',
+              'team/'
             ],
             '/internal-docs/': [
               '',
@@ -122,6 +124,11 @@ module.exports = {
         ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
+            after: '</div>',
+        }],
+        ['container', {
+            type: 'teaser',
+            before: name => `<div class="teaser custom-block"><p class="custom-block-title">${name}</p>`,
             after: '</div>',
         }],
         [ 'feed', feed_options ]

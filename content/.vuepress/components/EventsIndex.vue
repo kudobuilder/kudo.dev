@@ -68,19 +68,17 @@
 
 <style lang="stylus" scoped>
 .event
-    width 90%
     padding-left 4.5rem
     margin 2rem 0
     .location
         color $inlineCodeColor
-        padding .1rem 0rem
+        padding .1rem 0
     .title
         font-weight bold
         font-size 1.0rem
-        padding .1rem 0rem
     .inner
-        margin-block-start 0em;
-        padding .5rem 1rem
+        margin-block-start 0
+        padding .5rem 1rem 0
 
 .date-box
     position absolute
