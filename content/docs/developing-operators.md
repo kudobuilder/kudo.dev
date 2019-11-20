@@ -20,17 +20,17 @@ The `operator.yaml` is the main YAML file defining both operator metadata as the
 ### Your First KUDO Operator
 First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
-<<< @/kudo/config/samples/first-operator/operator.yaml
+<<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
 
 You can see that the task `nginx` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
 
-<<< @/kudo/config/samples/first-operator/templates/deployment.yaml
+<<< @//kudo/test/integration/first-operator-test/first-operator/templates/deployment.yaml
 
 This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml` (which goes into the root first-operator folder next to `operator.yaml`).
 
-<<< @/kudo/config/samples/first-operator/params.yaml
+<<< @/kudo/test/integration/first-operator-test/first-operator/params.yaml
 
 Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
 
