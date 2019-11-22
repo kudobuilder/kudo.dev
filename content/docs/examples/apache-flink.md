@@ -27,7 +27,7 @@ For our demo, we use Kafka and Flink which depend on ZooKeeper. To make the ZooK
 $ kubectl kudo install zookeeper --version=0.2.0 --skip-instance
 ```
 
-The --skip-instance flag skips the creation of a ZooKeeper instance. The flink-demo Operator that we’re going to install below will create it as a dependency instead. Now let’s make the Kafka and Flink Operators available the same way:
+The `--skip-instance` flag skips the creation of a ZooKeeper instance. The flink-demo Operator that we’re going to install below will create it as a dependency instead. Now let’s make the Kafka and Flink Operators available the same way:
 
 ```bash
 $ kubectl kudo install kafka --version=0.1.3 --skip-instance
@@ -59,7 +59,7 @@ $ kubectl kudo install repository/flink/docs/demo/financial-fraud/demo-operator 
 instance.kudo.dev/v1alpha1/flink-demo created
 ```
 
-This time we didn’t include the --skip-instance flag, so KUDO will actually deploy all the components, including Flink, Kafka, and ZooKeeper. KUDO orchestrates deployments and other lifecycle operations using [plans](https://kudo.dev/docs/concepts.html#plan) that were defined by the Operator developer. Plans are similar to [runbooks](https://en.wikipedia.org/wiki/Runbook) and encapsulate all the procedures required to operate the software. We can track the status of the deployment using this KUDO command:
+This time we didn’t include the `--skip-instance` flag, so KUDO will actually deploy all the components, including Flink, Kafka, and ZooKeeper. KUDO orchestrates deployments and other lifecycle operations using [plans](https://kudo.dev/docs/concepts.html#plan) that were defined by the Operator developer. Plans are similar to [runbooks](https://en.wikipedia.org/wiki/Runbook) and encapsulate all the procedures required to operate the software. We can track the status of the deployment using this KUDO command:
 
 ```bash
 $ kubectl kudo plan status --instance flink-demo
@@ -123,4 +123,4 @@ Transaction{timestamp=1563395817000, origin=1, target='3', amount=2802}
 Transaction{timestamp=1563395831000, origin=1, target='3', amount=160}}
 ```
 
-If you add the “-f” flag to the previous command, you can follow along as more transactions are streaming in and are evaluated by our Flink job.
+If you add the `-f` flag to the previous command, you can follow along as more transactions are streaming in and are evaluated by our Flink job.
