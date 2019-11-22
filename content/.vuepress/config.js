@@ -51,6 +51,7 @@ module.exports = {
               {
                 title: 'Examples',
                 children: [
+                  'examples/apache-flink',
                   'examples/apache-kafka',
                   'examples/apache-zookeeper'
                 ]
