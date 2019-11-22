@@ -1,6 +1,6 @@
 # Operator Repository
 
-The [KUDO CLI](cli.md) comes with a built-in official repository of verified Operators. Every time you use the `kudo install <operator>` command, it pulls the specified package from this repository. The packages are mirrored from the [KUDO Operators repository on Github](https://github.com/kudobuilder/operators).
+The [KUDO CLI](cli.md) comes with a built-in official repository of verified Operators. Every time you use the `kudo install <operator>` command, it pulls the specified package from this repository. The packages are mirrored from the [KUDO Operators repository on GitHub](https://github.com/kudobuilder/operators).
 
 ## Layout
 
