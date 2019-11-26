@@ -25,6 +25,7 @@ apiVersion: kudo.dev/v1beta1
 name: "first-operator"
 version: "0.1.0"
 kubernetesVersion: 1.13.0
+appVersion: 1.17.6
 maintainers:
   - name: Your name
     email: <your@email.com>
