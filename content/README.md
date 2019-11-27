@@ -7,19 +7,22 @@ actionText: ⇝ Get Started ⇜
 actionLink: /docs/
 features:
 - title: Focus on your software …
-  details: The Kubernetes Universal Declarative Operator (KUDO) is a highly productive toolkit for writing operators for Kubernetes.
+  details: The Kubernetes Universal Declarative Operator (KUDO) is a highly productive toolkit for writing Kubernetes Operators.
 - title: … not deploying it to Kubernetes
   details: Using KUDO, you can deploy your applications, give your users the tools they need to operate it, and understand how it's behaving in their environments – all without a PhD in Kubernetes.
-- title: Use declarative templates
-  details: KUDO let’s you configure an operator’s lifecycle using a declarative spec. You don’t have to write Go unless you want to.
+- title: Automate Day-2 Operations
+  details: KUDO lets you configure an Operator’s entire lifecycle using a declarative spec, including things like backup/restore. You don’t have to write Go unless you want to.
 footer: Written in Go, maintained by good people.
 
 ---
 
-::: teaser Featured Content
-For a great introduction to KUDO watch the CNCF Webinar series: [Introducing the Kubernetes Universal Declarative Operator](https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/). In order to get an idea about the history of KUDO, a high level comparison between KUDO and Mesos frameworks, listen to the [Kubernetes Podcast #78](https://kubernetespodcast.com/episode/078-kudo/).
+::: teaser Watch the Intro Video
 
-You can find more recordings, tutorials, etc on our [community page](community/README.md#community-content). 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j2A8vl0m2hs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Or listen to the [Kubernetes Podcast #78](https://kubernetespodcast.com/episode/078-kudo/) to hear about the origin and history of KUDO.
+
+You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
 :::
 
 <SpecialHeader text="User Stories" />
