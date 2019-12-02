@@ -1,6 +1,8 @@
-# Controlled Parameter Changes
+# Features
 
-## Register Rollout Plan for Parameter
+## Controlled Parameter Changes
+
+### Register Rollout Plan for Parameter
 
 The operations required to safely update a running application can vary depending on which parameter is
 being updated. For instance updating the `BROKER_COUNT`, may require a simple update of the deployment, whereas
