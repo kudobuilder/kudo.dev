@@ -49,7 +49,7 @@ In 0.9.0 version of KUDO we introduced a new experimental feature - validating a
 
 Validating [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) is HTTP callback that receive admission request (from API server) and let you apply validation rules on them. This validation cannot be performed inside controller because that would happen AFTER the resource was stored in ETCD thus leaving us with illegal state already in. Kubernetes admission webhooks require HTTPS to be used for this endpoint.
 
-![Webhook accept](/images/webhook-update.png?10x20)
+![Webhook accept](/images/webhook-accept.png?10x20)
 
 ![Webhook deny](/images/webhook-deny.png?10x20)
 
