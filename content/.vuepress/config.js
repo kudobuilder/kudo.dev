@@ -46,7 +46,7 @@ module.exports = {
               'comparison',
               'concepts',
               'contributing',
-              'controlled-parameter-changes',
+              'features',
               'developing-operators',
               {
                 title: 'Examples',
