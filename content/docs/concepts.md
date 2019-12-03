@@ -6,18 +6,18 @@ Any kind of software that you would want to run in your Kubernetes cluster. It c
 
 ## Operator
 
-High-level description of a deployable application to be run in a Kubernetes cluster. Contains metadata about the application (e.g., [Kafka](https://github.com/kudobuilder/kudo/blob/master/config/samples/kafka-operator.yaml)).
+High-level description of a deployable application to be run in a Kubernetes cluster. Contains metadata about the application.
 You can have multiple versions of Kafka ready to be installed in your cluster, all will belong to the same Operator.
 
 ## OperatorVersion
 
-Specific version of a deployable application, including configuration and lifecycle hooks for deployments, upgrades, and rollbacks (e.g., [Kafka version 2.4.0](https://github.com/kudobuilder/kudo/blob/master/config/samples/kafka-operatorversion.yaml)).
+Specific version of a deployable application, including configuration and lifecycle hooks for deployments, upgrades, and rollbacks.
 This is already complete definition of application to be installed (except overridable parameters). By adding OperatorVersion to your cluster, no application is running yet.
 
 ## Instance
 
 When you create an instance, you provide missing parameters for the installed OperatorVersion. Creating an instance typically causes rendering of those parameters in your templates, such as services, pods or statefulsets. Once rendered these objects will then be applied with the given parameters to your cluster.
-Instances have the same name throughout its entire lifecycle. (e.g., [Kafka 2.4.0 cluster with 1 broker](https://github.com/kudobuilder/kudo/blob/master/config/samples/kafka-instance.yaml)).
+Instances have the same name throughout its entire lifecycle.
 
 You can create multiple instance of an OperatorVersion in your cluster (e.g. different Kafka instances for different teams).
 
