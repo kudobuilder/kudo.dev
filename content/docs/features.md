@@ -64,5 +64,5 @@ Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or 
 As a part of the installation KUDO will:
 - expose endpoint over HTTPS in KUDO manager for the webhook
 - create ValidatingWebhookConfiguration CR
-- create cert-manager self-signed issuer CRD in the namespace used for KUDO installation
+- create cert-manager self-signed issuer CR in the namespace used for KUDO installation
 - create cert-manager certificate CRD signed by the issuer in the namespace used for KUDO installation
