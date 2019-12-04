@@ -61,7 +61,7 @@ If you already have KUDO installed, you can run `kudo init --enable-validation -
 
 Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or higher**. You have to have cert-manager installed in your cluster prior to installing the webhook for everything to work.
 
-As a part of the installation KUDO wil:
+As a part of the installation KUDO will:
 - expose endpoint over HTTPS in KUDO manager for the webhook
 - create ValidatingWebhookConfiguration CRD
 - create cert-manager self-signed issuer CRD in the namespace used for KUDO installation
