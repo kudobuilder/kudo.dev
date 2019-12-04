@@ -59,7 +59,7 @@ For now, this feature is experimental thus disabled by default. If you want to e
 
 If you already have KUDO installed, you can run `kudo init --enable-validation -o yaml --dry-run` to get the kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`.
 
-Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or higher**. You have to have cert-manager installed in your cluster prior to installing the webhook for everything to work.
+Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or higher**. You have to have cert-manager installed in your cluster prior to installing the webhook for everything to work. To install, follow the [instructions in the docs](https://cert-manager.io/docs/installation/).
 
 As a part of the installation KUDO will:
 - expose endpoint over HTTPS in KUDO manager for the webhook
