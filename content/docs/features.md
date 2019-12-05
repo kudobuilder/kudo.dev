@@ -24,3 +24,17 @@ spec:
     deploy:
     ...
 ```
+
+## Cleanup plans
+
+If an optional `cleanup` plan is part of an operator, this plan will run when the operator's instance is being deleted. Once this plan is completed or failed, the instance will be deleted.
+Operator developers should take care that there aren't any triggers defined for this plan. Furthermore it should be expected that the steps of this plan could fail. E.g., an instance may get deleted because its deploy plan failed. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. 
+
+```yaml
+spec:
+  plans:
+    deploy:
+    ...
+    cleanup:
+    ...
+```
