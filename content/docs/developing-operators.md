@@ -20,69 +20,17 @@ The `operator.yaml` is the main YAML file defining both operator metadata as the
 ### Your First KUDO Operator
 First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
-```yaml
-apiVersion: kudo.dev/v1beta1
-name: "first-operator"
-version: "0.1.0"
-kubernetesVersion: 1.13.0
-appVersion: 1.17.6
-maintainers:
-  - name: Your name
-    email: <your@email.com>
-url: https://kudo.dev
-tasks:
-  - name: app
-    kind: Apply
-    spec:
-      resources:
-        - deployment.yaml
-plans:
-  deploy:
-    strategy: serial
-    phases:
-      - name: main
-        strategy: parallel
-        steps:
-          - name: everything
-            tasks:
-              - app
-```
+<<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
 
 You can see that the task `nginx` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: {{ .Params.replicas }}
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-        - name: nginx
-          image: nginx:{{ .AppVersion }} # templated from operator.yaml (appVersion) definition
-          ports:
-            - containerPort: 80
-```
+<<< @//kudo/test/integration/first-operator-test/first-operator/templates/deployment.yaml
 
 This is a pretty normal Kubernetes YAML file defining a deployment. However, you can already see the KUDO templating language in action on the line referencing `.Params.replicas`. This will get substituted during installation by merging what is in `params.yaml` and overrides defined before install. So let’s define the last missing piece, `params.yaml` (which goes into the root first-operator folder next to `operator.yaml`).
 
-```yaml
-apiVersion: kudo.dev/v1beta1
-parameters:
-  - name: replicas
-    description: Number of replicas that should be run as part of the deployment
-    default: 2
-```
+<<< @/kudo/test/integration/first-operator-test/first-operator/params.yaml
 
 Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [concepts](concepts.md).
 
@@ -113,34 +61,11 @@ kubectl get pods
 ## Operator.yaml File
 
 This is the main piece of every operator. It consists of two main parts. First one defines metadata about your operator.
-
-```yaml
-name: operator
-description: my first super awesome operator
-version: "5.7"
-kudoVersion: ">= 0.2.0"
-kubernetesVersion: ">= 1.14"
-maintainers:
-  - name: Your name
-    email: <your@email.com>
-url: https://github.com/myoperator/myoperator
-```
-
 Most of these are provided as a form of documentation. `kudoVersion` and `kubernetesVersion` use semver constraints to define minimal or maximal version of Kubernetes or KUDO that this operator supports. Under the hood, we use [this library](https://github.com/Masterminds/semver) to evaluate the constraints.
 
 ### Tasks Section
 
-Another part of `operator.yaml` is the tasks section. Tasks are the smallest pieces of work that get executed together. You usually group Kubernetes manifests that should be applied at once into one task. An example can be a deploy task that will result in `config.yaml` and `pod.yaml` being applied to your cluster.
-
-```yaml
-tasks:
-  - name: app
-    kind: Apply
-    spec:
-      resources:
-        - pod.yaml
-        - config.yaml
-```
+Another part of `operator.yaml` is the tasks section. Tasks are the smallest pieces of work that get executed together. You usually group Kubernetes manifests that should be applied at once into one task. An example can be an app that will result in `deployment.yaml` being applied to your cluster.
 
 ### Plans Section
 
@@ -162,22 +87,9 @@ Plan foo
 
 Plans consists of one or more `phases`. `Phases` consists of one or more `steps`. `Steps` contain one or more `tasks` (those are defined in the section we talked about in the last paragraph). Both phases and also steps can be configured with an execution `strategy`, either `serial` or `parallel`.
 
-The sample has a `deploy` plan with a `deploy-phase` and a `deploy-step`. From the `deploy-step` the `deploy-task` is referenced. This task gets executed when an instance is created using the operator.
+The sample has a `deploy` plan with a phase `main` and a step `everything`. From `everything` the `app` is referenced. This task gets executed when an instance is created using the operator.
 
 At the same time, `deploy` plan is the most important plan within your operator because that is the default plan that every operator has to have and also the plan that gets executed when you install an instance of your operator into the cluster. Another important plan that you might consider having is `update` (run when instance metadata is updated) or `upgrade` (run when instance is upgraded from one version of the operator to another). If you don't provide `update` and/or `upgrade` plans for your operator, the fallback is always `deploy`.
-
-```yaml
-plans:
-  deploy:
-    strategy: serial
-    phases:
-      - name: deploy-phase
-        strategy: parallel
-        steps:
-          - name: deploy-step
-            tasks:
-              - deploy-task
-```
 
 Plans allow operators to see what the operator is currently doing, and to visualize the broader operation such as for a config rollout. The fixed structure of that information meanwhile makes it straightforward to build UIs and tooling on top.
 
