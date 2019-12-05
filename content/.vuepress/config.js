@@ -68,8 +68,7 @@ module.exports = {
                   'testing/test-environments',
                   'testing/tips'
                 ]
-              },
-              'update-upgrade-plans'
+              }
             ],
             '/blog/': [
               {
