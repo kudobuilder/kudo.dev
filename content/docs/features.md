@@ -55,9 +55,9 @@ Validating [admission webhook](https://kubernetes.io/docs/reference/access-authn
 
 ### How to enable validation?
 
-For now, this feature is experimental thus disabled by default. If you want to enable admission webhook on your KUDO installation, you need to run `kudo init --enable-validation` command which installs KUDO into your cluster with admission webhook enabled.
+For now, this feature is experimental thus disabled by default. If you want to enable admission webhook on your KUDO installation, you need to run `kudo init --webhook=InstanceValidation` command which installs KUDO into your cluster with admission webhook enabled.
 
-If you already have KUDO installed, you can run `kudo init --enable-validation -o yaml --dry-run` to get the kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`.
+If you already have KUDO installed, you can run `kudo init --webhook=InstanceValidation -o yaml --dry-run` to get the kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`.
 
 Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or higher**. You have to have cert-manager installed in your cluster prior to installing the webhook for everything to work. To install, follow the [instructions in the docs](https://cert-manager.io/docs/installation/).
 
