@@ -2,7 +2,7 @@
 event: Cloud Native and Kubernetes Oslo
 topic: KUDO - Kubernetes Operators, the easy way
 speaker: Nick Jones
-date: 2020-01-23
+date: 2020-01-22
 location: Oslo, Norway
 url: https://www.meetup.com/Cloud-Native-and-Kubernetes-Oslo/
 ---
