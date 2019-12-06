@@ -109,7 +109,8 @@ Example operators on in the [operator GH project](https://github.com/kudobuilder
 
 Follow the [Readme.md](https://github.com/kudobuilder/kudo/blob/master/README.md) and guides to get started.
 
-Features are add to KUDO using a KEP process, however that is the [KUDO Enhancement Process](https://github.com/kudobuilder/kudo/blob/e8a524ccd87c5cd086477f19ddf4a7de97add9e2/keps/0001-kep-process.md).  Think Kubernetes Enhancement Process simplified.
+Features are proposed and eventually added to KUDO using the [KUDO Enhancement Process](https://github.com/kudobuilder/kudo/blob/e8a524ccd87c5cd086477f19ddf4a7de97add9e2/keps/0001-kep-process.md) (KEP). This is a simplified variant of the Kubernetes Enhancement Process.
+
 
 Design Work:
 
