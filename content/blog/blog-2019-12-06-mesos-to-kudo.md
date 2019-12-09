@@ -22,10 +22,10 @@ This includes:
 
 ## From Frameworks to Operators
 
-The concept of operators is relatively new being [introduced the end of 2016](https://coreos.com/blog/introducing-operators.html), yet they have a lot in common with [Mesos Frameworks](http://mesos.apache.org/documentation/latest/app-framework-development-guide/).
-The following is provided to help you jump-start the Kubernetes learning curve assuming you already have a background in the Mesos community, and have limited experience with Kubernetes. This information needed to get involved with KUDO (we’d love if you did).
+The concept of operators is relatively new: it was [introduced near the end of 2016](https://coreos.com/blog/introducing-operators.html). Yet, they have a lot in common with [Mesos Frameworks](http://mesos.apache.org/documentation/latest/app-framework-development-guide/).
+The following is provided to help you jump-start the Kubernetes learning curve assuming you already have a background in the Mesos community, and have limited experience with Kubernetes. This is all the information needed to get involved with KUDO (we’d love if you did).
 
-The following is a check list with resources to accelerate that learning curve.  This blog post goes into each of these topics:
+The following is a checklist with resources to accelerate that learning curve. This blog post goes into each of these topics:
 
 1. [Learn Kubernetes Basics and Internals](#learn-kubernetes-basics)
 2. [Learn kubectl](#learn-kubectl)
@@ -77,9 +77,9 @@ Once you have the basics read Michael Hausenblas's post on [Kubernetes deep dive
 
 ## Learn Custom Resource Definitions
 
-Now that we understand the API / Resources that come with Kubernetes, you might be wondering *am I limited to that? or can I extend that?* That is where Custom Resource Definitions (CRD) come in. We can extend Kubernetes by defining extensions to its API. You might start with the [official CRD docs](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/). It is worth going through the exercises presented there. If you want to watch and learn, start with [Stefan Schimanski's CRD talk](https://www.youtube.com/watch?v=Ne4jQF-CPIM) on the topic.
+Now that you understand the API / Resources that come with Kubernetes, you might be wondering *am I limited to that? or can I extend that?* That is where Custom Resource Definitions (CRD) come in. You can extend Kubernetes by defining extensions to its API. You might start with the [official CRD docs](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/). It is worth going through the exercises presented there. If you want to watch and learn, start with [Stefan Schimanski's CRD talk](https://www.youtube.com/watch?v=Ne4jQF-CPIM) on the topic.
 
-Addition resources:
+Additional resources:
 * [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 * [Part 3a](https://blog.openshift.com/kubernetes-deep-dive-api-server-part-3a/) of API Service deep dive series
 * [Stefan Schimanski's 36 min talk](https://www.youtube.com/watch?v=Ne4jQF-CPIM) on the topic
@@ -88,7 +88,7 @@ Addition resources:
 
 ## Learn Kubernetes Operators
 
-In order to understand operators, it is useful to understand [Kubernetes controllers](https://stackoverflow.com/questions/47848258/kubernetes-controller-vs-kubernetes-operator) which may raise the question what the difference is. It is best answer on [stackoverflow](https://stackoverflow.com/a/47857073/1375187). The Kubernetes community as a great read on [Writing Controllers](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/controllers.md) which includes a [sample controller](https://github.com/kubernetes/sample-controller).
+In order to understand operators, it is useful to understand [Kubernetes controllers](https://stackoverflow.com/questions/47848258/kubernetes-controller-vs-kubernetes-operator) first, which may raise the question what the difference is. It is best answered on [stackoverflow](https://stackoverflow.com/a/47857073/1375187). The Kubernetes community has a great read on [Writing Controllers](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/controllers.md) which includes a [sample controller](https://github.com/kubernetes/sample-controller).
 
 Resources:
 * [What is an Operator](https://operatorhub.io/what-is-an-operator)
@@ -99,11 +99,11 @@ Resources:
 
 ## KUDO
 
-Now we can talk KUDO. KUDO is about creating CRD on the fly based on information passed to it or Dynamic CRD. It is about being 1 operator for a number of operator configurations.
+Now we can talk KUDO. KUDO is about creating CRDs on the fly based on information passed to it or Dynamic CRD. It is about being 1 operator for a number of operator configurations.
 
 From the [KUDO Website](https://kudo.dev/) it is worth looking at the [comparison guide](https://kudo.dev/docs/comparison/#comparison_table).
 
-The [KUDO project](https://github.com/kudobuilder/kudo) is written in Go. It was initially created using kubebuilder. It also contains the CLI code. CI service is by circleci. All artifacts can be built (if all prerequisites are met) with the Makefile.  Releases [as outlined](https://github.com/kudobuilder/kudo/blob/master/RELEASE.md) are released with [goreleaser](https://goreleaser.com/).
+The [KUDO project](https://github.com/kudobuilder/kudo) is written in Go. It was initially created using kubebuilder. It also contains the CLI code. CI service is by circleci. All artifacts can be built (if all prerequisites are met) with the Makefile. Releases [as outlined](https://github.com/kudobuilder/kudo/blob/master/RELEASE.md) are released with [goreleaser](https://goreleaser.com/).
 
 Example operators on in the [operator GH project](https://github.com/kudobuilder/operators).
 
