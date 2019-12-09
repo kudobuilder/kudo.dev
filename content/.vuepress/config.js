@@ -48,6 +48,7 @@ module.exports = {
               'contributing',
               'features',
               'developing-operators',
+              'tasks',
               {
                 title: 'Examples',
                 children: [
