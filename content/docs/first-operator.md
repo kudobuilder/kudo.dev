@@ -1,4 +1,4 @@
-# Developing Operators
+# First Operator
 
 This guide will provide introduction to creating KUDO operators, you will learn about the structure of the package and the template language to use.
 

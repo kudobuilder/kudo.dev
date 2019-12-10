@@ -44,19 +44,24 @@ module.exports = {
               'architecture',
               'cli',
               'comparison',
-              'concepts',
               'contributing',
               'features',
-              'developing-operators',
-              'tasks',
-              {
-                title: 'Examples',
-                children: [
-                  'examples/apache-flink',
-                  'examples/apache-kafka',
-                  'examples/apache-zookeeper'
-                ]
-              },
+                {
+                    title: 'Developing Operators',
+                    children: [
+                        'concepts',
+                        'first-operator',
+                        'tasks',
+                        {
+                            title: 'Examples',
+                            children: [
+                                'examples/apache-flink',
+                                'examples/apache-kafka',
+                                'examples/apache-zookeeper'
+                            ]
+                        },
+                    ]
+                },
               'faq',
               'repository',
               {

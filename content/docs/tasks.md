@@ -2,7 +2,7 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](developing-operators.md#your-first-kudo-operator). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and one `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](developing-operators.md#operatoryaml-file) and must have three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](first-operator.md#your-first-kudo-operator). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and one `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](first-operator.md#operatoryaml-file) and must have three fields:
 
 ```yaml
 tasks:
@@ -15,7 +15,7 @@ Let's take a look at an individual task type in detail.
 
 ## Apply-Task
 
-An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of k8s resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](developing-operators.md#your-first-kudo-operator):
+An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of k8s resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](first-operator.md#your-first-kudo-operator):
 
 ```yaml
 tasks:
@@ -49,7 +49,7 @@ tasks:
 
 ## Pipe-Task
 
-Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](developing-operators.md#your-first-kudo-operator) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
+Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](first-operator.md#your-first-kudo-operator) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
 
 ```yaml
 tasks:
