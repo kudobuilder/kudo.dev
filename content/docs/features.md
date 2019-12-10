@@ -28,7 +28,7 @@ spec:
 ## Cleanup plans
 
 If an optional `cleanup` plan is part of an operator, this plan will run when the operator's instance is being deleted. Once this plan is completed or failed, the instance will be deleted.
-Operator developers should take care that there aren't any triggers defined for this plan. Furthermore it should be expected that the steps of this plan could fail. E.g., an instance may get deleted because its deploy plan failed. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. 
+Operator developers should take care that there aren't any triggers defined for this plan. Furthermore it should be expected that the steps of this plan could fail. E.g., users may want to delete an instance because its `deploy` plan is stuck. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. The `cleanup` plan will start even if other plans are currently in progress.
 
 ```yaml
 spec:
@@ -38,3 +38,5 @@ spec:
     cleanup:
     ...
 ```
+
+The `cleanup` plan is implemented using [finalizers](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers). The instance's `metadata.finalizers` contains the value "kudo.dev.instance.cleanup" while the `cleanup` plan is in progress.
