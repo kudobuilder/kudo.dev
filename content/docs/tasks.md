@@ -2,7 +2,7 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](developing-operators.md#your-first-kudo-operator). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and one `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](developing-operators.md#operatoryaml-file) and must define three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](developing-operators.md#your-first-kudo-operator). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and one `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](developing-operators.md#operatoryaml-file) and must have three fields:
 
 ```yaml
 tasks:
@@ -15,7 +15,7 @@ Let's take a look at an individual task type in detail.
 
 ## Apply-Task
 
-An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of templates that will be applied to the cluster. Given a definition like the one from the [first-operator](developing-operators.md#your-first-kudo-operator):
+An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of k8s resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](developing-operators.md#your-first-kudo-operator):
 
 ```yaml
 tasks:
@@ -26,7 +26,7 @@ tasks:
         - deployment.yaml
 ```
 
-a task named `app` will launch a deployment defined in `templates/deployment.yaml`.
+a task named `app` will create a deployment resource defined in `templates/deployment.yaml`.
 
 KUDO will apply all the listed resources and wait for all of them to become healthy. "Health" is dependent on the particular resource: a [deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) must have a defined number of spec instances up and running, a [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) must finish successfully and e.g. a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) will be simply created in the cluster.
 
@@ -45,7 +45,7 @@ tasks:
         - deployment.yaml
 ```
 
-**Note:** deleting non-existing resources is always successful. As of KUDO 0.9.0, it will not wait for the resource to be actually removed e.g. k8s imposes a default graceful termination period of 30 seconds when terminating pods, however, a delete-task will be done before that.
+**Note:** deleting non-existing resources is always successful. As of version 0.9.0, KUDO will not wait for the resource to be actually removed and will finish the task when the API server accepts the deletion request. So in case of Pods, k8s imposes a default graceful termination period of 30 seconds, however, a delete-task will be done before that. KUDO 0.9.0 will not wait for [resource finalizers](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) should they exist.
 
 ## Pipe-Task
 
@@ -63,7 +63,7 @@ tasks:
           key: indexHtml
 ```
 
-a pipe-task spec has two fields: a `pod` spec that will generate our `index.html` and a `pipe` spec that defines a list of files that will be persisted. Here we'll generate a `/tmp/index.html` file that we'll save as a `ConfigMap`. It can be referenced with the key `indexHtml` (more about that below). Pipe-task `spec.pod` field must reference a [core/v1 Pod](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core) template. However, there are limitations. Reasons for that are explained in the [corresponding KEP](https://github.com/kudobuilder/kudo/blob/master/keps/0017-pipe-tasks.md). In a nutshell:
+Pipe-task spec has two fields: a `pod` spec that will generate our `index.html` and a `pipe` spec that defines a list of files that will be persisted. Here we'll generate a `/tmp/index.html` file that we'll save as a `ConfigMap`. It can be referenced within template resources with the key `indexHtml` (more about that below). Pipe-task `spec.pod` field must reference a [core/v1 Pod](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core) template. However, there are limitations. Reasons for that are explained in the [corresponding KEP](https://github.com/kudobuilder/kudo/blob/master/keps/0017-pipe-tasks.md). In a nutshell:
 
 - A pipe-pod should generate artifacts in a [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 - It has to define and mount one [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) where generated files are stored
