@@ -43,7 +43,7 @@ See the KUDO Operator repository at [https://github.com/kudobuilder/operators/](
 
 ## Create Your First Operator
 
-To see the powers of KUDO unleashed in full, you should try [creating your own Operator](developing-operators.md).
+To see the powers of KUDO unleashed in full, you should try [creating your own Operator](first-operator.md).
 
 ## Notes on Minikube
 
