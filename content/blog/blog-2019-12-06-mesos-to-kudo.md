@@ -38,7 +38,7 @@ The following is a checklist with resources to accelerate that learning curve. T
 
 The [Kubernetes Docs](https://kubernetes.io/docs/home/) are fantastic. I suggest you get started with Minikube and become familiar with the basic concepts. At a minimum, go through the [Hello Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) tutorial.
 
-Important in the learning at this phase is understanding the concept of "Kind" which is one of the [top level API Objects](https://kubernetes.io/docs/reference/federation/v1/definitions/). [Kinds](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#types-kinds). Kinds for a default cluster includes `Pod`, `ReplicationController`, `Service`, `Namespace`, `Node`. Each of these you can query or manipulate from the CLI using `kubectl`, for example: `kubectl get pod`.
+Important in the learning at this phase is understanding the concept of "Kind" which is one of the [top level API Objects](https://v1-13.docs.kubernetes.io/docs/reference/federation/v1/definitions/). [Kinds](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#types-kinds). Kinds for a default cluster includes `Pod`, `ReplicationController`, `Service`, `Namespace`, `Node`. Each of these you can query or manipulate from the CLI using `kubectl`, for example: `kubectl get pod`.
 
 Now that you have some basics, it is important to understand the communication and event based system that is behind Kubernetes with this video: [Events, the DNA of Kubernetes](https://www.mgasch.com/post/k8sevents/). The event system details provided by this blog post are crucial for understanding the core of Kubernetes.
 
@@ -81,8 +81,6 @@ Now that you understand the API / Resources that come with Kubernetes, you might
 
 Additional resources:
 * [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-* [Part 3a](https://blog.openshift.com/kubernetes-deep-dive-api-server-part-3a/) of API Service deep dive series
-* [Stefan Schimanski's 36 min talk](https://www.youtube.com/watch?v=Ne4jQF-CPIM) on the topic
 * [Extending Kubernetes with Custom Resources](https://thenewstack.io/extend-kubernetes-1-7-custom-resources/)
 * [Kubernetes CRD Tutorial](https://github.com/yaronha/kube-crd)
 
