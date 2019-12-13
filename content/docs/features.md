@@ -47,7 +47,7 @@ In the 0.9.0 version of KUDO, we introduced a new experimental feature - validat
 
 ### Why we need this?
 
-Validating [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) is HTTP callback that receive admission request (from API server) and let you apply validation rules on them. This validation cannot be performed inside controller because that would happen AFTER the resource was stored in ETCD thus leaving us with illegal state already in. Kubernetes admission webhooks require HTTPS to be used for this endpoint.
+Validating [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) is HTTP callback that receives admission request (from API server) and let you apply validation rules on them. This validation cannot be performed inside the controller because that would happen AFTER the resource was stored in ETCD thus leaving us with the illegal state already in. Kubernetes admission webhooks require HTTPS to be used for this endpoint.
 
 ![Webhook accept](/images/webhook-accept.png?10x20)
 
