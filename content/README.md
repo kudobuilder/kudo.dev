@@ -9,7 +9,7 @@ features:
 - title: Focus on your software …
   details: The Kubernetes Universal Declarative Operator (KUDO) is a highly productive toolkit for writing Kubernetes Operators.
 - title: … not on deploying it to Kubernetes
-  details: Using KUDO you can deploy your applications, have the tools needed to operate them, and understand how they're behaving – all without a PhD in Kubernetes.
+  details: Using KUDO you can deploy your applications, have the tools needed to operate them, and understand how they're behaving – all without a Ph.D. in Kubernetes.
 - title: Automate Day-2 Operations
   details: KUDO lets you configure an Operator’s entire lifecycle using a declarative spec, including things like backup/restore. You don’t have to write Go unless you want to.
 footer: Written in Go, maintained by good people.
