@@ -81,6 +81,7 @@ module.exports = {
                 title: 'Blog',
                 collapsable: false,
                 children: [
+                  'blog-2019-12-06-mesos-to-kudo',
                   'blog-2019-10-kudo-team',
                   'blog-2019-10-hacktoberfest',
                   'announcing-kudo-0.7.2',
