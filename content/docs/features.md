@@ -43,7 +43,7 @@ The `cleanup` plan is implemented using [finalizers](https://kubernetes.io/docs/
 
 ## EXPERIMENTAL - Validating admission webhook
 
-In 0.9.0 version of KUDO we introduced a new experimental feature - validating admission webhook. When enabled, it helps to enforce consistency of our CRDs and it also makes sure that the execution plan is atomic and deterministic.
+In the 0.9.0 version of KUDO, we introduced a new experimental feature - validating the admission webhook. When enabled, it helps to enforce consistency of our CRs and it also makes sure that the execution plan is atomic and deterministic.
 
 ### Why we need this?
 
