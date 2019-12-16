@@ -472,7 +472,7 @@ $ kubectl kudo package create ../operators/repository/zookeeper/operator/ --dest
 
 ### Validating an Operator
 
-You can use the `package verify` command to check the condition of an operator which returns warnings and errors.  Warnings are conditions such as a parameter is defined in the params.yaml but is not used a template file.  Errors on conditions such as a parameter is used in a template file but is not defined in the params.yaml.  If there are errors the command exits with a non-zero exit code.
+You can use the `package verify` command to check the condition of an operator which returns warnings and errors.  Warnings are conditions such as a parameter is defined in the params.yaml but is not used a template file.  Errors are conditions such as a parameter is used in a template file but is not defined in the params.yaml.  If there are errors the command exits with a non-zero exit code.
 
 Examples:
 
