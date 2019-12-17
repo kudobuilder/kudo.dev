@@ -52,8 +52,12 @@ Initialize KUDO on both the client and server
 Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
 :::
 
-::: flag kubectl kudo package &lt;operator_folder&gt; [flags]
+::: flag kubectl kudo package create &lt;operator_folder&gt; [flags]
 Packages an operator in a folder into a tgz file.
+:::
+
+::: flag kubectl kudo package verify &lt;operator_folder&gt; [flags]
+Verifies an operator providing errors and warnings as an output.  Provides a non-zero exit when errors are present.
 :::
 
 ::: flag kubectl kudo plan status [flags]
@@ -89,7 +93,7 @@ Upgrade installed operator from one version to another.
 :::
 
 ::: flag kubectl kudo version
-Print the current KUDO package version.
+Print the current KUDO version.
 :::
 
 ## Flags
@@ -455,15 +459,34 @@ This includes the previous history but also all OperatorVersions that have been 
 
 ### Package an Operator
 
-You can use the `package` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
+You can use the `package create` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
 
-`kubectl kudo package zookeeper --destination=target`
+`kubectl kudo package create zookeeper --destination=target`
 
 Example:
 
 ```bash
-$ kubectl kudo package ../operators/repository/zookeeper/operator/ --destination=~
+$ kubectl kudo package create ../operators/repository/zookeeper/operator/ --destination=~
   Package created: /Users/kensipe/zookeeper-0.1.0.tgz
+```
+
+### Validating an Operator
+
+You can use the `package verify` command to check the condition of an operator which returns warnings and errors.  Warnings are conditions such as a parameter is defined in the params.yaml but is not used a template file.  Errors are conditions such as a parameter is used in a template file but is not defined in the params.yaml.  If there are errors the command exits with a non-zero exit code.
+
+Examples:
+
+```bash
+$ kubectl kudo package verify ../operators/repository/zookeeper/operator/
+  package is valid
+```
+
+```bash
+$ kubectl kudo package verify ../operators/repository/kafka/operator/
+Warnings                                                      
+parameter "SSL_ENDPOINT_IDENTIFICATION_ENABLED" defined but not used.
+parameter "CUSTOM_SERVER_PROPERTIES" defined but not used.           
+package is valid
 ```
 
 ### Creating a Repository Index File
