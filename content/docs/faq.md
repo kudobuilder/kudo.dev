@@ -99,13 +99,9 @@ Plan foo
    └─ Step grault
 ```
 
-The status of the execution of a plan is captured as a [PlanExecution](#what-is-a-planexecution) CRD. Each execution of a plan has intentionally its own `PlanExecution` CRD. Plans drive the transition between current and desired states, and are built based on the current progress of that transition. They are not themselves part of those states.
+The status of the execution of a plan is captured in `Status` field in Instance CRD.
 
 KUDO expects by default the `deploy` plan.
-
-## What is a PlanExecution?
-
-This CRD captures the status of the execution of a plan defined in an `OperatorVersion` on an `Instance`. The plan status is solely determined based on the statuses of its child phases, and the phases in turn determine their statuses based on their steps.
 
 ## What is a Parameter?
 
@@ -132,8 +128,8 @@ That is the eventual goal. We want each `OperatorVersion` (those versions of an 
 
 ## How Does It Work From an RBAC Perspective?
 
-Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion`,`Instance` and `PlanExecution` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
+Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion` and`Instance` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
 
 ## Is the dependency model an individual controller per workload?
 
-We have one controller that handles all of the CRDs of the `Operator`, `OperatorVersion`, `Instance` and `PlanExecution` types. They all are being subscribed by the same single state machine operator. For example, right now there is only an `Instance` CRD and that object is owned by its single operator. Once we start doing dynamic CRDs there will be more types dynamically subscribed by new objects registering with the operator along the way.
+We have one controller that handles all of the CRDs of the `Operator`, `OperatorVersion` and `Instance` types. They all are being subscribed by the same single state machine operator. For example, right now there is only an `Instance` CRD and that object is owned by its single operator. Once we start doing dynamic CRDs there will be more types dynamically subscribed by new objects registering with the operator along the way.
