@@ -99,7 +99,7 @@ Plan foo
    └─ Step grault
 ```
 
-The status of the execution of a plan is captured in `Status` field in Instance CRD.
+The status of the execution of a plan is captured in the `Status` field in within the Instance CRD.
 
 KUDO expects by default the `deploy` plan.
 
