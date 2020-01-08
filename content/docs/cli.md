@@ -370,7 +370,7 @@ Events:     <none>
 
 You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
-### Get the History to plan executions
+### Get the History of Plan Executions
 
 This is helpful if you want to find out which plan ran on your instance to a particular `OperatorVersion`.
 Run this command to retrieve all plans that ran for the instance `up` and its OperatorVersion `upgrade-v1`:
