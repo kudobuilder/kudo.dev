@@ -26,8 +26,3 @@ You can create multiple instance of an OperatorVersion in your cluster (e.g. dif
 Operators typically define several plans. Plans capture the individual steps of operational tasks. Think of them as runbooks written in a structured way that can be executed by software. Plans are made up of phases, and phases have one or more steps.
 
 Every OperatorVersion must contain a `deploy` plan which is the default plan to deploy an application to the cluster. For more complex systems, you would want to define a plan for backup and restore or upgrade.
-
-## PlanExecution
-
-Every time a plan is executed, the corresponding PlanExecution CRD is stored with inputs and status of the plan (e.g., when you upgrade Kafka from version 2.4.0 -> 2.4.1).
-You can query the status of any plan via the CLI.

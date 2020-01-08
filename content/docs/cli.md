@@ -279,8 +279,7 @@ In this tree chart you see all important information in one screen:
 For comparison, the according `kubectl` commands to retrieve the above information are:
 
 * `kubectl get instances` (to get the matching `OperatorVersion`)
-* `kubectl describe operatorversion upgrade-v1` (to get the current `PlanExecution`)
-* `kubectl describe planexecution up-deploy-493146000` (to get the status of the `Active-Plan`)
+* `kubectl describe operatorversion upgrade-v1`
 
 Here, you can find the overview of all available plans in `Spec.Plans` of the matching `OperatorVersion`:
 
@@ -367,74 +366,11 @@ spec:
 Events:     <none>
 ```
 
-You can then find the status of the currently applied plan when looking at the particular `PlanExecution`:
-
-```bash
-$ kubectl describe planexecution up-deploy-493146000
-  Name:         up-deploy-493146000
-  Namespace:    default
-  Labels:       operator-version=upgrade-v1
-                instance=up
-  Annotations:  <none>
-  API Version:  kudo.dev/v1alpha1
-  Kind:         PlanExecution
-  Metadata:
-    Cluster Name:
-    Creation Timestamp:  2018-12-14T19:26:44Z
-    Generation:          1
-    Owner References:
-      API Version:           kudo.dev/v1alpha1
-      Block Owner Deletion:  true
-      Controller:            true
-      Kind:                  Instance
-      Name:                  up
-      UID:                   3101bbe5-ffd6-11e8-abd5-080027d506c7
-    Resource Version:        63815
-    Self Link:               /apis/kudo.dev/v1alpha1/namespaces/default/planexecutions/up-deploy-493146000
-    UID:                     31037dd0-ffd6-11e8-abd5-080027d506c7
-  Spec:
-    Instance:
-      Kind:       Instance
-      Name:       up
-      Namespace:  default
-    Plan Name:    deploy
-  Status:
-    Name:  deploy
-    Phases:
-      Name:   par
-      State:  COMPLETE
-      Steps:
-        Name:    run-step
-        State:   COMPLETE
-      Strategy:  serial
-    State:       COMPLETE
-    Strategy:    serial
-  Events:        <none>
-```
-
-Finally, the status information for the `Active-Plan` is nested in this part:
-
-```bash
-  Status:
-    Name:  deploy
-    Phases:
-      Name:   par
-      State:  COMPLETE
-      Steps:
-        Name:    run-step
-        State:   COMPLETE
-      Strategy:  serial
-    State:       COMPLETE
-    Strategy:    serial
-```
-
-Apparently, KUDO's tree view makes this information easier to understand and prevents you from putting together the bits and pieces of various commands.
-
 ### Delete an Instance
 
 You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
-### Get the History to PlanExecutions
+### Get the History of Plan Executions
 
 This is helpful if you want to find out which plan ran on your instance to a particular `OperatorVersion`.
 Run this command to retrieve all plans that ran for the instance `up` and its OperatorVersion `upgrade-v1`:
