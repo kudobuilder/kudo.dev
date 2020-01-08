@@ -128,7 +128,7 @@ That is the eventual goal. We want each `OperatorVersion` (those versions of an 
 
 ## How Does It Work From an RBAC Perspective?
 
-Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion` and`Instance` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
+Right now everything is `namespaced`. For the current capability `Operator`, `OperatorVersion` and `Instance` are all namespaced and the permissions of the operator are all in the current namespace. For example, deletion can only happen on objects in the namespace that the instance is in. There is a trade-off between the *flexibility* of having application operators deploy their own versions in their own namespaces to manage versus having *broad capability* from a cluster perspective. With easily defining `OperatorVersions` in YAML we give you the capability to provide full operators to everyone on the cluster and you are able to give those application management pieces to those application operators individually and not have to provide support on each one of those.
 
 ## Is the dependency model an individual controller per workload?
 
