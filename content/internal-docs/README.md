@@ -5,7 +5,7 @@
 **TODO:** link a more extensive list of guidelines
 
 * Use simple language – documentation will be read by non-native speakers. 
-* Stick to your wording – don't use a different word each time you refer to an action
+* Stick to your wording – don't use a different word each time you refer to an action.
   As an example, don't confuse your reader by asking them to _press the button, then click the button, and finally activate the button_. Use either of those verbs and stick to it.
 * Address your reader directly – i.e. write _you can do X_ instead of _we can do X_.
 * Add exhaustive links – if you refer to something that's documented, link to it. If it's not documented, create that documentation.
@@ -33,4 +33,4 @@ Some code snippets are included from KUDO that is included as a [Git submodule](
 cd kudo
 git checkout %tag-of-release%
 ```
-and committing this to KUDO.
+and committing this to `kudo.dev`.
