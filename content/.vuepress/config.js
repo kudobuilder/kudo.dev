@@ -46,11 +46,11 @@ module.exports = {
                 {
                     title: 'Comparison',
                     children: [
-                        'README',
-                        'iaac',
-                        'static-yaml',
-                        'high-level-controllers',
-                        'custom-controllers'
+                        'comparison/overview',
+                        'comparison/iac',
+                        'comparison/static-yaml',
+                        'comparison/high-level-controllers',
+                        'comparison/custom-controllers'
                     ]
                 },
               'contributing',
