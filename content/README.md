@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /images/kudo_horizontal_color@2x.png
+heroImage:
 heroText:
 tagline: The Kubernetes Universal Declarative Operator
 actionText: ⇝ Get Started ⇜
@@ -15,6 +15,35 @@ features:
 footer: Written in Go, maintained by good people.
 
 ---
+
+<SpecialHeader text="What is KUDO" />
+
+## KUDO:
+
+* Is a toolkit that makes it easy to build Operators, in most cases just using YAML
+
+* Provides a set of pre-built Operators, that you can just use out of the box or easily customise
+
+* Lets you standardise the way you run Operators
+
+
+<SpecialHeader text="What are Operators" />
+
+A stateless web application doesn’t usually need any complex configuration, or actions we need to run during operation. They are either on or off. Although we might have more than one instance running, they aren't coupled together.
+
+A distributed stateful application consists of more than one instance that are tightly connected. They usually need a set of operations to configure and maintain them, which are specific to the application.
+
+Human operators of stateful applications have deep knowledge about how and when to run those operations.
+
+The [Operator pattern](https://https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a way of capturing that human knowledge. It provides a way of automating those tasks by extending the native Kubernetes API.
+
+Operators let you perform application tasks like taking backups, rebalancing data, scaling, or changing configuration. Any tasks you might want to do during operation of an application can be automated using an Operator.
+
+<SpecialHeader text="KUDO is for you if..." />
+
+* You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals
+* You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go
+* You run a Kubernetes cluster with many different Operators, and are looking for a way to standardise how you manage your Operators
 
 ::: teaser Watch the Intro Video
 
@@ -45,11 +74,11 @@ Instead of re-writing all of these tooling in Go, KUDO allows you to encapsulate
 <SpecialHeader text="Complicated lifecycle? Keep it simple" />
 
 Software with complicated lifecycles is the kind of software KUDO optimizes for. In many cases, submitting a bunch of manifests and letting pods crash until other pods have run creates additional complexity in the deployment and maintenance of this software.
- 
+
 Init Containers go awry, binaries get wrapped in esoteric launch scripts that are hard to debug, and Kubernetes users have to navigate a minefield of misleading data with poor resolution. The solution? Write software that deploys your software and handles this sequencing for you.
 
 KUDO brings sequencing of complicated software lifecycles without having to build software to do it for you. Plans contain phases, steps, and tasks, allowing plans to represent the full lifecycle of your application's stages.
- 
+
  <SpecialHeader text="Just Kubernetes" />
 
 Other tools require learning a programming language, learning the API, or learning a DSL specific for building operators. For many teams, this doesn't overlap with their core competencies.
