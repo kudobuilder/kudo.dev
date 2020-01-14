@@ -5,7 +5,7 @@ type: docs
 
 # KUDO vs Static Definition Formats
 
-Static Definition Formats have in common that they operate from the outside of the cluster.
+A common feature of all Static Definition Formats have, is that they operate from the outside of the cluster.
 The more complex tools in this area allow installation, upgrading and rollback of applications, but 
 don't provide any mechanisms to automatically keep the cluster in the requested state or interact with 
 the installed applications.
