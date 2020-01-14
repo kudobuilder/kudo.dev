@@ -13,6 +13,9 @@ for lifecycle management of most applications. Apart from the specific requireme
 also burdens the developer to manage the operator, including testing, upgrades to the kubernetes cluster, changes to the
 stored data of the operator and changing APIs.
 
+KUDO allows a an application developer to create an operator with declarative measures. Without custom Go code, 
+KUDO operators provide most of the functionality of a custom operator.
+
 \+ Full control over the cluster and deployed resources  
 \+ Allows reaction to changes in the cluster, custom resources, validation  
 \+ Allows any required behaviour  
@@ -30,7 +33,8 @@ topics in the kubernetes space.
 
 ## [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)
 Kubebuilder is a framework for building Kubernetes APIs using CRDs. It uses Go, and provides an opinionated way
-to generate and developer Kubernetes APIs. 
+to generate and develop Kubernetes APIs. It utilizes the [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime)
+library as a base for new controllers.
 
 When following the Kubebuilder approach, Data is stored in CustomResourceDefinitions. A Controller then implements 
 reconcile loops that watches the CRs and other resources and handles changes according to the business logic.
@@ -39,3 +43,6 @@ Kubebuilder provides good documentation and examples. This allows the developmen
 ground up and with a clear path through common problems.
 
 ## [Operator SDK](https://github.com/operator-framework/operator-sdk)
+The Operator SDK provides even more scaffolding and higher level frameworks around controller-runtime. It allows
+integration with Helm or Ansible, and has a large feature set. 
+
