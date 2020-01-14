@@ -52,6 +52,7 @@ module.exports = {
                         'concepts',
                         'first-operator',
                         'tasks',
+                        'operator-parameters',
                         {
                             title: 'Examples',
                             children: [
@@ -131,6 +132,11 @@ module.exports = {
         ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
+            after: '</div>',
+        }],
+        ['container', {
+            type: 'attribute',
+            before: name => `<div class="attribute"><code class="title" v-pre>${name}</code>`,
             after: '</div>',
         }],
         ['container', {
