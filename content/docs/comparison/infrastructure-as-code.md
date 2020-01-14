@@ -1,5 +1,5 @@
 ---
-title: KUDO vs. IaC
+title: vs. IaC
 type: docs
 ---
 
@@ -12,3 +12,7 @@ While Lifecycle management of complex, stateful applications is possible with th
 Operators reflect this reality by taking responsibility for the software that they run. They do this in two ways - providing a declarative shell called a Custom Resource Definition (CRD) that creates an API for operator users to define the desired state of their software, as well as a controller that continuously asserts that these resources are always advancing to the desired state.
 
 IaC tools work well in this paradigm. Instead of using Terraform to work with the underlying components that make up a complex software deployment, use Terraform or Ansible to deploy the KUDO controller, and the custom resources that define the operator for the Kubernetes application you want to deploy. This works for any operator, combining the single-view infrastructure convergence power of IaC tooling with the long-term maintenance capabilities of Operators.
+
+::: warning Terraform Kubernetes Provider Compatibility
+As Terraform Kubernetes provider version v1.10.0, Custom Resources and Custom Resource Definitions are in planning but not yet supported. Support for these features is available in a well-maintained [third-party Terraform provider](https://github.com/nabancard/terraform-provider-kubernetes-yaml).
+:::
