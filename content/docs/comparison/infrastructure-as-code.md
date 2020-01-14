@@ -16,5 +16,5 @@ Operators reflect this reality by taking responsibility for the software that th
 IaC tools work well in this paradigm. Do not use basic Kubernetes like pods and deployments for pets. Terraform and Ansible can create the controller and the custom resource. This enables IaC tools to manage the controller as cattle, and the controller to manage the pet.
 
 ::: warning Terraform Kubernetes Provider Compatibility
-As Terraform Kubernetes provider version v1.10.0, Custom Resources and Custom Resource Definitions are in planning but not yet supported. Support for these features is available in a well-maintained [third-party Terraform provider](https://github.com/nabancard/terraform-provider-kubernetes-yaml).
+In Terraform Kubernetes provider version v1.10.0, Custom Resources and Custom Resource Definitions are in planning but not yet supported. Support for these features is available in a well-maintained [third-party Terraform provider](https://github.com/nabancard/terraform-provider-kubernetes-yaml).
 :::
