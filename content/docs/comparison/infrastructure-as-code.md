@@ -13,7 +13,7 @@ IaC tools often consider the resources running these two types of software to be
 
 Operators reflect this reality by taking responsibility for the software that they run. Operators are two combined parts: a custom resource and a controller. The custom resource contains the declarative information for the managed application. Controllers ensure that the resources in the cluster and custom resource match.
 
-IaC tools work well in this paradigm. Instead of using Terraform to work with the underlying components that make up a complex software deployment, use Terraform or Ansible to deploy the KUDO controller, and the custom resources that define the operator for the Kubernetes application you want to deploy. This works for any operator, combining the single-view infrastructure convergence power of IaC tooling with the long-term maintenance capabilities of Operators.
+IaC tools work well in this paradigm. Don't use IaC tools to work with the components of a stateful application. Instead, use Terraform or Ansible to deploy KUDO and the application's custom resources. This works for any operator, combining the power of IaC tooling with long term management.
 
 ::: warning Terraform Kubernetes Provider Compatibility
 In Terraform Kubernetes provider version v1.10.0, Custom Resources and Custom Resource Definitions are in planning but not yet supported. Support for these features is available in a well-maintained [third-party Terraform provider](https://github.com/nabancard/terraform-provider-kubernetes-yaml).
