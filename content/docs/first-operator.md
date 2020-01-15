@@ -95,37 +95,8 @@ Plans allow operators to see what the operator is currently doing, and to visual
 
 ## Params File
 
-`params.yaml` defines all parameters that can be used to customize your operator installation. You have to define the name of the parameter and optionally a default value. If not specified otherwise, all parameters in this list are treated as required parameters. For parameters that don't specify default values, you must provide a value during installation, otherwise the installation will fail.
-
-A more detailed example of `params.yaml` may look as following:
-
-```yaml
-apiVersion: kudo.dev/v1beta1
-parameters:
-  - name: BACKUP_FILE
-    description: "Filename to save the backups to"
-    default: "backup.sql"
-    displayName: "BackupFile"
-  - name: PASSWORD
-    default: "password"
-    trigger: backup
-  - name: OPTIONAL_PARAM
-    description: "This parameter is not required"
-    required: False
-  - name: REQUIRED_PARAM
-    description: "This parameter is required but does not have a default value"
-    required: True
-```
-
-Let's look at these parameters:
-* The `BACKUP_FILE` parameter provides a default value, so a user does not need to specify anything unless they want to change that value.
-* The `OPTIONAL_PARAM` is explicitly not required, so even though it doesn't come with a default value, not providing a value for this parameter won't fail the installation.
-* The `REQUIRED_PARAM` is required but does not provide a default value. For such parameters, users are expected to provide a value for `kubectl kudo install youroperator -p REQUIRED_PARAM=value`.
-* The `PASSWORD` parameter exposes one more feature of `params.yaml`: you can `trigger` specific plans when changing a parameter.
-
-### Triggers
-
-`trigger` is an optional field which points to an existing plan in `operator.yaml`. When you update a parameter after an instance has been installed, the plan specified gets triggered as a result of your change. In other words, this plan will apply the parameter change to your Kubernetes objects. If no trigger is specified, the `update` plan will be triggered by default. If no `update` plan exists for this operator, the `deploy` plan is run.
+`params.yaml` defines all parameters that can be used to customize your operator installation.
+They are described in more detail in the [document about operator parameters](operator-parameters.html).
 
 ## Templates
 
