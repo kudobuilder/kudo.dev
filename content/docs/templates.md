@@ -55,6 +55,8 @@ Functions transform input like variables. Pipelines allow to use the result of a
 * make simple calculations (`len`, `and`, `or`, `add`, `mul`, ...)
 * manipulate text (`html`, `js`, `trim`, `wrap`, ...)
 
+Sprig functions that allow environment access are disabled. The respective functions are `env`, `expandenv`, `base`, `dir`, `clean`, `ext` and `isAbs`.
+
 ## Actions
 
 Use actions to provide branching or repetition in templates. Below are some examples on how to use functions in operator templates. The [documentation for Go templates](https://golang.org/pkg/text/template/#hdr-Actions) has more details on its features.
