@@ -5,8 +5,8 @@ type: docs
 
 # KUDO vs High Level Frameworks
 High Level Frameworks are the area of tools that sit between simple configuration and fully fledged custom controllers.
-These Tools usually hide the complexities of the Kubernetes internals and allow more control than 
-simple Kubernetes operations. As they do not expose all details, the don't allow as much possibilities as full 
+These tools usually hide the complexities of the Kubernetes internals and allow more control than 
+simple Kubernetes operations. As they do not expose all details, they don't allow as much possibilities as full 
 custom controllers.
 
 ## Metacontroller
