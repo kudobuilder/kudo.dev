@@ -13,4 +13,4 @@ Deploying software to Kubernetes comes in a wide variety of forms, and knowing w
 
 [Custom Controllers](/docs/comparison/custom-controllers.html) walks through SDKs and API clients used to build Kubernetes controllers directly.
 
-[High Level Controllers](/docs/comparison/high-level-controllers.html) compares KUDO to other similar tooling in it's space, and explores the difference between these tools and declarative operator development.
+[High Level Controllers](/docs/comparison/high-level-controllers.html) compares KUDO to similar tooling in it's space, and explores the difference between these tools and declarative operator development.
