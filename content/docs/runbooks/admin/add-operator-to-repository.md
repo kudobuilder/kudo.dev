@@ -17,8 +17,8 @@ This will download the current index from the community repository.  Add all ope
 
 ### Copy Artifacts to Repository
 
-Copy all artifacts in the `~/repo` to the serve.
+Copy all artifacts in the `~/repo` to the server.
 
 ::: tip Note
-When updating a repository it is best to copy over all operator packages, then update the index file.
+When updating a repository it is best to copy over all operator packages first, then update the index file.
 :::

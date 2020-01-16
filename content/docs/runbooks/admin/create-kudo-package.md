@@ -4,7 +4,9 @@ In order to distribute a KUDO operator the files are packaged together in compre
 
 ## Preconditions
 
-A KUDO operator has been created.  This runbook uses the [first-operator operator](https://github.com/kudobuilder/operators/tree/master/repository/first-operator) as defined in the [operators github repository](https://github.com/kudobuilder/operators).  It is expected that the working directory is from the base of the operator project.
+* A KUDO operator has been created.  This runbook uses the [first-operator operator](https://github.com/kudobuilder/operators/tree/master/repository/first-operator) as defined in the [operators github repository](https://github.com/kudobuilder/operators).  It is expected that the working directory is from the base of the operator project.
+
+* `tree` command is installed (used for confirmation only)
 
 ## Steps
 
@@ -12,9 +14,12 @@ A KUDO operator has been created.  This runbook uses the [first-operator operato
 
 ```bash
 rm -rf ~/repo
-mkdir ~/repo
+mkdir -p ~/repo
 kubectl kudo package create repository/first-operator/operator/ --destination=~/repo
 ```
+::: warning Potential Data Loss
+You may want to check the contents of the `~/repo` folder prior to deleting it.
+:::
 
 The output looks like:
 

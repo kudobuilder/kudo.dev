@@ -24,6 +24,10 @@ serviceaccount "kudo-manager" deleted
 clusterrolebinding.rbac.authorization.k8s.io "kudo-manager-rolebinding" deleted
 ```
 
+::: warning Removing KUDO Removes all KUDO resources
+The removal of KUDO from the cluster will remove all KUDO operators on the cluster and all deployments associated with those operators.
+:::
+
 ### Check to see the KUDO Manager has been removed
 
 ```bash
