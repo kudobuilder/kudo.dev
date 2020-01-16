@@ -7,7 +7,7 @@ type: docs
 
 Deploying software to Kubernetes comes in a wide variety of forms, and knowing which is appropriate for your use case is important for long term success. In this section, we compare KUDO to a variety of different deployment paradigms:
 
-[Static YAML](/docs/comparison/static-yaml.html) approaches deployment in it's most simple form - templated and untemplated YAML manifests, and evaluates tools in this space.
+[Static Definition Formats](/docs/comparison/static-yaml.html) approaches deployment in it's most simple form - templated and untemplated YAML manifests, and evaluates tools in this space.
 
 [Infrastructure as Code](/docs/comparison/infrastructure-as-code.html) explores the use of traditional IaC tooling, such as Ansible and Terraform, for Kubernetes application deployments.
 
