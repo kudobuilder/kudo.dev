@@ -47,10 +47,10 @@ module.exports = {
           title: "Comparison",
           children: [
             "comparison/overview",
-            "comparison/infrastructure-as-code",
             "comparison/static-yaml",
-            "comparison/high-level-controllers",
-            "comparison/custom-controllers"
+            "comparison/infrastructure-as-code",
+            "comparison/custom-controllers",
+            "comparison/high-level-controllers"
           ]
         },
         "contributing",
