@@ -43,7 +43,16 @@ module.exports = {
               '',
               'architecture',
               'cli',
-              'comparison',
+              {
+                  title: "Comparison",
+                  children: [
+                      "comparison/overview",
+                      "comparison/infrastructure-as-code",
+                      "comparison/static-yaml",
+                      "comparison/high-level-controllers",
+                      "comparison/custom-controllers"
+                  ]
+              },
               'contributing',
               'features',
                 {
