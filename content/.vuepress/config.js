@@ -72,6 +72,7 @@ module.exports = {
                         },
                     ]
                 },
+              'templates',
               'faq',
               'repository',
               {
