@@ -3,7 +3,7 @@
 
 This runbook explains how to upgrade a running KUDO Kafka to a newer version of KUDO Kafka. 
 
-  * [Requirements](#requirements)
+  * [Preconditions](#Preconditions)
   * [Steps](#steps)
     + [Verifying if KUDO Kafka is ready for the upgrade](#verifying-if-kudo-kafka-is-ready-for-the-upgrade)
       - [1. Get the KUDO Kafka Instance object name](#1-get-the-kudo-kafka-object-name)
@@ -23,7 +23,7 @@ This runbook explains how to upgrade a running KUDO Kafka to a newer version of 
       - [13. (Optional) Bump the `inter.broker.protocol.version` to upgraded version](#13--optional--bump-the--interbrokerprotocolversion--to-upgraded-version)
   * [Future improvements](#future-improvements)
 
-## Requirements
+## Preconditions
 
 - Kubernetes cluster with KUDO version > 0.10.0 installed
 - Have a KUDO Kafka cluster version 1.1.0 up and running in the namespace `kudo-kafka`
@@ -72,7 +72,7 @@ Plan(s) for "kafka" in namespace "kudo-kafka":
             └── Step not-allowed [NOT ACTIVE]
 ```
 
-#### 3. Get the operatorversion  of KUDO Kafka Instance
+#### 3. Get the Operator Version of KUDO Kafka Instance
 
 
  From step 1 we know the name of KUDO Kafka instance is `kafka`. We can get the Operator Version of the KUDO Kafka Instance.
@@ -124,7 +124,7 @@ in this case the expected output is the Kafka version
 2.3.0
 ```
 
-In case the `inter.broker.protocol.version` matches the app version you can skip to the step 7.
+If `inter.broker.protocol.version` already matches the app version, skip to step 7.
 
 
 #### 6. Update the inter.broker.protocol.version to match the current version
@@ -259,7 +259,7 @@ The expected output is the Kafka version and that should be the upgraded version
 kubectl get pods kafka-kafka-0 -n kudo-kafka -o json | jq -r '.spec.containers[].image'
 ```
 
-the expected output will show the container images used by the KUDO Kafka pods. The `mesosphere/kafka` image should be the upgraded version `1.1.0-2.4.0`
+The expected output will show the container images used by the KUDO Kafka pods. The `mesosphere/kafka` image should be the upgraded version `1.1.0-2.4.0`
 
 ```
 quay.io/prometheus/node-exporter:v0.18.1
@@ -272,7 +272,7 @@ mesosphere/kafka:1.1.0-2.4.0
 kubectl get instances.kudo.dev kafka -n kudo-kafka -o json | jq -r .spec.operatorVersion.name | xargs kubectl get operatorversion -n kudo-kafka -o json | jq -r .spec.appVersion
 ```
 
-the expected output should be the app version specified in the operator version of the instance
+The expected output should be the app version specified in the operator version of the instance
 
 ```
 2.4.0
