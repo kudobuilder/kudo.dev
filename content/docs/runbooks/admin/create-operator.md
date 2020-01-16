@@ -1,6 +1,6 @@
-
 # How to Create an Operator from Scratch
-This is a step-by-step walk through of the creation of an operator using the KUDO cli to generate the operator structure.
+
+This is a step-by-step walk through of the creation of an operator using the KUDO CLI to generate the KUDO operator structure.
 
 ## Preconditions
 
@@ -10,24 +10,26 @@ None
 
 ### Create the Core Operator Structure
 
-```
+```bash
 # create operator folder
 mkdir first-operator
 cd first-operator
 kubectl kudo package new first-operator
 ```
 
-This creates the main structure of the operator which can be view with `tree`
+This creates the main structure of the operator which can be viewed using the `tree` command:
 
-```
-tree .
+```bash
+$ tree .
 .
 └── operator
     ├── operator.yaml
     └── params.yaml
 ```
 
-**note:** use the `-i` mode to be prompted interactively for operator details.
+::: tip Note
+Use the `-i` flag with `kubectl kudo package new` to be prompted interactively for operator details.
+:::
 
 ### Add a Maintainer
 
@@ -37,10 +39,10 @@ tree .
 
 `kubectl kudo package add task`
 
-This will go into interactive mode.  Here is an example interaction.
+This command uses an interactive prompt to construct the details of the task.  Here is an example interaction:
 
-```
-kubectl kudo package add task
+```bash
+$ kubectl kudo package add task
 Task Name: app
 ✔ Apply
 Task Resource: deployment
@@ -51,10 +53,10 @@ Task Resource: deployment
 
 `kubectl kudo package add plan`
 
-This will go into interactive mode.  Here is an example interaction.
+This command uses an interactive prompt to construct the details of the plan.  Here is an example interaction:
 
-```
-kubectl kudo package add plan
+```bash
+$ kubectl kudo package add plan
 ✔ Plan Name: deploy
 ✔ serial
 Phase 1 name: main
@@ -70,10 +72,10 @@ Step 1 name: everything
 
 `kubectl kudo package add parameter`
 
-This will go into interactive mode.  Here is an example interaction.
+This command uses an interactive prompt to construct the details of the parameter.  Here is an example interaction:
 
-```
-kubectl kudo package add parameter
+```bash
+$ kubectl kudo package add parameter
 Parameter Name: replicas
 Default Value: 2
 Display Name:
@@ -82,9 +84,9 @@ Description: Number of replicas that should be run as part of the deployment
 ✗ Add Trigger Plan:
 ```
 
-These steps have created the entirety of the first-operator with the exception of the details in the `template/deployment.yaml` file.  To complete this operator execute the following.
+These steps have created the entirety of the first-operator with the exception of the details in the `template/deployment.yaml` file.  To complete this operator execute the following:
 
-```
+```bash
 cat << EOF > operator/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
