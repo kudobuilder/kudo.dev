@@ -80,7 +80,7 @@ spec:
 
 ### Create objects for a specified number
 
-This example create [persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) for each volume.
+This example creates [persistent volume claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) for each volume.
 
 ```yaml
 {{ range $i, $v := until (int .Params.VOLUMES) }}
