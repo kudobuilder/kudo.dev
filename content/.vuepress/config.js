@@ -41,7 +41,7 @@ module.exports = {
         sidebar: {
             '/docs/': [
               '',
-              'architecture',
+              'components',
               'cli',
               {
                   title: "Comparison",
