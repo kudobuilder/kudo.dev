@@ -65,6 +65,23 @@ module.exports = {
               'faq',
               'repository',
               {
+                title: 'Runbooks',
+                children: [
+                  {
+                    title: 'Admin',
+                    children: [
+                      'runbooks/admin/initialize-kudo',
+                      'runbooks/admin/debug-kudo',
+                      'runbooks/admin/create-operator',
+                      'runbooks/admin/create-kudo-package',
+                      'runbooks/admin/add-operator-to-repository',
+                      'runbooks/admin/local-repo',
+                      'runbooks/admin/remove-kudo'
+                    ]
+                  }
+                ]
+              },
+              {
                 title: 'Testing',
                 children: [
                   'testing',
