@@ -1,6 +1,6 @@
 # How to package a KUDO operator
 
-In order to distribute a KUDO operator the files are packaged together in compressed tarball.  The KUDO CLI provides a mechanism to create this package format while verifying the integrity of the operator.
+In order to distribute a KUDO operator the files are packaged together in a compressed tarball.  The KUDO CLI provides a mechanism to create this package format while verifying the integrity of the operator.
 
 ## Preconditions
 

@@ -1,6 +1,6 @@
 # How to Initialize KUDO in a Cluster
 
-The objective of this runbook is to initialize a Kubernetes cluster with KUDO.
+The objective of this runbook is to initialize KUDO in a Kubernetes cluster.
 
 ## Preconditions
 
@@ -31,7 +31,7 @@ $ kubectl kudo init
 
 ### Check to see KUDO Manager is running
 
-The installation of KUDO is verified by confirm that the `kudo-controller-manager-0` is in a running status.
+The installation of KUDO is verified by confirming that the `kudo-controller-manager-0` is in a running status.
 
 ```bash
 $ kubectl get -n kudo-system pod

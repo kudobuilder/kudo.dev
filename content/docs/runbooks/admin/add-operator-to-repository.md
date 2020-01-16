@@ -1,6 +1,6 @@
 # How to add an Operator to a Repository
 
-The following is the minimum steps necessary to add an operator to a repository.  This example uses the repository named "community", however you will want to use a repository for which you have admin rights.
+The following are the minimum steps necessary to add an operator to a repository.  This example uses the repository named "community", however you will want to use a repository for which you have admin rights.
 
 ## Preconditions
 
