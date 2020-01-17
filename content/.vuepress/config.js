@@ -54,7 +54,7 @@ module.exports = {
                   ]
               },
               'contributing',
-              'features',
+              'what-is-kudo',
                 {
                     title: 'Developing Operators',
                     children: [
@@ -75,7 +75,6 @@ module.exports = {
                     ]
                 },
               'templates',
-              'faq',
               'repository',
               {
                 title: 'Runbooks',

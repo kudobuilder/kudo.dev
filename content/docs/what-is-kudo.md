@@ -8,7 +8,7 @@ Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach
 
 ## Motivation
 
-Building Kubernetes operators is not easy. While existing tools and libraries like [kubebuilder](https://book.kubebuilder.io/) and [Operator Framework](https://github.com/operator-framework/getting-started) and Kubernetes [control loop](https://kubernetes.io/docs/concepts/#kubernetes-control-plane) help with some aspects, developing an operator is still quite an undertaking. This is where the KUDO approach differs. It utilizes a Universal and Declarative approach (the UD in KUDO), doesn't require any code and significantly accelerates the development of operators. In a nutshell, KUDO does all the "k8s heavy lifting" allowing the developers to concentrate on the task at hand.
+Building Kubernetes operators is not easy. While existing tools and libraries like [kubebuilder](https://book.kubebuilder.io/) and [Operator Framework](https://github.com/operator-framework/getting-started) and Kubernetes [control loop](https://kubernetes.io/docs/concepts/#kubernetes-control-plane) help with some aspects, developing an operator is still quite an undertaking. This is where the KUDO approach differs. It utilizes a Universal and Declarative approach (the UD in KUDO), doesn't require any code and significantly accelerates the development of operators. In a nutshell, KUDO does all the "Kubernetes heavy lifting" allowing the developers to concentrate on the task at hand.
 
 ## When would you use KUDO
 
@@ -22,13 +22,21 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 
 Let's talk about some concepts first. At the top level, there are _Operator Packages_.
 
-An _Operator Package_ is a collection of files that defines a KUDO operator. Think of it like a Helm Chart or Homebrew formula. An operator package can be local (a folder or tarball) or remote (tarball URL). An operator package has all the k8s resources and workflow definitions to run your application.
+::: attribute Operator Package
+An _Operator Package_ is a collection of files that defines a KUDO operator. Think of it like a Helm Chart or Homebrew formula. An operator package can be local (a folder or tarball) or remote (tarball URL). An operator package has all the Kubernetes resources and workflow definitions to run your application.
+:::
 
+::: attribute Repository
 A _Repository_ is a place that holds operator packages. It can be a local folder or a remote URL.
+:::
 
-A _KUDO Manager_ is a set of k8s controllers that understand KUDO operators and know how to execute plans.
+::: attribute KUDO Manager
+A _KUDO Manager_ is a set of Kubernetes controllers that understand KUDO operators and know how to execute plans.
+:::
 
-A _Plan_ is the operator's main workflow unit. A plan specifies a series of steps that will apply or delete k8s resources to the cluster in the defined order.
+::: attribute Plan
+A _Plan_ is the operator's main workflow unit. A plan specifies a series of steps that will apply or delete Kubernetes resources to the cluster in the defined order.
+:::
 
 **In a nutshell**: A user will take an _Operator Package_ from the _Repository_, submit it to the _KUDO Manager_ which will then execute operator _Plans_ either automatically or on-demand.
 
@@ -102,15 +110,23 @@ By default, KUDO reserves three plan names for special purposes:
 
 ## Under the Hood
 
-As mentioned in the [concepts section](what-is-kudo.md#main-concepts) KUDO Manager is a set of k8s controllers deployed into the cluster that handles operators, invokes plans, etc. It utilizes k8s [CRDs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to extend k8s API. The important ones are:
+As mentioned in the [concepts section](what-is-kudo.md#main-concepts) KUDO Manager is a set of Kubernetes controllers deployed into the cluster that handles operators, invokes plans, etc. It utilizes Kubernetes [CRDs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to extend Kubernetes API. The important ones are:
 
-- _Operator_ is a high-level description of an application to be run in a Kubernetes cluster. It contains only metadata about your application but no specific plans or resources. You can have multiple versions of your application ready to be installed in your cluster, all belonging to the same Operator.
+:: attribute Operator
+An _Operator_ CRD contains the high-level description of an application to be run in a Kubernetes cluster. Not to be confused with the overall _Operator_. It contains only metadata about your application but no specific plans or resources. You can have multiple versions of your application ready to be installed in your cluster, all belonging to the same Operator.
+:::
 
-- _OperatorVersion_ is a concrete version of your Application. It contains all the k8s resources used by the operator (deployments, services), plans and parameters. Think about OperatorVersion as a Class, that when instantiated, becomes the running application.
+:: attribute OperatorVersion
+An _OperatorVersion_ is a concrete version of your Application. It contains all the Kubernetes resources used by the operator (deployments, services), plans and parameters. Think about OperatorVersion as a Class, that when instantiated, becomes the running application.
+:::
 
-- _Instance_ is a deployed version of your application. If _OperatorVersion_ is a Class, _Instance_ is a specific object of that Class. It must provide missing parameter values and can override the defaults defined in the _OperatorVersion_. Creating an _Instance_ means in most cases, executing the `deploy` plan which will render and apply k8s resources according to the plan phases and steps.
+::: attribute Instance
+An _Instance_ is a deployed version of your application. If the _OperatorVersion_ is a Class, _Instance_ is a specific object of that Class. It must provide missing parameter values and can override the defaults defined in the _OperatorVersion_. Creating an _Instance_ means in most cases, executing the `deploy` plan which will render and apply Kubernetes resources according to the plan phases and steps.
+:::
 
-Multiple _OperatorVersions_ of the same _Operator_ might exist in the cluster. Think about multiple teams using different Kafka versions depending on their requirements. The separation in _OperatorVersion_ and _Instance_ is useful when the same version of your application is used by different teams in the same cluster. Each team then owns a separate _Instance_ of the _OperatorVersion_ and can configure and scale it separately. Normally, _Operator_ and _OperatorVersion_ are handled by the manager and rarely seen by the user. _Instance_, on the other hand, is present in many CLI commands, e.g. when installing an operator, the user can specify the name of the instance:
+Multiple _OperatorVersions_ of the same _Operator_ might exist in the cluster. Think about multiple teams using different Kafka versions depending on their requirements. The separation in _OperatorVersion_ and _Instance_ is useful when the same version of your application is used by different teams in the same cluster. Each team then owns a separate _Instance_ of the _OperatorVersion_ and can configure and scale it separately.
+
+Normally, _Operator_ and _OperatorVersion_ are handled by the manager and rarely seen by the user. _Instance_, on the other hand, is present in many CLI commands, e.g. when installing an operator, the user can specify the name of the instance:
 
 ```bash
 $ kubectl kudo install kafka --instance dev-kafka
