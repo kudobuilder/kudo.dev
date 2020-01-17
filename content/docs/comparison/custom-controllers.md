@@ -17,11 +17,15 @@ stored data of the operator and changing APIs.
 KUDO allows a an application developer to create an operator with declarative measures. Without custom Go code,
 KUDO operators provide most of the functionality of a custom operator.
 
-\+ Full control over the cluster and deployed resources
-\+ Allows reaction to changes in the cluster, custom resources, validation
-\+ Allows any required behaviour
-\- Requires intimate knowledge of Kubernetes internals
-\- Is an extra software to develop, test and manage
+`+` Full control over the cluster and deployed resources
+
+`+` Allows reaction to changes in the cluster, custom resources, validation
+
+`+` Allows any required behaviour
+
+`-` Requires intimate knowledge of Kubernetes internals
+
+`-` Is an extra software to develop, test and manage
 
 ## [Kubernetes Clients](https://kubernetes.io/docs/reference/using-api/client-libraries/)
 
