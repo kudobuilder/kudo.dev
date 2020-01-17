@@ -1,8 +1,5 @@
-# First Operator
+# Getting Started
 
-This guide will provide introduction to creating KUDO operators, you will learn about the structure of the package and the template language to use.
-
-## Getting Started
 In this section we’ll start by developing your first operator and we’ll follow up with in-depth explanation of the underlying concepts.
 
 A package bundles all files needed to describe an operator. The overall structure of a package looks following:
@@ -17,7 +14,8 @@ A package bundles all files needed to describe an operator. The overall structur
 
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
-### Your First KUDO Operator
+## Your First KUDO Operator
+
 First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
@@ -58,16 +56,16 @@ If all worked fine, you should see 2 pods running
 kubectl get pods
 ```
 
-## Operator.yaml File
+# Operator.yaml File
 
 This is the main piece of every operator. It consists of two main parts. First one defines metadata about your operator.
 Most of these are provided as a form of documentation. `kudoVersion` and `kubernetesVersion` use semver constraints to define minimal or maximal version of Kubernetes or KUDO that this operator supports. Under the hood, we use [this library](https://github.com/Masterminds/semver) to evaluate the constraints.
 
-### Tasks Section
+## Tasks Section
 
 Another part of `operator.yaml` is the tasks section. Tasks are the smallest pieces of work that get executed together. You usually group Kubernetes manifests that should be applied at once into one task. An example can be an app that will result in `deployment.yaml` being applied to your cluster.
 
-### Plans Section
+## Plans Section
 
 Plans orchestrate tasks through `phases` and `steps`.
 
@@ -93,16 +91,16 @@ At the same time, `deploy` plan is the most important plan within your operator 
 
 Plans allow operators to see what the operator is currently doing, and to visualize the broader operation such as for a config rollout. The fixed structure of that information meanwhile makes it straightforward to build UIs and tooling on top.
 
-## Params File
+# Params File
 
 `params.yaml` defines all parameters that can be used to customize your operator installation.
 They are described in more detail in the [document about operator parameters](operator-parameters.html).
 
-## Templates
+# Templates
 
 Everything that is placed into the templates folder is treated as a template and passed on to the KUDO controller for rendering. KUDO uses the [Sprig template library](https://godoc.org/github.com/Masterminds/sprig) for server side templates rendering during installation. Thanks to Sprig you can use tens of different functions inside your templates. Some of them are inherited from [go templates](https://godoc.org/text/template), some of them are defined by [Sprig](https://godoc.org/github.com/Masterminds/sprig) itself. See their documentation for reference.
 
-### Variables Provided by KUDO
+## Variables Provided by KUDO
 
 - `.OperatorName` - name of the operator the template belongs to
 - `.Name` - name of the instance to which Kubernetes objects created from this template will belong to
@@ -142,6 +140,6 @@ spec:
     kudo.dev/instance: {{ .Name }}
 ```
 
-## Testing Your Operator
+# Testing Your Operator
 
 You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](testing.md).
