@@ -42,7 +42,6 @@ module.exports = {
             '/docs/': [
               '',
               'cli',
-              'components',
               {
                   title: "Comparison",
                   children: [
