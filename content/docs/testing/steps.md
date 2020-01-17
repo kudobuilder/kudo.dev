@@ -14,7 +14,7 @@ A test step can include many YAML files and each YAML file can contain many Kube
 
 E.g., in a test case directory:
 
-```
+```text
 tests/e2e/example/00-pod.yaml
 tests/e2e/example/00-example.yaml
 tests/e2e/example/01-staging.yaml

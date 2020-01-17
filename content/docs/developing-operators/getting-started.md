@@ -3,6 +3,7 @@
 In this section we’ll start by developing your first operator and we’ll follow up with in-depth explanation of the underlying concepts.
 
 A package bundles all files needed to describe an operator. The overall structure of a package looks following:
+
 ```bash
 .
 ├── operator.yaml
@@ -15,7 +16,6 @@ A package bundles all files needed to describe an operator. The overall structur
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
 ## Your First KUDO Operator
-
 First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
@@ -81,7 +81,6 @@ Plan foo
    ├─ Step corge
    └─ Step grault
 ```
-
 
 Plans consists of one or more `phases`. `Phases` consists of one or more `steps`. `Steps` contain one or more `tasks` (those are defined in the section we talked about in the last paragraph). Both phases and also steps can be configured with an execution `strategy`, either `serial` or `parallel`.
 

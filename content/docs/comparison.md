@@ -30,7 +30,7 @@ For example, backing up an ElasticSearch index can be provided as part of the ap
 
 ### Custom Process Flows
 
-KUDO allows custom process flows with steps/phases if possible, or by writing a program in ANY language that makes calls/commands to the K8s cluster and run that as a "job".
+KUDO allows custom process flows with steps/phases if possible, or by writing a program in ANY language that makes calls/commands to the Kubernetes cluster and run that as a "job".
 Helm (v2 and v3) is the only other tool in this space that allows custom flows.
 
 ### Kubernetes Custom Resource Definitions
@@ -84,7 +84,7 @@ Consider Helm Charts[^charts], Kustomization[^kustomization], and the Cloud Nati
 ## References
 
 [^CRD]: [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-[^RBAC]: [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) 
+[^RBAC]: [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 [^finalizers]: [Using Finalizers](https://book.kubebuilder.io/reference/using-finalizers.html)
 [^charts]: [Helm Charts](https://github.com/helm/charts)
 [^kustomization]: [kustomize workflows](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/workflows.md)
