@@ -43,3 +43,75 @@ In order to keep previews slim, any headers within the excerpt will be hidden, a
 Posts will be sorted according to their date. In order to find easily tell apart release announcements from other posts, please follow the following naming convention:
 - **Release announcements**: `announcing-kudo-<version>.md`
 - **Other blog posts**: `blog-YYYY-MM-<name>.md`
+
+## Release Posts
+
+A blog post that notifies of a release should follow this format:
+
+- The title should be _Announcing KUDO x.y.z_
+- The first paragraph should summarize the high level additions in this release and must be followed by an html comment line:
+  ```
+  <!-- more -->
+  ```
+  This will use this forst paragraph as an excerpt for rendering the blog posts overview and rss feed summary.
+- The following content should be copied/pasted from the Github release page
+- The blog post should close with a link to the changelog and ideally an overview of the next release.
+
+You can find a template [here](https://raw.githubusercontent.com/kudobuilder/www/master/content/internal-docs/release-post-template.md).
+
+::: warning Link Your Post
+We haven't added a dynamic sidebar yet so each blog post must be manually added to the blog section of the sidebar in [config.js](https://github.com/kudobuilder/www/blob/0a160e629e21593a10e5fa1bb18353ddf1c34d2b/content/.vuepress/config.js#L80-L83).
+:::
+
+## Authors
+
+We want to make contributions more personal, especially for blog posts and probably even for release announcements. In order to render the author of a blog post, please follow a few simple steps:
+
+### Add Author Metadata
+
+Add metadata about the author to [authors.md](https://github.com/kudobuilder/www/blob/master/content/community/assets/authors.md). A simple example would be
+
+```json
+{
+  "alias": "meichstedt",
+  "name": "Matthias",
+  "about": "Matthias is mostly harmless.",
+  "avatar": "meichstedt_200x200.jpg"
+}
+```
+
+The full list of possible properties is as follows:
+
+::: flag alias
+The authors GitHub alias, and the ID for looking up authors in this documentation. If no alias is given, all authors will be rendered.
+:::
+
+::: flag name
+The authors full name (or whatever they want to have displayed).
+:::
+
+::: flag about
+Some information about the author which will be in a _about the author_ section.
+:::
+
+::: flag avatar
+(optional) The filename of the author's image which needs to be provided in [/authors](https://github.com/kudobuilder/www/tree/master/content/.vuepress/public/images/authors)
+:::
+
+::: flag twitter
+(optional) The author's twitter alias.
+:::
+
+### Add An Image
+
+If you want to render an image using the `avatar` property, add it to the [authors](https://github.com/kudobuilder/www/tree/master/content/.vuepress/public/images/authors) folder. Images should ideally be 200x200 pixels.
+
+### Reference The Author
+
+Finally, reference the author using the given `alias` at the and of your blog post like so:
+```yaml
+<Authors alias="meichstedt" />
+```
+You can see how this will render at the end of this page.
+
+<Authors about="meichstedt" />

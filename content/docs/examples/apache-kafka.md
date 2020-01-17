@@ -7,45 +7,47 @@ type: docs
 
 ## Dependencies
 
-Kafka depends on Zookeeper so we need to run it first. Follow the [Zookeeper example](apache-zookeeper.md) to run a basic cluster.
+Apache Kafka depends on ZooKeeper so we need to run it first. Follow the [ZooKeeper example](apache-zookeeper.md) to run a basic cluster.
 
 ## Run Kafka
 
-Create a Kafka cluster
+Install the KUDO Kafka Operator to create a Kafka cluster with the default options:
+
 ```bash
-$ kubectl kudo install kafka --instance=kafka
-operator.kudo.dev/kafka unchanged
-operatorversion.kudo.dev/v1alpha1/kafka-0.2.0 created
-instance.kudo.dev/v1alpha1/kafka created
+$ kubectl kudo install kafka
+operator.kudo.dev/v1beta1/kafka created
+operatorversion.kudo.dev/v1beta1/kafka-1.0.0 created
+instance.kudo.dev/v1beta1/kafka-instance created
 ```
 
 `kubectl kudo install kafka` creates the `Operator`, `OperatorVersion` and `Instance` CRDs of the Kafka package.
-When an instance is created, the default `deploy` plan is executed
+
+When an instance is created, the default `deploy` plan is executed:
 
 ```
-$ kubectl get planexecutions
-NAME                    AGE
-kafka-deploy-91712000   13s
-zk-deploy-392770000     3m
+$ kubectl get instances
+NAME                 AGE
+kafka-instance       24s
+zookeeper-instance   24m
 ```
 
 The stateful set defined in the `OperatorVersion` comes up with 3 pods:
 
 ```bash
-$ kubectl get statefulset kafka-kafka
-NAME          READY   AGE
-kafka-kafka   3/3     56s
+$ kubectl get statefulset kafka-instance-kafka
+NAME                   READY   AGE
+kafka-instance-kafka   3/3     55s
 ```
 
 ```bash
 $ kubectl get pods
-NAME             READY   STATUS    RESTARTS   AGE
-kafka-kafka-0    1/1     Running   0          83s
-kafka-kafka-1    1/1     Running   0          61s
-kafka-kafka-2    1/1     Running   0          34s
-zk-zookeeper-0   1/1     Running   0          6m56s
-zk-zookeeper-1   1/1     Running   0          6m56s
-zk-zookeeper-2   1/1     Running   0          6m56s
+NAME                             READY   STATUS    RESTARTS   AGE
+kafka-instance-kafka-0           1/1     Running   0          7m7s
+kafka-instance-kafka-1           1/1     Running   0          6m22s
+kafka-instance-kafka-2           1/1     Running   0          5m36s
+zookeeper-instance-zookeeper-0   1/1     Running   0          30m
+zookeeper-instance-zookeeper-1   1/1     Running   0          30m
+zookeeper-instance-zookeeper-2   1/1     Running   0          30m
 ```
 
 You can find more details around configuring a Kafka cluster in the [KUDO Kafka documentation](https://github.com/kudobuilder/operators/tree/master/repository/kafka).

@@ -1,0 +1,3 @@
+[submodule "kudo"]
+	path = kudo
+	url = https://github.com/kudobuilder/kudo.git

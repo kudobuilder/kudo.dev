@@ -40,15 +40,17 @@
     },
     computed: {
       events() {
+        var today = new Date();
+        today.setHours(0,0,0,0);
         if (this.subset === 'upcoming') {
           return this.$site.pages
             .filter(x => x.path.startsWith('/community/events/') && x.frontmatter.event)
-            .filter(x => new Date(x.frontmatter.date) >= new Date())
+            .filter(x => new Date(x.frontmatter.date) >= today)
             .sort((a, b) => new Date(a.frontmatter.date) - new Date(b.frontmatter.date));
         } else {
           return this.$site.pages
             .filter(x => x.path.startsWith('/community/events/') && x.frontmatter.event)
-            .filter(x => new Date(x.frontmatter.date) < new Date())
+            .filter(x => new Date(x.frontmatter.date) < today)
             .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
         }
       },
@@ -66,19 +68,17 @@
 
 <style lang="stylus" scoped>
 .event
-    width 90%
     padding-left 4.5rem
     margin 2rem 0
     .location
         color $inlineCodeColor
-        padding .1rem 0rem
+        padding .1rem 0
     .title
         font-weight bold
         font-size 1.0rem
-        padding .1rem 0rem
     .inner
-        margin-block-start 0em;
-        padding .5rem 1rem
+        margin-block-start 0
+        padding .5rem 1rem 0
 
 .date-box
     position absolute

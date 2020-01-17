@@ -44,39 +44,48 @@ module.exports = {
               'architecture',
               'cli',
               'comparison',
-              'concepts',
               'contributing',
-              'controlled-parameter-changes',
-              'developing-operators',
-              {
-                title: 'Examples',
-                children: [
-                  'examples/apache-flink',
-                  'examples/apache-kafka',
-                  'examples/apache-zookeeper',
-                  'examples/backups'
-                ]
-              },
+              'features',
+                {
+                    title: 'Developing Operators',
+                    children: [
+                        'concepts',
+                        'first-operator',
+                        'tasks',
+                        {
+                            title: 'Examples',
+                            children: [
+                                'examples/apache-flink',
+                                'examples/apache-kafka',
+                                'examples/apache-zookeeper'
+                            ]
+                        },
+                    ]
+                },
               'faq',
               'repository',
               {
                 title: 'Testing',
                 children: [
                   'testing',
-                  'testing/asserts',
+                  'testing/asserts-errors',
                   'testing/reference',
                   'testing/steps',
                   'testing/test-environments',
                   'testing/tips'
                 ]
-              },
-              'update-upgrade-plans'
+              }
             ],
             '/blog/': [
               {
                 title: 'Blog',
                 collapsable: false,
                 children: [
+                  'blog-2019-12-06-mesos-to-kudo',
+                  'blog-2019-10-kudo-team',
+                  'blog-2019-10-hacktoberfest',
+                  'announcing-kudo-0.7.2',
+                  'announcing-kudo-0.6.0',
                   'announcing-kudo-0.5.0',
                   'announcing-kudo-0.4.0',
                   'announcing-kudo-0.3.0',
@@ -85,7 +94,8 @@ module.exports = {
               }
             ],
             '/community/': [
-              ''
+              '',
+              'team/'
             ],
             '/internal-docs/': [
               {
@@ -128,6 +138,11 @@ module.exports = {
         ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
+            after: '</div>',
+        }],
+        ['container', {
+            type: 'teaser',
+            before: name => `<div class="teaser custom-block"><p class="custom-block-title">${name}</p>`,
             after: '</div>',
         }],
         [ 'feed', feed_options ]

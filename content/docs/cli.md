@@ -16,7 +16,7 @@ This document demonstrates how to use the CLI but also shows what happens in KUD
 
 ### Installation
 
-You can either install the CLI plugin using `brew`:
+You can either download CLI binaries for linux or MacOS from our [release page](https://github.com/kudobuilder/kudo/releases), or install the CLI plugin using `brew`:
 
 ```bash
 brew tap kudobuilder/tap
@@ -27,6 +27,11 @@ or you can compile and install the plugin from your `$GOPATH/src/github.com/kudo
 
 ```bash
 make cli-install
+```
+
+Another alterntive is `krew` the package manager for kubectl plugins [doc](https://github.com/kubernetes-sigs/krew)
+```bash
+kubectl krew install kudo
 ```
 
 ## Commands
@@ -47,8 +52,12 @@ Initialize KUDO on both the client and server
 Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
 :::
 
-::: flag kubectl kudo package &lt;operator_folder&gt; [flags]
+::: flag kubectl kudo package create &lt;operator_folder&gt; [flags]
 Packages an operator in a folder into a tgz file.
+:::
+
+::: flag kubectl kudo package verify &lt;operator_folder&gt; [flags]
+Verifies an operator providing errors and warnings as an output.  Provides a non-zero exit when errors are present.
 :::
 
 ::: flag kubectl kudo plan status [flags]
@@ -71,6 +80,10 @@ Generates an index file given a directory containing KUDO packages.
 Test KUDO and Operators.
 :::
 
+::: flag kubectl kudo uninstall
+Uninstall operator instances.
+:::
+
 ::: flag kubectl kudo update
 Update installed operator parameters.
 :::
@@ -80,7 +93,7 @@ Upgrade installed operator from one version to another.
 :::
 
 ::: flag kubectl kudo version
-Print the current KUDO package version.
+Print the current KUDO version.
 :::
 
 ## Flags
@@ -136,8 +149,15 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 * `kubectl kudo init --dry-run --output=yaml > kudo-install.yaml` which will not install anything but will output YAML to a file which can be applied manually to the server.
 * `kubectl kudo init --version=0.5.0` which will install the `0.5.0` into the cluster using the image `kudobuilder/controller:v0.5.0`
 * `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
-* `kudoctl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
+* `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
+* `kubectl kudo init --crd-only` will create crds in the cluster.
 
+**Note**: Looking to delete kubernetes objects created via init, run:
+
+* `kubectl kudo init --dry-run -o yaml | kubectl delete -f -` which will delete all kubernetes objects created with init or
+* `kubectl kudo init --dry-run -o yaml --crd-only | kubectl delete -f -` which will only delete the KUDO CRDs.
+
+**Note**: If you want to ensure all components are installed, just init again. It will cycle through all objects and ensure they are created.
 
 ### Install a Package
 
@@ -259,8 +279,7 @@ In this tree chart you see all important information in one screen:
 For comparison, the according `kubectl` commands to retrieve the above information are:
 
 * `kubectl get instances` (to get the matching `OperatorVersion`)
-* `kubectl describe operatorversion upgrade-v1` (to get the current `PlanExecution`)
-* `kubectl describe planexecution up-deploy-493146000` (to get the status of the `Active-Plan`)
+* `kubectl describe operatorversion upgrade-v1`
 
 Here, you can find the overview of all available plans in `Spec.Plans` of the matching `OperatorVersion`:
 
@@ -347,74 +366,11 @@ spec:
 Events:     <none>
 ```
 
-You can then find the status of the currently applied plan when looking at the particular `PlanExecution`:
-
-```bash
-$ kubectl describe planexecution up-deploy-493146000
-  Name:         up-deploy-493146000
-  Namespace:    default
-  Labels:       operator-version=upgrade-v1
-                instance=up
-  Annotations:  <none>
-  API Version:  kudo.dev/v1alpha1
-  Kind:         PlanExecution
-  Metadata:
-    Cluster Name:
-    Creation Timestamp:  2018-12-14T19:26:44Z
-    Generation:          1
-    Owner References:
-      API Version:           kudo.dev/v1alpha1
-      Block Owner Deletion:  true
-      Controller:            true
-      Kind:                  Instance
-      Name:                  up
-      UID:                   3101bbe5-ffd6-11e8-abd5-080027d506c7
-    Resource Version:        63815
-    Self Link:               /apis/kudo.dev/v1alpha1/namespaces/default/planexecutions/up-deploy-493146000
-    UID:                     31037dd0-ffd6-11e8-abd5-080027d506c7
-  Spec:
-    Instance:
-      Kind:       Instance
-      Name:       up
-      Namespace:  default
-    Plan Name:    deploy
-  Status:
-    Name:  deploy
-    Phases:
-      Name:   par
-      State:  COMPLETE
-      Steps:
-        Name:    run-step
-        State:   COMPLETE
-      Strategy:  serial
-    State:       COMPLETE
-    Strategy:    serial
-  Events:        <none>
-```
-
-Finally, the status information for the `Active-Plan` is nested in this part:
-
-```bash
-  Status:
-    Name:  deploy
-    Phases:
-      Name:   par
-      State:  COMPLETE
-      Steps:
-        Name:    run-step
-        State:   COMPLETE
-      Strategy:  serial
-    State:       COMPLETE
-    Strategy:    serial
-```
-
-Apparently, KUDO's tree view makes this information easier to understand and prevents you from putting together the bits and pieces of various commands.
-
 ### Delete an Instance
 
-You can delete an instance (i.e. uninstall it from the cluster) using `kubectl delete instances <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
+You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
-### Get the History to PlanExecutions
+### Get the History of Plan Executions
 
 This is helpful if you want to find out which plan ran on your instance to a particular `OperatorVersion`.
 Run this command to retrieve all plans that ran for the instance `up` and its OperatorVersion `upgrade-v1`:
@@ -439,15 +395,34 @@ This includes the previous history but also all OperatorVersions that have been 
 
 ### Package an Operator
 
-You can use the `package` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
+You can use the `package create` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
 
-`kubectl kudo package zookeeper --destination=target`
+`kubectl kudo package create zookeeper --destination=target`
 
 Example:
 
 ```bash
-$ kubectl kudo package ../operators/repository/zookeeper/operator/ --destination=~
+$ kubectl kudo package create ../operators/repository/zookeeper/operator/ --destination=~
   Package created: /Users/kensipe/zookeeper-0.1.0.tgz
+```
+
+### Validating an Operator
+
+You can use the `package verify` command to check the condition of an operator which returns warnings and errors.  Warnings are conditions such as a parameter is defined in the params.yaml but is not used a template file.  Errors are conditions such as a parameter is used in a template file but is not defined in the params.yaml.  If there are errors the command exits with a non-zero exit code.
+
+Examples:
+
+```bash
+$ kubectl kudo package verify ../operators/repository/zookeeper/operator/
+  package is valid
+```
+
+```bash
+$ kubectl kudo package verify ../operators/repository/kafka/operator/
+Warnings                                                      
+parameter "SSL_ENDPOINT_IDENTIFICATION_ENABLED" defined but not used.
+parameter "CUSTOM_SERVER_PROPERTIES" defined but not used.           
+package is valid
 ```
 
 ### Creating a Repository Index File

@@ -9,55 +9,58 @@ Before you get started using KUDO, you need to have a running Kubernetes cluster
 
 ## Install KUDO CLI
 
-Install the `kubectl kudo` plugin, To do so, please follow the [CLI plugin installation instructions](cli.md) on a Mac it is as simple as:
+Install the `kubectl kudo` plugin. To do so, please follow the [CLI plugin installation instructions](cli.md). On a Mac it is as simple as:
 
-```
+```bash
 $ brew tap kudobuilder/tap
 $ brew install kudo-cli
 ```
+
+The KUDO CLI leverages the kubectl plugin system, which gives you all its functionality under `kubectl kudo`. This is a convenient way to install and deal with your KUDO Operators.
 
 ## Install KUDO into your cluster
 
 Once you have a running cluster with `kubectl` installed along with the KUDO CLI plugin, you can install KUDO like so:
 
+```bash
+$ kubectl kudo init
 ```
-kubectl kudo init
-```
+
+This will create several resources. First, it will create the [Custom Resource Definitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/), [service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/), and [role bindings](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) necessary for KUDO to operate. It will also create an instance of the [KUDO controller](https://kudo.dev/docs/architecture.html#components) so that we can begin creating instances of applications.
 
 If you want to manage the installation by hand the following is also possible:
 
-```
-kubectl kudo init --dry-run -o=yaml > kudo.yaml
-kubectl apply -f kudo.yaml
+```bash
+$ kubectl kudo init --dry-run -o=yaml > kudo.yaml
+$ kubectl apply -f kudo.yaml
 ```
 
 ## Deploy Your First Operator
 
-Follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) to deploy a Kafka cluster along with its dependency Zookeeper.
+To get started, follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) to deploy a Kafka cluster along with its dependency ZooKeeper.
+
+See the KUDO Operator repository at [https://github.com/kudobuilder/operators/](https://github.com/kudobuilder/operators) for more KUDO Operators and documentation.
 
 ## Create Your First Operator
 
-To see the powers of KUDO unleashed in full, you should try [creating your own operator](developing-operators.md).
-```
+To see the powers of KUDO unleashed in full, you should try [creating your own Operator](first-operator.md).
+
 ## Notes on Minikube
 
 If you plan on developing and testing KUDO locally via Minikube, you'll need to launch your cluster with a reasonable amount of memory allocated. By default, Minikube runs with 2GB - we recommend at least 10GB, especially if you're working with applications such as [Kafka](examples/apache-kafka.md). You can start Minikube with some suitable resource adjustments as follows:
 
 ```bash
-minikube start --cpus=4 --memory=10240 --disk-size=40g
+$ minikube start --cpus=4 --memory=10240 --disk-size=40g
 ```
 
 ## Notes on KIND
 
-In order to use KIND with storage operators, it is necessary to modify its Persistent Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
+In order to use KIND with storage Operators, it is necessary to modify its Persistent Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
 
 Here is an example of setting up a new cluster:
 
-```
-# create kind cluster
-kind create cluster
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl delete storageclass standard
-kubectl apply -f https://github.com/kudobuilder/operators/blob/master/test/manifests/local-path-storage.yaml
-kubectl annotate storageclass --overwrite local-path storageclass.kubernetes.io/is-default-class=true
+```bash
+$ kind create cluster
+$ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+$ kubectl apply -f https://raw.githubusercontent.com/kudobuilder/operators/master/test/manifests/local-path-storage.yaml
 ```

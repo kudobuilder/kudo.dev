@@ -21,7 +21,7 @@
     },
     methods: {
       displayDate(value) {
-        return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        return new Date(value).toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' })
       },
       /**
        * @param post the post that is rendered
