@@ -112,11 +112,11 @@ By default, KUDO reserves three plan names for special purposes:
 
 As mentioned in the [concepts section](what-is-kudo.md#main-concepts) KUDO Manager is a set of Kubernetes controllers deployed into the cluster that handles operators, invokes plans, etc. It utilizes Kubernetes [CRDs](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to extend Kubernetes API. The important ones are:
 
-:: attribute Operator
+::: attribute Operator
 An _Operator_ CRD contains the high-level description of an application to be run in a Kubernetes cluster. Not to be confused with the overall _Operator_. It contains only metadata about your application but no specific plans or resources. You can have multiple versions of your application ready to be installed in your cluster, all belonging to the same Operator.
 :::
 
-:: attribute OperatorVersion
+::: attribute OperatorVersion
 An _OperatorVersion_ is a concrete version of your Application. It contains all the Kubernetes resources used by the operator (deployments, services), plans and parameters. Think about OperatorVersion as a Class, that when instantiated, becomes the running application.
 :::
 
