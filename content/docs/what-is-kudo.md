@@ -18,6 +18,8 @@ KUDO is built to help Dev/Ops teams manage day 2 operations of services on Kuber
 - you have a micro-services application where deployment workflow has multiple serial or parallel stages (e.g. generating dynamic configuration or waiting for a migration to finish)
 - you need to automate repetitive tasks around your application life-cycle like chaos and resilience testing
 
+Find out more about how KUDO differs from other tools in the [comparison section](comparison/overview.md).
+
 ## Main Concepts
 
 Let's talk about some concepts first. At the top level, there are _Operator Packages_.
