@@ -60,6 +60,7 @@ module.exports = {
                     children: [
                         'concepts',
                         'first-operator',
+                        'operator-package',
                         'tasks',
                         'plans',
                         'operator-parameters',
