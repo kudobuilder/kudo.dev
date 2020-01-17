@@ -6,7 +6,7 @@ We'd be happy to see you engaged with our community! This page explains you how 
 
 ## Channels
 
-- [Slack](https://kubernetes.slack.com/messages/kudo/) (join k8s slack via [self-invitation link](https://slack.k8s.io/))
+- [Slack](https://kubernetes.slack.com/messages/kudo/) (join Kubernetes slack via [self-invitation link](https://slack.k8s.io/))
 - [Mailing List](https://groups.google.com/d/forum/kudobuilder)
 - [@kudobuilder on Twitter](https://twitter.com/kudobuilder)
 
@@ -46,7 +46,7 @@ Learn more about KUDO by attending a talk or meetup:
 
 ### Past Events
 
-<EventsIndex subset="past"/> 
+<EventsIndex subset="past"/>
 
 ## Code of Conduct
 

@@ -5,8 +5,9 @@ The objective of this runbook is to initialize KUDO in a Kubernetes cluster.
 ## Preconditions
 
 KUDO requires:
-*  kubernetes 1.15+
-*  100m [cpu](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu) and 50Mi [memory](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
+
+* Kubernetes 1.15+
+* 100m [cpu](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu) and 50Mi [memory](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory).
 
 ## Steps
 

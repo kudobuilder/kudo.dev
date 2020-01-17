@@ -59,6 +59,7 @@ If you already have KUDO installed, you can run `kudo init --webhook=InstanceVal
 Be aware that **KUDO admission webhook has a dependency on cert-manager 0.11 or higher**. You have to have the cert-manager installed in your cluster prior to installing the webhook for everything to work. To install, follow the [instructions in the docs](https://cert-manager.io/docs/installation/).
 
 As a part of the installation KUDO will:
+
 - expose an endpoint over HTTPS in KUDO manager for the webhook
 - create ValidatingWebhookConfiguration CR
 - create cert-manager self-signed issuer CR in the namespace used for KUDO installation

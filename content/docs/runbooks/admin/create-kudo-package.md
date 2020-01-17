@@ -17,6 +17,7 @@ rm -rf ~/repo
 mkdir -p ~/repo
 kubectl kudo package create repository/first-operator/operator/ --destination=~/repo
 ```
+
 ::: warning Potential Data Loss
 You may want to check the contents of the `~/repo` folder prior to deleting it.
 :::
