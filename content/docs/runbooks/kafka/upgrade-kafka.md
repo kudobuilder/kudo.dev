@@ -1,27 +1,7 @@
 
 # Upgrade KUDO Kafka 
 
-This runbook explains how to upgrade a running KUDO Kafka to a newer version of KUDO Kafka. 
-
-  * [Preconditions](#Preconditions)
-  * [Steps](#steps)
-    + [Verifying if KUDO Kafka is ready for the upgrade](#verifying-if-kudo-kafka-is-ready-for-the-upgrade)
-      - [1. Get the KUDO Kafka Instance object name](#1-get-the-kudo-kafka-object-name)
-      - [2. Verify the KUDO Kafka instance plans are COMPLETE](#2-verify-the-kudo-kafka-plans-are-complete)
-      - [3. Get the operatorversion  of KUDO Kafka Instance](#3-get-the-operatorversion--of-kudo-kafka)
-      - [4. Get the installed operator versions of KUDO Kafka](#4-get-the-installed-operator-versions-of-kudo-kafka)
-    + [Preparing for the upgrade](#preparing-for-the-upgrade)
-      - [5. Verify the inter.broker.protocol.version is matching the current OperatorVersion](#5-verify-the-interbrokerprotocolversion-is-matching-the-current-operatorversion)
-      - [6. Update the inter.broker.protocol.version to match the current version](#6-update-the-interbrokerprotocolversion-to-match-the-current-version)
-      - [7. Install the new OperatorVersion using --skip-instance](#7-install-the-new-operatorversion-using---skip-instance)
-      - [8. Verify the new OperatorVersion is installed correctly](#8-verify-the-new-operatorversion-is-installed-correctly)
-    + [Upgrade the KUDO Kafka Instance](#upgrade-the-kudo-kafka)
-      - [9. Upgrade the KUDO Kafka Instance](#9-upgrade-the-kudo-kafka)
-      - [10. Verify the Kafka version through the pod logs](#10-verify-the-kafka-version-through-the-pod-logs)
-      - [11. Verify the Kafka version through the container version](#11-verify-the-kafka-version-through-the-container-version)
-      - [12. Verify the Kafka version through the app version of the installed KUDO Instance](#12-verify-the-kafka-version-through-the-app-version-of-the-installed-kudo-instance)
-      - [13. (Optional) Bump the `inter.broker.protocol.version` to upgraded version](#13--optional--bump-the--interbrokerprotocolversion--to-upgraded-version)
-  * [Future improvements](#future-improvements)
+This runbook explains how to upgrade a running KUDO Kafka to a newer version of KUDO Kafka.
 
 ## Preconditions
 
@@ -37,9 +17,7 @@ This runbook explains how to upgrade a running KUDO Kafka to a newer version of 
 
 Verify the KUDO Kafka instance object is present in the expected namespace
 
-```bash
-kubectl get instances -n kudo-kafka
-```
+`kubectl get instances -n kudo-kafka`
 
 expected output are the KUDO Instance objects present in the namespace `kudo-kafka`:
 
@@ -51,9 +29,7 @@ zk      130m
 
 #### 2. Verify the KUDO Kafka instance plans are COMPLETE 
 
-```bash
-kubectl kudo plan status --instance=kafka -n kudo-kafka
-```
+`kubectl kudo plan status --instance=kafka -n kudo-kafka`
 
 expected output is the plan status for instance `kafka`:
 
@@ -76,9 +52,7 @@ Plan(s) for "kafka" in namespace "kudo-kafka":
 
 
  From step 1 we know the name of KUDO Kafka instance is `kafka`. We can get the Operator Version of the KUDO Kafka Instance.
-```bash
-kubectl get instance kafka -n kudo-kafka -o json | jq -r '.spec.operatorVersion.name'
-```
+`kubectl get instance kafka -n kudo-kafka -o json | jq -r '.spec.operatorVersion.name'`
 
 expected output is the operator version
 ```bash
@@ -87,9 +61,7 @@ kafka-1.1.0
 
 #### 4. Get the installed operator versions of KUDO Kafka
 
-```
-kubectl get operatorversions -n kudo-kafka
-```
+`kubectl get operatorversions -n kudo-kafka`
 
 expected output is the list the operator versions installed in the namespace `kudo-kafka`
 
@@ -105,9 +77,8 @@ zookeeper-0.2.0   3h23m
 
 Get the `inter.broker.protocol.version` version in the instance.
 
-```
-kubectl exec -ti kafka-kafka-2 -n kudo-kafka -c k8skafka -- cat /opt/kafka/server.properties  | grep inter.broker.protocol.version
-```
+`kubectl exec -ti kafka-kafka-2 -n kudo-kafka -c k8skafka -- cat /opt/kafka/server.properties  | grep inter.broker.protocol.version`
+
 expected output is the `inter.broker.protocol.version`
 ```
 inter.broker.protocol.version=2.1
@@ -115,9 +86,7 @@ inter.broker.protocol.version=2.1
 
 The `inter.broker.protocol.version` should match with the app minor version
 
-```
-kubectl get operatorversion -n kudo-kafka kafka-1.1.0 -o json | jq -r '.spec.appVersion'
-```
+`kubectl get operatorversion -n kudo-kafka kafka-1.1.0 -o json | jq -r '.spec.appVersion'`
 in this case the expected output is the Kafka version
 
 ```
@@ -130,9 +99,7 @@ If `inter.broker.protocol.version` already matches the app version, skip to step
 #### 6. Update the inter.broker.protocol.version to match the current version
 
 
-```bash
-kubectl kudo update -n kudo-kafka --instance=kafka -p INTER_BROKER_PROTOCOL_VERSION=2.3
-```
+`kubectl kudo update -n kudo-kafka --instance=kafka -p INTER_BROKER_PROTOCOL_VERSION=2.3`
 
 expected output is confirmation that instance has been updated.
 ```
@@ -145,9 +112,7 @@ Repeat the step 5 to confirm that now the `inter.broker.protocol.version` is mat
 
 Install the OperatorVersion to what we are upgrading using the `skip-instance` flag. If the new OperatorVersion is already installed you can skip to the step 7.
 
-```
-kubectl kudo install kafka -n kudo-kafka --operator-version=1.2.0 --skip-instance
-```
+`kubectl kudo install kafka -n kudo-kafka --operator-version=1.2.0 --skip-instance`
 
 expected output is the CRDs installed for the OperatorVersion
 
@@ -158,9 +123,7 @@ operatorversion.kudo.dev/v1beta1/kafka-1.2.0 created
 
 #### 8. Verify the new OperatorVersion is installed correctly
 
-```
-kubectl get operatorversions -n kudo-kafka
-```
+`kubectl get operatorversions -n kudo-kafka`
 
 expected output is the list the operator versions installed in the namespace `kudo-kafka`
 
@@ -174,9 +137,7 @@ zookeeper-0.2.0   4h34m
 
 #### 9. Upgrade the KUDO Kafka Instance
 
-```
-kubectl kudo upgrade kafka --instance=kafka --operator-version=1.2.0 -n kudo-kafka
-```
+`kubectl kudo upgrade kafka --instance=kafka --operator-version=1.2.0 -n kudo-kafka`
 
 expected output is the confirmation that instance kafka has been updated
 
@@ -186,9 +147,7 @@ instance./kafka updated
 
 check the plan status
 
-```
-kubectl kudo plan status --instance=kafka -n kudo-kafka
-```
+`kubectl kudo plan status --instance=kafka -n kudo-kafka`
 
 expected output should show `deploy` in progress and the `Operator-Version` to be `kafka-1.2.0`
 
@@ -208,9 +167,7 @@ Plan(s) for "kafka" in namespace "kudo-kafka":
 ```
 
 Once the pods are ready, which can be checked using next command
-```
-kubectl get pods -n kudo-kafka
-```
+`kubectl get pods -n kudo-kafka`
 the expected output is the list of the pods
 
 ```
@@ -221,9 +178,7 @@ kafka-kafka-2           2/2     Running   0          5m21s
 ```
 
 Once the are passing the both readiness and liveness checks the plan should be complete
-```
-kubectl kudo plan status --instance=kafka -n kudo-kafka
-```
+`kubectl kudo plan status --instance=kafka -n kudo-kafka`
 
 expected output should show the `deploy` plan complete and the `Operator-Version` to be `kafka-1.2.0`
 
@@ -243,9 +198,7 @@ Plan(s) for "kafka" in namespace "kudo-kafka":
 ```
 
 #### 10. Verify the Kafka version through the pod logs
-```
-kubectl logs kafka-kafka-0 -c k8skafka -n kudo-kafka | grep "Kafka version:"
-```
+`kubectl logs kafka-kafka-0 -c k8skafka -n kudo-kafka | grep "Kafka version:"`
 
 The expected output is the Kafka version and that should be the upgraded version `2.4.0`
 
@@ -255,9 +208,7 @@ The expected output is the Kafka version and that should be the upgraded version
 
 #### 11. Verify the Kafka version through the container version
 
-```
-kubectl get pods kafka-kafka-0 -n kudo-kafka -o json | jq -r '.spec.containers[].image'
-```
+`kubectl get pods kafka-kafka-0 -n kudo-kafka -o json | jq -r '.spec.containers[].image'`
 
 The expected output will show the container images used by the KUDO Kafka pods. The `mesosphere/kafka` image should be the upgraded version `1.1.0-2.4.0`
 
@@ -268,9 +219,7 @@ mesosphere/kafka:1.1.0-2.4.0
 
 #### 12. Verify the Kafka version through the app version of the installed KUDO Instance
 
-```
-kubectl get instances.kudo.dev kafka -n kudo-kafka -o json | jq -r .spec.operatorVersion.name | xargs kubectl get operatorversion -n kudo-kafka -o json | jq -r .spec.appVersion
-```
+`kubectl get instances.kudo.dev kafka -n kudo-kafka -o json | jq -r .spec.operatorVersion.name | xargs kubectl get operatorversion -n kudo-kafka -o json | jq -r .spec.appVersion`
 
 The expected output should be the app version specified in the operator version of the instance
 
@@ -280,9 +229,7 @@ The expected output should be the app version specified in the operator version 
 
 #### 13. (Optional) Bump the `inter.broker.protocol.version` to upgraded version
 
-```
-kubectl kudo update --instance=kafka -n kudo-kafka -p INTER_BROKER_PROTOCOL_VERSION=2.4
-```
+`kubectl kudo update --instance=kafka -n kudo-kafka -p INTER_BROKER_PROTOCOL_VERSION=2.4`
 
 ## Future improvements
 

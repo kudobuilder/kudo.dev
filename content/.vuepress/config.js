@@ -89,6 +89,12 @@ module.exports = {
                       'runbooks/admin/local-repo',
                       'runbooks/admin/remove-kudo'
                     ]
+                  },
+                  {
+                    title: 'Kafka',
+                    children: [
+                      'runbooks/kafka/upgrade-kafka'
+                    ]
                   }
                 ]
               },
