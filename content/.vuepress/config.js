@@ -129,6 +129,11 @@ module.exports = {
     },
     plugins: [
         ['container', {
+            type: 'flex-box',
+            before: grow => `<div class="flex-box" style="flex-grow: ${grow}">`,
+            after: '</div>',
+        }],
+        ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
             after: '</div>',

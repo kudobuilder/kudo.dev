@@ -16,14 +16,14 @@ footer: Written in Go, maintained by good people.
 
 ---
 
-<SpecialHeader text="What is KUDO" />
+## What is KUDO
 
 * KUDO is a toolkit that makes it easy to build Operators, in most cases just using YAML
 * KUDO provides a set of pre-built Operators, that you can just use out of the box or easily customise
 * KUDO lets you standardise the way you run Operators
 
 
-<SpecialHeader text="What are Operators" />
+## What are Operators
 
 A stateless web application doesn’t usually need any complex configuration, or actions we need to run during operation. They are either on or off. Although we might have more than one instance running, they aren't coupled together.
 
@@ -35,26 +35,30 @@ The [Operator pattern](https://https://kubernetes.io/docs/concepts/extend-kubern
 
 Operators let you perform application tasks like taking backups, rebalancing data, scaling, or changing configuration. Any tasks you might want to do during operation of an application can be automated using an Operator.
 
-<SpecialHeader text="KUDO is for you if..." />
+## KUDO is for you if...
 
 * You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals
 * You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go
 * You run a Kubernetes cluster with many different Operators, and are looking for a way to standardise how you manage your Operators
 
-> Left-justified half-width box
+<div class="flex-container">
 
-<SpecialHeader text="Get KUDO" />
+::: flex-box
+<h3> Get KUDO</h3>
 
 Link to KUDO installation guide
+:::
 
-> Right-justified half-width box 
-
-<SpecialHeader text="Get KUDO Operators" />
+::: flex-box
+<h3>Get KUDO Operators</h3>
 
 Link to Operators repo - logos for popular feature-complete Operators like Kafka, Cassandra etc.
 Link to runbooks for different applications / operators
+:::
 
-<SpecialHeader text="Join the KUDO Community" />
+</div>
+
+## Join the KUDO Community
 
 [Get started](docs/README.md) with KUDO today, join the [community](community/README.md), and
 build your next operator with KUDO!
