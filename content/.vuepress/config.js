@@ -53,7 +53,7 @@ module.exports = {
                       "comparison/custom-controllers"
                   ]
               },
-              'concepts',
+              'what-is-kudo',
               {
                   title: 'Developing Operators',
                   children: [
