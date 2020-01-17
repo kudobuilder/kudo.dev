@@ -1,8 +1,5 @@
-# First Operator
+# Getting Started
 
-This guide will provide introduction to creating KUDO operators, you will learn about the structure of the package and the template language to use.
-
-## Getting Started
 In this section we’ll start by developing your first operator and we’ll follow up with in-depth explanation of the underlying concepts.
 
 A package bundles all files needed to describe an operator. The overall structure of a package looks following:
@@ -17,7 +14,8 @@ A package bundles all files needed to describe an operator. The overall structur
 
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
-### Your First KUDO Operator
+## Your First KUDO Operator
+
 First let’s create `first-operator` folder and place an `operator.yaml` in it.
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
