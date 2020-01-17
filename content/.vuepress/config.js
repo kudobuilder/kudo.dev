@@ -41,8 +41,8 @@ module.exports = {
         sidebar: {
             '/docs/': [
               '',
-              'components',
               'cli',
+              'components',
               {
                   title: "Comparison",
                   children: [
@@ -53,29 +53,26 @@ module.exports = {
                       "comparison/custom-controllers"
                   ]
               },
-              'contributing',
-              'features',
-                {
-                    title: 'Developing Operators',
-                    children: [
-                        'concepts',
-                        'first-operator',
-                        'operator-package',
-                        'tasks',
-                        'plans',
-                        'operator-parameters',
-                        {
-                            title: 'Examples',
-                            children: [
-                                'examples/apache-flink',
-                                'examples/apache-kafka',
-                                'examples/apache-zookeeper'
-                            ]
-                        },
-                    ]
-                },
-              'templates',
-              'faq',
+              'concepts',
+              {
+                  title: 'Developing Operators',
+                  children: [
+                      'developing-operators/getting-started',
+                      'developing-operators/packages',
+                      'developing-operators/tasks',
+                      'developing-operators/plans',
+                      'developing-operators/parameters',
+                      'developing-operators/templates',
+                      {
+                          title: 'Examples',
+                          children: [
+                              'examples/apache-flink',
+                              'examples/apache-kafka',
+                              'examples/apache-zookeeper'
+                          ]
+                      },
+                  ]
+              },
               'repository',
               {
                 title: 'Runbooks',
@@ -91,6 +88,12 @@ module.exports = {
                       'runbooks/admin/local-repo',
                       'runbooks/admin/remove-kudo'
                     ]
+                  },
+                  {
+                    title: 'Kafka',
+                    children: [
+                      'runbooks/kafka/upgrade-kafka'
+                    ]
                   }
                 ]
               },
@@ -104,7 +107,8 @@ module.exports = {
                   'testing/test-environments',
                   'testing/tips'
                 ]
-              }
+              },
+              'contributing'
             ],
             '/blog/': [
               {
