@@ -72,7 +72,6 @@ module.exports = {
                       },
                   ]
               },
-              'repository',
               {
                 title: 'Runbooks',
                 children: [
