@@ -12,7 +12,6 @@ A cluster with a running instance of KUDO
 
 `kubectl logs -n kudo-system kudo-controller-manager-0`
 
-
 ```bash
 2020/01/14 13:59:24 PlanExecution: 'everything' step(s) (instance: default/first-operator-instance) of the deploy.main are not ready
 2020/01/14 13:59:24 InstanceController: Received Reconcile request for instance "first-operator-instance"
