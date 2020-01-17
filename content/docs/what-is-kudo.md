@@ -83,7 +83,7 @@ After the successful deployment, the `bootstrap` node is removed. Each step has 
 
 ## Operator Parameters
 
-Operators can be customized using proved parameters. Where KUDO differs from a lot fo similar tools: _operator parameters are tied to plans, so that when a parameter changes a plan would be automatically triggered._ Here are two typical parameters for the number of nodes and memory that each node container is using:
+Operators can be customized using provided parameters. Where KUDO differs from a lot of similar tools: _operator parameters are tied to plans, so that when a parameter changes a plan would be automatically triggered._ Here are two typical parameters for the number of nodes and memory that each node container is using:
 
 ```yaml
 parameters:
