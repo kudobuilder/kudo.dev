@@ -61,6 +61,7 @@ module.exports = {
                         'concepts',
                         'first-operator',
                         'tasks',
+                        'plans',
                         'operator-parameters',
                         {
                             title: 'Examples',
