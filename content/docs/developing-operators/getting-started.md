@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-It's time to create your first operator. But before you proceed make sure you're up-to-date on all the important KUDO concepts:
+It's time to create your first operator. But before you proceed, make sure you're up-to-date on all the important KUDO concepts:
 
 * [Operator packages](developing-operators/packages.md)
 * [Plans](developing-operators/plans.md)
@@ -12,7 +12,7 @@ It's time to create your first operator. But before you proceed make sure you're
 
 ## Package Structure
 
-Out first operator will deploy nginx to the cluster. If you're thinkg that one doesn't need a KUDO operator to do this, you're absolutely right. It hardly showcases KUDOs stong sides but this is a `hello-world` type of operator and we have to start somewhere.
+Our first operator will deploy Nginx to the cluster. If you're thinking that one doesn't need a KUDO operator to do this, you're absolutely right. It hardly showcases KUDOs strong sides but this is a `hello-world` type of operator and we have to start somewhere.
 
 Create a new folder `./first-operator` that will contain the operator (also known as a local package bundle). The overall structure of a package looks following:
 
@@ -42,7 +42,7 @@ This is a pretty normal Kubernetes YAML file defining a deployment. However, you
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/params.yaml
 
-Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance` as described in [What is KUDO](TODO).
+Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance`, as described in, [What is KUDO](what-is-kudo.md).
 
 In order to see what's happen in your cluster you can run the following command:
 
