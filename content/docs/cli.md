@@ -131,7 +131,7 @@ The namespace used for the operator installation. (default: "default")
 :::
 
 ::: flag --operator-version (string)
-A specific operator version int the official GitHub repo. (default to the most recent)
+A specific operator version in the official GitHub repo. (default to the most recent)
 :::
 
 ::: flag -p, --parameter (stringArray)
@@ -151,7 +151,7 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 
 * `kubectl kudo init --wait --wait-timeout 600` which will install CRDS, install KUDO and will wait up to 600 seconds for KUDO to be responsive.
 * `kubectl kudo init --dry-run --output=yaml > kudo-install.yaml` which will not install anything but will output YAML to a file which can be applied manually to the server.
-* `kubectl kudo init --version=0.10.0` which will install the `0.10.0` into the cluster using the image `kudobuilder/controller:v0.5.0`
+* `kubectl kudo init --version=0.10.0` which will install the `0.10.0` version in the cluster using the `kudobuilder/controller:v0.10.0` image
 * `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
 * `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
 * `kubectl kudo init --crd-only` will create crds in the cluster.
