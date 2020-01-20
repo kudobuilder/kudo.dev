@@ -1,22 +1,34 @@
 # Getting Started
 
-In this section we’ll start by developing your first operator and we’ll follow up with in-depth explanation of the underlying concepts.
+## Prerequisites
 
-A package bundles all files needed to describe an operator. The overall structure of a package looks following:
+It's time to create your first operator. But before you proceed make sure you're up-to-date on all the important KUDO concepts:
+
+* [Operator packages](developing-operators/packages.md)
+* [Plans](developing-operators/plans.md)
+* [Tasks](developing-operators/tasks.md)
+* [Parameters](developing-operators/parameters.md)
+* [Templates](developing-operators/templates.md)
+
+## Package Structure
+
+Out first operator will deploy nginx to the cluster. If you're thinkg that one doesn't need a KUDO operator to do this, you're absolutely right. It hardly showcases KUDOs stong sides but this is a `hello-world` type of operator and we have to start somewhere.
+
+Create a new folder `./first-operator` that will contain the operator (also known as a local package bundle). The overall structure of a package looks following:
+
 ```bash
 .
 ├── operator.yaml
 ├── params.yaml
 └── templates
-    ├── deployment.yaml
-    └── ...
+    └── deployment.yaml
 ```
 
 The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
-## Your First KUDO Operator
+## Operator Substance
 
-First let’s create `first-operator` folder and place an `operator.yaml` in it.
+First let’s create an `operator.yaml` file in the `./first-operator`.
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/operator.yaml
 
@@ -47,16 +59,6 @@ If all worked fine, you should see 2 pods running
 ```bash
 kubectl get pods
 ```
-
-## Further documentation
-
-Details for the concepts introduced here can be found in the following pages:
-
-* [Operator packages](developing-operators/packages.md)
-* [Plans](developing-operators/plans.md)
-* [Tasks](developing-operators/tasks.md)
-* [Parameters](developing-operators/parameters.md)
-* [Templates](developing-operators/templates.md)
 
 ## Testing Your Operator
 
