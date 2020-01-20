@@ -108,7 +108,7 @@ By default, KUDO reserves three plan names for special purposes:
 
 - `deploy` (**required**) as mentioned above this plan deploys the application to the cluster. This is also the default plan which is used when a parameter value changes and does not have a _trigger_.
 - `upgrade` plan is used to upgrade an operator to a new version. If _upgrade_ is not defined, _deploy_ is used.
-- `cleanup` plan, when exists, is triggered when an operator is removed. This gives an operator a chance to have a graceful shutdown and cleanup resources. Read more about cleanup plans in our [documentaton](developing-operators/plans.md#cleanup-plans).
+- `cleanup` plan, when exists, is triggered when an operator is removed. This gives an operator a chance to have a graceful shutdown and cleanup resources. Read more about [cleanup plans](developing-operators/plans.md#cleanup-plans).
 
 ## Under the Hood
 
