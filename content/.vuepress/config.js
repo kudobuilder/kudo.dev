@@ -91,7 +91,8 @@ module.exports = {
                   {
                     title: 'Kafka',
                     children: [
-                      'runbooks/kafka/upgrade-kafka'
+                      'runbooks/kafka/upgrade-kafka',
+                      'runbooks/kafka/external-kafka'
                     ]
                   }
                 ]
