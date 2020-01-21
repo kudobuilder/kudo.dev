@@ -29,9 +29,8 @@ This documentation uses a few custom components which are meant to help writing 
 
 - There is no need to create _table of content_ (TOC) manually. VuePress supports adding a TOC by simply adding a `[[toc]]` at the according position. The `[[toc]]` will render h2 and h3 headers. **Note:** if you want to accompany the TOC with a header _Table of Contents_, then you need to format this header with plain html `<h2>Your Header</h2>` on order to not have it listed in the TOC.
 
-Some code snippets are included from KUDO that is included as a [Git submodule](https://git-scm.com/docs/git-submodule). When updating the docs for a new KUDO release, the submodule has to be updated as well. This is done by running
+Some code snippets are included from KUDO that is included as a [Git submodule](https://git-scm.com/docs/git-submodule). When updating the docs for a new KUDO release, the submodule has to be updated as well. This is done by updating the KUDO version in `scripts/bump-kudo.sh`, running
 ```
-cd kudo
-git checkout %tag-of-release%
+./scripts/bump-kudo.sh
 ```
 and committing this to `kudo.dev`.
