@@ -197,7 +197,7 @@ This will install new instance of Kafka Operator which maps to Kafka app version
 kubectl kudo install kafka --operator-version=1.2.0
 ```
 
-This will install new instance ofq Kafka Operator which maps to Kafka operator version 1.2.0
+This will install new instance of Kafka Operator which maps to Kafka operator version 1.2.0
 
 ### Install a Package Overriding Instance Name and Parameters
 
