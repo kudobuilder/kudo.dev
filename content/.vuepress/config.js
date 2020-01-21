@@ -42,7 +42,6 @@ module.exports = {
             '/docs/': [
               '',
               'cli',
-              'components',
               {
                   title: "Comparison",
                   children: [
@@ -53,7 +52,7 @@ module.exports = {
                       "comparison/custom-controllers"
                   ]
               },
-              'concepts',
+              'what-is-kudo',
               {
                   title: 'Developing Operators',
                   children: [
@@ -87,6 +86,12 @@ module.exports = {
                       'runbooks/admin/add-operator-to-repository',
                       'runbooks/admin/local-repo',
                       'runbooks/admin/remove-kudo'
+                    ]
+                  },
+                  {
+                    title: 'Kafka',
+                    children: [
+                      'runbooks/kafka/upgrade-kafka'
                     ]
                   }
                 ]

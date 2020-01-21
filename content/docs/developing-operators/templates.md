@@ -16,11 +16,11 @@ Access instance parameters defined in `params.yaml`. E.g., to get the value of a
 :::
 
 ::: flag .OperatorName
-Gets the name of the operator (TODO: link to Operator)
+Gets the name of the [operator](../what-is-kudo.md#main-concepts)
 :::
 
 ::: flag .Name
-Gets the name of the current instance (TODO: link to Instance)
+Gets the name of the current [instance](../what-is-kudo.md#main-concepts)
 :::
 
 ::: flag .Namespace
@@ -28,19 +28,19 @@ Gets the name of the instance's namespace
 :::
 
 ::: flag .Pipes
-Gets pipeline parameters (TODO: Link to pipelines)
+Gets pipeline [parameters](tasks.md#pipe-task)
 :::
 
 ::: flag .PlanName
-Gets the name of the instance's active plan (TODO: link to plan)
+Gets the name of the instance's active [plan](plans.md)
 :::
 
 ::: flag .PhaseName
-Gets the name of the instance's active phase (TODO: link to phase)
+Gets the name of the instance's active [phase](plans.md)
 :::
 
 ::: flag .StepName
-Gets the name of the instance's active step (TODO: link to step)
+Gets the name of the instance's active [step](plans.md)
 :::
 
 ::: flag .AppVersion

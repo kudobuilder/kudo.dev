@@ -2,7 +2,7 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](first-operator.md#your-first-kudo-operator). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, and `Pipe`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](first-operator.md#operatoryaml-file) and must have three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, and `Pipe`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
 
 ```yaml
 tasks:
@@ -15,7 +15,7 @@ Let's take a look at an individual task type in detail.
 
 ## Apply-Task
 
-An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of k8s resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](first-operator.md#your-first-kudo-operator):
+An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of Kubernetes resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](getting-started.md):
 
 ```yaml
 tasks:
@@ -45,11 +45,11 @@ tasks:
         - deployment.yaml
 ```
 
-**Note:** deleting non-existing resources is always successful. As of version 0.9.0, KUDO will not wait for the resource to be actually removed and will finish the task when the API server accepts the deletion request. So in case of Pods, k8s imposes a default graceful termination period of 30 seconds, however, a delete-task will be done before that. KUDO 0.9.0 will not wait for [resource finalizers](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) should they exist.
+**Note:** deleting non-existing resources is always successful. As of version 0.9.0, KUDO will not wait for the resource to be actually removed and will finish the task when the API server accepts the deletion request. So in case of Pods, Kubernetes imposes a default graceful termination period of 30 seconds, however, a delete-task will be done before that. KUDO 0.9.0 will not wait for [resource finalizers](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) should they exist.
 
 ## Pipe-Task
 
-Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](first-operator.md#your-first-kudo-operator) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
+Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](getting-started.md) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
 
 ```yaml
 tasks:
@@ -88,7 +88,7 @@ spec:
           mountPath: /tmp
 ```
 
-Here we use an online [cowsay-generator](http://cowsay.morecode.org) API to generate and download an `index.html` file and save in the mounted volume under `/tmp/index.html` path.  
+Here we use an online [cowsay-generator](http://cowsay.morecode.org) API to generate and download an `index.html` file and save in the mounted volume under `/tmp/index.html` path.
 
 Given the above pipe-pod and `genwww` task specification, KUDO will run the pipe-pod, wait for the successful generation of the `index.html`, copy it out and save it as a ConfigMap. Now, this file is ready to be used in our Nginx deployment spec. Let's extend the `templates/deployment.yaml` to mount the generated file:
 
@@ -144,7 +144,7 @@ Once our Nginx server is up and running we should be able to read a pearl of cow
              (__)\       )\/\
                  ||----w |
                  ||     ||
-```  
+```
 
 **Note:**
 
@@ -171,7 +171,7 @@ tasks:
 
 Such a task is useful as a breakpoint in an operator workflow, allowing the operator developer to pause or fail an execution in an arbitrary step.
 
-**Note:** 
+**Note:**
 
 - A `wantErr` will take precedence over `done`
 - If a fatal error is wanted, both `wantErr` and `fatal` should be set to true

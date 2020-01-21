@@ -33,9 +33,9 @@ python -m http.server 80
 
 ```bash
 $ kubectl kudo repo list
-NAME     	URL                                                  
+NAME     	URL
 community	https://kudo-repository.storage.googleapis.com/0.10.0
-*local   	http://localhost     
+*local   	http://localhost
 ```
 
 ::: tip Note
@@ -44,7 +44,7 @@ The `*` next to local indicates that it is the default context for the KUDO clie
 
 ### Verify you are using the local repository for an installation
 
-Using the verbose CLI output flag (`-v`) with KUDO it is possible to trace from where an operator is being installed from.  
+Using the verbose CLI output flag (`-v`) with KUDO it is possible to trace from where an operator is being installed from.
 
 `kubectl kudo install first-operator -v 9`
 

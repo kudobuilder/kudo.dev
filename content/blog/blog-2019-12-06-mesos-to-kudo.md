@@ -49,7 +49,7 @@ Resources:
 
 This will just take time but it is incredibly useful to start with [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).
 
-It is useful to understand creating objects from the CLI and from files. It is important to understand that K8s works with YAML, JSON and protobuf. It uses and stores objects in protobuf internally and can output in a number of formats which include YAML or JSON. Try:
+It is useful to understand creating objects from the CLI and from files. It is important to understand that Kubernetes works with YAML, JSON and protobuf. It uses and stores objects in protobuf internally and can output in a number of formats which include YAML or JSON. Try:
 
 ```
 kubectl create deployment nginx --image=nginx

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Plans capture the individual steps of operational tasks. A plan organizes these tasks into `phases` and `steps`. Each step references the tasks (TODO: link to tasks) to run for this step. By organizing steps into phases, complex behavior of services can be captured.
+Plans capture the individual steps of operational tasks. A plan organizes these tasks into `phases` and `steps`. Each step references the [tasks](tasks.md) to run for this step. By organizing steps into phases, complex behavior of services can be captured.
 
 Plans and phases have a `strategy`. The `strategy` indicated if `phases` and `steps` should run in parallel or in serial.
 
@@ -84,7 +84,7 @@ plans:
 
 ## Cleanup plans
 
-If an optional `cleanup` plan is part of an operator, this plan will run as part of the deletion of an `Instance` (TODO: link to Instance). Once this plan completes or fails, the instance will be deleted.
+If an optional `cleanup` plan is part of an operator, this plan will run as part of the deletion of an [Instance](../what-is-kudo.md#main-concepts). Once this plan completes or fails, the instance will be deleted.
 Operator developers should take care that there aren't any triggers defined for this plan. Furthermore it should be expected that the steps of this plan could fail. E.g., users may want to delete an instance because its `deploy` plan is stuck. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. The `cleanup` plan will start even if other plans are in progress.
 
 ```yaml
@@ -126,7 +126,7 @@ The `cleanup` plan is implemented using [finalizers](https://kubernetes.io/docs/
 
 ## Parameter triggers
 
-Parameters (TODO: link to parameters) can have optional triggers. A trigger references a plan that will run if the parameter is updated.
+[Parameters](parameters.md) can have optional triggers. A trigger references a plan that will run if the parameter is updated.
 
 The operations required to update a running application can vary depending on which parameter is
 being updated. For instance updating the `BROKER_COUNT`, may require a simple update of the deployment, whereas
