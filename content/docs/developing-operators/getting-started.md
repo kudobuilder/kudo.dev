@@ -5,10 +5,10 @@
 It's time to create your first operator. But before you proceed, make sure you're up-to-date on all the important KUDO concepts:
 
 * [Operator packages](packages.md)
-* [Plans](developing-operators/plans.md)
-* [Tasks](developing-operators/tasks.md)
-* [Parameters](developing-operators/parameters.md)
-* [Templates](developing-operators/templates.md)
+* [Plans](plans.md)
+* [Tasks](tasks.md)
+* [Parameters](parameters.md)
+* [Templates](templates.md)
 
 ## Package Structure
 
@@ -42,7 +42,7 @@ This is a pretty normal Kubernetes YAML file defining a deployment. However, you
 
 <<< @/kudo/test/integration/first-operator-test/first-operator/params.yaml
 
-Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance`, as described in, [What is KUDO](../what-is-kudo.md).
+Now your first operator is ready and you can install it to your cluster. You can do this by invoking `kubectl kudo install ./first-operator` where `./first-operator` is a relative path to the folder containing your operator. To do this, you need to have the KUDO CLI installed - [follow the instructions here](../cli.md), if you haven't already. Various resources will be installed for your operator, among them `Operator`, `OperatorVersion` and `Instance`, as described in, [What is KUDO](../what-is-kudo.md).
 
 In order to see what's happen in your cluster you can run the following command:
 
@@ -62,4 +62,4 @@ kubectl get pods
 
 ## Testing Your Operator
 
-You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](testing.md).
+You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](../testing.md).
