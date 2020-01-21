@@ -84,7 +84,7 @@ This flag may be specified many times to change more parameters in a single run.
 
 ## Triggers
 
-Operator developer may specify the name of the [plan](concepts.html#plan) which should be triggered
+Operator developer may specify the name of the [plan](plans.md) which should be triggered
 when the value of this parameter is changed in an update.
 
 In other words, this plan will apply the parameter change to your Kubernetes application.
