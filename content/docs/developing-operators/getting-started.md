@@ -63,3 +63,7 @@ kubectl get pods
 ## Testing Your Operator
 
 You should aim for your operators being tested for day 1. To help you with testing your operator, we have developed a tool called test harness (it's also what we use to test KUDO itself). For more information please go to [test harness documentation](../testing.md).
+
+## What's Next
+
+Take a look at the [Pipe-Tasks](tasks.md#pipe-task) and learn how to create a custom `index.html` starting page in a separate step of the _deploy_ plan and start your Nginx with it.
