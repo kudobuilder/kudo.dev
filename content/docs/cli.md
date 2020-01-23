@@ -131,7 +131,11 @@ The namespace used for the operator installation. (default: "default")
 :::
 
 ::: flag --operator-version (string)
-A specific operator version in the official GitHub repo. (default to the most recent)
+A specific operator version on the official GitHub repo. (default to the most recent)
+:::
+
+::: flag --app-version (string)
+A specific application version on the official GitHub repo. (default to the most recent)
 :::
 
 ::: flag -p, --parameter (stringArray)
@@ -448,7 +452,7 @@ A repository is a set of operator packages (tarballs) which are indexed in an in
 ```bash
 # example folder
 ls ~/repo
-kafka-0.1.2.tgz		kafka-0.2.0.tgz
+kafka-2.2.1-0.1.2.tgz		kafka-0.2.0.tgz
 
 # repo index
 kubectl kudo repo index ~/repo
@@ -462,17 +466,17 @@ entries:
     maintainers:
     - name: Zain Malik <zmalikshxil@gmail.com>
     name: kafka
+    operatorVersion: 0.2.0
     urls:
     - http://localhost/kafka-0.2.0.tgz
-    version: 0.2.0
   - appVersion: 2.2.1
     digest: fbff9679cd0070bf10dcafc8d5e1e7d13a5c1651154165162c543508895a37c0
     maintainers:
     - name: Zain Malik <zmalikshxil@gmail.com>
     name: kafka
+    operatorVersion: 0.1.2
     urls:
-    - http://localhost/kafka-0.1.2.tgz
-    version: 0.1.2
+    - http://localhost/kafka-2.2.1-0.1.2.tgz
 ```
 
 It can be useful when overwriting a file to use `--overwrite`.  It is also useful to use `--url=http://kudo.dev/repo` to supply the desired URL the operator packages will be hosted on.

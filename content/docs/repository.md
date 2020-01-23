@@ -15,9 +15,9 @@ entries:
   - apiVersion: v1alpha1
     appVersion: 7.0.0
     name: youroperator
+    operatorVersion: 0.1.0
     urls:
-    - https://kudo-repository.storage.googleapis.com/elastic-0.1.0.tgz
-    version: 0.1.0
+    - https://kudo-repository.storage.googleapis.com/elastic-7.0.0-0.1.0.tgz
 ```
 
 The `url` points to a location where a tarball package is hosted. These locations can be within the repository, or outside of it.
