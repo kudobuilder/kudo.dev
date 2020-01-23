@@ -24,17 +24,17 @@ If you’re using a different way to provision Kubernetes, make sure you have at
 For our demo, we use Kafka and Flink which depend on ZooKeeper. To make the ZooKeeper Operator available on the cluster, run:
 
 ```bash
-$ kubectl kudo install zookeeper --version=0.2.0 --skip-instance
+$ kubectl kudo install zookeeper --operator-version=0.3.0 --skip-instance
 ```
 
 The `--skip-instance` flag skips the creation of a ZooKeeper instance. The flink-demo Operator that we’re going to install below will create it as a dependency instead. Now let’s make the Kafka and Flink Operators available the same way:
 
 ```bash
-$ kubectl kudo install kafka --version=0.1.3 --skip-instance
+$ kubectl kudo install kafka --operator-version=1.2.0 --skip-instance
 ```
 
 ```bash
-$ kubectl kudo install flink --version=0.1.1 --skip-instance
+$ kubectl kudo install flink --operator-version=0.2.1 --skip-instance
 ```
 
 This installs all the Operator versions needed for our demo.
@@ -65,7 +65,7 @@ This time we didn’t include the `--skip-instance` flag, so KUDO will actually 
 $ kubectl kudo plan status --instance flink-demo
 Plan(s) for "flink-demo" in namespace "default":
 .
-└── flink-demo (Operator-Version: "flink-demo-0.1.1" Active-Plan: "deploy")
+└── flink-demo (Operator-Version: "flink-demo-0.1.4" Active-Plan: "deploy")
 	└── Plan deploy (serial strategy) [IN_PROGRESS]
     	├── Phase dependencies [IN_PROGRESS]
     	│   ├── Step zookeeper (COMPLETE)
@@ -85,14 +85,14 @@ The output shows that the “deploy” plan is in progress and that it consists 
 $ kubectl kudo plan status --instance flink-demo-kafka
 Plan(s) for "flink-demo-kafka" in namespace "default":
 .
-└── flink-demo-kafka (Operator-Version: "kafka-0.1.3" Active-Plan: "deploy")
-	├── Plan deploy (serial strategy) [IN_PROGRESS]
-	│   └── Phase deploy-kafka [IN_PROGRESS]
-	│   	└── Step deploy (IN_PROGRESS)
-	└── Plan not-allowed (serial strategy) [NOT ACTIVE]
-    	└── Phase not-allowed (serial strategy) [NOT ACTIVE]
-        	└── Step not-allowed (serial strategy) [NOT ACTIVE]
-            	└── not-allowed [NOT ACTIVE]
+└── flink-demo-kafka (Operator-Version: "kafka-1.2.0" Active-Plan: "deploy")
+    ├── Plan deploy (serial strategy) [IN_PROGRESS]
+    │   └── Phase deploy-kafka [IN_PROGRESS]
+    │       └── Step deploy (IN_PROGRESS)
+    └── Plan not-allowed (serial strategy) [NOT ACTIVE]
+        └── Phase not-allowed (serial strategy) [NOT ACTIVE]
+            └── Step not-allowed (serial strategy) [NOT ACTIVE]
+                └── not-allowed [NOT ACTIVE]
 ```
 
 After Kafka was successfully installed the next phase “flink-cluster” will start and bring up, you guessed it, your flink-cluster. After this is done, the demo phase creates the generator and actor pods that generate and display transactions for this demo. Lastly, we have the flink-job phase in which we submit the actual FinancialFraudJob to the Flink cluster. Once the flink job is submitted, we will be able to see fraud logs in our actor pod shortly after.

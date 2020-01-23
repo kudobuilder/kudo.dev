@@ -1,0 +1,25 @@
+{
+  "resources": [
+    {
+      "resourceType": "Tutorial",
+      "title": "KUDO Tutorial",
+      "author": "Michael Beisiegel",
+      "url": "https://github.com/realmbgl/kudo-tutorial"
+    },
+    {
+      "resourceType": "Event",
+      "date": "2019-05-14",
+      "title": "KUDO - Kubernetes Operators, the easy way",
+      "author": "Matt Jarvis",
+      "video": "https://youtu.be/qAUmRfbd300"
+    },
+    {
+      "resourceType": "Event",
+      "date": "2019-06-27",
+      "title": "Building Kubernetes Operators with KUDO",
+      "details": "Experiences from Building the ArangoDB Operator.",
+      "author": "Jörg Schad",
+      "slides": "https://docs.google.com/presentation/d/1CFE0Vr1AmkKLhpG-KtDVSZRokKNy81OGjQ4I2tpqtss/"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Events
 
-Events are [rendered](../community/README.md) via the `EventsIndex` [component](https://github.com/kudobuilder/www/blob/master/content/.vuepress/components/EventsIndex.vue) from simple markdown pages located in the [events folder](https://github.com/kudobuilder/www/tree/master/content/community/events). The format is as follows:
+Events are [rendered](../community/README.md#events) via the `EventsIndex` [component](https://github.com/kudobuilder/www/blob/master/content/.vuepress/components/EventsIndex.vue) from simple markdown pages located in the [events folder](https://github.com/kudobuilder/www/tree/master/content/community/events). The format is as follows:
 
 ```markdown
 <!-- kubernetes-edinburgh-2019-07.md -->
