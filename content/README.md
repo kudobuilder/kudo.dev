@@ -48,14 +48,19 @@ Operators let you perform application tasks like taking backups, rebalancing dat
 ::: flex-box
 <h3> Get KUDO</h3>
 
-Link to KUDO installation guide
+It's easy to get started with KUDO - [follow this handy guide!](/docs/)
 :::
 
 ::: flex-box
 <h3>Get KUDO Operators</h3>
 
-Link to Operators repo - logos for popular feature-complete Operators like Kafka, Cassandra etc.
-Link to runbooks for different applications / operators
+Use KUDO to install and manage these applications:
+
+* [Apache Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest) ![](/images/Apache_kafka.svg =x40)
+* [Apache Cassandra](https://github.com/kudobuilder/operators/tree/master/repository/cassandra/) ![](/images/Cassandra_logo.svg =x40)
+* [Apache Flink](https://github.com/kudobuilder/operators/tree/master/repository/flink) ![](/images/flink_squirrel_500.png =x40)
+
+And [many more](https://github.com/kudobuilder/operators/)
 :::
 
 </div>
