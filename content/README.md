@@ -18,28 +18,30 @@ footer: Written in Go, maintained by good people.
 
 ## What is KUDO
 
-* KUDO is a toolkit that makes it easy to build Operators, in most cases just using YAML
-* KUDO provides a set of pre-built Operators, that you can just use out of the box or easily customise
-* KUDO lets you standardise the way you run Operators
+KUDO is a toolkit that makes it easy to build [Kubernetes Operators](#what-are-operators), in most cases just using YAML.
+
+It provides a set of pre-built Operators, that you can use out of the box or easily customise.
+
+Finally, KUDO lets you standardise the way you run Operators.
 
 
 ## What are Operators
 
 A stateless web application doesn’t usually need any complex configuration, or actions we need to run during operation. They are either on or off. Although we might have more than one instance running, they aren't coupled together.
 
-A distributed stateful application consists of more than one instance that are tightly connected. They usually need a set of operations to configure and maintain them, which are specific to the application.
+A distributed stateful application consists of more than one instance that are tightly connected. They typically need a set of operations to configure and maintain them, and which are specific to the application.
 
-Human operators of stateful applications have deep knowledge about how and when to run those operations.
+Human operators of stateful applications have deep knowledge about how - and when - to run those operations.
 
-The [Operator pattern](https://https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a way of capturing that human knowledge. It provides a way of automating those tasks by extending the native Kubernetes API.
+The [Operator pattern](https://https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a way of capturing that human knowledge. It provides a means for automating those tasks by extending the native Kubernetes API.
 
 Operators let you perform application tasks like taking backups, rebalancing data, scaling, or changing configuration. Any tasks you might want to do during operation of an application can be automated using an Operator.
 
 ## KUDO is for you if...
 
-* You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals
-* You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go
-* You run a Kubernetes cluster with many different Operators, and are looking for a way to standardise how you manage your Operators
+* You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals;
+* You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go;
+* You run a Kubernetes cluster with many different Operators, and are looking for a way to standardise how you manage your Operators.
 
 <div class="flex-container">
 
