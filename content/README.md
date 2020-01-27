@@ -73,9 +73,13 @@ build your next operator with KUDO!
 You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
 
 KUDO is used by:
-* MayaData
-* ArangoDB
-* Salesforce
-* Replicated.com
+
+<center>
+
+[![D2iQ](/images/d2iq.png =x75)](https://d2iq.com) [![MayaData](/images/mayadata.jpg =200x)](https://mayadata.io) [![Replicated](/images/replicated.png =200x)](https://replicated.com) [![ArangoDB](/images/arangodb.png =200x)](https://arangodb.com)
+
+</center>
+
+... plus [many others](https://github.com/kudobuilder/kudo/graphs/contributors).
 
 
