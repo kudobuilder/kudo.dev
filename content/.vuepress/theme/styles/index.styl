@@ -6,6 +6,7 @@
 @require './wrapper'
 @require './toc'
 @require './flag'
+@require './flex-box'
 
 html, body
   padding 0
@@ -29,9 +30,9 @@ body
   left 0
   right 0
   height $navbarHeight
-  background-color $foregroundColor
+  background-color $backgroundColor
   box-sizing border-box
-  border-bottom 1px solid $borderColor
+  border-bottom 1px dashed $borderColor
 
 .sidebar-mask
   position fixed
@@ -44,7 +45,7 @@ body
 
 .sidebar
   font-size 16px
-  background-color $foregroundColor
+  background-color $backgroundColor
   width $sidebarWidth
   position fixed
   z-index 10
@@ -53,7 +54,7 @@ body
   left 0
   bottom 0
   box-sizing border-box
-  border-right 1px solid $borderColor
+  border-right 1px dashed $borderColor
   overflow-y auto
 
 {$contentClass}:not(.custom)
@@ -112,6 +113,7 @@ strong
   font-weight 600
 
 h1, h2, h3, h4, h5, h6
+  color $kudoEggplantLightColor
   font-weight 600
   line-height 1.25
 
@@ -136,7 +138,8 @@ h1
 h2
   font-size 1.65rem
   padding-bottom .3rem
-  border-bottom 1px solid $borderColor
+  border-bottom 1px solid lighten($kudoEggplantLightColor, 80%)
+  border-bottom-style dashed
 
 h3
   font-size 1.35rem

@@ -158,9 +158,15 @@ module.exports = {
         lineNumbers: false,
         extendMarkdown: md => {
             md.use(require('markdown-it-footnote'))
+            md.use(require('markdown-it-imsize'))
         }
     },
     plugins: [
+        ['container', {
+            type: 'flex-box',
+            before: type => `<div class="flex-box ${type}">`,
+            after: '</div>',
+        }],
         ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
@@ -173,7 +179,7 @@ module.exports = {
         }],
         ['container', {
             type: 'teaser',
-            before: name => `<div class="teaser custom-block"><p class="custom-block-title">${name}</p>`,
+            before: name => `<div class="teaser custom-block"><h2 class="custom-block-title">${name}</h2>`,
             after: '</div>',
         }],
         [ 'feed', feed_options ]

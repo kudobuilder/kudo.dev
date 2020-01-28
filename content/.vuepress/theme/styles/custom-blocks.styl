@@ -2,7 +2,7 @@
   .custom-block-title
     font-weight 600
     margin-bottom -0.4rem
-  &.tip, &.warning, &.danger, &.teaser
+  &.tip, &.warning, &.danger
     padding .1rem 1.5rem
     border-left-width .5rem
     border-left-style solid
@@ -26,8 +26,41 @@
     .custom-block-title
       color $dangerHighlightColor
   &.teaser
-    background-color $teaserBackgroundColor
-    border-color $teaserHighlightColor
+    margin auto
+    display block
+    text-align center
+    font-weight lighter
+    background-color lighten($kudoBlueColor, 95%)
+    border-top-color lighten($kudoBlueColor, 50%)
+    padding 0.8rem 1.6rem
+    border-radius 4px
+    transition background-color .1s ease
+    //box-sizing border-box
+    width auto
+    img
+      display block
+      margin-left auto
+      margin-right auto
     .custom-block-title
-      font-size 1.4em
-      color $teaserHighlightColor
+      border-bottom-width 0
+
+&.teaser1
+    margin 1rem
+    padding .5rem
+    text-align center
+    background-color lighten($kudoBlueColor, 95%) //#F7FCFF
+    border-top-color lighten($kudoBlueColor, 50%)
+    border-top-style solid
+    border-top-width 1px
+    border-radius 8px
+    flex-grow 1
+    flex-basis 30%
+    line-height 1.7em
+    img
+      display block
+      margin-left auto
+      margin-right auto
+    .custom-block-title
+      border-bottom-width 0
+    //  font-size 1.4em
+    //  color $teaserHighlightColor
