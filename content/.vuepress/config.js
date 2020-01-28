@@ -131,7 +131,7 @@ module.exports = {
     plugins: [
         ['container', {
             type: 'flex-box',
-            before: grow => `<div class="flex-box" style="flex-grow: ${grow}">`,
+            before: type => `<div class="flex-box ${type}">`,
             after: '</div>',
         }],
         ['container', {
@@ -141,7 +141,7 @@ module.exports = {
         }],
         ['container', {
             type: 'teaser',
-            before: name => `<div class="teaser custom-block"><p class="custom-block-title">${name}</p>`,
+            before: name => `<div class="teaser custom-block"><h2 class="custom-block-title">${name}</h2>`,
             after: '</div>',
         }],
         [ 'feed', feed_options ]

@@ -76,11 +76,13 @@ export default {
   max-width 960px
   margin 0px auto
   display block
+  h2
+    color #563479
+    text-align center
   .hero
     text-align center
     img
-      max-width: 100%
-      max-height 280px
+      width 40%
       display block
       margin 3rem auto 1.5rem
     h1
@@ -91,7 +93,8 @@ export default {
       max-width 35rem
       font-size 1.6rem
       line-height 1.3
-      color lighten($textColor, 40%)
+      color $textColor
+      font-weight lighter
     .action-button
       display inline-block
       font-size 1.2rem
@@ -133,6 +136,9 @@ export default {
 
 @media (max-width: $MQMobile)
   .home
+    .hero
+      img
+        width 90%
     .features
       flex-direction column
     .feature
