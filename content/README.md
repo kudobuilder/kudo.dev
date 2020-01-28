@@ -97,9 +97,7 @@ It's easy to get started with KUDO - [follow this handy guide!](/docs/)
 
 [Get started](docs/README.md) with KUDO today, join the [community](community/README.md), and
 build your next operator with KUDO!
-
 You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
-
 KUDO is used by:
 
 <center>

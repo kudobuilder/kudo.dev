@@ -29,9 +29,9 @@ body
   left 0
   right 0
   height $navbarHeight
-  background-color $foregroundColor
+  background-color $backgroundColor
   box-sizing border-box
-  border-bottom 1px solid $borderColor
+  border-bottom 1px dashed $borderColor
 
 .sidebar-mask
   position fixed
@@ -44,7 +44,7 @@ body
 
 .sidebar
   font-size 16px
-  background-color $foregroundColor
+  background-color $backgroundColor
   width $sidebarWidth
   position fixed
   z-index 10
@@ -53,7 +53,7 @@ body
   left 0
   bottom 0
   box-sizing border-box
-  border-right 1px solid $borderColor
+  border-right 1px dashed $borderColor
   overflow-y auto
 
 {$contentClass}:not(.custom)

@@ -27,30 +27,23 @@
 .button
     margin 1rem
     padding .5rem
-    //border-top 1px solid $borderColor
-    //border-bottom 1px solid $borderColor
-    background-color $foregroundColor
-    border-top-color lighten($kudoBlueColor, 80%)
-    border-top-style dashed
-    border-top-width 1px
+    background-color $kudoBlueColor //$foregroundColor
     border-radius 8px
-    font-weight lighter
-    color #ffffff
     text-align center
     flex-grow 1
     flex-basis 30%
     line-height 1.7em
     opacity 1
-    &.text
-        position absolute
-        bottom 0
+    .text
+        font-weight lighter
+        color #ffffff
     &:hover
-        background-color lighten($kudoBlueColor, 90%)
-        //opacity .5
+        background-color lighten($kudoBlueColor, 20%)
     b
         color $kudoEggplantLightColor
     img
         display block
+        margin-top .3em
         margin-left auto
         margin-right auto
         max-width 80px
@@ -60,4 +53,5 @@
     .button
         max-width 100%
         padding 0 2.5rem
+
 </style>

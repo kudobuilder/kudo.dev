@@ -77,8 +77,10 @@ export default {
   margin 0px auto
   display block
   h2
-    color #563479
+    color $kudoEggplantLightColor
+    line-height 3em
     text-align center
+    border-bottom-style none
   .hero
     text-align center
     img
@@ -93,7 +95,7 @@ export default {
       max-width 35rem
       font-size 1.6rem
       line-height 1.3
-      color $textColor
+      color $kudoEggplantLightColor
       font-weight lighter
     .action-button
       display inline-block
