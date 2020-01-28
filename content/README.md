@@ -79,23 +79,11 @@ It's easy to get started with KUDO - [follow this handy guide!](/docs/)
 
 <div class="flex-container">
 
-::: flex-box centered
-![](/images/Apache_kafka.svg =x40)
+<Button text="Apache Kafka" img="/images/Apache_kafka.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest/" />
 
-[Apache Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest)
-:::
+<Button text="Apache Cassandra" img="/images/Cassandra_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
 
-::: flex-box centered
-![](/images/Cassandra_logo.svg =x40)
-
-[Apache Cassandra](https://github.com/kudobuilder/operators/tree/master/repository/cassandra/)
-:::
-
-::: flex-box centered
-![](/images/flink_squirrel_500.png =x40)
-
-[Apache Flink](https://github.com/kudobuilder/operators/tree/master/repository/flink)
-:::
+<Button text="Apache Flink" img="/images/flink_squirrel_500.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
 
 </div>
 
