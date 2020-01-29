@@ -40,6 +40,26 @@ module.exports = {
         logo: '/images/kudo_horizontal_color@2x.png',
         sidebar: {
             '/docs/': [
+              'what-is-kudo',
+              {
+                title: 'Developing Operators',
+                children: [
+                  'developing-operators/getting-started',
+                  'developing-operators/packages',
+                  'developing-operators/tasks',
+                  'developing-operators/plans',
+                  'developing-operators/parameters',
+                  'developing-operators/templates',
+                  {
+                    title: 'Examples',
+                    children: [
+                      'examples/apache-flink',
+                      'examples/apache-kafka',
+                      'examples/apache-zookeeper'
+                    ]
+                  },
+                ]
+              },
               '',
               'cli',
               {
@@ -50,26 +70,6 @@ module.exports = {
                       "comparison/static-yaml",
                       "comparison/high-level-controllers",
                       "comparison/custom-controllers"
-                  ]
-              },
-              'what-is-kudo',
-              {
-                  title: 'Developing Operators',
-                  children: [
-                      'developing-operators/getting-started',
-                      'developing-operators/packages',
-                      'developing-operators/tasks',
-                      'developing-operators/plans',
-                      'developing-operators/parameters',
-                      'developing-operators/templates',
-                      {
-                          title: 'Examples',
-                          children: [
-                              'examples/apache-flink',
-                              'examples/apache-kafka',
-                              'examples/apache-zookeeper'
-                          ]
-                      },
                   ]
               },
               {
