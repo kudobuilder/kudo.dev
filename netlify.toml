@@ -5,3 +5,7 @@
 [[redirects]]
 from = "/docs/getting-started/"
 to = "/docs/"
+
+[[redirects]]
+from = "/community/events.html"
+to = "/community/#events"

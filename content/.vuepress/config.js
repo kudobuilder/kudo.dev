@@ -131,11 +131,18 @@ module.exports = {
               'team/'
             ],
             '/internal-docs/': [
-              '',
-              'blog-index',
-              'custom-badge',
-              'custom-blocks',
-              'events-index'
+              {
+                title: 'Writing Documentation',
+                collapsable: false,
+                children: [
+                  '',
+                  'blog-index',
+                  'custom-badge',
+                  'custom-blocks',
+                  'events-index',
+                  'community-resources'
+                ]
+              }
             ],
         },
         repo: "kudobuilder/kudo",
