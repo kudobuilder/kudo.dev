@@ -93,6 +93,17 @@ module.exports = {
                       'runbooks/kafka/upgrade-kafka',
                       'runbooks/kafka/external-kafka'
                     ]
+                  },
+                  {
+                    title: 'Cassandra',
+                    children: [
+                      'runbooks/cassandra/installing',
+                      'runbooks/cassandra/accessing',
+                      'runbooks/cassandra/managing',
+                      'runbooks/cassandra/upgrading',
+                      'runbooks/cassandra/monitoring',
+                      'runbooks/cassandra/parameters'
+                    ]
                   }
                 ]
               },
