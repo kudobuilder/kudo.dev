@@ -54,7 +54,7 @@ Operators let you perform application tasks like taking backups, rebalancing dat
 <div class="flex-container">
 
 ::: flex-box
-you are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals;
+You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals;
 :::
 
 ::: flex-box
@@ -80,18 +80,16 @@ It's easy to get started with KUDO! Follow this [handy guide](/docs/)!
 ## Get KUDO Operators
 
 ```bash
-# install apache zookeeper and apache kafka
 $ kubectl kudo install zookeeper
-$ kubectl kudo install kafka
 ```
 
 <div class="flex-container">
 
-<Button text="Apache Kafka" img="/images/Apache_kafka.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest/" />
+<Button text="Apache Kafka" img="/images/logos/Apache_kafka.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest/" />
 
-<Button text="Apache Cassandra" img="/images/Cassandra_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
+<Button text="Apache Cassandra" img="/images/logos/Cassandra_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
 
-<Button text="Apache Flink" img="/images/flink_squirrel_500.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
+<Button text="Apache Flink" img="/images/logos/flink_squirrel_500.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
 
 </div>
 
@@ -108,9 +106,20 @@ build your next operator with KUDO!
 You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
 KUDO is used by:
 
-<center>
+<div class="flex-container">
 
-[![D2iQ](/images/d2iq.png =x75)](https://d2iq.com) [![MayaData](/images/mayadata.jpg =200x)](https://mayadata.io) [![Replicated](/images/replicated.png =200x)](https://replicated.com) [![ArangoDB](/images/arangodb.png =200x)](https://arangodb.com)
+<Logo alt="MayaData" img="/images/logos/mayadata.jpg" url="https://mayadata.io/" />
+
+<Logo alt="Replicated" img="/images/logos/replicated.png" url="https://replicated.com/" />
+
+<Logo alt="ArangoDB" img="/images/logos/arangodb.png" url="https://arangodb.com/" />
+
+<Logo alt="D2iQ" img="/images/logos/d2iq.png" url="https://d2iq.com/" />
+
+</div>
+
+
+<center>
 
 ... and [many others](https://github.com/kudobuilder/kudo/graphs/contributors).
 

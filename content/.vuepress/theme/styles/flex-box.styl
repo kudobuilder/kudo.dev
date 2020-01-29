@@ -2,13 +2,11 @@
   display flex
   flex-flow row
   justify-content center
-  align-items stretch
+  align-items baseline
 
 .flex-box
   margin 1rem
   padding .5rem
-  //border-top 1px solid $borderColor
-  //border-bottom 1px solid $borderColor
   background-color lighten($kudoBlueColor, 98%)
   border-color $borderColor
   border-style dashed
@@ -30,6 +28,7 @@
 @media (max-width: $MQMobile)
   .flex-container
     flex-direction column
+    align-items center
   .flex-box
     max-width 100%
     padding 0 2.5rem

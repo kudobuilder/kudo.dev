@@ -1,7 +1,7 @@
 <template>
     <div class="button">
         <a :href=url target="_blank" rel="noopener noreferrer">
-            <img :src=img />
+            <img :src="img" :alt="text" />
             <div class="text">{{text}}</div>
         </a>
     </div>
