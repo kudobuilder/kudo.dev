@@ -25,9 +25,10 @@
 
 <style lang="stylus" scoped>
 .button
+    max-width 30%
     margin 1rem
     padding .5rem
-    background-color $kudoBlueColor //$foregroundColor
+    background-color $kudoBlueColor
     border-radius 8px
     text-align center
     flex-grow 1
@@ -46,7 +47,6 @@
         margin-top .3em
         margin-left auto
         margin-right auto
-        max-width 80px
         max-height 80px
 
 @media (max-width: $MQMobile)

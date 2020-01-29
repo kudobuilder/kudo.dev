@@ -69,13 +69,21 @@ You run a Kubernetes cluster with many different Operators, and are looking for 
 
 ## Get KUDO
 
-<center>
+```bash
+$ brew tap kudobuilder/tap
+$ brew install kudo-cli
+$ kubectl kudo init
+```
 
-It's easy to get started with KUDO - [follow this handy guide!](/docs/)
-
-</center>
+It's easy to get started with KUDO! Follow this [handy guide](/docs/)!
 
 ## Get KUDO Operators
+
+```bash
+# install apache zookeeper and apache kafka
+$ kubectl kudo install zookeeper
+$ kubectl kudo install kafka
+```
 
 <div class="flex-container">
 
