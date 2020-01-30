@@ -7,7 +7,7 @@ type: docs
 
 A common use case for Apache Flink is streaming data analytics together with Apache Kafka, which provides a pub/sub model and durability for data streams. To achieve elastic scalability, both are typically deployed in clustered environments, and increasingly on top of container orchestration platforms like Kubernetes.
 
-In this example we demonstrate how to orchestrate a streaming data analytics application based on Flink and Kafka with KUDO. It consists of a Flink job that checks financial transactions for fraud, and two microservices that generate and display the transactions. You can find more details about this demo in the [KUDO Operators repository](https://github.com/kudobuilder/operators/tree/master/repository/flink/docs/demo/financial-fraud), including instructions for installing the dependencies.
+In this example we demonstrate how to orchestrate a streaming data analytics application based on Flink and Kafka with KUDO. It consists of a Flink job that checks financial transactions for fraud, and two micro-services that generate and display the transactions. You can find more details about this demo in the [KUDO Operators repository](https://github.com/kudobuilder/operators/tree/master/repository/flink/docs/demo/financial-fraud), including instructions for installing the dependencies.
 
 ![Flink KUDO Architecture](/images/flink-kudo-architecture.png)
 
@@ -41,7 +41,7 @@ This installs all the Operator versions needed for our demo.
 
 ## Financial Fraud Demo
 
-In our financial fraud demo we have two microservices, called “generator” and “actor”. The generator produces transactions with random amounts and writes them into a Kafka topic. Occasionally, the value will be over 10,000 which is considered fraud for the purpose of this demo. The Flink job subscribes to the Kafka topic and detects fraudulent transactions. When it does, it submits them to another Kafka topic which the actor consumes. The actor simply displays each fraudulent transaction.
+In our financial fraud demo we have two micro-services, called “generator” and “actor”. The generator produces transactions with random amounts and writes them into a Kafka topic. Occasionally, the value will be over 10,000 which is considered fraud for the purpose of this demo. The Flink job subscribes to the Kafka topic and detects fraudulent transactions. When it does, it submits them to another Kafka topic which the actor consumes. The actor simply displays each fraudulent transaction.
 
 The KUDO CLI by default installs Operators from the [official repository](https://github.com/kudobuilder/operators/), but it also supports installation from your local filesystem. This is useful if you want to develop your own Operator, or modify this demo for your own purposes.
 

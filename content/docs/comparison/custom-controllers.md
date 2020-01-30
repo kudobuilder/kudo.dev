@@ -21,7 +21,7 @@ KUDO operators provide most of the functionality of a custom operator.
 
 `+` Allows reaction to changes in the cluster, custom resources, validation
 
-`+` Allows any required behaviour
+`+` Allows any required behavior
 
 `-` Requires intimate knowledge of Kubernetes internals
 

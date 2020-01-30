@@ -34,9 +34,9 @@ KUDO lets you configure an Operator’s entire lifecycle using a declarative spe
 
 KUDO is a toolkit that makes it easy to build [Kubernetes Operators](#what-are-operators), in most cases just using YAML.
 
-It provides a set of pre-built Operators, that you can use out of the box or easily customise.
+It provides a set of pre-built Operators, that you can use out of the box or easily customize.
 
-Finally, KUDO lets you standardise the way you run Operators.
+Finally, KUDO lets you standardize the way you run Operators.
 
 
 ## What are Operators?
@@ -47,7 +47,7 @@ A distributed stateful application consists of more than one instance that are t
 
 Human operators of stateful applications have deep knowledge about how - and when - to run those operations.
 
-The [Operator pattern](https://https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a way of capturing that human knowledge. It provides a means for automating those tasks by extending the native Kubernetes API.
+The [Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a way of capturing that human knowledge. It provides a means for automating those tasks by extending the native Kubernetes API.
 
 Operators let you perform application tasks like taking backups, rebalancing data, scaling, or changing configuration. Any tasks you might want to do during operation of an application can be automated using an Operator.
 
@@ -128,5 +128,3 @@ KUDO is used by:
 ... and [many others](https://github.com/kudobuilder/kudo/graphs/contributors).
 
 </center>
-
-
