@@ -33,7 +33,9 @@ KUDO lets you configure an Operator’s entire lifecycle using a declarative spe
 ## What is KUDO?
 
 KUDO is a toolkit that makes it easy to build [Kubernetes Operators](#what-are-operators), in most cases just using YAML.
+
 It provides a set of pre-built Operators, that you can use out of the box or easily customise.
+
 Finally, KUDO lets you standardise the way you run Operators.
 
 
@@ -54,11 +56,11 @@ Operators let you perform application tasks like taking backups, rebalancing dat
 <div class="flex-container">
 
 ::: flex-box
-You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals;
+You are an application administrator who wants to run your application on Kubernetes, without having to learn about Kubernetes internals.
 :::
 
 ::: flex-box
-You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go;
+You are a developer who wants an easy way to write Operators, without having to write thousands of lines of Go.
 :::
 
 ::: flex-box
@@ -103,7 +105,9 @@ $ kubectl kudo install zookeeper
 
 [Get started](docs/README.md) with KUDO today, join the [community](community/README.md), and
 build your next operator with KUDO!
+
 You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
+
 KUDO is used by:
 
 <div class="flex-container">
