@@ -153,11 +153,13 @@ cqlsh>
 Check out the [parameters reference](parameters.md) for a complete list of all
 configurable settings.
 
+<!-- The links in this paragraph are broken. see https://github.com/mesosphere/kudo-cassandra-operator/issues/49 
 Check out the
 ["configuration" section in the "managing" page](managing.md#configuration)
 for help with changing an existing operator instance's parameters and the
 [operating](./operating.md) page for help with managing Cassandra operators and
 their underlying Cassandra clusters.
+-->
 
 ::: warning
 This guide is based on the KUDO [Cassandra operator](https://github.com/kudobuilder/operators/tree/master/repository/cassandra/3.11/docs/) docs.
