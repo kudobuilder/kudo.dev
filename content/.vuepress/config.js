@@ -40,30 +40,73 @@ module.exports = {
         logo: '/images/kudo_horizontal_color@2x.png',
         sidebar: {
             '/docs/': [
-              '',
-              'architecture',
-              'cli',
-              'comparison',
-              'contributing',
-              'features',
-                {
-                    title: 'Developing Operators',
+              'what-is-kudo',
+              {
+                title: 'Developing Operators',
+                children: [
+                  'developing-operators/getting-started',
+                  'developing-operators/packages',
+                  'developing-operators/tasks',
+                  'developing-operators/plans',
+                  'developing-operators/parameters',
+                  'developing-operators/templates',
+                  {
+                    title: 'Examples',
                     children: [
-                        'concepts',
-                        'first-operator',
-                        'tasks',
-                        {
-                            title: 'Examples',
-                            children: [
-                                'examples/apache-flink',
-                                'examples/apache-kafka',
-                                'examples/apache-zookeeper'
-                            ]
-                        },
+                      'examples/apache-flink',
+                      'examples/apache-kafka',
+                      'examples/apache-zookeeper'
                     ]
-                },
-              'faq',
-              'repository',
+                  },
+                ]
+              },
+              '',
+              'cli',
+              {
+                  title: "Comparison",
+                  children: [
+                      "comparison/overview",
+                      "comparison/infrastructure-as-code",
+                      "comparison/static-yaml",
+                      "comparison/high-level-controllers",
+                      "comparison/custom-controllers"
+                  ]
+              },
+              {
+                title: 'Runbooks',
+                children: [
+                  {
+                    title: 'Admin',
+                    children: [
+                      'runbooks/admin/initialize-kudo',
+                      'runbooks/admin/debug-kudo',
+                      'runbooks/admin/create-operator',
+                      'runbooks/admin/create-kudo-package',
+                      'runbooks/admin/add-operator-to-repository',
+                      'runbooks/admin/local-repo',
+                      'runbooks/admin/remove-kudo'
+                    ]
+                  },
+                  {
+                    title: 'Kafka',
+                    children: [
+                      'runbooks/kafka/upgrade-kafka',
+                      'runbooks/kafka/external-kafka'
+                    ]
+                  },
+                  {
+                    title: 'Cassandra',
+                    children: [
+                      'runbooks/cassandra/installing',
+                      'runbooks/cassandra/accessing',
+                      'runbooks/cassandra/managing',
+                      'runbooks/cassandra/upgrading',
+                      'runbooks/cassandra/monitoring',
+                      'runbooks/cassandra/parameters'
+                    ]
+                  }
+                ]
+              },
               {
                 title: 'Testing',
                 children: [
@@ -74,7 +117,8 @@ module.exports = {
                   'testing/test-environments',
                   'testing/tips'
                 ]
-              }
+              },
+              'contributing'
             ],
             '/blog/': [
               {
@@ -132,17 +176,28 @@ module.exports = {
         lineNumbers: false,
         extendMarkdown: md => {
             md.use(require('markdown-it-footnote'))
+            md.use(require('markdown-it-imsize'))
         }
     },
     plugins: [
+        ['container', {
+            type: 'flex-box',
+            before: type => `<div class="flex-box ${type}">`,
+            after: '</div>',
+        }],
         ['container', {
             type: 'flag',
             before: name => `<div class="flag"><code class="title" v-pre>${name}</code>`,
             after: '</div>',
         }],
         ['container', {
+            type: 'attribute',
+            before: name => `<div class="attribute"><code class="title" v-pre>${name}</code>`,
+            after: '</div>',
+        }],
+        ['container', {
             type: 'teaser',
-            before: name => `<div class="teaser custom-block"><p class="custom-block-title">${name}</p>`,
+            before: name => `<div class="teaser custom-block"><h2 class="custom-block-title">${name}</h2>`,
             after: '</div>',
         }],
         [ 'feed', feed_options ]
