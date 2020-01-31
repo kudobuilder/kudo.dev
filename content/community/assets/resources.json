@@ -7,6 +7,20 @@
       "url": "https://github.com/realmbgl/kudo-tutorial"
     },
     {
+      "resourceType": "Webinar",
+      "date": "2019-10-16",
+      "title": "CNCF Webinar series: Introducing the Kubernetes Universal Declarative Operator",
+      "author": "Gerred Dillon",
+      "video": "https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/"
+    },
+    {
+      "resourceType": "Podcast",
+      "date": "2019-10-16",
+      "title": "Kubernetes Podcast #78: KUDO, with Gerred Dillon",
+      "author": "Craig Box & Adam Glick",
+      "url": "https://kubernetespodcast.com/episode/078-kudo/"
+    },
+    {
       "resourceType": "Event",
       "date": "2019-05-14",
       "title": "KUDO - Kubernetes Operators, the easy way",
