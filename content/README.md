@@ -77,7 +77,7 @@ $ brew install kudo-cli
 $ kubectl kudo init
 ```
 
-It's easy to get started with KUDO! Follow this [handy guide](/docs/)!
+It's insanely easy to get started with KUDO - follow this [handy guide](/docs/)!
 
 ## Get KUDO Operators
 
@@ -103,8 +103,7 @@ $ kubectl kudo install zookeeper
 
 ## Join the KUDO Community
 
-[Get started](docs/README.md) with KUDO today, join the [community](community/README.md), and
-build your next operator with KUDO!
+[Get started](docs/README.md) with KUDO today, join the [community](community/README.md), and build your next operator with KUDO!
 
 You can find more talks, tutorials, and events on our [community page](community/README.md#community-content).
 
@@ -113,8 +112,6 @@ KUDO is used by:
 <div class="flex-container">
 
 <Logo alt="MayaData" img="/images/logos/mayadata.jpg" url="https://mayadata.io/" />
-
-<Logo alt="Replicated" img="/images/logos/replicated.png" url="https://replicated.com/" />
 
 <Logo alt="ArangoDB" img="/images/logos/arangodb.png" url="https://arangodb.com/" />
 
