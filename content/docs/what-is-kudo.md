@@ -42,7 +42,7 @@ A _Plan_ is the operator's main workflow unit. A plan specifies a series of step
 
 **In a nutshell**: A user will take an _Operator Package_ from the _Repository_, submit it to the _KUDO Manager_ which will then execute operator _Plans_ either automatically or on-demand.
 
-## Operator PLans
+## Operator Plans
 
 An operator typically consists of several plans. Think of them as runbooks written in a structured way that can be executed by KUDO. Plans are made up of phases, and phases have one or more steps. Every operator must contain at least a `deploy` plan which is the default plan to deploy an application to the cluster. For more complex applications, you would want to define a plan for backup and restore or upgrade. Phases and steps can be executed either serially or in parallel. The default execution strategy, if none is specified, is _serial_.
 
