@@ -55,12 +55,4 @@ $ minikube start --cpus=4 --memory=10240 --disk-size=40g
 
 ## Notes on KIND
 
-In order to use KIND with storage Operators, it is necessary to modify its Persistent Storage ([more details](https://dischord.org/2019/07/11/persistent-storage-kind/)).
-
-Here is an example of setting up a new cluster:
-
-```bash
-$ kind create cluster
-$ export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-$ kubectl apply -f https://raw.githubusercontent.com/kudobuilder/operators/master/test/manifests/local-path-storage.yaml
-```
+In order to use KIND with storage Operators, you must be using KIND version 0.7.0 or newer.
