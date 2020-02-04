@@ -3,10 +3,10 @@
 
 This runbook explains how to upgrade a running KUDO Kafka to a newer version of KUDO Kafka.
 
-## Preconditions
+## Pre-conditions
 
-- Kubernetes cluster with KUDO version >= 0.10.0 installed
-- Have a KUDO Kafka cluster version 1.1.0 up and running in the namespace `kudo-kafka`
+- Kubernetes cluster with KUDO version >= 0.10.1 installed
+- Have a KUDO Kafka cluster version 1.2.0 up and running in the namespace `kudo-kafka`
 - Have binaries of `jq` and `grep` installed in the `$PATH`
 
 ## Steps
