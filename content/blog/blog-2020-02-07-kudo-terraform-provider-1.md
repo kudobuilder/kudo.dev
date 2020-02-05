@@ -42,7 +42,7 @@ spec:
 
 The `ZOOKEEPER_URI` value was hand calculated with knowledge of what the `NODE_COUNT` value was set to in the Zookeeper `Instance`.
 
-Before applying this example to a cluster, the KUDO CLI is needed to [install KUDO](https://kudo.dev/docs/#getting-started) and  [install the `Operators`](https://kudo.dev/docs/#deploy-your-first-operator) needed.
+Before applying this example to a cluster, the KUDO CLI is needed to [install KUDO](https://kudo.dev/docs/#getting-started) and  [install the `Operators`](https://kudo.dev/docs/#deploy-your-first-operator).
 
  During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the inital deployment, suppose, during our use of Kafka, we determine we need to scale out our Zookeeper instance and we patch Zookeeper to the following: <-- rewrite this last part>
 
@@ -123,7 +123,7 @@ The rest of this post will reference a `main.tf` file that is located in the `ex
 Instead of installing  KUDO via the CLI, the provider definition for KUDO in `main.tf` ensures that KUDO is installed:
 
 ```hcl
-//Ensure's KUDO is installed on your cluster
+//Ensures KUDO is installed on your cluster
 provider "kudo" {
     # Path to your local kubeconfig
     config_path = "~/.kube/config"
@@ -136,7 +136,7 @@ provider "kudo" {
 
 #### Operator Installation
 
-Installing each `Operator` requires the defintiion of a `kudo_operator` resource specifying the name of the Operator.  Other configurations are available for specifying a specific `operator_version` or `repo` to install from.  Installing our Kafka and Zookeeper Operators requires the addition of these two resources in `main.tf`
+Installing each `Operator` requires the definition of a `kudo_operator` resource specifying the name of the Operator.  Other configurations are available for specifying a specific `operator_version` or `repo` to install from.  Installing our Kafka and Zookeeper Operators requires the addition of these two resources in `main.tf`
 
 ```hcl
 // Installs the most recent Zookeeper Operator
@@ -153,7 +153,7 @@ resource "kudo_operator" "kafka" {
 
 ### KUDO Instance
 
-Similiarly installing the `Instances` can then be defined via the `kudo_instance` resource.
+Similarly installing the `Instances` can then be defined via the `kudo_instance` resource.
 
 ```hcl
 resource "kudo_instance" "zk1" {
@@ -401,7 +401,7 @@ kudo_instance.kafka: Creation complete after 54s [id=default_pipes]
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 ```
 
-Note that the kafka instance was created after the zookeeper instance's creation was complete.  This was ensured by Terraform's dependency graph. Looking at the kafka instance we can see the correct pods were used for the connection string:
+Note that the kafka instance was created after the zookeeper instance's creation was completed.  This was ensured by Terraform's dependency graph. Looking at the kafka instance we can see the correct pods were used for the connection string:
 
 ```bash
 $ kubectl get instances pipes -o jsonpath="{ .spec.parameters.ZOOKEEPER_URI }"
@@ -774,7 +774,7 @@ zook-zookeeper-0.zook-hs:2181,zook-zookeeper-1.zook-hs:2181,zook-zookeeper-2.zoo
 
 ## Where we go from here
 
-In a future post, we'll explore how to tie together this provider with other terraform providers and provide a seemless platform for using KUDO with other Terraform Infrastructure as Code repositories.  
+In a future post, we'll explore how to tie together this provider with other Terraform providers and provide a seamless platform for using KUDO with other Terraform Infrastructure as Code repositories.  
 
 There is still plenty of work to finish in this Terraform provider, please [fill out an issue](https://github.com/runyontr/terraform-provider-kudo/issues/new) if there's a feature you're looking for or reach out to the #kudo channel or @runyontr on the Kubernetes slack or email the author directly at tom@runyon.dev. We'd love to hear more about how you're looking to use KUDO to run operators.
 
