@@ -12,7 +12,7 @@ date: 2020-02-07
 
 KUDO has the ability to provide `Instance`s specific values to the application through the use of `PARAMETERS`.  These parameters allow for `strings` to be used as inputs to the template rendering built into KUDO.  More about the use of Parameters can be found [Here](https://kudo.dev/docs/developing-operators/parameters.html).
 
-The following example shows more explicitly how parameters are set and managed in a multi-`Instance` environment. In this simple example, supposed we want to deploy a [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) cluster backed by a [Zookeeper](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) cluster defined with the following relationship:  
+The following example shows more explicitly how parameters are set and managed in a multi-`Instance` environment. In this simple example, suppose we want to deploy a [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) cluster backed by a [Zookeeper](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) cluster defined with the following relationship:  
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
