@@ -12,7 +12,7 @@ date: 2020-02-07
 
 KUDO has the ability to provide `Instance`s specific values to the application through the use of `PARAMETERS`.  These parameters allow for `strings` to be used as inputs to the template rendering built into KUDO.  More about the use of Parameters can be found [Here](https://kudo.dev/docs/developing-operators/parameters.html).
 
-The following example shows more explicitly how parameters are set and managed in a multi-`Instance` environment. In this simple example, supposed we want to deploy a [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) cluster backed by a [Zookeeper](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) cluster defined with the following relationship:   Once complete, applying the following objects to the Kubernetes cluster represent that relationship:
+The following example shows more explicitly how parameters are set and managed in a multi-`Instance` environment. In this simple example, supposed we want to deploy a [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) cluster backed by a [Zookeeper](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) cluster defined with the following relationship:  
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -40,12 +40,11 @@ spec:
         ZOOKEEPER_URI: zook-zookeeper-0.zook-hs:2181,zook-zookeeper-1.zook-hs:2181,zook-zookeeper-2.zook-hs:2181
 ```
 
-The `ZOOKEEPER_URI` value was hand calculated with knowledge of what the `NODE_COUNT` value was set to in the Zookeeper `Instance`. 
+The `ZOOKEEPER_URI` value was hand calculated with knowledge of what the `NODE_COUNT` value was set to in the Zookeeper `Instance`.
 
-Before applying these objects, the cluster would need to be configured 
 Before applying this example to a cluster, the KUDO CLI is needed to [install KUDO](https://kudo.dev/docs/#getting-started) and  [install the `Operators`](https://kudo.dev/docs/#deploy-your-first-operator) needed.
 
- During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the inital deployment, suppose, during our use of Kafka, we determine we need to scale out our Zookeeper instance and we patch Zookeeper to the following:
+ During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the inital deployment, suppose, during our use of Kafka, we determine we need to scale out our Zookeeper instance and we patch Zookeeper to the following: <-- rewrite this last part>
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -81,7 +80,7 @@ spec:
 This example shows several limitations with managing workloads:
 
 1. When deploying dependent `Instances`, there's no mechanism to wait for one to get healthy before deploying the downstream `Instance`.
-2. Install/Updating one instance does not propegate its changes to downstream `Instances`
+2. Installing/Updating one instance does not propegate its changes to downstream `Instances`
 
 ## Terraform
 
@@ -92,7 +91,7 @@ The KUDO provider currently supports two types of resources: `kudo_operator` and
 
 ### KUDO Terraform Provider
 
-In order for these two instances to be tied together effectively, we need the ability to provide references another `Instances`'s paramaters, our its current state inside the cluster after becoming healthy.  As described in the [Terraform Docs](https://www.terraform.io/docs/configuration/resources.html), the resources defined in terraform allow for referencing both user provided values as well as `computed` values that are only calculated by the provider after installation/updating.  
+In order for these two instances to be tied together effectively, we need the ability to provide references to another `Instances`'s paramaters, or its current state inside the cluster after becoming healthy.  As described in the [Terraform Docs](https://www.terraform.io/docs/configuration/resources.html), the resources defined in terraform allow for referencing both user provided values as well as `computed` values that are only calculated by the provider after installation/updating.  
 
 The KUDO Provider provides a list of all parameter values (both default and instance specific), as well as a list of all `pods`, `deployments`, `services`, `statefulsets` and `pvcs`.  These computed values can be used to generate connection strings for other `Instance`s to use.
 
@@ -116,7 +115,7 @@ cd terraform-provider-kudo
 make build
 ```
 
-The rest of this post will reference a `main.tf` file that is located in the `examples/blog/part1/` folder of this repo.  You can also find this file [here](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf)
+The rest of this post will reference a `main.tf` file that is located in the `examples/blog/part1/` folder of the provider repo.  You can also find this file [here](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf)
 
 
 #### KUDO Installation
@@ -166,7 +165,7 @@ resource "kudo_instance" "zk1" {
 }
 ```
 
-defines the Zookeeper instance in our example with a name of `zook` and a parameter `NODE_COUNT` set to 3.  Note the `operator_version_name` that this instances is built from is referenced directly from the `kudo_operator.zookeeper` object.  This ensures that the `Operator` is installed before we try and create the `Zookeeper` instance. 
+defines the Zookeeper instance in our example with a name of `zook` and a parameter `NODE_COUNT` set to 3.  Note the `operator_version_name` referenced by this `kudo_instance` is referenced directly from the `kudo_operator.zookeeper` object, which causes a dependency between the nodes, as we'll see later in this section.  This ensures that the `Operator` is installed before we try and create the `Zookeeper` instance.
 
 The `kudo_instance` resource has several computed values that can be used as inputs to future resources.  The `kudo_instance` provides a list of all `pods`, `deployments`, `services`, `statefulsets`, `pvcs` and `configmaps` that are owned by the instance, as well as all `output_parameters` which combine the default `parameters` defined in the `OperatorVersion` with the local overrides for the `Instance`.  As a result, we can define the following [local](https://www.terraform.io/docs/configuration/locals.html) value, which provides a connection string to the Zookeeper instance:
 
@@ -188,7 +187,7 @@ resource "kudo_instance" "kafka" {
 }
 ```
 
-Due to the relationship of the Terraform objects, `kudo_instance.zk1` is needed before we can deploy `kudo_instance.kafka` since the output of the former is used as an input to the latter.  This relationship is captured in the dependency graph which shows the order Terraform will create and update objects in our environment.  Note that the earlier objects are at the bottom and Terraform moves up the graph, ensuring each parent node is healthy before starting a child node.
+Due to the relationship of the Terraform objects, `kudo_instance.zk1` is needed before we can deploy `kudo_instance.kafka` since the output of the former is used as an input to the latter.  This relationship is captured in the dependency graph which shows the order Terraform will create and update objects in our environment. This graph uses arrows to point at which nodes are dependencies of other nodes, and as a result the earlier objects are at the bottom and Terraform moves up the graph, ensuring each parent node is healthy before starting a child node.  
 
 ![Dependency Graph](https://github.com/runyontr/terraform-provider-kudo/raw/master/blog/part1/dependencies.png)
 
