@@ -9,12 +9,7 @@ Before you get started using KUDO, you need to have a running Kubernetes cluster
 
 ## Install KUDO CLI
 
-Install the `kubectl kudo` plugin. To do so, please follow the [CLI plugin installation instructions](cli.md). On a Mac it is as simple as:
-
-```bash
-$ brew tap kudobuilder/tap
-$ brew install kudo-cli
-```
+Install the `kubectl kudo` plugin. To do so, please follow the [CLI plugin installation instructions](cli.md).
 
 The KUDO CLI leverages the kubectl plugin system, which gives you all its functionality under `kubectl kudo`. This is a convenient way to install and deal with your KUDO Operators.
 

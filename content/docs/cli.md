@@ -11,8 +11,6 @@ This document demonstrates how to use the CLI but also shows what happens in KUD
 ### Requirements
 
 - `kubectl` version `1.13.0` or newer
-- KUDO CRDs installed to your cluster and KUDO controller is running. See the [getting started guide](README.md) for instructions
-- `kubectl kudo` is running outside your cluster
 
 ### Installation
 
