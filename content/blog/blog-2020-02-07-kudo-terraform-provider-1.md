@@ -4,7 +4,7 @@ date: 2020-02-07
 
 # KUDO Terraform Provider
 
-[KUDO](https://kudo.dev) is rolling out new and amazing features every month, but there still are plenty of features that are needed to facilitate usage for production workflows.  This KUDO Terraform provider looks to provide a solution for managing interconnected `Instances` and passing information from one Instance to another in a manner that allows for seemless upgrades.
+[KUDO](https://kudo.dev) is rolling out new and amazing features every month, but there still are plenty of features that are needed to facilitate usage for production workflows.  This KUDO Terraform provider looks to provide a solution for managing interconnected `Instances` and passing information from one Instance to another in a manner that allows for seamless upgrades.
 
 <!-- more -->
 
@@ -120,7 +120,7 @@ The rest of this post will reference a `main.tf` file that is located in the `ex
 
 #### KUDO Installation
 
-Instead of installing  KUDO via the CLI, the provider definition for KUDO in `main.tf` ensures that KUDO is installed:
+Instead of installing  KUDO via the CLI via the command `kubectl kudo init`, the provider definition for KUDO in `main.tf` ensures that KUDO is installed:
 
 ```hcl
 //Ensures KUDO is installed on your cluster
@@ -136,7 +136,7 @@ provider "kudo" {
 
 #### Operator Installation
 
-Installing each `Operator` requires the definition of a `kudo_operator` resource specifying the name of the Operator.  Other configurations are available for specifying a specific `operator_version` or `repo` to install from.  Installing our Kafka and Zookeeper Operators requires the addition of these two resources in `main.tf`
+Installing each `Operator` requires the definition of a `kudo_operator` resource specifying the name of the Operator.  The available community operators are kept in the [Operator Repo](https://github.com/kudobuilder/operators/tree/master/repository).  Other configurations are available for specifying a specific `operator_version` or `repo` to install from.  Installing our Kafka and Zookeeper Operators requires the addition of these two resources in `main.tf`
 
 ```hcl
 // Installs the most recent Zookeeper Operator
@@ -150,6 +150,14 @@ resource "kudo_operator" "kafka" {
 }
 ```
 
+These two resources would replace executing the following commands with the KUDO CLI:
+
+```bash
+kubectl kudo install zookeeper --skip-instance
+kubectl kudo install kafka --skip-instance
+```
+
+The `operator_name` can contain the relative path to a local folder that contains the definition of an operator, or a name of an operator hosted in the community repo.
 
 ### KUDO Instance
 
