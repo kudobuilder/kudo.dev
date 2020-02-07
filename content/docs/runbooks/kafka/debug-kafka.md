@@ -14,7 +14,7 @@ This runbook explains how to debug a KUDO Kafka cluster.
 
 ### Verifying if KUDO Kafka plans are COMPLETE
 
-#### 1. Get the KUDO Kafka Instance object name
+#### Get the KUDO Kafka Instance object name
 
 Verify the KUDO Kafka instance object is present in the expected namespace
 
@@ -28,7 +28,7 @@ kafka-instance       82m
 zookeeper-instance   82m
 ```
 
-#### 2. Verify the KUDO Kafka plans
+#### Verify the KUDO Kafka plans
 
 `kubectl kudo plan status  --instance=kafka-instance`
 
@@ -49,7 +49,7 @@ Plan(s) for "kafka-instance" in namespace "default":
             └── Step not-allowed [NOT ACTIVE]
 ```
 
-#### 3. Get all KUDO Kafka instance pods
+#### Get all KUDO Kafka instance pods
 
 We can use the KUDO Kafka instance name to retrieve all pods for KUDO Kafka cluster.
 
@@ -65,7 +65,7 @@ kafka-instance-kafka-2   2/2     Running   0          123m
 
 ### Debugging the pods logs
 
-#### 4. Get logs from KUDO Kafka combined pods 
+#### Get logs from KUDO Kafka combined pods 
 
 Sometimes we need the combined logs output of all the Kafka pods:
 `kubectl logs -l  kudo.dev/instance=kafka-instance -c k8skafka -f`
@@ -97,7 +97,7 @@ expected output is the current logs from all the Kafka pods, we can identify to 
 [2020-02-03 12:32:09,613] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
 ```
 
-#### 5. Get logs from KUDO Kafka individual pod
+#### Get logs from KUDO Kafka individual pod
 
 `kubectl logs kafka-instance-kafka-0 -c k8skafka`
 
@@ -111,7 +111,7 @@ expected output is the current logs from all the Kafka pods, we can identify to 
 [ ... lines removed for clarity ...]
 ```
 
-#### 6. Get logs from KUDO Kafka node exporter container
+#### Get logs from KUDO Kafka node exporter container
 
 `kubectl logs kafka-instance-kafka-0 -c kafka-node-exporter`
 
@@ -124,7 +124,7 @@ time="2020-02-03T10:31:44Z" level=info msg="Build context (go=go1.12.5, user=roo
 
 ### Debugging service issues
 
-#### 7. Verify the service endpoints
+#### Verify the service endpoints
 
 `kubectl get endpoints kafka-instance-svc -o json | jq  -r '.subsets[].addresses[].hostname'`
 
@@ -135,7 +135,7 @@ kafka-instance-kafka-0
 kafka-instance-kafka-1
 ```
 
-#### 8. Verify the service selector labels are matching the ones in pods
+#### Verify the service selector labels are matching the ones in pods
 
 Get the labels presents in the Kafka pods
 
@@ -181,7 +181,7 @@ expected output are the two labels the service use to find the Kafka pods:
 
 ### Debugging health of all objects
 
-#### 9. Get list of all objects created by KUDO Kafka Instance
+#### Get list of all objects created by KUDO Kafka Instance
 
 `kubectl api-resources --verbs=get --namespaced -o name \
   | xargs -n 1 kubectl get --show-kind --ignore-not-found -l kudo.dev/instance=kafka-instance`
@@ -225,7 +225,7 @@ role.rbac.authorization.k8s.io/kafka-instance-role   5h29m
 
 ### Debugging deployment issues
 
-#### 10. Pod stuck with Status `ContainerCreating` 
+#### Pod stuck with Status `ContainerCreating` 
 
 After deploying KUDO Kafka if the pods are stuck in `ContainerCreating` status. It can be caused by several issues caused by resource starvation to storage issues.
 
@@ -265,7 +265,7 @@ default       54s         Warning   FailedAttachVolume       pod/kafka-instance-
 
 we can see that the root cause of the container being stuck is an issue with the PersistentVolume.
 
-#### 8. Pod stuck with Status `Pending` 
+#### Pod stuck with Status `Pending` 
 
 Same debugging can be applied for the pods stuck in other states like `Pending`. 
 
