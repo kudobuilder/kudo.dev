@@ -97,9 +97,9 @@ expected output is the current logs from all the Kafka pods, we can identify to 
 [2020-02-03 12:32:09,613] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
 ```
 
-#### 4. Get logs from KUDO Kafka individual pod
+#### 5. Get logs from KUDO Kafka individual pod
 
-`k logs kafka-instance-kafka-0 -c k8skafka`
+`kubectl logs kafka-instance-kafka-0 -c k8skafka`
 
 ```
 [ ... lines removed for clarity ...]
@@ -111,7 +111,7 @@ expected output is the current logs from all the Kafka pods, we can identify to 
 [ ... lines removed for clarity ...]
 ```
 
-#### 4. Get logs from KUDO Kafka node exporter container
+#### 6. Get logs from KUDO Kafka node exporter container
 
 `kubectl logs kafka-instance-kafka-0 -c kafka-node-exporter`
 
@@ -124,7 +124,7 @@ time="2020-02-03T10:31:44Z" level=info msg="Build context (go=go1.12.5, user=roo
 
 ### Debugging service issues
 
-#### 5. Verify the service endpoints
+#### 7. Verify the service endpoints
 
 `kubectl get endpoints kafka-instance-svc -o json | jq  -r '.subsets[].addresses[].hostname'`
 
@@ -135,7 +135,7 @@ kafka-instance-kafka-0
 kafka-instance-kafka-1
 ```
 
-#### 6. Verify the service selector labels are matching the ones in pods
+#### 8. Verify the service selector labels are matching the ones in pods
 
 Get the labels presents in the Kafka pods
 
@@ -181,7 +181,7 @@ expected output are the two labels the service use to find the Kafka pods:
 
 ### Debugging health of all objects
 
-#### 7. Get list of all objects created by KUDO Kafka Instance
+#### 9. Get list of all objects created by KUDO Kafka Instance
 
 `kubectl api-resources --verbs=get --namespaced -o name \
   | xargs -n 1 kubectl get --show-kind --ignore-not-found -l kudo.dev/instance=kafka-instance`
@@ -225,7 +225,7 @@ role.rbac.authorization.k8s.io/kafka-instance-role   5h29m
 
 ### Debugging deployment issues
 
-#### 8. Pod stuck with Status `ContainerCreating` 
+#### 10. Pod stuck with Status `ContainerCreating` 
 
 After deploying KUDO Kafka if the pods are stuck in `ContainerCreating` status. It can be caused by several issues caused by resource starvation to storage issues.
 
@@ -306,4 +306,3 @@ expected output should reveal that pod `kafka-instance-kafka-2` is stuck due to 
 default     <unknown>   Warning   FailedScheduling         pod/kafka-instance-kafka-2         0/7 nodes are available: 7 Insufficient memory.
 [ ... lines removed for clarity ...]
 ```
-
