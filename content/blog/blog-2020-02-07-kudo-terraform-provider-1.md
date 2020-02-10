@@ -10,7 +10,7 @@ date: 2020-02-07
 
 ## Current Process
 
-KUDO has the ability to provide `Instance`s specific values to the application through the use of `PARAMETERS`.  These parameters allow for `strings` to be used as inputs to the template rendering built into KUDO.  More about the use of Parameters can be found [Here](https://kudo.dev/docs/developing-operators/parameters.html).
+KUDO has the ability to provide `Instances` specific values to the application through the use of `PARAMETERS`.  These parameters allow for `strings` to be used as inputs to the template rendering built into KUDO.  More about the use of Parameters can be found [Here](https://kudo.dev/docs/developing-operators/parameters.html).
 
 The following example shows more explicitly how parameters are set and managed in a multi-`Instance` environment. In this simple example, suppose we want to deploy a [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) cluster backed by a [Zookeeper](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) cluster defined with the following relationship:  
 
@@ -44,7 +44,8 @@ The `ZOOKEEPER_URI` value was hand calculated with knowledge of what the `NODE_C
 
 Before applying this example to a cluster, the KUDO CLI is needed to [install KUDO](https://kudo.dev/docs/#getting-started) and  [install the `Operators`](https://kudo.dev/docs/#deploy-your-first-operator).
 
- During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the inital deployment, suppose, during our use of Kafka, we determine we need to scale out our Zookeeper instance and we patch Zookeeper to the following: <-- rewrite this last part>
+ During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the initial deployment, suppose we determine we need to scale out our Zookepeer cluster and we patch the object:
+
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -99,7 +100,8 @@ In addition to the generation of these outputs from an Instance for consumption 
 
 ### Example Revisited
 
-Revisiting our initial example, rather than having to manually install KUDO and our operators, we can use Terraform to define what we'd like available on our cluster.  These objects are captured in [main.tf](main.tf), but we describe the various objects here.
+Revisiting our initial example, rather than having to manually install KUDO and our operators, we can use Terraform to define what we'd like available on our cluster.  These objects are captured in [main.tf](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf), but we describe the various objects here.
+
 
 ### Getting the Provider and the example
 
