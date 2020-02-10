@@ -89,22 +89,11 @@ module.exports = {
                   },
                   {
                     title: 'Kafka',
-                    children: [
-                      'runbooks/kafka/upgrade-kafka',
-                      'runbooks/kafka/external-kafka',
-                      'runbooks/kafka/debug-kafka'
-                    ]
+                    children: require('./kafka').children
                   },
                   {
                     title: 'Cassandra',
-                    children: [
-                      'runbooks/cassandra/installing',
-                      'runbooks/cassandra/accessing',
-                      'runbooks/cassandra/managing',
-                      'runbooks/cassandra/upgrading',
-                      'runbooks/cassandra/monitoring',
-                      'runbooks/cassandra/parameters'
-                    ]
+                    children: require('./cassandra').children
                   }
                 ]
               },

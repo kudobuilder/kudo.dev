@@ -6,3 +6,7 @@ dev-image:
 
 dev:
 	docker run -it --rm --name=kudowww -p 8080:8080 -v ${PWD}:/app ${DOCKER_IMG}:${DOCKER_TAG}
+
+build:
+	./embed-operator-docs.sh
+	yarn docs:build

@@ -1,5 +1,5 @@
 [build]
-  command = "yarn docs:build"
+  command = "make build"
   publish = "content/.vuepress/dist/"
 
 [[redirects]]
