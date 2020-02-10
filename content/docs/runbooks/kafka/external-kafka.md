@@ -2,10 +2,10 @@
 
 This runbook explains how to expose a KUDO Kafka cluster to the outside of the Kubernetes cluster, using the `Service` of type `LoadBalancer`
 
-## Requirements
+## Pre-conditions
 
-- A Kubernetes cluster with KUDO version >= 0.10.0 installed
-- Have a KUDO Kafka cluster version 1.1.0 up and running in the namespace `kudo-kafka`
+- A Kubernetes cluster with KUDO version >= 0.10.1 installed
+- Have a KUDO Kafka cluster version 1.2.0 up and running in the namespace `kudo-kafka`
 - Have binaries of `jq` installed in the `$PATH`
 
 ## Steps

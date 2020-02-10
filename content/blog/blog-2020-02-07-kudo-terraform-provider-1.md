@@ -44,7 +44,8 @@ The `ZOOKEEPER_URI` value was hand calculated with knowledge of what the `NODE_C
 
 Before applying this example to a cluster, the KUDO CLI is needed to [install KUDO](https://kudo.dev/docs/#getting-started) and  [install the `Operators`](https://kudo.dev/docs/#deploy-your-first-operator).
 
- During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the initial deployment, suppose we determine we need to scale out our Zookepeer cluster and we patch the object: 
+ During the initial rollout of these two instances, the KUDO controller will attempt to deploy both at the same time.  This will have the effect of causing Kafka to error and restart pods multiple times while they fail to connect to the Zookeeper cluster before it's successfully deployed. After the initial deployment, suppose we determine we need to scale out our Zookepeer cluster and we patch the object:
+
 
 ```yaml
 apiVersion: kudo.dev/v1beta1
@@ -100,6 +101,7 @@ In addition to the generation of these outputs from an Instance for consumption 
 ### Example Revisited
 
 Revisiting our initial example, rather than having to manually install KUDO and our operators, we can use Terraform to define what we'd like available on our cluster.  These objects are captured in [main.tf](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf), but we describe the various objects here.
+
 
 ### Getting the Provider and the example
 
