@@ -14,11 +14,14 @@ git clone https://github.com/kudobuilder/operators.git "${checkout_dir}"
 function embed_docs() {
     local name="$1"
     local source="$2"
+
     local destination="${site_dir}/content/docs/runbooks/${name}"
     local snippet="${site_dir}/content/.vuepress/${name}.js"
+
     echo "Embedding ${name} docs from ${source} using ${snippet}" >&2
     rm -rf "${destination}"
     cp -a "${source}" "${destination}"
+
     echo 'module.exports = { children: [' > "${snippet}"
     for file in $(find "${destination}" -maxdepth 1 -type f -name '*.md' -not -name 'README.md' -printf '%f\n')
     do
@@ -29,3 +32,4 @@ function embed_docs() {
 
 embed_docs cassandra "${checkout_dir}/repository/cassandra/3.11/docs"
 embed_docs kafka "${checkout_dir}/repository/kafka/docs/latest"
+embed_docs spark "${checkout_dir}/repository/spark/docs/latest"
