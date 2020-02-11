@@ -91,6 +91,8 @@ $ kubectl kudo install zookeeper
 
 <Button text="Apache Cassandra" img="/images/logos/Cassandra_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
 
+<Button text="Apache Spark" img="/images/logos/apache_Spark_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/spark/" />
+
 <Button text="Apache Flink" img="/images/logos/flink_squirrel_500.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
 
 </div>
