@@ -34,7 +34,7 @@ First let’s create an `operator.yaml` file in the `./first-operator`.
 
 This is an operator with just one plan `deploy`, which has one phase and one step and represents the minimal setup. The `deploy` plan is automatically triggered when you install an instance of this operator into your cluster.
 
-You can see that the task  `app` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
+You can see that the task `app` references the resource `deployment.yaml`. KUDO expects this file to exist inside the `templates` folder. As the next step, create `templates/deployment.yaml`:
 
 <<< @//kudo/test/integration/first-operator-test/first-operator/templates/deployment.yaml
 
