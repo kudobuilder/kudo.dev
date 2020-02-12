@@ -12,6 +12,8 @@ The `TestSuite` object specifies the settings for the entire test suite and shou
 apiVersion: kudo.dev/v1alpha1
 kind: TestSuite
 startKIND: true
+kindContainers:
+- your/image:latest
 startKUDO: true
 testDirs:
 - tests/e2e/
@@ -38,6 +40,7 @@ parallel          | int              | The maximum number of tests to run at onc
 artifactsDir      | string           | The directory to output artifacts to (current working directory if not specified).       | .
 commands          | list of [Command](#command) | Commands to run prior to running the tests.                                   | []
 kubectl           | list of strings  | Kubectl specifies a list of kubectl commands to run prior to running the tests and after commands. | []
+kindContainers    | list of strings  | List of Docker images to load into the KIND cluster once it is started. | []
 
 ## TestStep
 
