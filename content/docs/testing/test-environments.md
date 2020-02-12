@@ -41,6 +41,8 @@ The kind cluster name can be overriden by setting either `kindContext` in your c
 
 By setting `kindNodeCache`, the containerd directories will be mounted into a Docker volume in order to persist the images pulled during a test run across test runs.
 
+If you want to load images into the built KIND cluster that have not been pushed, set `kindContainers`. See [Tips And Tricks](tips.md#loading-built-images-into-kind) for an example.
+
 It is also possible to provide a custom kind configuration file. For example, to override the Kubernetes cluster version, create a kind configuration file called `kind.yaml`:
 
 ```yaml

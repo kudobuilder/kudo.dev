@@ -4,6 +4,28 @@ This document contains some tips and gotchas that can be helpful when writing te
 
 [[toc]]
 
+## Loading Built Images Into KIND
+
+When KIND clusters are started, you may want to load an image that has not been pushed into the registry. To do this, you can use the `kindContainers` setting on your `TestSuite`.
+
+For example:
+
+```
+docker build -t myimage .
+```
+
+And then in the TestSuite, set:
+
+```
+apiVersion: kudo.dev/v1alpha1
+kind: TestSuite
+startKIND: true
+kindContainers:
+- myimage
+```
+
+When the KIND cluster is launched, the image will be loaded into it.
+
 ## Kubernetes Events
 
 Kubernetes events are regular Kubernetes objects and can be asserted on just like any other object:
