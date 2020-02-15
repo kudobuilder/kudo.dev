@@ -12,7 +12,7 @@ A package bundles all files needed to describe an operator. The structure of a p
 ```
 
 ::: attribute operator.yaml
-`operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. [Tasks](tasks.md) and [plans](plans.md) are defined in this file. Metadata that provide the name, version and maintainers of the operator are set here as well.
+`operator.yaml` is the main YAML file defining both operator metadata as well as the whole lifecycle of the operator. [Tasks](tasks.md) and [plans](plans.md) are defined in this file. Metadata that provide the name, version and maintainers of the operator are set here as well.
 :::
 
 ::: attribute params.yaml
