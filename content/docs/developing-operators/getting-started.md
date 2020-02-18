@@ -24,7 +24,7 @@ Create a new folder `./first-operator` that will contain the operator (also know
     └── deployment.yaml
 ```
 
-The `operator.yaml` is the main YAML file defining both operator metadata as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
+The `operator.yaml` is the main YAML file defining both operator metadata as well as the whole lifecycle of the operator. `params.yaml` defines parameters of the operator. During installation, these parameters can be overridden allowing customization. `templates` folder contain all templated Kubernetes objects that will be applied to your cluster after installation based on the workflow defined in `operator.yaml`.
 
 ## Operator Substance
 
