@@ -39,7 +39,7 @@
   export default{
     data(){
       return{
-        resources: json.resources
+        resources: json.resources.sort((a, b) => new Date(b.date) - new Date(a.date))
       }
     }
   }
