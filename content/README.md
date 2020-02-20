@@ -87,19 +87,23 @@ $ kubectl kudo install zookeeper
 
 <div class="flex-container">
 
-<Button text="Apache Kafka" img="/images/logos/Apache_kafka.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest/" />
+<Button text="Apache Kafka" img="/images/logos/apache-kafka.png" url="https://github.com/kudobuilder/operators/tree/master/repository/kafka/docs/latest/" />
 
-<Button text="Apache Cassandra" img="/images/logos/Cassandra_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
+<Button text="Apache Cassandra" img="/images/logos/apache-cassandra.jpg" url="https://github.com/kudobuilder/operators/tree/master/repository/cassandra/" />
 
-<Button text="Apache Spark" img="/images/logos/apache_Spark_logo.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/spark/" />
+<Button text="Apache Spark" img="/images/logos/apache-spark.jpg" url="https://github.com/kudobuilder/operators/tree/master/repository/spark/" />
 
-<Button text="Apache Flink" img="/images/logos/flink_squirrel_500.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
+<Button text="Apache Zookeeper" img="/images/logos/apache-zookeeper.png" url="https://github.com/kudobuilder/operators/tree/master/repository/zookeeper/" />
+
+<Button text="Apache Flink" img="/images/logos/apache-flink.png" url="https://github.com/kudobuilder/operators/tree/master/repository/flink/" />
+
+<Button text="Elasticsearch" img="/images/logos/elasticsearch.svg" url="https://github.com/kudobuilder/operators/tree/master/repository/elastic/" />
 
 </div>
 
 <center>
 
-… and [many more](https://github.com/kudobuilder/operators/)!
+… also check out the [operators repository](https://github.com/kudobuilder/operators/)!
 
 </center>
 
