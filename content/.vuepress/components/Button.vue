@@ -26,25 +26,28 @@
 <style lang="stylus" scoped>
 .button
     max-width 30%
-    margin 1rem
-    padding .5rem
-    background-color $kudoBlueColor
+    margin .5rem
+    padding .2rem
+    border-style solid
+    border-width 0
+    border-top-width 1px
+    border-bottom-width 1px
     border-radius 8px
+    border-color $backgroundColor
     text-align center
     flex-grow 1
     flex-basis 30%
-    line-height 1.7em
+    line-height 1em
     opacity 1
     .text
+        margin-top .2em
         font-weight lighter
-        color #ffffff
+        font-size .8em
+        color $textColor
     &:hover
-        background-color lighten($kudoBlueColor, 20%)
-    b
-        color $kudoEggplantLightColor
+        border-color $codeBgColor
     img
-        display block
-        margin-top .3em
+        vertical-align middle
         margin-left auto
         margin-right auto
         max-height 80px
