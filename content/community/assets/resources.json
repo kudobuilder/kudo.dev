@@ -2,6 +2,7 @@
   "resources": [
     {
       "resourceType": "Tutorial",
+      "date": "2019-05-06",
       "title": "KUDO Tutorial",
       "author": "Michael Beisiegel",
       "url": "https://github.com/realmbgl/kudo-tutorial"
@@ -34,6 +35,13 @@
       "details": "Experiences from Building the ArangoDB Operator.",
       "author": "Jörg Schad",
       "slides": "https://docs.google.com/presentation/d/1CFE0Vr1AmkKLhpG-KtDVSZRokKNy81OGjQ4I2tpqtss/"
+    },
+    {
+      "resourceType": "Blog",
+      "date": "2020-02-14",
+      "title": "Operating Akka Clusters using KUDO",
+      "author": "Michael Beisiegel",
+      "url": "https://d2iq.com/blog/operating-akka-clusters-using-kudo"
     }
   ]
 }
