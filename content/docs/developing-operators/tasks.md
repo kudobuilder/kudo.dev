@@ -47,6 +47,27 @@ tasks:
 
 **Note:** deleting non-existing resources is always successful. As of version 0.9.0, KUDO will not wait for the resource to be actually removed and will finish the task when the API server accepts the deletion request. So in case of Pods, Kubernetes imposes a default graceful termination period of 30 seconds, however, a delete-task will be done before that. KUDO 0.9.0 will not wait for [resource finalizers](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) should they exist.
 
+
+## Toggle-Task
+
+Developing featrues for operators sometimes requires enabling and disabling resources.
+A toggle-task runs an apply-task or delete-task based on a parameter boolean value.
+Let's add a service for an operator based on the parameter `enable-service`:
+
+```yaml
+tasks:
+  - name: app-service
+    kind: Toggle
+    spec:
+      parameter: enable-service
+      resources:
+        - service.yaml
+```
+
+Based on the `enable-service` value the task will either `apply` or `delete` the resources defined in `templates/service.yaml`
+
+If the `enable-service` parameter evaluates to `true` the task named `app-service` will create a service resource defined in `templates/service.yaml`. In case the `enable-service` parameter evaluates to `false`, the task named `app-service` will delete the service resource defined in `templates/service.yaml`.
+
 ## Pipe-Task
 
 Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](getting-started.md) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
