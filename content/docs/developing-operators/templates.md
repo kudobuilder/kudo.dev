@@ -61,6 +61,17 @@ Sprig functions that allow environment access are disabled. The respective funct
 
 Use actions to provide branching or repetition in templates. Below are some examples on how to use functions in operator templates. The [documentation for Go templates](https://golang.org/pkg/text/template/#hdr-Actions) has more details on its features.
 
+### Perform arithmetic using parameters
+
+Note that all `.Params` have a type of `string`. You may need to use a function to convert a parameter to
+a different type first.
+
+This example substracts 1 from a parameter:
+
+```yaml
+{{ sub (atoi .Params.NODE_COUNT) 1 }}
+```
+
 ### Enable or disable features using a feature parameter
 
 This example uses an HTTPS port if the `ENCRYPTION` parameter is "true". Otherwise it uses an HTTP port.
