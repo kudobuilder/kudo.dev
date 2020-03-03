@@ -36,3 +36,4 @@ function embed_docs() {
 embed_docs cassandra "${checkout_dir}/repository/cassandra/3.11/docs"
 embed_docs kafka "${checkout_dir}/repository/kafka/docs/latest"
 embed_docs spark "${checkout_dir}/repository/spark/docs/latest"
+embed_docs elastic "${checkout_dir}/repository/elastic/docs"
