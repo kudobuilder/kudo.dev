@@ -100,6 +100,10 @@ module.exports = {
                   {
                     title: 'Spark',
                     children: require('./spark').children
+                  },
+                  {
+                    title: 'Elastic',
+                    children: require('./elastic').children
                   }
                 ]
               },
