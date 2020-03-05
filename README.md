@@ -10,7 +10,11 @@ The KUDO web site is build using [VuePress](https://v1.vuepress.vuejs.org/).
 In the root of the project, run
 ```bash
 yarn install
+make build
 yarn docs:dev
+
+#or make local-run target calls yarm docs:dev
+make local-run
 ```
 
 The output will inform you about the address the site is served (usually http://localhost:8080).
@@ -21,13 +25,13 @@ You can choose to install and run the above dependencies in a Docker container i
 First, build the development image with:
 
 ```bash
-make dev-image
+make docker-build
 ```
 
 And then run VuePress in a container from this image by doing:
 
 ```bash
-make dev
+make docker-run
 ```
 
 
