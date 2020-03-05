@@ -66,7 +66,7 @@ Use actions to provide branching or repetition in templates. Below are some exam
 Note that all `.Params` have a type of `string`. You may need to use a function to convert a parameter to
 a different type first.
 
-This example substracts 1 from a parameter:
+This example subtracts 1 from a parameter:
 
 ```yaml
 {{ sub (atoi .Params.NODE_COUNT) 1 }}
