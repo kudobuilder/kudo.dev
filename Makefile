@@ -15,7 +15,7 @@ build:	external-docs
 
 .PHONY: external-docs
 external-docs:
-	./embed-operator-docs.sh
+	./scripts/embed-operator-docs.sh
 
 .PHONY: local-run
 local-run:

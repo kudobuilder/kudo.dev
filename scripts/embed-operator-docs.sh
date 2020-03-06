@@ -5,7 +5,7 @@ set -o pipefail
 set -o nounset
 #set -o xtrace
 
-site_dir="$(dirname "$(realpath "$0")")"
+site_dir="$(dirname "$(dirname "$(realpath "$0")")")"
 checkout_dir=$(mktemp -d)
 trap "rm -rf ${checkout_dir}" EXIT
 
