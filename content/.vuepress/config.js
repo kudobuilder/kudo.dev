@@ -60,7 +60,7 @@ module.exports = {
                   },
                 ]
               },
-              '',
+              'architecture',
               'cli',
               {
                   title: "Comparison",
