@@ -1,6 +1,7 @@
 ---
 home: true
-navbar: false
+navbar: true
+hideNavbarLogo: false
 heroImage: /images/kudo_horizontal_color@2x.png
 heroText:
 tagline: The Kubernetes Universal Declarative Operator
