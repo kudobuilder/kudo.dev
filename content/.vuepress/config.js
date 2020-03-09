@@ -157,8 +157,6 @@ module.exports = {
               }
             ],
         },
-        repo: "kudobuilder/kudo",
-        repoLabel: "Contribute!",
         docsRepo: "kudobuilder/www",
         docsDir: "content",
         docsBranch: "master",

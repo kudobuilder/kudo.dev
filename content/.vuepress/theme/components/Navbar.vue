@@ -8,7 +8,7 @@
     >
       <img
         class="logo"
-        v-if="$site.themeConfig.logo"
+        v-if="$site.themeConfig.logo && $page.frontmatter.hideNavbarLogo !== false"
         :src="$withBase($site.themeConfig.logo)"
         :alt="$siteTitle"
       >
@@ -34,6 +34,17 @@
       />
       <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"/>
       <NavLinks class="can-hide"/>
+      <!-- links to SLack, Twitter and GitHub -->
+      <span style="margin: .5em" />
+      <a href="https://github.com/kudobuilder/kudo" target="_blank" rel="noopener noreferrer">
+        <img class="nav-icon" src="/images/logos/github-64.png" alt="GitHub"  />
+      </a>
+      <a href="https://twitter.com/kudobuilder" target="_blank" rel="noopener noreferrer">
+        <img class="nav-icon" src="/images/logos/twitter-64.png" alt="Twitter"  />
+      </a>
+      <a href="https://kubernetes.slack.com/messages/kudo/" target="_blank" rel="noopener noreferrer">
+        <img class="nav-icon" src="/images/logos/slack-64.png" alt="Slack"  />
+      </a>
     </div>
   </header>
 </template>
@@ -118,6 +129,13 @@ $navbar-horizontal-padding = 1.5rem
     .search-box
       flex: 0 0 auto
       vertical-align top
+  .nav-icon
+    margin .3em
+    height $navbarHeight - 2.2rem
+    min-width $navbarHeight - 2.2rem
+    &:hover
+      opacity .7
+
 
 @media (max-width: $MQMobile)
   .navbar
