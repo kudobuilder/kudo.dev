@@ -138,7 +138,20 @@ A specific application version on the official GitHub repo. (default to the most
 :::
 
 ::: flag -p, --parameter (stringArray)
-The parameter name and value separated by '='
+The parameter name and value separated by '='. See also `-P`
+:::
+
+::: flag -P, --parameter-file (stringArray)
+Path to a YAML file with parameter values. The top-level element in this file must be a mapping,
+where keys are parameter names and values are the parameter values.
+
+This is useful if you want to keep your instances' parameter values in version control,
+or for specifying particularly complex or long parameter values which are inconvenient
+to handle in shell command line.
+
+Parameters are collected by first reading the files specified with `--parameter-file`/`-P` (in the order specified)
+and then from values specified with `--parameter`/`-p`. Last encountered value of a given parameter wins.
+This lets you define defaults in one or more files, and override them on the command line as needed.
 :::
 
 ::: flag --repo (string)
@@ -206,10 +219,16 @@ This will install new instance of Kafka Operator which maps to Kafka operator ve
 
 ### Install a Package Overriding Instance Name and Parameters
 
-Use `--instance` and `--parameter`/`-p` for setting an instance name and parameters, respectively:
+Use `--instance` for setting an instance name.
+Use `--parameter`/`-p` and/or `--parameter-file`/`-P` for setting parameters.
+
+For example:
 
 ```bash
-$ kubectl kudo install kafka --instance=my-kafka-name --parameter ZOOKEEPER_URI=zk-zk-0.zk-hs:2181,zk-zk-1.zk-hs:2181,zk-zk-2.zk-hs:2181 --parameter ZOOKEEPER_PATH=/small -p BROKERS_COUNTER=3
+$ cat kafka-parameters.yaml
+ZOOKEEPER_URI: zk-zk-0.zk-hs:2181,zk-zk-1.zk-hs:2181,zk-zk-2.zk-hs:2181
+ZOOKEEPER_PATH: /small
+$ kubectl kudo install kafka --instance=my-kafka-name -p BROKERS_COUNTER=3 -P kafka-parameters.yaml
 operator.kudo.dev/kafka unchanged
 operatorversion.kudo.dev/kafka unchanged
 instance.kudo.dev/v1alpha1/my-kafka-name created
@@ -517,7 +536,7 @@ In order to remove a repository simply run `kubectl kudo repo remove foo`
 
 ### Update Parameters on Running Operator Instance
 
-Every operator can define overridable parameters in `params.yaml`. When installing an operator and deploying an instance, you can use the defaults or override them with `-p` parameters to `kudo install`.
+Every operator can define overridable parameters in `params.yaml`. When installing an operator and deploying an instance, you can use the defaults or override them with `-p` or `-P` parameters to `kudo install`.
 
 The `kudo update` command allows you to change these parameters even on an already running operator instance. For example, if you have an instance in your cluster named `dev-flink` (you can figure out what you have installed with `kubectl get instances`) and that operator exposes a parameter with the name `param`, you can change its value with the following command:
 
