@@ -57,6 +57,13 @@ Functions transform input like variables. Pipelines allow to use the result of a
 
 Sprig functions that allow environment access are disabled. The respective functions are `env`, `expandenv`, `base`, `dir`, `clean`, `ext` and `isAbs`.
 
+Additionally, KUDO provides the following custom functions:
+
+::: flag toYaml
+Returns a YAML representation of its argument. Its output
+should usually be piped into `| trim | indent N`.
+:::
+
 ## Actions
 
 Use actions to provide branching or repetition in templates. Below are some examples on how to use functions in operator templates. The [documentation for Go templates](https://golang.org/pkg/text/template/#hdr-Actions) has more details on its features.
