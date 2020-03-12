@@ -50,8 +50,8 @@ tasks:
 
 ## Toggle-Task
 
-Developing featrues for operators sometimes requires enabling and disabling resources.
-A toggle-task runs an apply-task or delete-task based on a parameter boolean value.
+Developing features for operators sometimes requires enabling and disabling resources.
+A toggle-task applies or deletes resources based on a parameter boolean value.
 Let's add a service for an operator based on the parameter `enable-service`:
 
 ```yaml
@@ -64,7 +64,7 @@ tasks:
         - service.yaml
 ```
 
-Based on the `enable-service` value the task will either `apply` or `delete` the resources defined in `templates/service.yaml`
+This task will either apply or delete the resources defined in `templates/service.yaml` based on the `enable-service` parameter value.
 
 If the `enable-service` parameter evaluates to `true` the task named `app-service` will create a service resource defined in `templates/service.yaml`. In case the `enable-service` parameter evaluates to `false`, the task named `app-service` will delete the service resource defined in `templates/service.yaml`.
 
