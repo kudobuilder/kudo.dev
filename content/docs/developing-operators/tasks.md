@@ -2,7 +2,7 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, and `Pipe`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and `Toggle`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
 
 ```yaml
 tasks:
