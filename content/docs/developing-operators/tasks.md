@@ -68,6 +68,8 @@ This task will either apply or delete the resources defined in `templates/servic
 
 If the `enable-service` parameter evaluates to `true` the task named `app-service` will create a service resource defined in `templates/service.yaml`. In case the `enable-service` parameter evaluates to `false`, the task named `app-service` will delete the service resource defined in `templates/service.yaml`.
 
+The parameter `enable-service` must be defined in the `params.yaml` file otherwise the operator installation will fail. And the parameter value should also render to a boolean value. In case the parameter value isn't a boolean the Toggle-Task will fail. 
+
 ## Pipe-Task
 
 Developing complicated operators often require generating files in one step and reusing them in a later one. A common example is generating custom certificates/dynamic configuration files in the bootstrap step and using them in the later deployment step of the service. This is were pipe-tasks can help: you can generate files in one task and save them either as a [Secret](https://cloud.google.com/kubernetes-engine/docs/concepts/secret) or a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap) for use in subsequent steps. Let's see it in action. We will extend [first-operator](getting-started.md) to generate a custom `index.html` page and deploy the Nginx server with it. Let's define a new pipe-task called `genwww`:
