@@ -2,7 +2,7 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, and `Pipe`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO (as of 0.9.0) offers three main task types: `Apply`, `Delete`, `Pipe` and `Toggle`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
 
 ```yaml
 tasks:
@@ -46,6 +46,29 @@ tasks:
 ```
 
 **Note:** deleting non-existing resources is always successful. As of version 0.9.0, KUDO will not wait for the resource to be actually removed and will finish the task when the API server accepts the deletion request. So in case of Pods, Kubernetes imposes a default graceful termination period of 30 seconds, however, a delete-task will be done before that. KUDO 0.9.0 will not wait for [resource finalizers](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/) should they exist.
+
+
+## Toggle-Task
+
+Developing features for operators sometimes requires enabling and disabling resources.
+A toggle-task applies or deletes resources based on a parameter boolean value.
+Let's add a service for an operator based on the parameter `enable-service`:
+
+```yaml
+tasks:
+  - name: app-service
+    kind: Toggle
+    spec:
+      parameter: enable-service
+      resources:
+        - service.yaml
+```
+
+This task will either apply or delete the resources defined in `templates/service.yaml` based on the `enable-service` parameter value.
+
+If the `enable-service` parameter evaluates to `true` the task named `app-service` will create a service resource defined in `templates/service.yaml`. In case the `enable-service` parameter evaluates to `false`, the task named `app-service` will delete the service resource defined in `templates/service.yaml`.
+
+The parameter `enable-service` must be defined in the `params.yaml` file otherwise the operator installation will fail. And the parameter value should also render to a boolean value. In case the parameter value isn't a boolean the Toggle-Task will fail. 
 
 ## Pipe-Task
 
