@@ -100,24 +100,24 @@ In addition to the generation of these outputs from an Instance for consumption 
 
 ### Example Revisited
 
-Revisiting our initial example, rather than having to manually install KUDO and our operators, we can use Terraform to define what we'd like available on our cluster.  These objects are captured in [main.tf](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf), but we describe the various objects here.
+Revisiting our initial example, rather than having to manually install KUDO and our operators, we can use Terraform to define what we'd like available on our cluster.  These objects are captured in [main.tf](https://github.com/kudobuilder/terraform-provider-kudo/blob/master/blog/part1/main.tf), but we describe the various objects here.
 
 
 ### Getting the Provider and the example
 
-The provider code and examples are currently hosted on [Github](https://github.com/runyontr/terraform-provider-kudo).
+The provider code and examples are currently hosted on [Github](https://github.com/kudobuilder/terraform-provider-kudo).
 
 #### Build the provider
 
 The makefile at the top level of the git repo has a command to build and install the provider into the default plugin directory so your local Terraform can find it.  This provider was built with Go version 1.13.5.
 
 ```bash
-git clone https://github.com/runyontr/terraform-provider-kudo
+git clone https://github.com/kudobuilder/terraform-provider-kudo
 cd terraform-provider-kudo
 make build
 ```
 
-The rest of this post will reference a `main.tf` file that is located in the `examples/blog/part1/` folder of the provider repo.  You can also find this file [here](https://github.com/runyontr/terraform-provider-kudo/blob/master/blog/part1/main.tf)
+The rest of this post will reference a `main.tf` file that is located in the `examples/blog/part1/` folder of the provider repo.  You can also find this file [here](https://github.com/kudobuilder/terraform-provider-kudo/blob/master/blog/part1/main.tf)
 
 
 #### KUDO Installation
@@ -199,7 +199,7 @@ resource "kudo_instance" "kafka" {
 
 Due to the relationship of the Terraform objects, `kudo_instance.zk1` is needed before we can deploy `kudo_instance.kafka` since the output of the former is used as an input to the latter.  This relationship is captured in the dependency graph which shows the order Terraform will create and update objects in our environment. This graph uses arrows to point at which nodes are dependencies of other nodes, and as a result the earlier objects are at the bottom and Terraform moves up the graph, ensuring each parent node is healthy before starting a child node.  
 
-![Dependency Graph](https://github.com/runyontr/terraform-provider-kudo/raw/master/blog/part1/dependencies.png)
+![Dependency Graph](https://github.com/kudobuilder/terraform-provider-kudo/raw/master/blog/part1/dependencies.png)
 
 ## Terraform In Action!
 
@@ -786,7 +786,7 @@ zook-zookeeper-0.zook-hs:2181,zook-zookeeper-1.zook-hs:2181,zook-zookeeper-2.zoo
 
 In a future post, we'll explore how to tie together this provider with other Terraform providers and provide a seamless platform for using KUDO with other Terraform Infrastructure as Code repositories.  
 
-There is still plenty of work to finish in this Terraform provider, please [fill out an issue](https://github.com/runyontr/terraform-provider-kudo/issues/new) if there's a feature you're looking for or reach out to the #kudo channel or @runyontr on the Kubernetes slack or email the author directly at tom@runyon.dev. We'd love to hear more about how you're looking to use KUDO to run operators.
+There is still plenty of work to finish in this Terraform provider, please [fill out an issue](https://github.com/kudobuilder/terraform-provider-kudo/issues/new) if there's a feature you're looking for or reach out to the #kudo channel or @runyontr on the Kubernetes slack or email the author directly at tom@runyon.dev. We'd love to hear more about how you're looking to use KUDO to run operators.
 
 
 <Authors about="runyontr" />
