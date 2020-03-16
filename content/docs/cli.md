@@ -212,7 +212,6 @@ Use `--instance` and `--parameter`/`-p` for setting an instance name and paramet
 $ kubectl kudo install kafka --instance=my-kafka-name --parameter ZOOKEEPER_URI=zk-zk-0.zk-hs:2181,zk-zk-1.zk-hs:2181,zk-zk-2.zk-hs:2181 --parameter ZOOKEEPER_PATH=/small -p BROKERS_COUNTER=3
 operator.kudo.dev/kafka unchanged
 operatorversion.kudo.dev/kafka unchanged
-No instance named 'my-kafka-name' tied to this "kafka" version has been found. Do you want to create one? (Yes/no)
 instance.kudo.dev/v1alpha1/my-kafka-name created
 $ kubectl get instances
 NAME            AGE
