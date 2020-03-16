@@ -228,7 +228,7 @@ For example:
 $ cat kafka-parameters.yaml
 ZOOKEEPER_URI: zk-zk-0.zk-hs:2181,zk-zk-1.zk-hs:2181,zk-zk-2.zk-hs:2181
 ZOOKEEPER_PATH: /small
-$ kubectl kudo install kafka --instance=my-kafka-name -p BROKERS_COUNTER=3 -P kafka-parameters.yaml
+$ kubectl kudo install kafka --instance=my-kafka-name -p BROKER_COUNT=3 -P kafka-parameters.yaml
 operator.kudo.dev/kafka unchanged
 operatorversion.kudo.dev/kafka unchanged
 instance.kudo.dev/v1alpha1/my-kafka-name created
