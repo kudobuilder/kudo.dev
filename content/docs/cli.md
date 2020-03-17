@@ -145,6 +145,9 @@ The parameter name and value separated by '='. See also `-P`
 Path to a YAML file with parameter values. The top-level element in this file must be a mapping,
 where keys are parameter names and values are the parameter values.
 
+See [the section on installing with overrides](#install-a-package-overriding-instance-name-and-parameters) below
+for an example of a parameter value file.
+
 This is useful if you want to keep your instances' parameter values in version control,
 or for specifying particularly complex or long parameter values which are inconvenient
 to handle in shell command line.
