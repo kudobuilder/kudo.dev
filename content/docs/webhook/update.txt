@@ -1,0 +1,13 @@
+title KUDO Request Life Cycle
+
+
+KUDO user -> CLI: execute plan
+CLI -> API server: update instance resource
+API server -> Instance Admission Controller: validate request
+Instance Admission Controller --> API server: accept the request
+API server --> API server: store new Instance in etcd
+API server --> CLI: HTTP 200, update successful
+CLI --> KUDO user: new plan scheduled
+API server -> KUDO Manager: instance update event
+
+// https://sequencediagram.org/

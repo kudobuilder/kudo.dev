@@ -13,7 +13,7 @@
 * Repository development and management
 * Interacting with the deployed KUDO controller via KUDO CRDs
   * Installing and uninstalling operator CRDs and operators
-  * Starting operator plans and querying their status 	
+  * Starting operator plans and querying their status
   * Upgrading, updating, backing up and restoring operators
 
 **KUDO CRDs** extend the Kubernetes API to support KUDO
