@@ -34,6 +34,18 @@ parameters:
   - name: REQUIRED_PARAM
     description: "This parameter is required but does not have a default value."
     required: True
+  - name: ARRAY_PARAM
+    description: "This parameter describes an array of values."
+    default:
+      - user1
+      - user2
+    type: array
+  - name: MAP_PARAM
+    description: "This parameter describes a map of values."
+    default:
+      label1: foo
+      label2: bar
+    type: map
 ```
 
 A parameter declaration consists of the following attributes:
@@ -53,6 +65,12 @@ May be used by user interfaces to KUDO.
 A description of the purpose of the parameter. Optional.
 Currently not used anywhere.
 May be used by user interfaces to KUDO.
+:::
+
+::: attribute type
+The type of the parameter value. Optional.
+By default, a parameter value is a string. Arrays or maps can be provided by using `array` or `map` here.
+In that case the default value can be provided as YAML.
 :::
 
 ::: attribute default
