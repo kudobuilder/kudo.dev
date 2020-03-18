@@ -42,6 +42,13 @@
       "title": "Operating Akka Clusters using KUDO",
       "author": "Michael Beisiegel",
       "url": "https://d2iq.com/blog/operating-akka-clusters-using-kudo"
+    },
+    {
+      "resourceType": "Blog",
+      "date": "2019-12-09",
+      "title": "Running Apache Flink on Kubernetes with KUDO",
+      "author": "Gerred Dillon",
+      "url": "https://flink.apache.org/news/2019/12/09/flink-kubernetes-kudo.html"
     }
   ]
 }
