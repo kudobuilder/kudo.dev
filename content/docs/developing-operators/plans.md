@@ -170,8 +170,5 @@ Instance admission controller governs any update to the Instance either through 
 
 The admission controller would also reject parameter updates that would trigger multiple distinct plans. There are a few exceptions too: for example, a `cleanup` plan is special and is executed when an Instance is deleted. `cleanup` can not be executed manually and is allowed to override any existing plan (since the Instance is being deleted anyway).
 
-### Installing Admission Controller
+As of KUDO v0.11.0, the Instance admission controller is optional though we're planing to make it mandatory in the near future. See [kudo init](../cli.md#kudo-init) documentation for more details.
 
-As of KUDO v0.11.0, the Instance admission controller is optional. You can install it using `kudo init --webhook=InstanceValidation` command which installs KUDO into your cluster with admission webhook enabled. If you already have KUDO installed, you can run `kudo init --webhook=InstanceValidation -o yaml --dry-run` to get the Kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`. See [kudo init](cli.md#examples) documentation for more details.
-
-Any admission controller in Kubernetes is an HTTPS endpoint and thus requires a valid certificate. KUDO relies on the cert-manager **0.11 or higher** for this. You should have [cert-manager installed](https://cert-manager.io/docs/installation/) and operational **prior** to admission controller installation. Note, that we're planning to make the controller mandatory soon.
