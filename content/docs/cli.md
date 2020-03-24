@@ -158,7 +158,9 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 * `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
 * `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
 * `kubectl kudo init --crd-only` will create crds in the cluster.
-* `kudo init --webhook=InstanceValidation` installs KUDO into your cluster with admission webhook enabled. If you already have KUDO installed, you can run `kudo init --webhook=InstanceValidation -o yaml --dry-run` to get the Kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`. Any admission controller in Kubernetes is an HTTPS endpoint and thus requires a valid certificate. KUDO relies on the cert-manager **0.11 or higher** for this. You should have [cert-manager installed](https://cert-manager.io/docs/installation/) and operational **prior** to admission controller installation. Read more about the admission controllers and how/why [KUDO uses them](developing-operators/plans.md#executing-plans).
+* `kudo init --webhook=InstanceValidation` installs KUDO into your cluster with admission webhook enabled. If you already have KUDO installed, you can run `kudo init --webhook=InstanceValidation -o yaml --dry-run` to get the Kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`.
+
+  Any admission controller in Kubernetes is an HTTPS endpoint and thus requires a valid certificate. KUDO relies on the cert-manager **0.11 or higher** for this. You should have [cert-manager installed](https://cert-manager.io/docs/installation/) and operational **prior** to admission controller installation. Read more about the admission controllers and how/why KUDO uses them to ensure correct [plan execution](developing-operators/plans.md#executing-plans).
 
 **Note**: Looking to delete kubernetes objects created via init, run:
 
