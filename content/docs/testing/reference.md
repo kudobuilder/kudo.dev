@@ -39,7 +39,6 @@ timeout           | int              | Override the default timeout of 30 second
 parallel          | int              | The maximum number of tests to run at once.                                              | 8
 artifactsDir      | string           | The directory to output artifacts to (current working directory if not specified).       | .
 commands          | list of [Command](#command) | Commands to run prior to running the tests.                                   | []
-kubectl           | list of strings  | Kubectl specifies a list of kubectl commands to run prior to running the tests and after commands. | []
 kindContainers    | list of strings  | List of Docker images to load into the KIND cluster once it is started. | []
 
 ## TestStep
@@ -64,7 +63,6 @@ Field    |          Type             | Description
 delete   | list of object references | A list of objects to delete, if they do not already exist, at the beginning of the test step. The test harness will wait for the objects to be successfully deleted before applying the objects in the step.
 index    | int                       | Override the test step's index.
 commands | list of [Command](#command) | Commands to run prior at the beginning of the test step.
-kubectl  | list of strings           | Kubectl specifies a list of kubectl commands to run at the beginning of the test step and after commands.
 
 Object Reference:
 

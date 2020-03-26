@@ -80,22 +80,16 @@ The `delete` object references can delete:
 
 The test harness will wait for the objects to be successfully deleted, if they exist, before continuing with the test step - if the objects do not get deleted before the timeout has expired the test step is considered failed.
 
-## Kubectl Commands
+## Running Commands
 
-A `TestStep` configuration can also specify kubectl commands to run before running the step:
-
-```yaml
-apiVersion: kudo.dev/v1alpha1
-kind: TestStep
-kubectl:
-- apply -f https://raw.githubusercontent.com/kudobuilder/kudo/master/docs/deployment/10-crds.yaml
-```
-
-It is also possible to use any installed kubectl plugin when calling kubectl commands:
+A `TestStep` configuration can also specify commands to run before running the step:
 
 ```yaml
 apiVersion: kudo.dev/v1alpha1
 kind: TestStep
-kubectl:
-- kudo install zookeeper --skip-instance
+commands:
+- command: kubectl apply -f https://raw.githubusercontent.com/kudobuilder/kudo/master/docs/deployment/10-crds.yaml
+  namespaced: true
 ```
+
+If the `namespaced` setting is set, the `--namespace` flag is set to the test step's namespace.
