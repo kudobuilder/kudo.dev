@@ -1,8 +1,0 @@
-@startuml
-"KUDO user" -> CLI: install operator
-CLI -> "API server": create CRDs
-"API server" -> "KUDO webhook": validate the CRDs
-"KUDO webhook" --> "API server": deny the request
-"API server" --> CLI: HTTP 400, Bad request
-CLI --> "KUDO user": operator install failed
-@enduml

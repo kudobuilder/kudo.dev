@@ -102,6 +102,8 @@ parameters:
 
 Each parameter has a `trigger` field which specifies what plan will be executed when this parameter changes. The operations required to safely update a running application can vary depending on which parameter is being updated. For instance, updating the `NODE_COUNT` may require a simple update of the deployment, whereas updating the `NODE_MEM_MIB` may require rolling out a new version via a canary or blue/green deployment. If no trigger is specified, the default `deploy` plan will be executed.
 
+You can also trigger plans manually, without the corresponding parameter update. See [plans documentation](developing-operators/plans.md#executing-plans) for more details.
+
 ## Default Plans
 
 By default, KUDO reserves three plan names for special purposes:

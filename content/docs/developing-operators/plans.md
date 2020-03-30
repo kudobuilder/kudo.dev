@@ -39,7 +39,7 @@ plans:
               - deploy-agent
 ```
 
-The KUDO controller deploys the plans of an operator. Only a single plan can be in active deployment at a time. KUDO has  different approaches to decide which plan to deploy.
+The KUDO controller deploys the plans of an operator. Only a single plan can be in active deployment at a time. KUDO has different approaches to decide which plan to deploy.
 
 ## Deploy and update plans
 
@@ -140,3 +140,35 @@ parameters:
 - name: APPLICATION_MEMORY
   trigger: canary
 ```
+
+## Executing Plans
+
+In general, KUDO manager will automatically [execute a plan](what-is-kudo.md#operator-parameters) when the corresponding parameter changes. However, sometimes this is not enough. Sometimes you need to trigger a plan manually, e.g. to create a periodic `backup`, or `restore` data in case of data corruption. Such plans typically do not need a corresponding parameter. KUDO [v0.11.0](https://github.com/kudobuilder/kudo/releases/tag/v0.11.0) introduced new feature: manual plan execution. In a nutshell, you can now:
+
+```bash
+$ kubectl kudo plan trigger --name deploy --instance my-instance
+```
+
+which will trigger the `deploy` plan and execute it on `my-instance`. While this looks relatively easy on the surface, the devil is in detail, so let's take a closer look.
+
+### Plan Life Cycle
+
+Having the ability to trigger multiple plans on demand raises the question: what happens if two plans run concurrently? The answer is: it depends. Should two plans be completely independent of each other (e.g. `deploy` deploys the services and `monitor` deploys the monitoring pods) both can be executed in parallel. But if two plans in question are `backup` and `restore` or `deploy` and `migrate`? Some plans are incompatible with others. A few may not even be reentrant. While it is probably ok to restart a running `deploy` plan, a `restore` plan might not be reentrant because of possible data corruption.
+
+We're planning to explore the realm of plan compatibility further in the future. Annotating plan affinity and anti-affinity, reentrant vs non-reentrant plans, plan cancellation and transient plan parameters are some of the topics we're examining. All contributions and feedback are highly welcome.
+
+Having all this in mind how can we ensure correct plan execution? Meet Kubernetes admission controllers.
+
+### Admission Controllers
+
+In a nutshell, Kubernetes admission controllers are plugins that govern and enforce how the cluster is used. They can be thought of as a gatekeeper that intercepts (authenticated) API requests and may change the request object or deny the request altogether. Kubernetes already comes with a bunch of these [pre-installed](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) which govern everything from user authorization to the namespace life cycle.
+
+KUDO manager employs an Instance admission controller that governs changes to Instances, making sure that plans do not interfere. Schematically this looks like the following:
+![Instance update](/images/admission-instance-update.png)
+
+Instance admission controller governs any update to the Instance either through manual plan execution or Instance parameter updates. The general rule of thumb is the following: all plans should be terminal (either successfully with status `COMPLETE` or unsuccessfully with `FATAL_ERROR`) before a new plan is allowed to start. A singular plan can be restarted so we assume all plans to be reentrant at least for now. While this might not be true for all plans, we think that it covers the 80/20 case e.g. when a `deploy` plan is stuck and must be restarted with less memory per node. In case a request is rejected, the Instance controller returns an error explaining why exactly the update was denied.
+
+The admission controller would also reject parameter updates that would trigger multiple distinct plans. There are a few exceptions too: for example, a `cleanup` plan is special and is executed when an Instance is deleted. `cleanup` can not be triggered manually and is allowed to override any existing plan (since the Instance is being deleted anyway).
+
+As of KUDO v0.11.0, the Instance admission controller is optional though we're planing to make it mandatory in the near future. See [kudo init](../cli.md#kudo-init) documentation for more details.
+

@@ -30,6 +30,8 @@ $ kubectl kudo init --dry-run -o=yaml > kudo.yaml
 $ kubectl apply -f kudo.yaml
 ```
 
+See [kudo init documentation](cli.md#kudo-init)  for more KUDO installation options.
+
 ## Deploy Your First Operator
 
 To get started, follow the instructions in the [Apache Kafka example](examples/apache-kafka.md) to deploy a Kafka cluster along with its dependency ZooKeeper.
