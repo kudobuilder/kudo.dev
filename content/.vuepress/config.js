@@ -199,6 +199,9 @@ module.exports = {
             before: name => `<div class="teaser custom-block"><h2 class="custom-block-title">${name}</h2>`,
             after: '</div>',
         }],
-        [ 'feed', feed_options ]
+        [ 'feed', feed_options ],
+        ['check-md', {
+          pattern: '**/*.md',
+        }]
     ]
 };

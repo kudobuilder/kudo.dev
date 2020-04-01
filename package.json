@@ -1,9 +1,11 @@
 {
   "license": "Apache-2.0",
   "devDependencies": {
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "vuepress-plugin-check-md": "^0.0.2"
   },
   "scripts": {
+    "docs:lint": "vuepress check-md content",
     "docs:dev": "vuepress dev content",
     "docs:build": "vuepress build content",
     "docs:clean": "rm -rf node_modules && yarn install"

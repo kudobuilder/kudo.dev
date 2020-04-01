@@ -11,6 +11,7 @@ In the root of the project, run
 ```bash
 yarn install
 make build
+yarn docs:lint
 yarn docs:dev
 
 #or make local-run target calls yarm docs:dev
