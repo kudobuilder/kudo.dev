@@ -20,3 +20,7 @@ external-docs:
 .PHONY: local-run
 local-run:
 	yarn docs:dev
+
+.PHONY: lint
+lint:
+	yarn docs:lint

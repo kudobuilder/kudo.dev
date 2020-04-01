@@ -30,9 +30,9 @@ The following is a checklist with resources to accelerate that learning curve. T
 1. [Learn Kubernetes Basics and Internals](#learn-kubernetes-basics)
 2. [Learn kubectl](#learn-kubectl)
 3. [Learn Kubernetes API / Resources](#learn-kubernetes-api-resources)
-4. [Learn Custom Resource Definitions](#learn-custom-resource-defintions)
+4. [Learn Custom Resource Definitions](#learn-custom-resource-definitions)
 5. [Learn Kubernetes Operators](#learn-kubernetes-operators)
-6. [Dynamic CRD / KUDO](#dynamic-crd-kudo)
+6. [Dynamic CRD / KUDO](#kudo)
 
 ## Learn Kubernetes Basics
 
