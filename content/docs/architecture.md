@@ -25,7 +25,7 @@
 
 Read about KUDO's [concepts](concepts.md) for more details around operators, operator versions and instance CRDs.
 
-**KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read about the [operator repository](repository.md) for more details on repositories and operator layout.
+**KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read about the [operator repository](https://github.com/kudobuilder/operators) for more details on repositories and operator layout.
 
 ## Implementation
 

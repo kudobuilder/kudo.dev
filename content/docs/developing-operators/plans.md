@@ -143,7 +143,7 @@ parameters:
 
 ## Executing Plans
 
-In general, KUDO manager will automatically [execute a plan](what-is-kudo.md#operator-parameters) when the corresponding parameter changes. However, sometimes this is not enough. Sometimes you need to trigger a plan manually, e.g. to create a periodic `backup`, or `restore` data in case of data corruption. Such plans typically do not need a corresponding parameter. KUDO [v0.11.0](https://github.com/kudobuilder/kudo/releases/tag/v0.11.0) introduced new feature: manual plan execution. In a nutshell, you can now:
+In general, KUDO manager will automatically [execute a plan](../what-is-kudo.md#operator-parameters) when the corresponding parameter changes. However, sometimes this is not enough. Sometimes you need to trigger a plan manually, e.g. to create a periodic `backup`, or `restore` data in case of data corruption. Such plans typically do not need a corresponding parameter. KUDO [v0.11.0](https://github.com/kudobuilder/kudo/releases/tag/v0.11.0) introduced new feature: manual plan execution. In a nutshell, you can now:
 
 ```bash
 $ kubectl kudo plan trigger --name deploy --instance my-instance
@@ -171,4 +171,3 @@ Instance admission controller governs any update to the Instance either through 
 The admission controller would also reject parameter updates that would trigger multiple distinct plans. There are a few exceptions too: for example, a `cleanup` plan is special and is executed when an Instance is deleted. `cleanup` can not be triggered manually and is allowed to override any existing plan (since the Instance is being deleted anyway).
 
 As of KUDO v0.11.0, the Instance admission controller is optional though we're planing to make it mandatory in the near future. See [kudo init](../cli.md#kudo-init) documentation for more details.
-
