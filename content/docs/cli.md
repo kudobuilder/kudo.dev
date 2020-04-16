@@ -21,17 +21,19 @@ brew tap kudobuilder/tap
 brew install kudo-cli
 ```
 
+Another alternative is `krew` the package manager for kubectl plugins [doc](https://github.com/kubernetes-sigs/krew)
+
+```bash
+kubectl krew install kudo
+```
+
 or you can compile and install the plugin from your `$GOPATH/src/github.com/kudobuilder/kudo` root folder via:
 
 ```bash
 make cli-install
 ```
 
-Another alternative is `krew` the package manager for kubectl plugins [doc](https://github.com/kubernetes-sigs/krew)
-
-```bash
-kubectl krew install kudo
-```
+**note:** Building the CLI with `make` will work for all functions with the exception of `kudo init`.  Building and running kudo this way is for developers and advanced users.
 
 ## Commands
 
