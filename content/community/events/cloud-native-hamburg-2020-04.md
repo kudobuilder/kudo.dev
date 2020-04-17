@@ -3,7 +3,7 @@ event: Hamburg Kubernetes/Cloud-Native Meetup
 topic: KUDO - Kubernetes Operators, the easy way
 speaker: Matt Jarvis
 date: 2020-04-23
-location: Hamburg, DE
+location: Virtual
 url: https://www.meetup.com/Hamburg-Kubernetes-Meetup/
 ---
 
