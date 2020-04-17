@@ -2,6 +2,8 @@
 
 KUDO's development continues apace, with major new features landing in each release.  This post highlights and summarises a few of the cool new things that have made it in, just in case you missed them being called out in the [release](https://github.com/kudobuilder/kudo/releases) notes.
 
+<!-- more -->
+
 ## Cleanup Plans
 
 An oft-overlooked part of any application deployment lifecycle is what happens as part of termination and deletion.  KUDO 0.9.0 introduced a new type of optional plan, `Cleanup`, which runs when an Instance is being deleted.  The documentation for this new Plan [is here](https://kudo.dev/docs/developing-operators/plans.html#cleanup-plans).
