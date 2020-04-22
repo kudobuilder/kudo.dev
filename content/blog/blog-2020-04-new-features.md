@@ -1,3 +1,7 @@
+---
+date: 2020-04-22
+---
+
 # KUDO New Features: Roundup and Highlights
 
 KUDO's development continues apace, with major new features landing in each release.  This post highlights and summarises a few of the cool new things that have made it in, just in case you missed them being called out in the [release](https://github.com/kudobuilder/kudo/releases) notes.
