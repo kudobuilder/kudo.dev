@@ -15,7 +15,7 @@ Let's take a look at an individual task type in detail.
 
 ## Apply-Task
 
-An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of Kubernetes resources that will be either created (if don't exist) or updated (if present). Given a definition like the one from the [first-operator](getting-started.md):
+An apply-task applies (!) templates to the cluster. Pretty simple. Its `spec.resources` field defines a list of Kubernetes resources that will be either created (if they don't exist) or updated (if present). Given a definition like the one from the [first-operator](getting-started.md):
 
 ```yaml
 tasks:
