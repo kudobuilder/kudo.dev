@@ -23,7 +23,7 @@
 * Watching Kubernetes KUDO objects and ensuring desired state
 * Creating KUDO operators and invoking operator plans
 
-Read about KUDO's [concepts](what-is-kudo.html#under-the-hood) for more details around operators, operator versions and instance CRDs.
+Read about KUDO's [concepts](what-is-kudo.md#under-the-hood) for more details around operators, operator versions and instance CRDs.
 
 **KUDO Repository** provides significant convenience but is not strictly required. It provides an index of operators along with URLs they may be retrieved from. Read about the [operator repository](https://github.com/kudobuilder/operators) for more details on repositories and operator layout.
 
