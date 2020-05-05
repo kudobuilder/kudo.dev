@@ -11,13 +11,12 @@ What could possibly go wrong, right?
 Well, [Hyrum's Law](https://www.hyrumslaw.com/) made sure it's being remembered, and this seemingly simple bump required quite a bit of debugging and a workaround to succeed.
 This post describes this investigation, the cause of the issue and the workaround.
 
-[ToC]
+<!-- more -->
 
 TL;DR: the performance improvements mentioned above caused the KUDO controller to always win a certain race condition. This turned a [deficiency in stateful set controller](https://github.com/kubernetes/kubernetes/issues/74374) into a deadlock.
 
 _Reading time: 00:05:00_
 
-<!-- more -->
 
 ## What is KUDO and KUDO-Cassandra?
 
@@ -95,7 +94,7 @@ The first `jq` command applies various filters on the object reference, and the 
 
 I used LibreOffice CSV import for viewing and annotating the output in a clear tabular format.
 
-![](https://i.imgur.com/fI2Tzmd.png "Viewing ouput in Calc.")
+![](/images/blog-perf-surprise-calc.png "Viewing ouput in Calc.")
 
 Other useful filters:
 - by actor:
@@ -114,7 +113,7 @@ jq 'select(.requestReceivedTimestamp=="2020-04-06T06:37:23.416332Z") |
 
 These can also be compared with a diff viewer such as [`meld`](https://meldmerge.org/), to understand the intents of individual mutations:
 
-![](https://i.imgur.com/ia9xwan.png "Comparing records with meld.")
+![](/images/blog-perf-surprise-meld.png "Comparing records with meld.")
 
 ## Root Cause
 
