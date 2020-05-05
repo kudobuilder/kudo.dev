@@ -9,3 +9,7 @@ to = "/docs/"
 [[redirects]]
 from = "/community/events.html"
 to = "/community/#events"
+
+[[redirects]]
+from = "/docs/concepts.html"
+to = "/docs/what-is-kudo.html#under-the-hood"
