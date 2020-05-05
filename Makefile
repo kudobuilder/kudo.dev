@@ -7,7 +7,7 @@ docker-build: external-docs
 
 .PHONY: docker-run
 docker-run:
-	docker run -it --rm --name=kudowww -p 8080:8080 -v ${PWD}:/app ${DOCKER_IMG}:${DOCKER_TAG}
+	docker run -it --rm --name=kudowww -p 8080:8080 -v ${PWD}:/app ${DOCKER_IMG}:${DOCKER_TAG} ${ARGS}
 
 .PHONY: build
 build:	external-docs
