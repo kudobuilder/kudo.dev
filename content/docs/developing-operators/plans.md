@@ -4,7 +4,7 @@
 
 Plans capture the individual steps of operational tasks. A plan organizes these tasks into `phases` and `steps`. Each step references the [tasks](tasks.md) to run for this step. By organizing steps into phases, complex behavior of services can be captured.
 
-Plans and phases have a `strategy`. The `strategy` indicated if `phases` and `steps` should run in parallel or in serial.
+Plans and phases have a `strategy`. The `strategy` indicates if `phases` and `steps` should run in parallel or in serial.
 
 ```yaml
 ...
