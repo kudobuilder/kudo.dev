@@ -15,11 +15,32 @@
       "video": "https://www.cncf.io/webinars/introducing-the-kubernetes-universal-declarative-operator/"
     },
     {
+      "resourceType": "Webinar",
+      "date": "2020-04-15",
+      "title": "All The Talks: Introducing KUDO, Kubernetes Operators the Easy Way",
+      "author": "Matt Jarvis",
+      "video": "https://www.youtube.com/watch?v=ZnHwkUlu_XU"
+    },
+    {
+      "resourceType": "Webinar",
+      "date": "2019-08-22",
+      "title": "Deploy a Kafka cluster on a D2iQ Konvoy Kubernetes cluster using KUDO",
+      "author": "Denis Jannot",
+      "video": "https://www.youtube.com/watch?v=MlJG3sPXf08"
+    },
+    {
       "resourceType": "Podcast",
       "date": "2019-10-16",
       "title": "Kubernetes Podcast #78: KUDO, with Gerred Dillon",
       "author": "Craig Box & Adam Glick",
       "url": "https://kubernetespodcast.com/episode/078-kudo/"
+    },
+    {
+      "resourceType": "Podcast",
+      "date": "2020-04-27",
+      "title": "Jump The Shark Podcast #1: Matt Jarvis and Gerred Dillon",
+      "author": "Matt Jarvis & Gerred Dillon",
+      "url": "https://www.youtube.com/watch?v=5cUbAt-52i4"
     },
     {
       "resourceType": "Event",
