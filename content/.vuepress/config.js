@@ -125,6 +125,7 @@ module.exports = {
                 title: 'Blog',
                 collapsable: false,
                 children: [
+                  'blog-2020-05-05-performance-improvement-with-a-surprise',
                   'blog-2020-04-new-features',
                   'blog-2020-02-07-kudo-terraform-provider-1',
                   'blog-2019-12-06-mesos-to-kudo',
