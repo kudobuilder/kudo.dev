@@ -29,7 +29,7 @@ One of these suites, which [verifies various TLS configuration options](https://
 1. Install `cassandra` `Operator`, `OperatorVersion` and `Instance` resources. See [KUDO docs](https://kudo.dev/docs/what-is-kudo.html#under-the-hood) if you'd like to know what these resources do.
 1. Wait for the `Instance` to become healthy.
 
-   An important detail is that the instance in turn creats a stateful set, here named `cassandra-instance-node`. This stateful set runs two pods, called `cassandra-instance-node-X`, each of which requires an auto-provisioned persistent volume.
+   An important detail is that the instance in turn creates a stateful set, here named `cassandra-instance-node`. This stateful set runs two pods, called `cassandra-instance-node-X`, each of which requires an auto-provisioned persistent volume.
 3. [Remove](https://github.com/mesosphere/kudo-cassandra-operator/blob/78b22ddc3ab3883e099acd95bddae59ea8d5640e/tests/cassandra/cassandra.go#L212) the `cassandra` `Operator`, `OperatorVersion` and `Instance` resources.
 4. [Remove](https://github.com/mesosphere/kudo-cassandra-operator/blob/78b22ddc3ab3883e099acd95bddae59ea8d5640e/tests/cassandra/cassandra.go#L216) both `PersistentVolumeClaim` resources, if they exist.
 
