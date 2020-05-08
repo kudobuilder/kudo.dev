@@ -32,6 +32,12 @@ KUDO will apply all the listed resources and wait for all of them to become heal
 
 **Note:** current implementation will apply all resources in the given order so that e.g. a Pod can mount previously created ConfigMap. However, this is not part of the specification and might change in the future (all resources can be applied concurrently). If you need [happens-before-guarantee](https://en.wikipedia.org/wiki/Happened-before) between your resources, use e.g. multiple serial steps.
 
+The apply-task enhances deployed resources with KUDO specific labels and annotations. For resources that create or deploy pods (StatefulSets, Deployments, Daemonsets, etc. ) KUDO adds a special annotation to the pod template spec that is the hash from all resources used by the pod template spec (ConfigMaps and Secrets). The effect of this hash is that an update to an operator parameter that changes a ConfigMap triggers a restart of the pods that uses that ConfigMap.
+
+**Note:** The pods will only be restarted when the parent resource (StatefulSet, Deployment) is applied. This can happen in the same task as the dependency or a task that is executed later in the same plan. This means, if a plan applies only a config map but not the stateful set which uses the config map, the pods will *not* be restarted when the plan is executed. The change will be detected the next time the stateful set is applied though, even if that happens later and in a different plan. 
+
+**Note:** To exclude a ConfigMap or Secret from triggering a pod restart, you can add the annotation `kudo.dev/skip-hash-calculation` with any value to the ConfigMap or Secret. 
+
 ## Delete-Task
 
 A delete-task looks very similar to an apply-task, however, it will delete resources instead of creating them. Let's create a task that will uninstall the app we created above:
