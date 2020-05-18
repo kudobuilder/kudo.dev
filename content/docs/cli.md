@@ -30,13 +30,13 @@ kubectl krew install kudo
 or you can download the CLI binaries from the release page at https://github.com/kudobuilder/kudo/releases/latest and download the release for your platform and OS.  Make executable and add to your path:
 
 ```bash
-export VERSION=0.12.0
-export OS=$(uname | tr '[:upper:]' '[:lower:]')
-export ARCH=$(uname -m)
+VERSION=0.12.0
+OS=$(uname | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
 wget -O kubectl-kudo https://github.com/kudobuilder/kudo/releases/download/v${VERSION}/kubectl-kudo_${VERSION}_${OS}_${ARCH}
 chmod +x kubectl-kudo
 # add to your path
-mv kubectl /usr/local/bin/kubectl-kudo
+sudo mv kubectl-kudo /usr/local/bin/kubectl-kudo
 ```
 
 **note:** On Mac OSX, you may need to explicitly authorize the use of the command.  Details on the [Apple support site](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac)
