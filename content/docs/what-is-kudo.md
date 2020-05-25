@@ -135,3 +135,9 @@ Normally, _Operator_ and _OperatorVersion_ are handled by the manager and rarely
 ```bash
 $ kubectl kudo install kafka --instance dev-kafka
 ```
+
+### Limitations
+
+The _Operator_, _OperatorVersion_, and _Instance_ resources created by KUDO are namespace scoped. These resources can only own resources in the same namespace. As a result, it isn't possible for an operator to create resources in multiple namespaces.
+
+It is possible for an _Instance_ to create cluster-scoped resources. However, this can result in issues when updating or upgrading an _Instance_. [KEP-5](https://github.com/kudobuilder/kudo/blob/master/keps/0005-cluster-resources-for-crds.md) will resolve this limitation.
