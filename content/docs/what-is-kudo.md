@@ -138,6 +138,6 @@ $ kubectl kudo install kafka --instance dev-kafka
 
 ### Limitations
 
-The _Operator_, _OperatorVersion_, and _Instance_ resources created by KUDO are namespace scoped. These resources can only own resources in the same namespace. As a result, it isn't possible for an operator to create resources in multiple namespaces.
+The _Operator_, _OperatorVersion_, and _Instance_ resources created by KUDO are namespace scoped. These resources can only own resources in the same namespace. As a result, it isn't possible for a single operator to create resources in multiple namespaces.
 
-It is possible for an _Instance_ to create cluster-scoped resources. However, this can result in issues when updating or upgrading an _Instance_. [KEP-5](https://github.com/kudobuilder/kudo/blob/master/keps/0005-cluster-resources-for-crds.md) will resolve this limitation.
+It is possible for an _Instance_ to create cluster-scoped resources. However, these `resourceOwners` field for such resources is not populated with the _Instance_ reference. Cluster-scoped resources are also **not** automatically cleaned up when the _Instance_ is deleted. Additionally,  they can result in issues when updating or upgrading an _Instance_. [KEP-5](https://github.com/kudobuilder/kudo/blob/master/keps/0005-cluster-resources-for-crds.md) will resolve this limitation.
