@@ -138,6 +138,19 @@ $ kubectl kudo install kafka --instance dev-kafka
 
 ### Limitations
 
+#### Cross-namespace ownership and cluster-scoped resources
+
 All the resources created by an operator _Instance_ are [owned](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/#owners-and-dependents) by it. This way, when the _Instance_ is deleted, the resources are removed too. However, the _Instance_ (as well as  _Operator_, and _OperatorVersion_)  are namespace scoped. Namespaced resources can only own resources in the same namespace. As a result, it isn't possible for a single operator to create resources in multiple namespaces.
 
 It is possible for an _Instance_ to create cluster-scoped resources. However, these `resourceOwners` field for such resources is not populated with the _Instance_ reference. Cluster-scoped resources are also **not** automatically cleaned up when the _Instance_ is deleted. Additionally,  they can result in issues when updating or upgrading an _Instance_. [KEP-5](https://github.com/kudobuilder/kudo/blob/master/keps/0005-cluster-resources-for-crds.md) will resolve this limitation.
+
+#### Watching arbitrary resources
+
+KUDO cannot watch arbitrary user-specified resource types.
+
+The only things that KUDO controller watches are changes to the `spec` KUDO-specific
+`Instance`, `OperatorVersion` and `Operator` custom resources. In reaction it runs
+[plans](#operator-plans) which can deploy almost arbitrary other resources.
+However, other than checking their health and re-applying until the health checks pass,
+KUDO never observes their status once the plan completes.
+
