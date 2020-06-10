@@ -91,6 +91,10 @@ Update installed operator parameters.
 Upgrade installed operator from one version to another.
 :::
 
+::: flag kubectl kudo diagnostics
+Collect diagnostic data about KUDO and an installed operator instance
+::: 
+
 ::: flag kubectl kudo version
 Print the current KUDO version.
 :::
@@ -557,3 +561,18 @@ Following the same example from the previous section, having a `dev-flink` insta
 A new version of that operator is installed to the cluster and `upgrade` (or `deploy`) plan is started to roll out new Flink pods.
 
 At the same time, we're overriding the value of the parameter `param`. That is optional and you can always do it in a separate step via `kudo update`.
+
+### Collecting diagnostic data 
+
+With an existing installation of an operator, it is possible to collect diagnostic data:
+
+`kubectl kudo diagnostics collect --instance dev-flink --log-since 10m`
+
+This command will create a new directory and collect the following data:
+- The KUDO environment:
+  - The installed manager and its logs
+  - Service accounts and services
+- The data for the specified operator
+  - The Operator, OperatorVersion and Instance resources
+  - The deployed resources from the operator
+  - The logs from deployed pods - Limited by the specified `--log-since` parameter
