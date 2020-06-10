@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 cd /app
 yarn install
-yarn docs:dev
+yarn ${1:-docs:dev}
