@@ -2,12 +2,12 @@
 
 ## Overview
 
-A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO offers following main task types: `Apply`, `Delete`, `Pipe` and `Toggle`. Additionally there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
+A task is the basic building block in the KUDO workflow. Plans, phases, and steps are control structures that execute tasks at the end. You've already come across an Apply-task when developing your [first-operator](getting-started.md). KUDO offers following main task types: `Apply`, `Delete`, `Pipe`, `Toggle` and `KudoOperator`. Additionally, there is a `Dummy` task which is helpful when debugging and testing your operator. All KUDO tasks are defined in the [operator.yaml](packages.md) and must have three fields:
 
 ```yaml
 tasks:
   - name: # Task name defined by the user
-    kind: # Task kind can be: Apply, Delete, Pipe, Toggle and Dummy
+    kind: # Task kind can be: Apply, Delete, Pipe, Toggle, KudoOperator and Dummy
     spec: # Task-specific specification
 ```
 
@@ -74,7 +74,7 @@ This task will either apply or delete the resources defined in `templates/servic
 
 If the `enable-service` parameter evaluates to `true` the task named `app-service` will create a service resource defined in `templates/service.yaml`. In case the `enable-service` parameter evaluates to `false`, the task named `app-service` will delete the service resource defined in `templates/service.yaml`.
 
-The parameter `enable-service` must be defined in the `params.yaml` file otherwise the operator installation will fail. And the parameter value should also render to a boolean value. In case the parameter value isn't a boolean the Toggle-Task will fail. 
+The parameter `enable-service` must be defined in the `params.yaml` file otherwise the operator installation will fail. The parameter value should also render to a boolean value. In case the parameter value isn't a boolean the Toggle-Task will fail. 
 
 ## Pipe-Task
 
@@ -92,7 +92,7 @@ tasks:
           key: indexHtml
 ```
 
-Pipe-task spec has two fields: a `pod` spec that will generate our `index.html` and a `pipe` spec that defines a list of files that will be persisted. Here we'll generate a `/tmp/index.html` file that we'll save as a `ConfigMap`. It can be referenced within template resources with the key `indexHtml` (more about that below). Pipe-task `spec.pod` field must reference a [core/v1 Pod](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core) template. However, there are limitations. Reasons for that are explained in the [corresponding KEP](https://github.com/kudobuilder/kudo/blob/master/keps/0017-pipe-tasks.md). In a nutshell:
+Pipe-task spec has two fields: a `pod` spec which will generate our `index.html` and a `pipe` spec which defines a list of files that will be persisted. Here we'll generate a `/tmp/index.html` file that we'll save as a `ConfigMap`. It can be referenced within template resources with the key `indexHtml` (more about that below). Pipe-task `spec.pod` field must reference a [core/v1 Pod](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#pod-v1-core) template. However, there are limitations. Reasons for that are explained in the [corresponding KEP](https://github.com/kudobuilder/kudo/blob/master/keps/0017-pipe-tasks.md). In a nutshell:
 
 - A pipe-pod should generate artifacts in a [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 - It has to define and mount one [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) where generated files are stored
@@ -177,12 +177,91 @@ Once our Nginx server is up and running we should be able to read a pearl of cow
 
 **Note:**
 
-- File generating Pod has to be side-effect free (meaning side-effects that are observable outside of the container like a 3rd party API call) as the container might be executed multiple times on failure. A `restartPolicy: OnFailure` is used for the pipe-pod
+- File generating Pod has to be side effect free (meaning side effects that are observable outside of the container like a 3rd party API call) as the container might be executed multiple times on failure. A `restartPolicy: OnFailure` is used for the pipe-pod
 - Only files <1Mb are applicable to be stored as ConfigMap or Secret. A pipe-task will fail should it try to copy files >1Mb
 - As of KUDO 0.9.0 pipe-artifacts can only be used within the same plan they were generated
 - You can pipeline artifacts by creating them in one pipe-task and mounting in a subsequent one
 
 Full cowsay-operator can be found in the [KUDO operators repo](https://github.com/kudobuilder/operators/tree/master/repository/cowsay).
+
+## KudoOperator-Task
+
+A `KudoOperator` task allows you to specify a dependency on other operators. While dependencies in general is a complicated topic, `KudoOperator` itself is about installation dependencies e.g. your operator and all the operators it depends on (including transitive dependencies) will be installed and/or removed as one unit.
+
+KUDO operators already have a mechanism to deal with installation dependencies called [plans, phases, and steps](plans.md) with serial or parallel execution strategy. This mechanism is already powerful enough to express any dependency hierarchy including transitive dependencies.
+
+Here a simple example of a task specifying a dependency on the community Zookeeper operator version 0.3.0 (which will install [zookeeper 3.4.14](https://github.com/kudobuilder/operators/blob/master/repository/zookeeper/README.md))
+
+```yaml
+tasks:
+  - name: deploy-zookeeper
+    kind: KudoOperator
+    spec:
+      package: zookeeper
+      operatorVersion: 0.3.0
+```
+
+As with other tasks, KUDO will make sure this task is healthy before moving to the next one (with serial execution strategy):
+ 
+```yaml
+plans:
+  deploy:
+    strategy: serial
+    phases:
+      - name: main
+        strategy: serial
+        steps:
+          - name: everything
+            tasks:
+              - deploy-zookeeper
+              - deploy-main
+```
+
+"Healthy", in the case of the operator means that its `deploy` plan has finished successfully. `KudoOperator` closely mimics the `kudo install` command semantics allowing to additionally specify the `appVersion` (defaults to most recent one) and the `instanceName` (will be generated by KUDO by default).
+
+As with `kudo install` command, a local operator (or remote tarball) can be specified in the `package` field e.g. `package: "./child-operator"`. During installation of the parent operator, `kudoctl` will resolve the child dependency, parse the operator and create the necessary resources.
+
+### Dependency Parametrization
+
+If a child operator needs to be parametrised a parameter file can be specified using the `parameterFile` field. Let's take a look at an example. Suppose, we have two operators (_parent_ and _child_) and _child_ has a required parameter `PASSWORD` which is empty by default. First, the parent operator needs to specify a  parameter file for the child and reference it in the corresponding `KudoOperator` task:
+
+```yaml
+tasks:
+  - name: deploy-child
+    kind: KudoOperator
+    spec:
+      package: child-operator
+      parameterFile: child-params.yaml 
+```
+
+`child-params.yaml` is located in the parents _template_ folder along with other template files:
+
+```yaml
+# parent/templates/child-params.yaml
+PASSWORD: {{ .Params.CHILD_PASSWORD }}
+```
+
+Child `PASSWORD` value references the parent `CHILD_PASSWORD` parameter that can look like:
+
+```yaml
+# parent/params.yaml
+apiVersion: kudo.dev/v1beta1
+parameters:
+  - name: CHILD_PASSWORD
+    displayName: "child password"
+    description: "password for the underlying instance of child operator"
+    required: true
+```
+
+When installing the _parent_ operator the user then has to define the `CHILD_PASSWORD` as usual:
+
+```shell script
+$ kubectl kudo install parent -p CHILD_PASSWORD=secret
+```
+
+Note, that the _parent_ operator may decide to provide a sensible default or even to hardcode the password and not expose it at all to the end user. Overall we wanted to encourage operator composition by providing a way of operator encapsulation. In other words, operator users should not be allowed to arbitrarily modify the parameters of embedded operator instances. The higher-level operator should define all parameters that its direct dependency operators need.
+
+For more information and implementation details, take a look at the [KEP-29](https://github.com/kudobuilder/kudo/blob/main/keps/0029-operator-dependencies.md)
 
 ## Dummy-Task
 
