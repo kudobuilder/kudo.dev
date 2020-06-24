@@ -201,19 +201,24 @@ tasks:
       operatorVersion: 0.3.0
 ```
 
-As with other tasks, KUDO will make sure this task is healthy before moving to the next one (with serial execution strategy):
+As with other tasks, KUDO will make sure this task is healthy before moving to the next one. In the example below we split the `deploy` plan into two phases: _prereqs_ and _main_:
  
 ```yaml
 plans:
   deploy:
     strategy: serial
     phases:
-      - name: main
-        strategy: serial
+      - name: prereqs
+        strategy: parallel
         steps:
-          - name: everything
+          - name: first
             tasks:
               - deploy-zookeeper
+      - name: main
+        strategy: parallel
+        steps:
+          - name: second
+            tasks:
               - deploy-main
 ```
 
