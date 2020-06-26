@@ -186,7 +186,7 @@ Full cowsay-operator can be found in the [KUDO operators repo](https://github.co
 
 ## KudoOperator-Task
 
-A `KudoOperator` task allows you to specify a dependency on other operators. While dependencies in general is a complicated topic, `KudoOperator` itself is about installation dependencies i.e. your operator instance and all its dependencies (including transitive ones) will be installed and/or removed as one unit.
+As of KUDO 0.15.x, KUDO supports a `KudoOperator` task which allows you to specify a dependency on other operators. While dependencies in general is a complicated topic, `KudoOperator` itself is about installation dependencies i.e. your operator instance and all its dependencies (including transitive ones) will be installed and/or removed as one unit.
 
 KUDO operators already have a mechanism to deal with installation dependencies called [plans, phases, and steps](plans.md) with serial or parallel execution strategy. This mechanism is already powerful enough to express any dependency hierarchy including transitive dependencies.
 
