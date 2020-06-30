@@ -18,7 +18,7 @@ Today we release KUTTL v0.5.0.  Most releases are simply announced, however this
 
 Added to the KUTTL set of commands is `assert` and `errors`.  The premise behind these commands is while you are writing a new kuttl test, it is common to manually adjust or query the cluster for information as you form the assert or errors files.  It is super helpful to "check" an assert file against the current state of the cluster without the need to walk through the entire test steps for that test.  It could also be useful to assert a cluster to be ready for testing a set of tests. 
 
-As an example, perhaps you have a pod running and you want to confirm it is running.  A common kuttl parital yaml file might looking like (01-assert.yaml):
+As an example, perhaps you have a pod running and you want to confirm it is running.  A common kuttl partial yaml file might looking like (01-assert.yaml):
 
 ```yaml
 apiVersion: v1
@@ -29,7 +29,7 @@ status:
   phase: Running
 ```
 
-Running a `kubectl kuttl assert --timeout 5 01-assert.yaml` might provide an successful response such as:
+Running a `kubectl kuttl assert --timeout 5 01-assert.yaml` will provide either a successful response such as:
 `"01-assert.yaml" in "default" namespace is valid`
 or it may provide a verbose output which ends with the details such as:
 
@@ -39,7 +39,7 @@ or it may provide a verbose output which ends with the details such as:
 These examples expect that you have a running kubernetes cluster and that kuttl can connect to it.
 :::
 
-The `errors` command provides the absolute affect, it asserts that the value doe NOT exist in the cluster. Example:
+The `errors` command provides the opposite affect, it asserts that the value doe NOT exist in the cluster. Example:
 ```
 kubectl kuttl errors --timeout 5 01-assert.yaml
 error assert is valid
@@ -53,10 +53,10 @@ error assert is valid`
 
 ## Namespace Control
 
-Previous to v0.5.0 KUTTL would always create a test namespace.  This works great in environments where you have full control of your cluster, however many orgs were unable to use kuttl for this reason allow.  It is now possible to pass a namespace to kuttl to use.  When a namespace is provided, kuttl will use that namespace if it exists and attempts to create if it doesn't.  The justification for creation is the test suite would have failed if the namespace didn't exist, if the kuttl user isn't authorized to create a namespace it will also fail. 
+Previous to v0.5.0, KUTTL would always create a test namespace.  This works great in environments where you have full control of your cluster, however many orgs were unable to use kuttl for this reason.  It is now possible to pass a namespace for kuttl to use.  When a namespace is provided, kuttl will use that namespace if it exists and attempts to create if it doesn't. The justification for creation is the test suite would have failed if the namespace didn't exist, if the kuttl user isn't authorized to create a namespace it will also fail.
 
 :::warning
-When a namespace is NOT provided to KUTTL, it will create namespace for each test in the testsuite providing some test isolation.  When a namespace is provided, that namespace is used for all tests in the test suite.
+When a namespace is NOT provided to KUTTL, it will create a distinct namespace for each test in the testsuite providing some test isolation.  When a namespace is provided, that namespace is used for all tests in the test suite.
 :::
 
 :::warning 
@@ -82,7 +82,7 @@ assert:
 This does require that `$TEST_FOO` is defined.
 
 :::warning
-It is worth noting regarding the expansion of `commands` that it doesn't have full shell support and is limited.  There is a new command option `script` which runs the command in a shell, which provides more shell ability.  Example:
+It is worth noting regarding the expansion of `commands` that it doesn't have full shell support. For this reason we introduced a new command option `script` which runs the command in a shell, which provides more shell capability.  Example:
 
 ```
 commands:
@@ -91,9 +91,12 @@ commands:
 ```
 :::
 
+`command` fields are run as processes created from kuttl and are not part of a shell.  These commands have simple variable substitution and nothing else.
+`script` fields are run in a `sh` and have full shell capabilities.  The loop interating 5 times would fail under the `command` field, but works fine under the `script` field.
+
 ## Pod Log Collector
 
-There was a command request to support when a test assert fails to gather more information from the cluster.  A popular request was to enable the ability to get pod logs.   That is now possible!  It is configured with `TestAssert` and provides a way to collect the logs from a pod which will be redirected into the test logs.  
+There was a feature request to gather more information from the cluster when a test assert fails.  A popular request was to enable the ability to get pod logs.   That is now possible!  It is configured with `TestAssert` and provides a way to collect the logs from a pod which will be redirected into the test logs.
 
 When configuring a pod, you can select on name or label.  You can also explicit specify the container.
 
@@ -108,7 +111,7 @@ This configuration will select on a label of `app` with a value of `nginx` and w
 
 ## Test Reports
 
-We've added the abiliy to ask kuttl to provide a test suite report.  Currently, by default, no report is generated.  While kuttl uses `go test` under the hood, the output of kuttl is different enough that `jstemmer/go-junit-report` doesn't work as one would hope.  Based on the need for reports, we provide 2 types:  JSON or XML.  They are the same reports in 2 different formats.  Whe XML report is JUnit report compliant and works with most CI environments.  The default location for the report is the current working directory which you are running kuttl from. It is possible to override that with the `--artifacts-dir`.
+We've added the abiliy to ask kuttl to provide a test suite report. Currently, by default, no report is generated.  While kuttl uses `go test` under the hood, the output of kuttl is different enough that `jstemmer/go-junit-report` doesn't work as one would hope. Based on the need for reports, we provide 2 types: JSON or XML. They are the same reports in 2 different formats.  The XML report is JUnit report compliant and works with most CI environments.  The default location for the report is the current working directory which you are running kuttl from. It is possible to override that with the `--artifacts-dir`.
 
 The XML output for the e2e tests in kuttl project can be generated in the following way: `kubectl kuttl test pkg/test/test_data/ --timeout 10 --report xml` and produces the following:
 
@@ -133,7 +136,9 @@ The XML output for the e2e tests in kuttl project can be generated in the follow
 
 ## Summary
 
-The above are just the highlights.  There more to the kuttl v0.5.0 release like better cleanup from a SIGTERM or CTRL+C break.  Have a look... keep testing and keep kuttl-ing1
+The above are just the highlights.  There more to the kuttl v0.5.0 release like better cleanup from a SIGTERM or CTRL+C break and KUTTL Kind support has been upgraded to `0.8.1`.
+
+Have a look... keep testing and keep kuttl-ing!
 
 
 <Authors about="kensipe" />
