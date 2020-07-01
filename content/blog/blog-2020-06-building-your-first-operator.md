@@ -1,5 +1,5 @@
 ---
-date: 2020-04-22
+date: 2020-07-01
 ---
 
 # Building your first KUDO operator - Part 1
