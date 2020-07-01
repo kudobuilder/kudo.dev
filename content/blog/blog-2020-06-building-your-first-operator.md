@@ -47,13 +47,17 @@ MacBook-Pro:galera matt$ tree
 If we look at the top level yaml files which have been created, they have populated some of the fields for us, but we’ll need to populate some of the others. The CLI extension can do some of this for you, but in the interests of understanding what is going on, in this blog we'll do it manually :
 
 ```yaml
+# operator.yaml
 apiVersion: kudo.dev/v1beta1
 kudoVersion: 0.12.0
 name: galera
 operatorVersion: 0.1.0
 plans: {}
 tasks: []
-MacBook-Pro:operator matt$ cat params.yaml 
+```
+
+```yaml
+# params.yaml
 apiVersion: kudo.dev/v1beta1
 parameters: []
 ```
@@ -61,6 +65,7 @@ parameters: []
 In our operator,yaml, the first things we’ll populate is the metadata, to add our maintainer details, and the metadata about the application itself. We can also add the version of Kubernetes that our operator is targeting. 
 
 ```yaml
+# operator.yaml
 apiVersion: kudo.dev/v1beta1
 kudoVersion: 0.12.0
 operatorVersion: 0.1.0
@@ -71,7 +76,6 @@ maintainers:
   name: Matt Jarvis
 name: galera
 url: https://mariadb.com/
-operatorVersion: 0.1.0
 ```
 
 Here you can see I’ve added the url of the application, the version of the app the operator was written against, as well as my details, and the version of Kubernetes I’m using. 
@@ -94,6 +98,7 @@ MacBook-Pro:operator matt$ tree
 All KUDO operators must have a deploy plan, so let’s also create the skeleton for that in our operator.yaml :
 
 ```yaml
+# operator.yaml
 apiVersion: kudo.dev/v1beta1
 kudoVersion: 0.12.0
 operatorVersion: 0.1.0
@@ -104,7 +109,6 @@ maintainers:
   name: Matt Jarvis
 name: galera
 url: https://mariadb.com/
-operatorVersion: 0.1.0
 plans:
   deploy:
     strategy: serial
@@ -119,9 +123,10 @@ tasks:
 
 When we deploy a Galera cluster, there are specific steps we need to take in order to bootstrap. We first need a bootstrap node, which will have different configuration from the rest of the cluster, and from which our remaining nodes are going to join to form the cluster.
 
-In order to deploy that bootstrap node, the first thing we’ll need is the configuration for it. I’m going to use a ConfigMap resource to pass this into my bootstrap container. Firstly, I’ll add a step and task to the deploy phase of my deploy plan, and I’ll add the configuration for that task which will refer to a YAML file in my templates directory, and define the task as an Apply task, which will just apply that YAML file to our cluster :
+In order to deploy that bootstrap node, the first thing we’ll need is the configuration for it. I’m going to use a ConfigMap resource to pass this into my bootstrap container. Firstly, I’ll add a step and task to the deploy phase of my deploy plan, and I’ll add the configuration for that task which will refer to a YAML file in my templates directory, and define the task as an Apply task, which will just apply that YAML file to our cluster:
 
 ```yaml
+# operator.yaml
 apiVersion: kudo.dev/v1beta1
 kudoVersion: 0.12.0
 operatorVersion: 0.1.0
@@ -132,7 +137,6 @@ maintainers:
   name: Matt Jarvis
 name: galera
 url: https://mariadb.com/
-operatorVersion: 0.1.0
 plans:
   deploy:
     strategy: serial
@@ -149,13 +153,12 @@ tasks:
       spec:
         resources:
           - bootstrap_config.yaml
-
 ```
 
 Now we have the KUDO configuration for this task in place, let’s go ahead and create the bootstrap_config.yaml file. 
 
-```
-MacBook-Pro:templates matt$ cat bootstrap_config.yaml 
+```yaml
+# templates/bootstrap_config.yaml 
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -180,7 +183,7 @@ wsrep_cluster_address = gcomm://
 
 The other important lines is this YAML file are the three which will be templated by KUDO on instantion. Firstly we have the name and namespace lines :
 
-```
+```yaml
   name: {{ .Name }}-bootstrap
   namespace: {{ .Namespace }}
 ```
@@ -196,6 +199,7 @@ wsrep_sst_auth = "{{ .Params.SST_USER }}:{{ .Params.SST_PASSWORD }}"
 Here we are referring to two parameters which will be defined in our params.yaml file, so let’s go and add those to our parameters file. 
 
 ```yaml
+# params.yaml
 apiVersion: kudo.dev/v1beta1
 parameters:
   - name: SST_USER
@@ -306,6 +310,7 @@ statefulset.apps "kudo-controller-manager" deleted
 The next thing we are going to need is a service defined, so that our cluster nodes can connect to our bootstrap node once they are deployed. Firstly we’ll define that step and task in our operator.yaml, as well as defining the resources for the task. Once again this will be an Apply task, just applying the resource to our cluster :
 
 ```yaml
+# operator.yaml
 plans:
   deploy:
     strategy: serial
@@ -335,6 +340,7 @@ tasks:
 Now we have our KUDO configuration, we need to create the bootstrap_service.yaml for the task. 
 
 ```yaml
+# templates/bootstrap_service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -363,6 +369,7 @@ Again here, we’ve made sure the name will be unique, and we’ve set a label w
 Now we’ve got that file in place, let’s add those parameters to our params.yaml :
 
 ```yaml
+# params.yaml
 apiVersion: kudo.dev/v1beta1
 parameters:
   - name: SST_USER
@@ -388,7 +395,6 @@ parameters:
 Now we’ve got our second step defined, let’s go ahead and test our operator again. 
 
 ```
-
 MacBook-Pro:operator matt$ kubectl kudo init
 $KUDO_HOME has been configured at /Users/matt/.kudo
 ✅ installed crds
@@ -460,7 +466,8 @@ As before, uninstall our operator, and let’s move onto the next steps.
 
 The final step we need for bootstrapping is to deploy an actual instance of our bootstrap node, using our config and service. As before, let’s add steps and tasks to our operator.yaml :
 
-```
+```yaml
+# operator.yaml
 plans:
   deploy:
     strategy: serial
@@ -497,8 +504,8 @@ tasks:
 
 Now we’ll create the bootstrap_deploy.yaml template :
 
-```
-MacBook-Pro:templates matt$ cat bootstrap_deploy.yaml 
+```yaml
+# templates/bootstrap_deploy.yaml 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -565,14 +572,14 @@ spec:
 
 As we can see, this one is a bit more complicated, so let’s break it down. Galera is an extension to MySQL, and in this case we are using MariaDB, and the standard upstream MariaDB image. We are setting labels and selectors that we use to link our resources together, and ensuring unique names by using the .Name variable from KUDO. 
 
-```
+```yaml
         app: galera-bootstrap
         instance: {{ .Name }}
 ```
 
 We are also configuring a number of ports for our container, matching our service, and using the values from our params.yaml :
 
-```
+```yaml
   ports:
         - containerPort: {{ .Params.MYSQL_PORT }}
           name: mysql
@@ -586,7 +593,7 @@ We are also configuring a number of ports for our container, matching our servic
 
 This image also allows the MySQL root password to be defined as an environment variable, so we are setting that to a value we will define in params.yaml :
 
-```
+```yaml
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
@@ -596,8 +603,7 @@ This image also allows the MySQL root password to be defined as an environment v
 
 Our liveness and readiness probes will use this, so we are templating that in there as well :
 
-```
-
+```yaml
         livenessProbe:
           exec:
             command: ["mysqladmin", "-p{{ .Params.MYSQL_ROOT_PASSWORD }}", "ping"]
@@ -615,7 +621,7 @@ Our liveness and readiness probes will use this, so we are templating that in th
 
 We’ll also need to mount the volume containing our ConfigMap :
 
-```
+```yaml
         volumeMounts:
         - name: {{ .Name }}-bootstrap
           mountPath: /etc/mysql/conf.d
@@ -632,8 +638,8 @@ Here we create the volume, using a unique name, and connect that to our ConfigMa
 
 Before we can actually deploy this, we need to add that MYSQL_ROOT_PASSWORD into our params.yaml :
 
-```
-MacBook-Pro:operator matt$ cat params.yaml 
+```yaml
+# params.yaml 
 apiVersion: kudo.dev/v1beta1
 parameters:
   - name: SST_USER
