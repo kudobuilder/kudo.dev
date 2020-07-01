@@ -2,12 +2,13 @@
 date: 2020-04-22
 ---
 
-# Building your first KUDO operator
-## Part 1
+# Building your first KUDO operator - Part 1
 
 So you’ve been using KUDO, tried some of the operators in the upstream repository, and now you want to write an operator for your own application. How do you go about doing that ? 
 
 In this series of blog posts, I’m going to take you through writing a KUDO operator for [Galera](https://galeracluster.com/), an open source clustering solution for [MariaDB](https://mariadb.org/).
+
+<!-- more -->
 
 ## Setting up your environment
 
