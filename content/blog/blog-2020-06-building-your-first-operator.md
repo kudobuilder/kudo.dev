@@ -4,7 +4,7 @@ date: 2020-07-01
 
 # Building your first KUDO operator - Part 1
 
-So you’ve been using KUDO, tried some of the operators in the upstream repository, and now you want to write an operator for your own application. How do you go about doing that ? 
+So you’ve been using KUDO, tried some of the operators in the upstream repository, and now you want to write an operator for your own application. How do you go about doing that? 
 
 In this series of blog posts, I’m going to take you through writing a KUDO operator for [Galera](https://galeracluster.com/), an open source clustering solution for [MariaDB](https://mariadb.org/).
 
@@ -22,7 +22,7 @@ Finally if you haven't already got it installed, you'll need the [KUDO CLI exten
 
 The first thing we need to do is create the filesystem layout which our operator will need. For KUDO operators, there is a standard layout which all operators share - we need a folder called operator, and inside that two top level yaml files, operator.yaml and params.yaml,  and a folder called templates. 
 
-Firstly make a top level directory :
+Firstly make a top level directory:
 
 ```
 MacBook-Pro:~ matt$ mkdir galera
@@ -44,7 +44,7 @@ MacBook-Pro:galera matt$ tree
 1 directory, 2 files
 ```
 
-If we look at the top level yaml files which have been created, they have populated some of the fields for us, but we’ll need to populate some of the others. The CLI extension can do some of this for you, but in the interests of understanding what is going on, in this blog we'll do it manually :
+If we look at the top level yaml files which have been created, they have populated some of the fields for us, but we’ll need to populate some of the others. The CLI extension can do some of this for you, but in the interests of understanding what is going on, in this blog we'll do it manually:
 
 ```yaml
 # operator.yaml
@@ -95,7 +95,7 @@ MacBook-Pro:operator matt$ tree
 
 ### Create a deploy plan
 
-All KUDO operators must have a deploy plan, so let’s also create the skeleton for that in our operator.yaml :
+All KUDO operators must have a deploy plan, so let’s also create the skeleton for that in our operator.yaml:
 
 ```yaml
 # operator.yaml
@@ -175,13 +175,13 @@ data:
     binlog_format = ROW
 ```
 
-As we can see this YAML file is a ConfigMap resource, which contains a single data section called galera.cnf, with the configuration we need for Galera. The bootstrap specific configuration here is the wsrep_cluster_address, which indicates that this will be a bootstrap node :
+As we can see this YAML file is a ConfigMap resource, which contains a single data section called galera.cnf, with the configuration we need for Galera. The bootstrap specific configuration here is the wsrep_cluster_address, which indicates that this will be a bootstrap node:
 
 ```
 wsrep_cluster_address = gcomm://
 ```
 
-The other important lines is this YAML file are the three which will be templated by KUDO on instantion. Firstly we have the name and namespace lines :
+The other important lines is this YAML file are the three which will be templated by KUDO on instantion. Firstly we have the name and namespace lines:
 
 ```yaml
   name: {{ .Name }}-bootstrap
@@ -190,7 +190,7 @@ The other important lines is this YAML file are the three which will be template
 
 The .Name variable is unique to each KUDO instance, and since you can’t have instances with the same name in a cluster, this ensures our ConfigMap resource is also unique. We must also namespace all of our KUDO objects, so this gets set by KUDO. 
 
-Finally we need to set credentials to be used internally in the Galera cluster for synchronization between nodes :
+Finally we need to set credentials to be used internally in the Galera cluster for synchronization between nodes:
 
 ```
 wsrep_sst_auth = "{{ .Params.SST_USER }}:{{ .Params.SST_PASSWORD }}"
@@ -210,14 +210,15 @@ parameters:
     default: "admin"
 ```
 
-So here we have defined the two parameters we need, added a description, and given them default values. 
-
-NOTE: For an real world operator it would be better to store the SST_PASSWORD in a separate `Secret` resource that can be provided by the user - when a simple KUDO parameter is used, the value of that parameter is not encrypted in any way and may easily be read from the cluster.
-
+So here we have defined the two parameters we need, added a description, and given them default values.
+ 
+::: warning
+For an real world operator it would be better to store the SST_PASSWORD in a separate `Secret` resource that can be provided by the user - when a simple KUDO parameter is used, the value of that parameter is not encrypted in any way and may easily be read from the cluster.
+:::
 
 ### First Test
 
-At this point, we want to now test that this part of our operator works correctly. First let’s install KUDO :
+At this point, we want to now test that this part of our operator works correctly. First let’s install KUDO:
 
 ```
 MacBook-Pro:operator matt$ kubectl kudo init
@@ -227,7 +228,7 @@ $KUDO_HOME has been configured at /Users/matt/.kudo
 ✅ installed kudo controller
 ```
 
-And now let’s install our operator. The KUDO CLI extension allows me to install directly from the local filesystem, so from our operator directory :
+And now let’s install our operator. The KUDO CLI extension allows me to install directly from the local filesystem, so from our operator directory:
 
 ```
 MacBook-Pro:operator matt$ kubectl kudo install .
@@ -236,7 +237,7 @@ operatorversion.kudo.dev/v1beta1/galera-0.1.0 created
 instance.kudo.dev/v1beta1/galera-instance created
 ```
 
-And now let’s see what the status of our deploy plan is. Since I didn't specify a name when I installed my operator, our instance automatically gets assigned the name *galera-instance* : 
+And now let’s see what the status of our deploy plan is. Since I didn't specify a name when I installed my operator, our instance automatically gets assigned the name *galera-instance*: 
 
 ```
 MacBook-Pro:operator matt$ kubectl kudo plan status --instance=galera-instance
@@ -249,7 +250,7 @@ Plan(s) for "galera-instance" in namespace "default":
 ```
 
 
-Now we are expecting that plan to have created a ConfigMap resource, and for our templating to have configured it correctly. First let’s see if the ConfigMap exists :
+Now we are expecting that plan to have created a ConfigMap resource, and for our templating to have configured it correctly. First let’s see if the ConfigMap exists:
 
 ```
 MacBook-Pro:operator matt$ kubectl get configmaps
@@ -257,7 +258,7 @@ NAME                        DATA   AGE
 galera-instance-bootstrap   1      2m1s
 ```
 
-So the ConfigMap has been created correctly, and you can see that it’s been named using the .Name variable as we configured in the bootstrap_config.yaml. Let’s take a look at the content :
+So the ConfigMap has been created correctly, and you can see that it’s been named using the .Name variable as we configured in the bootstrap_config.yaml. Let’s take a look at the content:
 
 ```
 MacBook-Pro:operator matt$ kubectl describe configmap galera-instance-bootstrap
@@ -291,7 +292,7 @@ Events:  <none>
 
 As we can see it’s been correctly created, with the parameters from the params.yaml templated into it. 
 
-At this point, we’ll want to remove all of our operator from our test cluster so we can add the next steps and re-test. The easiest way to do that is just to uninstall KUDO and all of its resources :
+At this point, we’ll want to remove all of our operator from our test cluster so we can add the next steps and re-test. The easiest way to do that is just to uninstall KUDO and all of its resources:
 
 ```
 MacBook-Pro:operator matt$ kubectl kudo init --dry-run --output yaml | kubectl delete -f -
@@ -307,7 +308,7 @@ statefulset.apps "kudo-controller-manager" deleted
 
 ## Bootstrap service
 
-The next thing we are going to need is a service defined, so that our cluster nodes can connect to our bootstrap node once they are deployed. Firstly we’ll define that step and task in our operator.yaml, as well as defining the resources for the task. Once again this will be an Apply task, just applying the resource to our cluster :
+The next thing we are going to need is a service defined, so that our cluster nodes can connect to our bootstrap node once they are deployed. Firstly we’ll define that step and task in our operator.yaml, as well as defining the resources for the task. Once again this will be an Apply task, just applying the resource to our cluster:
 
 ```yaml
 # operator.yaml
@@ -366,7 +367,7 @@ spec:
 
 Again here, we’ve made sure the name will be unique, and we’ve set a label which we’ll use to manage which instances use this service. We’ve defined all the ports which Galera uses, and assigned their values to parameters in our params.yaml file, and defined a selector which will match our bootstrap instance when we define that. For this particular service, we know only one instance will ever use it, so we don’t need a clusterIP, the service can be headless and Kubernetes can just create the relevant DNS endpoint. 
 
-Now we’ve got that file in place, let’s add those parameters to our params.yaml :
+Now we’ve got that file in place, let’s add those parameters to our params.yaml:
 
 ```yaml
 # params.yaml
@@ -414,7 +415,7 @@ Plan(s) for "galera-instance" in namespace "default":
             └── Step bootstrap_service [COMPLETE]
 ```
 
-From the output of *plan status*, we can see that both of our steps have been completed. Let’s check if the service configuration is correct :
+From the output of *plan status*, we can see that both of our steps have been completed. Let’s check if the service configuration is correct:
 
 ```
 MacBook-Pro:operator matt$ kubectl get services
@@ -422,7 +423,7 @@ NAME                            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)  
 galera-instance-bootstrap-svc   ClusterIP   None         <none>        3306/TCP,4444/TCP,4567/TCP,4568/TCP   39s
 ```
 
-Here we can see the service has been created, and has the correct ports from our params.yaml definitions. Let’s take a look in detail at it :
+Here we can see the service has been created, and has the correct ports from our params.yaml definitions. Let’s take a look in detail at it:
 
 ```
 MacBook-Pro:operator matt$ kubectl describe service galera-instance-bootstrap-svc
@@ -464,7 +465,7 @@ As before, uninstall our operator, and let’s move onto the next steps.
 
 ## Deploy the bootstrap node
 
-The final step we need for bootstrapping is to deploy an actual instance of our bootstrap node, using our config and service. As before, let’s add steps and tasks to our operator.yaml :
+The final step we need for bootstrapping is to deploy an actual instance of our bootstrap node, using our config and service. As before, let’s add steps and tasks to our operator.yaml:
 
 ```yaml
 # operator.yaml
@@ -502,7 +503,7 @@ tasks:
           - bootstrap_deploy.yaml
 ```
 
-Now we’ll create the bootstrap_deploy.yaml template :
+Now we’ll create the bootstrap_deploy.yaml template:
 
 ```yaml
 # templates/bootstrap_deploy.yaml 
@@ -577,7 +578,7 @@ As we can see, this one is a bit more complicated, so let’s break it down. Gal
         instance: {{ .Name }}
 ```
 
-We are also configuring a number of ports for our container, matching our service, and using the values from our params.yaml :
+We are also configuring a number of ports for our container, matching our service, and using the values from our params.yaml:
 
 ```yaml
   ports:
@@ -591,7 +592,7 @@ We are also configuring a number of ports for our container, matching our servic
           name: ist
 ```
 
-This image also allows the MySQL root password to be defined as an environment variable, so we are setting that to a value we will define in params.yaml :
+This image also allows the MySQL root password to be defined as an environment variable, so we are setting that to a value we will define in params.yaml:
 
 ```yaml
         env:
@@ -601,7 +602,7 @@ This image also allows the MySQL root password to be defined as an environment v
 ```
 
 
-Our liveness and readiness probes will use this, so we are templating that in there as well :
+Our liveness and readiness probes will use this, so we are templating that in there as well:
 
 ```yaml
         livenessProbe:
@@ -619,7 +620,7 @@ Our liveness and readiness probes will use this, so we are templating that in th
           timeoutSeconds: 1
 ```
 
-We’ll also need to mount the volume containing our ConfigMap :
+We’ll also need to mount the volume containing our ConfigMap:
 
 ```yaml
         volumeMounts:
@@ -636,7 +637,7 @@ We’ll also need to mount the volume containing our ConfigMap :
 
 Here we create the volume, using a unique name, and connect that to our ConfigMap, defining which key we should look for in the ConfigMap, and an output path. We then mount that into our container filesystem into /etc/mysql/conf.d where it will be automatically included into the configuration for MariaDB. 
 
-Before we can actually deploy this, we need to add that MYSQL_ROOT_PASSWORD into our params.yaml :
+Before we can actually deploy this, we need to add that MYSQL_ROOT_PASSWORD into our params.yaml:
 
 ```yaml
 # params.yaml 
@@ -665,7 +666,7 @@ parameters:
     default: "admin"
 ```
 
-Now when we install our operator, we’ll expect to see our bootstrap node actually deploy :
+Now when we install our operator, we’ll expect to see our bootstrap node actually deploy:
 
 ```
 MacBook-Pro:operator matt$ kubectl kudo install .
@@ -687,7 +688,7 @@ NAME                                         READY   STATUS    RESTARTS   AGE
 galera-instance-bootstrap-869c8bd847-7nk7b   1/1     Running   0          47s
 ```
 
-So we can see our Galera bootstrap node is now up and running. Let’s check if it’s working correctly :
+So we can see our Galera bootstrap node is now up and running. Let’s check if it’s working correctly:
 
 ```
 MacBook-Pro:operator matt$ kubectl logs galera-instance-bootstrap-869c8bd847-7nk7b
@@ -711,7 +712,7 @@ MacBook-Pro:operator matt$ kubectl logs galera-instance-bootstrap-869c8bd847-7nk
 
 We can see from the logs that Galera has been configured, and has created a new cluster ready to be joined. 
 
-We can also look into our running container, and check our ConfigMap is mounted correctly :
+We can also look into our running container, and check our ConfigMap is mounted correctly:
 
 ```
 MacBook-Pro:operator matt$ kubectl exec -it galera-instance-bootstrap-869c8bd847-7nk7b /bin/bash
@@ -727,7 +728,7 @@ wsrep_sst_auth = "root:admin"
 binlog_format = ROW
 ```
 
-Now when we look at our service, we can see we have an endpoint correctly registered :
+Now when we look at our service, we can see we have an endpoint correctly registered:
 
 ```
 MacBook-Pro:operator matt$ kubectl describe service galera-instance-bootstrap-svc
