@@ -91,3 +91,5 @@ Note, that the _parent_ operator may decide to provide a sensible default or eve
 ## Summary
 
 Obviously, there is more to dependencies than the right installation order. One area that KEP-29 deliberately avoided is life-cycle dependencies. It is easy to imagine a situation when a new operator (e.g Kafka) may want to depend on the existing Zookeeper instance. However, such life-cycle dependencies presents major challenges e.g. what happens when Zookeeper is removed? What happens when Zookeeper is upgraded, and the new version is incompatible with the current Kafka Instance? How can we ensure the compatibility? Anyway, we want to gather feedback before we address these issues so ping us if you have any ideas. For more information and implementation details, take a look at the [KEP-29](https://github.com/kudobuilder/kudo/blob/main/keps/0029-operator-dependencies.md), updated [Flink demo](https://github.com/kudobuilder/operators/pull/279) or [dependencies documentation](https://kudo.dev/docs/developing-operators/tasks.html#kudooperator-task).
+
+<Authors about="zen-dog" />
