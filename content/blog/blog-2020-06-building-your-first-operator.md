@@ -25,17 +25,17 @@ The first thing we need to do is create the filesystem layout which our operator
 Firstly make a top level directory:
 
 ```
-MacBook-Pro:~ matt$ mkdir galera
+~ $ mkdir galera
 ```
 
 Then we’ll change into that directory. Now we could manually create the filesystem layout, but if we’ve got the KUDO kubectl extension installed, then we can use the *package new* command to create it for us. 
 
 ```
-MacBook-Pro:~ matt$ cd galera
-MacBook-Pro:galera matt$ kubectl kudo package new galera
-MacBook-Pro:galera matt$ ls
+~ $ cd galera
+galera $ kubectl kudo package new galera
+galera $ ls
 operator
-MacBook-Pro:galera matt$ tree
+galera $ tree
 .
 └── operator
     ├── operator.yaml
@@ -83,8 +83,8 @@ Here you can see I’ve added the url of the application, the version of the app
 We also need to create our templates directory, which isn’t created automatically by the CLI. 
 
 ```
-MacBook-Pro:operator matt$ mkdir templates
-MacBook-Pro:operator matt$ tree
+operator $ mkdir templates
+operator $ tree
 .
 ├── operator.yaml
 ├── params.yaml
@@ -119,7 +119,7 @@ plans:
 tasks:
 ```
 
-## Bootstrap configuration
+## Bootstrap configuration
 
 When we deploy a Galera cluster, there are specific steps we need to take in order to bootstrap. We first need a bootstrap node, which will have different configuration from the rest of the cluster, and from which our remaining nodes are going to join to form the cluster.
 
@@ -155,7 +155,7 @@ tasks:
           - bootstrap_config.yaml
 ```
 
-Now we have the KUDO configuration for this task in place, let’s go ahead and create the bootstrap_config.yaml file. 
+Now we have the KUDO configuration for this task in place, let’s go ahead and create the `bootstrap_config.yaml` file. 
 
 ```yaml
 # templates/bootstrap_config.yaml 
@@ -221,7 +221,7 @@ For an real world operator it would be better to store the SST_PASSWORD in a sep
 At this point, we want to now test that this part of our operator works correctly. First let’s install KUDO:
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo init
+operator $ kubectl kudo init
 $KUDO_HOME has been configured at /Users/matt/.kudo
 ✅ installed crds
 ✅ installed service accounts and other requirements for controller to run
@@ -231,7 +231,7 @@ $KUDO_HOME has been configured at /Users/matt/.kudo
 And now let’s install our operator. The KUDO CLI extension allows me to install directly from the local filesystem, so from our operator directory:
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo install .
+operator $ kubectl kudo install .
 operator.kudo.dev/v1beta1/galera created
 operatorversion.kudo.dev/v1beta1/galera-0.1.0 created
 instance.kudo.dev/v1beta1/galera-instance created
@@ -240,7 +240,7 @@ instance.kudo.dev/v1beta1/galera-instance created
 And now let’s see what the status of our deploy plan is. Since I didn't specify a name when I installed my operator, our instance automatically gets assigned the name *galera-instance*: 
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo plan status --instance=galera-instance
+operator $ kubectl kudo plan status --instance=galera-instance
 Plan(s) for "galera-instance" in namespace "default":
 .
 └── galera-instance (Operator-Version: "galera-0.1.0" Active-Plan: "deploy")
@@ -253,7 +253,7 @@ Plan(s) for "galera-instance" in namespace "default":
 Now we are expecting that plan to have created a ConfigMap resource, and for our templating to have configured it correctly. First let’s see if the ConfigMap exists:
 
 ```
-MacBook-Pro:operator matt$ kubectl get configmaps
+operator $ kubectl get configmaps
 NAME                        DATA   AGE
 galera-instance-bootstrap   1      2m1s
 ```
@@ -261,7 +261,7 @@ galera-instance-bootstrap   1      2m1s
 So the ConfigMap has been created correctly, and you can see that it’s been named using the .Name variable as we configured in the bootstrap_config.yaml. Let’s take a look at the content:
 
 ```
-MacBook-Pro:operator matt$ kubectl describe configmap galera-instance-bootstrap
+operator $ kubectl describe configmap galera-instance-bootstrap
 Name:         galera-instance-bootstrap
 Namespace:    default
 Labels:       heritage=kudo
@@ -295,7 +295,7 @@ As we can see it’s been correctly created, with the parameters from the params
 At this point, we’ll want to remove all of our operator from our test cluster so we can add the next steps and re-test. The easiest way to do that is just to uninstall KUDO and all of its resources:
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo init --dry-run --output yaml | kubectl delete -f -
+operator $ kubectl kudo init --dry-run --output yaml | kubectl delete -f -
 customresourcedefinition.apiextensions.k8s.io "operators.kudo.dev" deleted
 customresourcedefinition.apiextensions.k8s.io "operatorversions.kudo.dev" deleted
 customresourcedefinition.apiextensions.k8s.io "instances.kudo.dev" deleted
@@ -396,16 +396,16 @@ parameters:
 Now we’ve got our second step defined, let’s go ahead and test our operator again. 
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo init
+operator $ kubectl kudo init
 $KUDO_HOME has been configured at /Users/matt/.kudo
 ✅ installed crds
 ✅ installed service accounts and other requirements for controller to run
 ✅ installed kudo controller
-MacBook-Pro:operator matt$ kubectl kudo install .
+operator $ kubectl kudo install .
 operator.kudo.dev/v1beta1/galera created
 operatorversion.kudo.dev/v1beta1/galera-0.1.0 created
 instance.kudo.dev/v1beta1/galera-instance created
-MacBook-Pro:operator matt$ kubectl kudo plan status --instance galera-instance
+operator $ kubectl kudo plan status --instance galera-instance
 Plan(s) for "galera-instance" in namespace "default":
 .
 └── galera-instance (Operator-Version: "galera-0.1.0" Active-Plan: "deploy")
@@ -418,7 +418,7 @@ Plan(s) for "galera-instance" in namespace "default":
 From the output of *plan status*, we can see that both of our steps have been completed. Let’s check if the service configuration is correct:
 
 ```
-MacBook-Pro:operator matt$ kubectl get services
+operator $ kubectl get services
 NAME                            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                               AGE
 galera-instance-bootstrap-svc   ClusterIP   None         <none>        3306/TCP,4444/TCP,4567/TCP,4568/TCP   39s
 ```
@@ -426,7 +426,7 @@ galera-instance-bootstrap-svc   ClusterIP   None         <none>        3306/TCP,
 Here we can see the service has been created, and has the correct ports from our params.yaml definitions. Let’s take a look in detail at it:
 
 ```
-MacBook-Pro:operator matt$ kubectl describe service galera-instance-bootstrap-svc
+operator $ kubectl describe service galera-instance-bootstrap-svc
 Name:              galera-instance-bootstrap-svc
 Namespace:         default
 Labels:            app=galera-bootstrap
@@ -669,11 +669,11 @@ parameters:
 Now when we install our operator, we’ll expect to see our bootstrap node actually deploy:
 
 ```
-MacBook-Pro:operator matt$ kubectl kudo install .
+operator $ kubectl kudo install .
 operator.kudo.dev/v1beta1/galera created
 operatorversion.kudo.dev/v1beta1/galera-0.1.0 created
 instance.kudo.dev/v1beta1/galera-instance created
-MacBook-Pro:operator matt$ kubectl kudo plan status --instance galera-instance
+operator $ kubectl kudo plan status --instance galera-instance
 Plan(s) for "galera-instance" in namespace "default":
 .
 └── galera-instance (Operator-Version: "galera-0.1.0" Active-Plan: "deploy")
@@ -683,7 +683,7 @@ Plan(s) for "galera-instance" in namespace "default":
             ├── Step bootstrap_service [COMPLETE]
             └── Step bootstrap_deploy [IN_PROGRESS]
 
-MacBook-Pro:operator matt$ kubectl get pods
+operator $ kubectl get pods
 NAME                                         READY   STATUS    RESTARTS   AGE
 galera-instance-bootstrap-869c8bd847-7nk7b   1/1     Running   0          47s
 ```
@@ -691,7 +691,7 @@ galera-instance-bootstrap-869c8bd847-7nk7b   1/1     Running   0          47s
 So we can see our Galera bootstrap node is now up and running. Let’s check if it’s working correctly:
 
 ```
-MacBook-Pro:operator matt$ kubectl logs galera-instance-bootstrap-869c8bd847-7nk7b
+operator $ kubectl logs galera-instance-bootstrap-869c8bd847-7nk7b
 
 --- SNIPPED FOR BREVITY---
 2020-06-23 14:12:40 2 [Note] WSREP: Bootstrapping a new cluster, setting initial position to 00000000-0000-0000-0000-000000000000:-1
@@ -715,7 +715,7 @@ We can see from the logs that Galera has been configured, and has created a new 
 We can also look into our running container, and check our ConfigMap is mounted correctly:
 
 ```
-MacBook-Pro:operator matt$ kubectl exec -it galera-instance-bootstrap-869c8bd847-7nk7b /bin/bash
+operator $ kubectl exec -it galera-instance-bootstrap-869c8bd847-7nk7b /bin/bash
 root@galera-instance-bootstrap-869c8bd847-7nk7b:/# ls /etc/mysql/conf.d/
 galera.cnf
 root@galera-instance-bootstrap-869c8bd847-7nk7b:/# cat /etc/mysql/conf.d/galera.cnf 
@@ -731,7 +731,7 @@ binlog_format = ROW
 Now when we look at our service, we can see we have an endpoint correctly registered:
 
 ```
-MacBook-Pro:operator matt$ kubectl describe service galera-instance-bootstrap-svc
+operator $ kubectl describe service galera-instance-bootstrap-svc
 Name:              galera-instance-bootstrap-svc
 Namespace:         default
 Labels:            app=galera-bootstrap
