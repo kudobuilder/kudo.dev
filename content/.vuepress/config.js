@@ -125,7 +125,7 @@ module.exports = {
                 title: 'Blog',
                 collapsable: false,
                 children: [
-                  'blog-2020-06-building-your-first-operator',
+                  'blog-2020-06-building-your-first-operator-1',
                   'blog-2020-06-29-kuttl-v0.5.0.md',
                   'blog-2020-05-05-performance-improvement-with-a-surprise',
                   'blog-2020-04-new-features',
