@@ -16,6 +16,13 @@
     },
     {
       "resourceType": "Webinar",
+      "date": "2020-05-20",
+      "title": "Software Circus - Need an Operator to Operate those Operators?",
+      "author": "Matt Jarvis",
+      "video": "https://youtu.be/QH2bHqJZj3o"
+    },
+    {
+      "resourceType": "Webinar",
       "date": "2020-04-15",
       "title": "All The Talks: Introducing KUDO, Kubernetes Operators the Easy Way",
       "author": "Matt Jarvis",
