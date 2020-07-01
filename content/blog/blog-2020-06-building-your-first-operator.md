@@ -95,7 +95,7 @@ operator $ tree
 
 ### Create a deploy plan
 
-All KUDO operators must have a deploy plan, so let’s also create the skeleton for that in our operator.yaml:
+All KUDO operators must have a deploy plan, so let’s also create the skeleton for that in our `operator.yaml`:
 
 ```yaml
 # operator.yaml
@@ -175,20 +175,20 @@ data:
     binlog_format = ROW
 ```
 
-As we can see this YAML file is a ConfigMap resource, which contains a single data section called galera.cnf, with the configuration we need for Galera. The bootstrap specific configuration here is the wsrep_cluster_address, which indicates that this will be a bootstrap node:
+As we can see this YAML file is a ConfigMap resource, which contains a single data section called `galera.cnf`, with the configuration we need for Galera. The bootstrap specific configuration here is the `wsrep_cluster_address`, which indicates that this will be a bootstrap node:
 
 ```
 wsrep_cluster_address = gcomm://
 ```
 
-The other important lines is this YAML file are the three which will be templated by KUDO on instantion. Firstly we have the name and namespace lines:
+The other important lines is this YAML file are the three which will be templated by KUDO on instantiation. Firstly we have the name and namespace lines:
 
 ```yaml
   name: {{ .Name }}-bootstrap
   namespace: {{ .Namespace }}
 ```
 
-The .Name variable is unique to each KUDO instance, and since you can’t have instances with the same name in a cluster, this ensures our ConfigMap resource is also unique. We must also namespace all of our KUDO objects, so this gets set by KUDO. 
+The `.Name` variable is unique to each KUDO instance, and since you can’t have instances with the same name in a cluster, this ensures our ConfigMap resource is also unique. We must also namespace all of our KUDO objects, so this gets set by KUDO. 
 
 Finally we need to set credentials to be used internally in the Galera cluster for synchronization between nodes:
 
@@ -196,7 +196,7 @@ Finally we need to set credentials to be used internally in the Galera cluster f
 wsrep_sst_auth = "{{ .Params.SST_USER }}:{{ .Params.SST_PASSWORD }}"
 ```
 
-Here we are referring to two parameters which will be defined in our params.yaml file, so let’s go and add those to our parameters file. 
+Here we are referring to two parameters which will be defined in our `params.yaml` file, so let’s go and add those to our parameters file. 
 
 ```yaml
 # params.yaml
@@ -213,7 +213,7 @@ parameters:
 So here we have defined the two parameters we need, added a description, and given them default values.
  
 ::: warning
-For an real world operator it would be better to store the SST_PASSWORD in a separate `Secret` resource that can be provided by the user - when a simple KUDO parameter is used, the value of that parameter is not encrypted in any way and may easily be read from the cluster.
+For an real world operator it would be better to store the password in a separate `Secret` resource that can be provided by the user - when a simple KUDO parameter is used, the value of that parameter is not encrypted in any way and may easily be read from the cluster.
 :::
 
 ### First Test
@@ -258,7 +258,7 @@ NAME                        DATA   AGE
 galera-instance-bootstrap   1      2m1s
 ```
 
-So the ConfigMap has been created correctly, and you can see that it’s been named using the .Name variable as we configured in the bootstrap_config.yaml. Let’s take a look at the content:
+So the ConfigMap has been created correctly, and you can see that it’s been named using the `.Name` variable as we configured in the `bootstrap_config.yaml`. Let’s take a look at the content:
 
 ```
 operator $ kubectl describe configmap galera-instance-bootstrap
@@ -290,7 +290,7 @@ binlog_format = ROW
 Events:  <none>
 ```
 
-As we can see it’s been correctly created, with the parameters from the params.yaml templated into it. 
+As we can see it’s been correctly created, with the parameters from the `params.yaml` templated into it. 
 
 At this point, we’ll want to remove all of our operator from our test cluster so we can add the next steps and re-test. The easiest way to do that is just to uninstall KUDO and all of its resources:
 
@@ -306,9 +306,9 @@ service "kudo-controller-manager-service" deleted
 statefulset.apps "kudo-controller-manager" deleted
 ```
 
-## Bootstrap service
+## Bootstrap service
 
-The next thing we are going to need is a service defined, so that our cluster nodes can connect to our bootstrap node once they are deployed. Firstly we’ll define that step and task in our operator.yaml, as well as defining the resources for the task. Once again this will be an Apply task, just applying the resource to our cluster:
+The next thing we are going to need is a service defined, so that our cluster nodes can connect to our bootstrap node once they are deployed. Firstly we’ll define that step and task in our `operator.yaml`, as well as defining the resources for the task. Once again this will be an Apply task, just applying the resource to our cluster:
 
 ```yaml
 # operator.yaml
@@ -338,7 +338,7 @@ tasks:
           - bootstrap_service.yaml
 ```
 
-Now we have our KUDO configuration, we need to create the bootstrap_service.yaml for the task. 
+Now we have our KUDO configuration, we need to create the `bootstrap_service.yaml` for the task. 
 
 ```yaml
 # templates/bootstrap_service.yaml
@@ -365,9 +365,9 @@ spec:
   clusterIP: None
 ```
 
-Again here, we’ve made sure the name will be unique, and we’ve set a label which we’ll use to manage which instances use this service. We’ve defined all the ports which Galera uses, and assigned their values to parameters in our params.yaml file, and defined a selector which will match our bootstrap instance when we define that. For this particular service, we know only one instance will ever use it, so we don’t need a clusterIP, the service can be headless and Kubernetes can just create the relevant DNS endpoint. 
+Again here, we’ve made sure the name will be unique, and we’ve set a label which we’ll use to manage which instances use this service. We’ve defined all the ports which Galera uses, and assigned their values to parameters in our `params.yaml` file, and defined a selector which will match our bootstrap instance when we define that. For this particular service, we know only one instance will ever use it, so we don’t need a clusterIP, the service can be headless and Kubernetes can just create the relevant DNS endpoint. 
 
-Now we’ve got that file in place, let’s add those parameters to our params.yaml:
+Now we’ve got that file in place, let’s add those parameters to our `params.yaml`:
 
 ```yaml
 # params.yaml
@@ -423,7 +423,7 @@ NAME                            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)  
 galera-instance-bootstrap-svc   ClusterIP   None         <none>        3306/TCP,4444/TCP,4567/TCP,4568/TCP   39s
 ```
 
-Here we can see the service has been created, and has the correct ports from our params.yaml definitions. Let’s take a look in detail at it:
+Here we can see the service has been created, and has the correct ports from our `params.yaml` definitions. Let’s take a look in detail at it:
 
 ```
 operator $ kubectl describe service galera-instance-bootstrap-svc
@@ -465,7 +465,7 @@ As before, uninstall our operator, and let’s move onto the next steps.
 
 ## Deploy the bootstrap node
 
-The final step we need for bootstrapping is to deploy an actual instance of our bootstrap node, using our config and service. As before, let’s add steps and tasks to our operator.yaml:
+The final step we need for bootstrapping is to deploy an actual instance of our bootstrap node, using our config and service. As before, let’s add steps and tasks to our `operator.yaml`:
 
 ```yaml
 # operator.yaml
@@ -503,7 +503,7 @@ tasks:
           - bootstrap_deploy.yaml
 ```
 
-Now we’ll create the bootstrap_deploy.yaml template:
+Now we’ll create the `bootstrap_deploy.yaml` template:
 
 ```yaml
 # templates/bootstrap_deploy.yaml 
@@ -571,14 +571,14 @@ spec:
               path: galera.cnf
 ```
 
-As we can see, this one is a bit more complicated, so let’s break it down. Galera is an extension to MySQL, and in this case we are using MariaDB, and the standard upstream MariaDB image. We are setting labels and selectors that we use to link our resources together, and ensuring unique names by using the .Name variable from KUDO. 
+As we can see, this one is a bit more complicated, so let’s break it down. Galera is an extension to MySQL, and in this case we are using MariaDB, and the standard upstream MariaDB image. We are setting labels and selectors that we use to link our resources together, and ensuring unique names by using the `.Name` variable from KUDO. 
 
 ```yaml
         app: galera-bootstrap
         instance: {{ .Name }}
 ```
 
-We are also configuring a number of ports for our container, matching our service, and using the values from our params.yaml:
+We are also configuring a number of ports for our container, matching our service, and using the values from our `params.yaml`:
 
 ```yaml
   ports:
@@ -592,7 +592,7 @@ We are also configuring a number of ports for our container, matching our servic
           name: ist
 ```
 
-This image also allows the MySQL root password to be defined as an environment variable, so we are setting that to a value we will define in params.yaml:
+This image also allows the MySQL root password to be defined as an environment variable, so we are setting that to a value we will define in `params.yaml`:
 
 ```yaml
         env:
@@ -635,9 +635,9 @@ We’ll also need to mount the volume containing our ConfigMap:
               path: galera.cnf
 ```
 
-Here we create the volume, using a unique name, and connect that to our ConfigMap, defining which key we should look for in the ConfigMap, and an output path. We then mount that into our container filesystem into /etc/mysql/conf.d where it will be automatically included into the configuration for MariaDB. 
+Here we create the volume, using a unique name, and connect that to our ConfigMap, defining which key we should look for in the ConfigMap, and an output path. We then mount that into our container filesystem into `/etc/mysql/conf.d` where it will be automatically included into the configuration for MariaDB. 
 
-Before we can actually deploy this, we need to add that MYSQL_ROOT_PASSWORD into our params.yaml:
+Before we can actually deploy this, we need to add that `MYSQL_ROOT_PASSWORD` into our `params.yaml`:
 
 ```yaml
 # params.yaml 
