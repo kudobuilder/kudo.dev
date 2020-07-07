@@ -4,7 +4,7 @@ date: 2020-07-01
 
 # KUDO Dependencies
 
-One of the most requested features (internally and externally) has been operator dependencies. We've experienced this pain ourselves: our own [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) operator requires the user to manually [install Zookeeper](https://github.com/kudobuilder/operators/blob/master/repository/kafka/docs/v1.3/install.md) as a prerequisite. This sounds simple enough but can get out of hand quickly as our [Flink demo](https://github.com/kudobuilder/operators/tree/master/repository/flink/docs/demo/financial-fraud) shows.
+One of the most requested features (internally and externally) has been operator dependencies. We've experienced this pain ourselves: [Kafka](https://github.com/kudobuilder/operators/tree/master/repository/kafka) was one of the first KUDO operators, and it requires the user to manually [install Zookeeper](https://github.com/kudobuilder/operators/blob/master/repository/kafka/docs/v1.3/install.md) as a prerequisite. This sounds simple enough but can get out of hand quickly with multiple dependencies as the [Flink demo](https://github.com/kudobuilder/operators/tree/master/repository/flink/docs/demo/financial-fraud) shows.
 
 We've been thinking about the best way of introducing dependencies to KUDO for a while now. A few months ago we created [KEP-29](https://github.com/kudobuilder/kudo/blob/main/keps/0029-operator-dependencies.md) that aimed at solving part of the problems. Dependencies are a complex topic. KEP-29 is not trying to boil the dependency ocean but rather limits itself to installation dependencies only, i.e. your operator instance and all its dependencies (including transitive ones) will be installed and/or removed as one unit.
 
