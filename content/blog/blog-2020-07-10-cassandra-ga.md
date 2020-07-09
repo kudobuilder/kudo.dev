@@ -17,7 +17,7 @@ Some highlights from this release are:
 ## Backup & Restore
 
 For KUDO Cassandra, we have integrated [Cassandra Medusa](https://github.com/thelastpickle/cassandra-medusa) to allow easy backup and restore operations.
-Medusa is a backup system for Cassandra that provides support for backups to Amazon S3, Google Cloud Storage and local storage. At the moment we have only integrated the AWS S3 solution, but can easily add support for the other storage providers.
+Medusa is a backup system for Cassandra that provides support for backups to Amazon S3, Google Cloud Storage and local storage. At the moment we have only integrated the AWS S3 solution, but can easily add support for the other storage providers, supported by [Apache libcloud](https://libcloud.readthedocs.io/en/stable/storage/supported_providers.html)
 
 With version 1.0.0, it is possible to do a full cluster backups and restore the backups to a new instance of the cluster - it is not possible to restore single nodes, but as Cassandra is a distributed database, a full cluster restore is a more probable use case.
 
@@ -31,7 +31,7 @@ Details about this feature can be found [here](https://github.com/mesosphere/kud
 
 One of the tasks of running a bigger Cassandra cluster is handling node failures and node replacement. There are generally two options for the storage provider. Either elastic block storage, which makes it easy to have the same data available on multiple servers, but limits the performance and is an additional complex software to manage. The second option is local storage, which provides the best performance, but has the risk of data loss in case of failure.
 
-The data loss is not really a problem for Cassandra - as long as the replication factor for a keyspace is setup correctly, copies of the data are stored on different nodes. But local storage requires manual intervention when a Cassandra node really fails. The cluster needs to be informed that a node was lost and was replaced, in case of Kubernetes the persistent volume and persistent volume claims need to be cleaned up, etc.
+Apache Cassandra is designed to tolerate node failure - as long as the minimum number of required nodes are up and running and the replication factor for a keyspace is setup correctly, copies of the data are stored on different nodes. But local storage requires manual intervention when a Cassandra node really fails. The cluster needs to be informed that a node was lost and was replaced, in case of Kubernetes the persistent volume and persistent volume claims need to be cleaned up, etc.
 
 With KUDO Cassandra we developed a feature that can handle failed Kubernetes nodes (semi-)automatically. When KUDO Cassandra is deployed with `RECOVERY_CONTROLLER` enabled, we start an additional controller that monitors the deployed pods. When a pod fails to be scheduled because of a failed Kubernetes node it tries to get the state of the failed node. As long as the node is just marked as down, the controller will take no action. Only when the Kubernetes node is removed from the Cluster by an administrator the recovery controller will take action. In this case it will remove the persistent volume claim that is bound to the failed Kubernetes node, and reschedules the pod. As the PVC is now missing, the pod gets rescheduled on to a different Kubernetes node. 
 
