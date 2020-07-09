@@ -4,7 +4,7 @@ date: 2020-07-10
 
 # KUDO Cassandra 1.0.0 Released
 
-We have released [KUDO Cassandra](https://github.com/mesosphere/kudo-cassandra-operator) 1.0.0 for general availability. 
+We have recently released [KUDO Cassandra](https://github.com/mesosphere/kudo-cassandra-operator) 1.0.0 for general availability. 
 
 Some highlights from this release are:
 
@@ -76,7 +76,7 @@ The details on how to set up the different versions can be found in the [documen
 
 ## Planned Features
 
-There are a couple of planned features for KUDO Cassandra, although we are not fully sure about the priority - If you're going to evaluate or use KUDO Cassandra, let us know what you like or need. 
+There are a couple of planned features for KUDO Cassandra, although we are not fully sure about the priorities - If you're going to use or evaluate KUDO Cassandra, let us know what you like or need. 
 
 * [Cassandra Reaper](http://cassandra-reaper.io/) for managing repair maintenance 
 * Improvements to Backup & Restore for single nodes
