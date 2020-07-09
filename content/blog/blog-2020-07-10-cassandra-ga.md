@@ -4,7 +4,7 @@ date: 2020-07-10
 
 # KUDO Cassandra 1.0.0 Released
 
-We have released (KUDO Cassandra)[https://github.com/mesosphere/kudo-cassandra-operator] 1.0.0 for general availability. 
+We have released [KUDO Cassandra](https://github.com/mesosphere/kudo-cassandra-operator) 1.0.0 for general availability. 
 
 Some highlights from this release are:
 
@@ -16,7 +16,7 @@ Some highlights from this release are:
 
 ## Backup & Restore
 
-For KUDO Cassandra, we have integrated (Cassandra Medusa)[https://github.com/thelastpickle/cassandra-medusa] to allow easy backup and restore operations.
+For KUDO Cassandra, we have integrated [Cassandra Medusa](https://github.com/thelastpickle/cassandra-medusa) to allow easy backup and restore operations.
 Medusa is a backup system for Cassandra that provides support for backups to Amazon S3, Google Cloud Storage and local storage. At the moment we have only integrated the AWS S3 solution, but can easily add support for the other storage providers.
 
 With version 1.0.0, it is possible to do a full cluster backups and restore the backups to a new instance of the cluster - it is not possible to restore single nodes, but as Cassandra is a distributed database, a full cluster restore is a more probable use case.
@@ -25,7 +25,7 @@ To enable backup and restore functionality, there is a single parameter: `BACKUP
 
 For a restore, the parameter sets up an init container before the actual start of the container which downloads the backup and initialises the data for that node.
 
-Details about this feature can be found (here)[https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/backup.md].
+Details about this feature can be found [here](https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/backup.md).
 
 ## Node Eviction/Node Recovery
 
@@ -39,38 +39,71 @@ The node eviction works similarly, but without a Kubernetes node failure. To evi
 
 KUDO Cassandra maintains a mapping for each Cassandra node - when the replacement node is scheduled on a new Kubernetes node, the bootstrap process of KUDO Cassandra detects that it is a replacement node an starts Cassandra in replace mode, which triggers the redistribution of the mirrored data in the Cassandra cluster.
 
-More Details about (node eviction)[https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/evicting-nodes.md] and (failure handling)[https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/managing.md#failure-handling] can be found in the documentation.
+More Details about [node eviction](https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/evicting-nodes.md) and [failure handling](https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/managing.md#failure-handling) can be found in the documentation.
+
+## Multi-Datacenter Cluster
+
+KUDO Cassandra allows to create Multi-Datacenter clusters. A single parameter, `NODE_TOPOLOGY` can be set, for example like this:
+
+```yaml
+- datacenter: dc1
+  datacenterLabels:
+    failure-domain.beta.kubernetes.io/region: us-west-2
+  nodes: 6
+  rackLabelKey: failure-domain.beta.kubernetes.io/zone
+  racks:
+    - rack: rack1
+      rackLabelValue: us-west-2a
+    - rack: rack2
+      rackLabelValue: us-west-2b
+- datacenter: dc2
+  datacenterLabels:
+    failure-domain.beta.kubernetes.io/region: us-east-1
+  nodes: 6
+  rackLabelKey: failure-domain.beta.kubernetes.io/zone
+  racks:
+    - rack: rack3
+      rackLabelValue: us-east-1a
+    - rack: rack4
+      rackLabelValue: us-east-1b
+```
+
+This will set up a Cassandra cluster with two rings of 12 nodes each. Each datacenter and each rack can have specific labels. The operator will set up a stateful set for each datacenter, create the correct `rack-dc.properties`, adjust the seed node configuration, etc.
+
+Another option to set up a multi-dc cluster is to use `EXTERNAL_SEED_NODES` to connect two KUDO Cassandra clusters. In this case we would have to deploy two or more instances of KUDO Cassandra, and connect them via the parameter. 
+
+The details on how to set up the different versions can be found in the [documentation](https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/multidatacenter.md).
 
 ## Planned Features
 
 There are a couple of planned features for KUDO Cassandra, although we are not fully sure about the priority - If you're going to evaluate or use KUDO Cassandra, let us know what you like or need. 
 
-* (Cassandra Reaper)[http://cassandra-reaper.io/] for managing repair maintenance 
+* [Cassandra Reaper](http://cassandra-reaper.io/) for managing repair maintenance 
 * Improvements to Backup & Restore for single nodes
 * Automatic scale down and decommissioning
 * Other improvements waiting for features in KUDO:
 
-### Toggle Tasks
+#### Toggle Tasks
 
-(Toggle Tasks)[https://kudo.dev/docs/developing-operators/tasks.html#toggle-task] were recently added to KUDO and allow easy feature toggles. It enables us to simplify the operator structure a bit.
+[Toggle Tasks](https://kudo.dev/docs/developing-operators/tasks.html#toggle-task) were recently added to KUDO and allow easy feature toggles. It enables us to simplify the operator structure a bit.
 
-### Immutable Parameters
+#### Immutable Parameters
 
-There are a couple of parameters in KUDO Cassandra that are essentially immutable - for example, the `NUM_TOKENS` must not be changed after the Cassandra cluster is initialized. The (immutable parameters)[https://github.com/kudobuilder/kudo/blob/main/keps/0030-immutable-parameters.md] which are planned for KUDO can be used to ensure that the value for those parameters will not be changed after the initial setup of the cluster.
+There are a couple of parameters in KUDO Cassandra that are essentially immutable - for example, the `NUM_TOKENS` must not be changed after the Cassandra cluster is initialized. The [immutable parameters](https://github.com/kudobuilder/kudo/blob/main/keps/0030-immutable-parameters.md) which are planned for KUDO can be used to ensure that the value for those parameters will not be changed after the initial setup of the cluster.
 
-### Transient Parameters
+#### Transient Parameters
 
-(Transient parameters)[https://github.com/kudobuilder/kudo/pull/1450] are another addition to KUDO that are in an early planning stage. At the moment it is not possible to provide transient values to triggered tasks, for example the name of a backup, or the name of a node for a repair job. We can work around that, but having this feature in KUDO would make it less error prone and clearer to use.
+[Transient parameters](https://github.com/kudobuilder/kudo/pull/1450) are another addition to KUDO that are in an early planning stage. At the moment it is not possible to provide transient values to triggered tasks, for example the name of a backup, or the name of a node for a repair job. We can work around that, but having this feature in KUDO would make it less error prone and clearer to use.
 
-### Parameter Dependencies
+#### Parameter Dependencies
 
 This is something that is not sketched out yet, but the use case is pretty obvious: There are a lot of parameters that only make sense if another parameter has a specific value - Setting the `BACKUP_PREFIX` when `BACKUP_RESTORE_ENABLED` isn't `true` does not make a lot of sense. This is again a quality-of-life feature that can prevent errors and provide help to users.
 
-### Yaml Object Validation
+#### Yaml Object Validation
 
 KUDO Cassandra uses a single YAML object parameter `NODE_TOPOLOGY` to set up a multi datacenter Cassandra cluster. The YAML in this parameter has to have a specific format, but KUDO currently doesn't have any way to verify the format of that parameter value. It might be possible to store that data in a CRD, or add YAML validation to KUDO.
 
-### The Recovery Controller
+#### The Recovery Controller
 
 The recovery controller mentioned above is currently a part of KUDO Cassandra, but there is no specific reason for that. The functionality is generic and could be used for any kind of stateful workload. There might be an option to integrate the functionality into KUDO core, or to extract the recovery controller into a separate project that can be used by multiple operators.
 
