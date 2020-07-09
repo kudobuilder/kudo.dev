@@ -23,7 +23,7 @@ With version 1.0.0, it is possible to do a full cluster backups and restore the 
 
 To enable backup and restore functionality, there is a single parameter: `BACKUP_RESTORE_ENABLED`. This will deploy a sidecar container on each Cassandra Node which contains Medusa. The actual backup is triggered by a Job that execs Medusa in the sidecar.
 
-For a restore, the parameter sets up an init container before the actual start of the container which downloads the backup and initialises the data for that node.
+For a restore, the parameter sets up an init container that will run before the actual C* node container, download the backup and initialize the data for that node.
 
 Details about this feature can be found [here](https://github.com/mesosphere/kudo-cassandra-operator/blob/master/docs/backup.md).
 
@@ -43,7 +43,7 @@ More Details about [node eviction](https://github.com/mesosphere/kudo-cassandra-
 
 ## Multi-Datacenter Cluster
 
-KUDO Cassandra allows to create Multi-Datacenter clusters. A single parameter, `NODE_TOPOLOGY` can be set, for example like this:
+KUDO Cassandra allows to create Multi-Datacenter clusters. A single parameter, `NODE_TOPOLOGY` can be set e.g.:
 
 ```yaml
 - datacenter: dc1
@@ -85,7 +85,7 @@ There are a couple of planned features for KUDO Cassandra, although we are not f
 
 #### Toggle Tasks
 
-[Toggle Tasks](https://kudo.dev/docs/developing-operators/tasks.html#toggle-task) were recently added to KUDO and allow easy feature toggles. It enables us to simplify the operator structure a bit.
+[Toggle Tasks](https://kudo.dev/docs/developing-operators/tasks.html#toggle-task) were recently added to KUDO and allow easy feature toggles. Using it with the C* operator will allow us to simplify the operator structure a bit.
 
 #### Immutable Parameters
 
