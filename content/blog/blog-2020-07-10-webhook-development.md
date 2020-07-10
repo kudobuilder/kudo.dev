@@ -36,7 +36,7 @@ This approach has a long dev cycle and is challenging when needing to make rapid
 In order to run the webhook process outside the cluster, we need to solve the challenge of kube making a callback which requires a valid certificate for https.  For this we currently use `ngrok`.  Using ngrok this way requires a registration (which is free and so far does not lead to nagging solitications).  ngrok was OSS for v1, but the latest version is not. ngrok was originally developed for this callback usecase and has some pretty cool features via the UI at `localhost:4040` for replaying requests which is a great feature. It is worth pointing out that we've had success running with [localtunnel](https://github.com/localtunnel/localtunnel) in a similar way.
 Once ngrok is installed and registered (needed for 443), you should be able to run `ngrok http 443`
 
-This results in a running process that should be forwarding details such as:
+This results in a running process that shows forwarding details such as:
 
 ```
 Web Interface                 http://127.0.0.1:4040                                                                                                                           
