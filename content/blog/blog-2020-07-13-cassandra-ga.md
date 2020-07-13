@@ -111,4 +111,4 @@ The recovery controller mentioned above is currently a part of KUDO Cassandra, b
 
 As mentioned in the section about the multi datacenter setups, KUDO Cassandra currently uses one stateful set per datacenter. A better configuration would actually be one stateful set per rack, which would allow more customisation, different node counts per racks, more freedom with labels, etc. The [Issue](https://github.com/kudobuilder/kudo/issues/1481) proposes repeatable phases or steps which would allow a dynamic number of stateful sets per datacenter. It is a complex feature that might open up a lot of possibilities for operator developers. 
 
-<Authors about="aneumann" />
+<Authors about="aneumann82" />
