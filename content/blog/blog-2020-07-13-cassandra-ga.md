@@ -1,5 +1,5 @@
 ---
-date: 2020-07-10
+date: 2020-07-13
 ---
 
 # KUDO Cassandra 1.0.0 Released
