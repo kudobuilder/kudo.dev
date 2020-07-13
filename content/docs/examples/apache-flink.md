@@ -103,7 +103,7 @@ After a while, the state of all plans, phases and steps will change to “COMPLE
 $ kubectl proxy
 ```
 
-[http://127.0.0.1:8001/api/v1/namespaces/default/services/flink-demo-flink-jobmanager:ui/proxy/#/overview](http://127.0.0.1:8001/api/v1/namespaces/default/services/flink-demo-flink-jobmanager:ui/proxy/#/overview)
+[http://127.0.0.1:8001/api/v1/namespaces/default/services/flink-jobmanager:ui/proxy/#/overview](http://127.0.0.1:8001/api/v1/namespaces/default/services/flink-jobmanager:ui/proxy/#/overview)
 
 It should look similar to this, depending on your local machine and how many cores you have available:
 
