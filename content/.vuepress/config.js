@@ -123,27 +123,7 @@ module.exports = {
             '/blog/': [
               {
                 title: 'Blog',
-                collapsable: false,
-                children: [
-                  'blog-2020-07-13-cassandra-ga',
-                  'blog-2020-07-10-webhook-development.md',
-                  'blog-2020-07-01-kudo-dependencies.md',
-                  'blog-2020-06-building-your-first-operator-1',
-                  'blog-2020-06-29-kuttl-v0.5.0.md',
-                  'blog-2020-05-05-performance-improvement-with-a-surprise',
-                  'blog-2020-04-new-features',
-                  'blog-2020-02-07-kudo-terraform-provider-1',
-                  'blog-2019-12-06-mesos-to-kudo',
-                  'blog-2019-10-kudo-team',
-                  'blog-2019-10-hacktoberfest',
-                  'announcing-kudo-0.7.2',
-                  'announcing-kudo-0.6.0',
-                  'announcing-kudo-0.5.0',
-                  'announcing-kudo-0.4.0',
-                  'announcing-kudo-0.3.0',
-                  'announcing-kudo-0.2.0'
-                ]
-              }
+                collapsable: false              }
             ],
             '/community/': [
               '',
