@@ -110,3 +110,13 @@ metadata:
 ...
 {{ end }}
 ```
+
+## Limitations
+
+Some Kubernetes objects should not be templated. One prominent example are [Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/). Job `Spec.Template` field is immutable and once the Job has been applied this field can not be changed. Trying to update `Spec.Template` via a templated parameter will result in an error like:
+
+```bash
+... failed to execute patch: Job.batch "xxx" is invalid: spec.template: Invalid value: core.PodTemplateSpec{...} field is immutable
+```
+
+A possible workaround is to delete the job (using a [Delete task](tasks.md#delete-task)) and recreate it, but that is the responsibility of the operator developer.
