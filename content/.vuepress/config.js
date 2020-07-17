@@ -122,7 +122,7 @@ module.exports = {
               },
               'contributing'
             ],
-            '/blog/': getSideBar("blog", "Blog"),
+            "/blog/": getSideBar(path.join(__dirname, "..", "blog"), "Blog"),
             '/community/': [
               '',
               'team/'
@@ -192,16 +192,14 @@ module.exports = {
 };
 
 function getSideBar(folder, title) {
-  const extension = [".md"];
-
   const files = fs
-    .readdirSync(path.join(`${__dirname}/../${folder}`))
+    .readdirSync(folder)
     .filter(
-      item =>
-        item.indexOf('.') !== 0 &&
-        item.slice(-3) === '.md' && 
+      (item) =>
+        item.indexOf(".") !== 0 &&
+        item.toLowerCase().slice(-3) === ".md" &&
         item.toLowerCase() != "readme.md" &&
-        fs.statSync(path.join(`${__dirname}/../${folder}`, item)).isFile()
+        fs.statSync(path.join(folder, item)).isFile()
     );
 
   return [{ title: title, children: [...files.reverse()] }];
