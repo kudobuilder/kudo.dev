@@ -25,8 +25,8 @@ function embed_docs() {
     echo 'module.exports = { children: [' > "${snippet}"
     # The two find commands are a hack to put installation docs first.
     for file in \
-	    $(find "${destination}" -maxdepth 1 -type f -name '*.md' -not -name 'README.md' -name 'instal*' -printf '%f\n') \
-	    $(find "${destination}" -maxdepth 1 -type f -name '*.md' -not -name 'README.md' -not -name 'instal*' -printf '%f\n')
+	    $(find "${destination}" -maxdepth 1 -type f -name '*.md' -not -name 'README.md' -name 'instal*') \
+	    $(find "${destination}" -maxdepth 1 -type f -name '*.md' -not -name 'README.md' -not -name 'instal*')
     do
         echo "'runbooks/${name}/$(basename "${file}" .md)'," >> "${snippet}"
     done
