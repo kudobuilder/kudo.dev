@@ -91,6 +91,13 @@
       "title": "KUDO automates Kubernetes Operators",
       "author": "Mike Melanson",
       "url": "https://thenewstack.io/kudo-automates-kubernetes-operators/"
+    },
+    {
+      "resourceType": "Video",
+      "date": "2020-07-17",
+      "title": "TGI Kubernetes 124: KUDO",
+      "author": "Joe Beda",
+      "video": "https://www.youtube.com/watch?v=XNi8uO0PwPo"
     }
   ]
 }
