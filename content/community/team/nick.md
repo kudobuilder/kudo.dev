@@ -7,7 +7,8 @@ avatar: nick.png
 twitter: yankcrime
 linkedin: nickj
 about:
-  Nick has worked as a sysadmin, engineer, architect with a career spanning nearly two decades across a wide variety of industries and sectors. He's passionate about new technologies and methodologies, especially those in relation to Open Source, virtualisation, orchestration, automation, and all forms of cloud computing.
+  Nick is based in Edinburgh in the UK and currently works for Rancher as a consulting engineer.  He's particularly interested in Open Source, virtualisation, orchestration, automation, and all forms of cloud computing.
+
 ---
 
 # Nick

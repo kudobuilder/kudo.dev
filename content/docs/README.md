@@ -6,6 +6,7 @@ Before you get started using KUDO, you need to have a running Kubernetes cluster
 
 - Setup a Kubernetes Cluster in version `1.13` or later (if you plan to use Minikube, please see the notes [below](#notes-on-minikube))
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) in version `1.13` or later.
+- Install [cert-manager](https://cert-manager.io/docs/installation/kubernetes/).  KUDO makes use of [webhooks](https://kubernetes.io/docs/reference/access-authn-authz/webhook/) which require TLS.  See additional notes [below](#notes-on-cert-manager) if you're interested in developing and testing KUDO without having to install cert-manager.
 
 ## Install KUDO CLI
 
@@ -53,3 +54,14 @@ $ minikube start --cpus=4 --memory=10240 --disk-size=40g
 ## Notes on KIND
 
 In order to use KIND with storage Operators, you must be using KIND version 0.7.0 or newer.
+
+## Notes on cert-manager
+
+If the cert-manager dependency isn't an option for your environment, then you can install KUDO with an (insecure) self-signed CA bundle by doing the following:
+
+```bash
+$ kubectl kudo init --unsafe-self-signed-webhook-ca
+```
+
+For development, you should also take a look at [this blog post](/blog/blog-2020-07-10-webhook-development.html).
+
