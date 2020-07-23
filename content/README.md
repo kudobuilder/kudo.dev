@@ -33,7 +33,7 @@ KUDO lets you configure an Operator’s entire lifecycle using a declarative spe
 
 ## What is KUDO?
 
-KUDO is a toolkit that makes it easy to build [Kubernetes Operators](#what-are-operators), in most cases just using YAML.
+KUDO is a toolkit that makes it easy to build [Kubernetes Operators](#invalid-anchor), in most cases just using YAML.
 
 It provides a set of pre-built Operators, that you can use out of the box or easily customize.
 
@@ -78,7 +78,7 @@ $ brew install kudo-cli
 $ kubectl kudo init
 ```
 
-It's insanely easy to get started with KUDO - follow this [handy guide](/docs/)!
+It's insanely easy to get started with KUDO - follow this [handy guide](/invalid-link/)!
 
 ## Get KUDO Operators
 
