@@ -5,7 +5,7 @@ type: docs
 
 # KUDO vs Static Definition Formats
 
-A common feature of all Static Definition Formats have, is that they operate from the outside of the cluster.
+A common feature of all Static Definition Formats, is that they operate from the outside of the cluster.
 The more complex tools in this area allow installation, upgrading and rollback of applications, but
 don't provide any mechanisms to automatically keep the cluster in the requested state or interact with
 the installed applications.
@@ -31,7 +31,7 @@ managed tool will only be able to counteract this change when executed by a user
 
 ## Raw YAML
 
-The most easy way to deploy an application. Write and modify Kubernetes YAML files, apply them to the cluster. This works
+The easiest way to deploy an application is to write and modify Kubernetes YAML files and apply them to the cluster. This works
 well for Proof-of-Concepts, very simple applications, or the beginning of the development of a larger application.
 
 `-` No parameter replacements
@@ -55,7 +55,7 @@ or install a complex applications that requires a specific order for installed c
 Helm is a Kubernetes Package Manager. It provides managed packages in a `chart` format, that allows customization,
 installation, upgrades and rollback of packages.
 
-Helm v2 uses an installed server (Tiller) in the Cluster to let the client interact with the Kubernetes API server, Helm v3
+Helm v2 uses an installed server (Tiller) in the Cluster to let the client interact with the Kubernetes API server. Helm v3
 uses a new architecture that does not depend on this component and works with a client only.
 
 `+` Repository of managed packages
