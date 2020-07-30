@@ -4,7 +4,7 @@ date: 2020-07-13
 
 # Building your first KUDO operator - Part 2
 
-In [part 1](https://kudo.dev/blog/blog-2020-06-building-your-first-operator-1.html) of this blog series, we started to build a KUDO operator for Galera, and I showed how we built up plans, steps and tasks to create the Galera bootstrap node. In this second part, we’ll extend the operator to deploy more nodes into our Galera cluster.
+In [part 1](blog-2020-06-building-your-first-operator-1.md) of this blog series, we started to build a KUDO operator for Galera, and I showed how we built up plans, steps and tasks to create the Galera bootstrap node. In this second part, we’ll extend the operator to deploy more nodes into our Galera cluster.
 
 <!-- more -->
 
@@ -563,7 +563,7 @@ We are using our `NODE_COUNT` parameter to set how many replicas should be in th
   replicas: {{ .Params.NODE_COUNT }}
 ```
 
-And we are also defining the ports using the parameters we set for those in the [first part](https://kudo.dev/blog/blog-2020-06-building-your-first-operator-1.html) of this blog:
+And we are also defining the ports using the parameters we set for those in the [first part](blog-2020-06-building-your-first-operator-1.md) of this blog:
 
 ```yaml
 # statefulset.yaml

@@ -14,9 +14,9 @@ In this series of blog posts, I’m going to take you through writing a KUDO ope
 
 Firstly, let’s get our development and test environment created. We’ll need a Kubernetes cluster for testing purposes, I usually find it easier to use [Kind](https://kubernetes.io/docs/setup/learning-environment/kind/) to do this locally on my laptop, although this is very much dependent on how much resource you have on your machine, and how big your operator is likely to be. For a bigger operator, you may want to test in the cloud on a bigger cluster.
 
-As part of the development process you’ll usually want to uninstall and reinstall your operator repeatedly, so it’s easiest to be able to uninstall all KUDO related resources from your cluster when you do this, to ensure a clean testing environment. You can find out how to do this [here](https://kudo.dev/docs/runbooks/admin/remove-kudo.html)
+As part of the development process you’ll usually want to uninstall and reinstall your operator repeatedly, so it’s easiest to be able to uninstall all KUDO related resources from your cluster when you do this, to ensure a clean testing environment. You can find out how to do this [here](../docs/runbooks/admin/remove-kudo.md)
 
-Finally if you haven't already got it installed, you'll need the [KUDO CLI extension](https://kudo.dev/docs/cli.html) for kubectl. 
+Finally if you haven't already got it installed, you'll need the [KUDO CLI extension](../docs/cli.md) for kubectl. 
 
 ### Create the filesystem layout
 
