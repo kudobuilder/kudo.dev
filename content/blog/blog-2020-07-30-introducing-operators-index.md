@@ -12,14 +12,14 @@ Adding new operators to the community repository was traditionally done by addin
 
 To avoid these and other challenges, the new [Operators Index](https://github.com/kudobuilder/operators-index) provides a simple way to reference operator packages located in external projects. Instead of copying an operator package, operator developers reference the URL of a git repository and the operator packages included in that git repository.
 
-With these references, there's a one-to-one mapping of operator packages included by a git repository and the respective packages in KUDO's community repository. Every entry in the _Operators Index_ corresponds to a package in the community repository.
+With these references, there's a one-to-one mapping of operator packages included by a git repository and the respective packages in KUDO's community repository. Every entry in the _Operators Index_ results in a package in the community repository.
 
 ## Adding operator packages to the _Operators Index_
 
 To add an operator package, create a pull request that adds or updates an index entry in the [operators](https://github.com/kudobuilder/operators-index/tree/main/operators) folder of the [Operators Index](https://github.com/kudobuilder/operators-index). Each entry in the index references versions of an operator package.
 By creating a pull request that adds or updates an entry, the referenced operator packages are validated as part of a CI job. This is similar to running `kubectl kudo package verify` on the operator package. Additional checks confirm that the metadata of the entry matches the respective metadata of the operator package.
 
-Once the pull request is approved and merged, it is added to the community repository.
+Once the pull request is approved and merged, the community repository is rebuild and the package will be available to users.
 
 ### Adding Tagged versions from a git repository
 
