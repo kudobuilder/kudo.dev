@@ -4,7 +4,7 @@ date: 2020-08-05
 
 # Building your first KUDO operator - Part 3
 
-In [part 1](blog-2020-06-building-your-first-operator-1.md) and [2](blog-2020-07-building-your-first-operator-2.md) of this blog series, I showed how we bootstrapped a Galera cluster using KUDO, by building up our operator in a series of steps, testing each one as we went.
+In [part 1](blog-2020-06-building-your-first-operator-1.md) and [2](blog-2020-07-13-building-your-first-operator-2.md) of this blog series, I showed how we bootstrapped a Galera cluster using KUDO, by building up our operator in a series of steps, testing each one as we went.
 
 In this third part, we’ll finish our production-ready deployment phase, adding connectivity and ensuring our cluster can scale up and down without interrupting service.
 
@@ -94,7 +94,7 @@ You can see we’ve added the conditional step around the `wsrep_cluster_address
     {{ end -}}
 ```
 
-Note that we terminate both the `if`, `else` and `end` statements with a hyphen. This tells the templating engine not to leave an empty line where those statements were in the template. For a full explanation of the templating code, have a look at [Part 2](blog-2020-07-building-your-first-operator-2.md) of this blog.
+Note that we terminate both the `if`, `else` and `end` statements with a hyphen. This tells the templating engine not to leave an empty line where those statements were in the template. For a full explanation of the templating code, have a look at [Part 2](blog-2020-07-13-building-your-first-operator-2.md) of this blog.
 
 By using these kinds of conditionals inside our templates, we can re-use code across different tasks, meaning we have less code to write and maintain.
 
