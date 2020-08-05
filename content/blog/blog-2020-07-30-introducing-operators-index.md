@@ -8,7 +8,7 @@ The default repository when installing operators with KUDO is the community repo
 
 <!-- more -->
 
-Adding new operators to the community repository was traditionally done by adding the operator packages as a folder in the [operators](https://github.com/kudobuilder/operators) project. While this worked well for smaller operators, it created challenges for large operators, for example, [KUDO Cassandra](https://github.com/mesosphere/kudo-cassandra-operator). Larger operators are developed as separate projects in their own git repository. For new releases, the operator package would have to be copied over to the _operators_ project. In case of bugs in the operator, is the source of truth now the origin project or the folder in the _operators_ project?
+Adding new operators to the community repository was traditionally done by adding the operator packages as a folder in the [operators](https://github.com/kudobuilder/operators) project. While this worked well for smaller operators, it created challenges for large operators, for example, [KUDO Cassandra](https://github.com/mesosphere/kudo-cassandra-operator). Larger operators are developed as separate projects in their own git repository because they need separate issue tracking, have extended tests and documentation, and sometimes build and release their own Docker images. For new releases, the operator package would have to be copied over to the _operators_ project. In case of bugs in the operator, is the source of truth now the origin project or the folder in the _operators_ project?
 
 To avoid these and other challenges, the new [Operators Index](https://github.com/kudobuilder/operators-index) provides a simple way to reference operator packages located in external projects. Instead of copying an operator package, operator developers reference the URL of a git repository and the operator packages included in that git repository.
 
@@ -80,6 +80,6 @@ versions:
 
 ## Summary
 
-The new [Operators Index](https://github.com/kudobuilder/operators-index) provides a one-to-one mapping of referenced operators and packages in the community repository. This makes it convenient for operator developers to add operator packages hosted in git repositories to KUDO's community repository.
+The new [Operators Index](https://github.com/kudobuilder/operators-index) provides a one-to-one mapping of referenced operators and packages in the community repository. This makes it convenient for operator developers to add operator packages hosted in git repositories to KUDO's community repository. Operator packages can be provided alongside other deployment methods, e.g. Helm charts from a single git repository.
 
 <Authors about="nfnt" />
