@@ -59,6 +59,11 @@ Initializes or upgrades the KUDO server and client components.
 These flags customize the installation, especially the server part. At the moment these values are not saved in the
 installation itself and have to be provided every time the init command is executed.
 
+::: flag -n, --namespace string
+For kudo init, the default is `kudo-system`. If a custom namespace is specified, the KUDO controller is installed in
+this namespace. A custom namespace has to exist before installation and will not be created.
+:::
+
 ::: flag -i, --kudo-image string
 Override KUDO controller image and/or version
 :::

@@ -43,7 +43,24 @@ This command installs the controller deployment, the webhook and all other compo
 
 ## KUDO Upgrades
 
+To upgrade an existing KUDO installation, the init process is used as well:
 
+`kubectl kudo init --upgrade`
+
+It is important that you use the same parameters for the upgrade process that you used for the installation; for example if you installed KUDO with:
+
+`kubectl kudo init --namespace kudo-custom --service-account my-kudo-sa`
+
+then you *must* upgrade with
+
+`kubectl kudo init --upgrade --namespace kudo-custom --service-account my-kudo-sa`
+
+This is required for:
+- `--namespace`
+- `--service-account`
+- `--unsafe-self-signed-ca`
+
+otherwise KUDO will fail to correctly detect the existing installation and abort the upgrade.
 
 ## KUDO Uninstall
 
