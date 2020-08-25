@@ -1,5 +1,5 @@
 ---
-date: 2020-07-30
+date: 2020-08-25
 ---
 
 # Introducing the KUDO Operators Index
