@@ -176,7 +176,19 @@ The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
 :::
 
 ::: flag -P, --parameter-file string
-A YAML file with parameters
+Path to a YAML file with parameter values. The top-level element in this file must be a mapping,
+where keys are parameter names and values are the parameter values.
+
+See [the section on installing with overrides](examples.md#install-a-package-overriding-instance-name-and-parameters) below
+for an example of a parameter value file.
+
+This is useful if you want to keep your instances' parameter values in version control,
+or for specifying particularly complex or long parameter values which are inconvenient
+to handle in shell command line.
+
+Parameters are collected by first reading the files specified with `--parameter-file`/`-P` (in the order specified)
+and then from values specified with `--parameter`/`-p`. Last encountered value of a given parameter wins.
+This lets you define defaults in one or more files, and override them on the command line as needed.
 :::
 
 ::: flag --wait
@@ -259,7 +271,7 @@ The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
 :::
 
 ::: flag -P, --parameter-file string
-A YAML file with parameters
+A YAML file with parameters. See [install](#install) for details.
 :::
 
 ::: flag --wait
@@ -304,7 +316,7 @@ The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
 :::
 
 ::: flag -P, --parameter-file string
-A YAML file with parameters
+A YAML file with parameters. See [install](#install) for details.
 :::
 
 ::: warning
