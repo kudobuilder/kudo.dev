@@ -113,88 +113,284 @@ Get information about installed instances
 
 ## search
 
+Searches the repository for a match on "contains" search criteria
+
+Given an operator named foo-demo, a search for 'foo' or 'demo' would include this operator.
+
+By default, the command only shows the latest version of an operator. Use `--all-versions` to list all found versions.
+
+::: tip Usage
+`kubectl-kudo search [criteria] [flags]`
+:::
+
+::: flag --repo string
+Name of repository configuration to use. (default defined by context)
+:::
+
+::: flag -a, --all-versions
+Return all versions of found operators.
+:::
+
 ## install
+
+Install a KUDO package from local filesystem or the official repo.
+
+The name argument must be a name of the package in the repository, a URL or path to package in *.tgz format,
+  or a path to an unpacked package directory.
+
+::: tip Usage
+`kubectl-kudo install <name> [flags]`
+:::
+
+::: flag --app-version string
+A specific app version in the official GitHub repo. (default to the most recent)
+:::
+
+::: flag --operator-version string
+A specific operator version int the official GitHub repo. (default to the most recent)
+:::
+
+::: flag --repo string
+Name of repository configuration to use. (default defined by context)
+:::
+
+::: flag --instance string
+The Instance name. (defaults to Operator name appended with -instance)
+:::
+
+::: flag --skip-instance
+If set, install will install the Operator and OperatorVersion, but not an Instance. (default "false")
+:::
+
+::: flag --create-namespace
+If set, install will create the specified namespace and will fail if it exists. (default "false")
+:::
+
+::: flag -p, --parameter string=value
+The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
+:::
+
+::: flag -P, --parameter-file string
+A YAML file with parameters
+:::
+
+::: flag --wait
+Specify if the CLI should wait for the install to complete before returning (default "false")
+:::
+
+::: flag --wait-time int
+Specify the max wait time in seconds for CLI for the install to complete before returning (default "300")
+:::
+
+::: warning
+Be careful with local directories. If you call `kubectl kudo install flink` and you have a local
+directory "flink", the local directory takes precedence over the remote directory.
+:::
+
 
 ## plan
 
+### plan status
+
+Shows the plan status of the given instance.
+
+This command supports `--output yaml`.
+
+::: tip Usage
+`kubectl kudo plan status --instance=<instanceName> [flags]`
+:::
+
+::: flag --wait
+Specify if the CLI should wait for the plan to complete before returning (default "false")
+:::
+
+### plan history
+
+Lists history for each plan of an instance.
+
+::: tip Usage
+ `kubectl kudo plan history --instance=<instanceName>`
+:::
+
+### plan trigger
+
+Triggers a specific plan on a particular instance.
+
+::: tip Usage
+ `kubectl kudo plan trigger <planName> --instance=<instanceName> [flags]`
+:::
+
+::: flag --wait
+Specify if the CLI should wait for the triggered plan to complete before returning (default "false")
+:::
+
+::: flag --wait-time int
+Specify the max wait time in seconds for CLI for the triggered plan to complete before returning (default "300")
+:::
+
 ## uninstall
+
+Uninstall an instance of a KUDO package. This also removes dependent objects, e.g. deployments, pods. It will NOT remove
+the OperatorVersion or Operator CRD.
+
+::: tip Usage
+ `kubectl-kudo uninstall --instance=<instanceName> [flags]`
+:::
+
+::: warning
+This will uninstall the specified operator instance and may lead to data loss!
+:::
 
 ## update
 
+Update KUDO operator instance with new parameters. The update of parameters can trigger the execution of specific plans.
+
+::: tip Usage
+ `kubectl kudo update --instance=<instanceName> [flags]`
+:::
+
+::: flag -p, --parameter string=value
+The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
+:::
+
+::: flag -P, --parameter-file string
+A YAML file with parameters
+:::
+
+::: flag --wait
+Specify if the CLI should wait for the update to complete before returning (default "false")
+:::
+
+::: flag --wait-time int
+Specify the max wait time in seconds for CLI for the update to complete before returning (default "300")
+:::
+
+::: info
+Updating the value of a parameter in an instance will trigger the plan which is specified in the parameter definition.
+:::
+
 ## upgrade
+
+Upgrade a KUDO package from the currently installed version to a new version. The upgrade argument must be a name of the 
+package in the repository, a path to package in *.tgz format, or a path to an unpacked package directory.
+
+Depending on the new operator version you may need to specify certain parameters, for example if the new operator version
+has newly added required parameters.
+
+
+::: tip Usage
+ `kubectl kudo upgrade <operatorname> --instance=<instanceName> [flags]`
+:::
+
+::: flag --app-version string
+A specific app version in the official GitHub repo. (default to the most recent)
+:::
+
+::: flag --operator-version string
+A specific operator version int the official GitHub repo. (default to the most recent)
+:::
+
+::: flag --repo string
+Name of repository configuration to use. (default defined by context)
+:::
+
+::: flag -p, --parameter string=value
+The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
+:::
+
+::: flag -P, --parameter-file string
+A YAML file with parameters
+:::
+
+::: warning
+Be careful with local directories. If you call `kubectl kudo upgrade flink --instance flink-instance` and you have a local
+directory "flink", the local directory takes precedence over the remote directory.
+:::
 
 ## diagnostics
 
-## Development 
+Diagnostics provides functionality to collect and analyze diagnostics data
+
+::: tip Usage
+ `kubectl kudo diagnostics collect --instance=<instanceName> [flags]`
+:::
+
+::: flag --log-since duration
+Only return logs newer than a relative duration like 5s, 2m, or 3h. Defaults to all logs.
+:::
+
+::: flag -O, --output-directory string
+The output directory for the collected resources. Defaults to 'diag' (default "diag")
+:::
+
+## Development Commands
+
+These commands are mostly interesting for operator developers.
 
 ### package
 
+This command consists of multiple sub-commands to interact with KUDO packages.
+
+It can be used to package or verify an operator, or list parameters.  When working with parameters it can 
+provide a list of parameters from a remote operator given a url or repository along with the name and version.
+
+::: flag add
+Add content to an operator package files
+:::
+
+::: flag create
+Package a local KUDO operator into a tarball.
+:::
+
+::: flag list 
+List context from an operator package 
+:::
+
+::: flag new 
+Wizard style helper to create new operator
+:::
+
+::: flag verify
+Verify a package
+:::
+
+For more details please use `--help` with the CLI.
+
 ### repo
+
+This command consists of multiple sub-commands to interact with KUDO repositories.
+
+It can be used to add, remove, list, and index kudo repositories.
+
+::: flag add
+Add an operator repository
+:::
+
+::: flag context
+Set default for operator repository context
+:::
+
+::: flag index
+Generate an index file given a directory containing KUDO operator packages
+:::
+
+::: flag list
+List operator repositories
+:::
+
+::: flag remove
+Remove an operator repository
+:::
+
+For more details please use `--help`
 
 ### test
 
+Runs KUTTL tests against a Kubernetes cluster.
+
+For more details see [KUTTL](https://kuttl.dev/)
+
 ## version
 
-::: flag kubectl kudo get instances [flags]
-Show all available instances.
-:::
+Show the version of KUDO.
 
-::: flag kubectl kudo help [command] [flags]
-Provides general help or help on a specific command
-:::
-
-::: flag kubectl kudo init [flags]
-Initialize KUDO on both the client and server
-:::
-
-::: flag kubectl kudo install &lt;name&gt; [flags]
-Install an operator from the official [kudobuilder/operators](https://github.com/kudobuilder/operators) repository, a URL or local filesystem.
-:::
-
-::: flag kubectl kudo package create &lt;operator_folder&gt; [flags]
-Packages an operator in a folder into a tgz file.
-:::
-
-::: flag kubectl kudo package verify &lt;operator_folder&gt; [flags]
-Verifies an operator providing errors and warnings as an output.  Provides a non-zero exit when errors are present.
-:::
-
-::: flag kubectl kudo plan status [flags]
-View all available plans.
-:::
-
-::: flag kubectl kudo plan history &lt;name&gt; [flags]
-View all available plans.
-:::
-
-::: flag kubectl kudo repo add|context|remove|list
-Manages local cache of repository configurations.
-:::
-
-::: flag kubectl kudo repo index
-Generates an index file given a directory containing KUDO packages.
-:::
-
-::: flag kubectl kudo test
-Test KUDO and Operators.
-:::
-
-::: flag kubectl kudo uninstall
-Uninstall operator instances.
-:::
-
-::: flag kubectl kudo update
-Update installed operator parameters.
-:::
-
-::: flag kubectl kudo upgrade
-Upgrade installed operator from one version to another.
-:::
-
-::: flag kubectl kudo diagnostics
-Collect diagnostic data about KUDO and an installed operator instance
-::: 
-
-::: flag kubectl kudo version
-Print the current KUDO version.
-:::

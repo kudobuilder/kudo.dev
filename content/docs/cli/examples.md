@@ -10,16 +10,16 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 * `kubectl kudo init --kudo-image=mycompany/controller:v0.6.0` allowing for user certified images or air-gapped alternative images to be installed.
 * `kubectl kudo init --client-only` which will not apply any changes to the cluster. It will setup the default KUDO home with repository options.
 * `kubectl kudo init --crd-only` will create crds in the cluster.
-* `kudo init ` installs KUDO into your cluster with admission webhook enabled. If you already have KUDO installed, you can run `kudo init --webhook=InstanceValidation -o yaml --dry-run` to get the Kubernetes resources needed for installation and then apply them to the cluster via `kubectl apply -f`.
 
   Any admission controller in Kubernetes is an HTTPS endpoint and thus requires a valid certificate. KUDO relies on the cert-manager **0.11 or higher** for this. You should have [cert-manager installed](https://cert-manager.io/docs/installation/) and operational **prior** to admission controller installation. Read more about the admission controllers and how/why KUDO uses them to ensure correct [plan execution](developing-operators/plans.md#executing-plans).
+
+As an alternative you can use `kudo init --unsafe-self-signed-webhook-ca`  to install KUDO into your cluster with a self signed CA for the webhook. This is very useful for local testing but should not be used for production setups.
+
 
 **Note**: Looking to delete kubernetes objects created via init, run:
 
 * `kubectl kudo init --dry-run -o yaml | kubectl delete -f -` which will delete all kubernetes objects created with init or
 * `kubectl kudo init --dry-run -o yaml --crd-only | kubectl delete -f -` which will only delete the KUDO CRDs.
-
-**Note**: If you want to ensure all components are installed, just init again. It will cycle through all objects and ensure they are created.
 
 ## Install a Package
 
