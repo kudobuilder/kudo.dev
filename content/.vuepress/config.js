@@ -63,7 +63,6 @@ module.exports = {
                 ]
               },
               'architecture',
-              'cli',
               {
                   title: "CLI Usage",
                   children: [

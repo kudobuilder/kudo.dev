@@ -1,6 +1,6 @@
-## Examples
+# Examples
 
-### KUDO Init
+## KUDO Init
 
 KUDO itself is a Kubernetes operator. As such it requires the installation of CRDs and the deployment of KUDO, in addition to the establishment of certain prerequisites like creating the namespace to install in. All of this can be handled by the KUDO CLI. To accomplish this, run `kubectl kudo init`.  Some variations on this might include:
 
@@ -21,7 +21,7 @@ KUDO itself is a Kubernetes operator. As such it requires the installation of CR
 
 **Note**: If you want to ensure all components are installed, just init again. It will cycle through all objects and ensure they are created.
 
-### Install a Package
+## Install a Package
 
 There are four options how to install a package. For development you can install packages from your local filesystem or local tgz file.
 For testing, or working without a repository, it is possible to install from a URL. Another option is to install from the package repository.
@@ -80,7 +80,7 @@ my-kafka-name   6s
 ```
 
 
-### Get Instances
+## Get Instances
 
 You can use the `get` command to get a list of all current instances:
 
@@ -247,11 +247,11 @@ spec:
 Events:     <none>
 ```
 
-### Delete an Instance
+## Delete an Instance
 
 You can delete an instance (i.e. uninstall it from the cluster) using `kubectl kudo uninstall --instance <instanceName>`. The deletion of an instance triggers the removal of all the objects owned by it.
 
-### Get the History of Plan Executions
+## History of Plan Executions
 
 This is helpful if you want to find out which plan ran on your instance to a particular `OperatorVersion`.
 Run this command to retrieve all plans that ran for the instance `up` and its OperatorVersion `upgrade-v1`:
@@ -274,7 +274,7 @@ $ kubectl kudo plan history --instance=up
 
 This includes the previous history but also all OperatorVersions that have been applied to the selected instance.
 
-### Package an Operator
+## Package an Operator
 
 You can use the `package create` command to package an operator into a tarball. The package name will be determined by the operator metadata in the package files. The folder of the operator is passed as an argument. It is possible to pass a `--destination` location to build the tgz file into.
 
@@ -287,7 +287,7 @@ $ kubectl kudo package create ../operators/repository/zookeeper/operator/ --dest
   Package created: /Users/kensipe/zookeeper-0.1.0.tgz
 ```
 
-### Validating an Operator
+## Validating an Operator
 
 You can use the `package verify` command to check the condition of an operator which returns warnings and errors.  Warnings are conditions such as a parameter is defined in the params.yaml but is not used a template file.  Errors are conditions such as a parameter is used in a template file but is not defined in the params.yaml.  If there are errors the command exits with a non-zero exit code.
 
@@ -306,7 +306,7 @@ parameter "CUSTOM_SERVER_PROPERTIES" defined but not used.
 package is valid
 ```
 
-### Creating a Repository Index File
+## Create a Repository Index File
 
 A repository is a set of operator packages (tarballs) which are indexed in an index file. To create an index file, execute `kubectl kudo repo index operators` where `operators` is a folder container operator package files.
 
@@ -342,7 +342,7 @@ entries:
 
 It can be useful when overwriting a file to use `--overwrite`.  It is also useful to use `--url=http://kudo.dev/repo` to supply the desired URL the operator packages will be hosted on.
 
-### Managing Repositories
+## Managing Repositories
 
 After KUDO has initialized a client, `kubectl kudo init` or `kubectl kudo init --client-only`, it is possible to configure other repositories. Let's start with a `repo list` using:
 
@@ -376,7 +376,7 @@ Now all installs and upgrades will default to the local repository.
 In order to remove a repository simply run `kubectl kudo repo remove foo`
 
 
-### Update Parameters on Running Operator Instance
+## Update Parameters on Instance
 
 Every operator can define overridable parameters in `params.yaml`. When installing an operator and deploying an instance, you can use the defaults or override them with `-p` or `-P` parameters to `kudo install`.
 
@@ -384,7 +384,7 @@ The `kudo update` command allows you to change these parameters even on an alrea
 
 `kubectl kudo update --instance dev-flink -p param=value`
 
-### Upgrade Running Operator from One Version to Another
+## Upgrade Instance from One Version to Another
 
 Following the same example from the previous section, having a `dev-flink` instance installed, we can upgrade it to a newer version with the following command:
 
@@ -394,7 +394,7 @@ A new version of that operator is installed to the cluster and `upgrade` (or `de
 
 At the same time, we're overriding the value of the parameter `param`. That is optional and you can always do it in a separate step via `kudo update`.
 
-### Collecting diagnostic data 
+## Collecting diagnostic data 
 
 With an existing installation of an operator, it is possible to collect diagnostic data:
 
