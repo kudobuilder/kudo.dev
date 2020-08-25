@@ -65,6 +65,14 @@ module.exports = {
               'architecture',
               'cli',
               {
+                  title: "CLI Usage",
+                  children: [
+                      "cli/installation",
+                      "cli/commands",
+                      "cli/examples",
+                  ]
+              },
+              {
                   title: "Comparison",
                   children: [
                       "comparison/overview",
