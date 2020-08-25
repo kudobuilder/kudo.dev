@@ -270,7 +270,7 @@ Specify if the CLI should wait for the update to complete before returning (defa
 Specify the max wait time in seconds for CLI for the update to complete before returning (default "300")
 :::
 
-::: info
+::: tip Info
 Updating the value of a parameter in an instance will trigger the plan which is specified in the parameter definition.
 :::
 

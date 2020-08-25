@@ -15,7 +15,7 @@ KUDO requires:
 
 `kubectl kudo init --wait`
 
-::: info Wait Timeout
+::: tip Wait Timeout
 There is an additional `--wait-timeout` parameter with a default of 300 seconds to adjust the wait timeout.
 :::
 

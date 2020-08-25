@@ -9,6 +9,10 @@ Operator parameters are key-value pairs declared by the operator developer.
 The operator user may [override](#overriding-parameters) their values at deployment time.
 This allows customizing the behavior of an operator.
 
+::: tip Tip
+Did you know? You can list all parameters for an operator with `kubectl kudo package list parameters <operatorname>`
+:::
+
 ## Declaring parameters
 
 Operator developer declares parameters in a `params.yaml` file.
