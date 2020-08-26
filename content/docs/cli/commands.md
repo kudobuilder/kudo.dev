@@ -143,6 +143,10 @@ Install a KUDO package from local filesystem or the official repo.
 The name argument must be a name of the package in the repository, a URL or path to package in *.tgz format,
   or a path to an unpacked package directory.
 
+To specify a local path as an operator, the path has to start with `./`, `../` or `/`, otherwise KUDO expects the operatorname to be a
+package from the remote repository.
+
+
 ::: tip Usage
 `kubectl-kudo install <name> [flags]`
 :::
@@ -198,12 +202,6 @@ Specify if the CLI should wait for the install to complete before returning (def
 ::: flag --wait-time int
 Specify the max wait time in seconds for CLI for the install to complete before returning (default "300")
 :::
-
-::: warning
-Be careful with local directories. If you call `kubectl kudo install flink` and you have a local
-directory "flink", the local directory takes precedence over the remote directory.
-:::
-
 
 ## plan
 
@@ -288,8 +286,11 @@ Updating the value of a parameter in an instance will trigger the plan which is 
 
 ## upgrade
 
-Upgrade a KUDO package from the currently installed version to a new version. The upgrade argument must be a name of the 
+Upgrade a KUDO operator instance from the currently installed version to a new version. The upgrade argument must be a name of the 
 package in the repository, a path to package in *.tgz format, or a path to an unpacked package directory.
+
+To specify a local path as an operator, the path has to start with `./`, `../` or `/`, otherwise KUDO expects the operatorname to be a
+package from the remote repository.
 
 Depending on the new operator version you may need to specify certain parameters, for example if the new operator version
 has newly added required parameters.
@@ -317,11 +318,6 @@ The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
 
 ::: flag -P, --parameter-file string
 A YAML file with parameters. See [install](#install) for details.
-:::
-
-::: warning
-Be careful with local directories. If you call `kubectl kudo upgrade flink --instance flink-instance` and you have a local
-directory "flink", the local directory takes precedence over the remote directory.
 :::
 
 ## diagnostics
