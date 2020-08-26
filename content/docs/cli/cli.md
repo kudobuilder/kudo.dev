@@ -8,7 +8,7 @@ How to install and setup KUDO. Details can be found [here](installation.md)
 
 ## Commands
 
-An overview about all the things the KUDO CLI can do. [Details](commands.md)
+An overview about all the things the KUDO CLI can do is [here](commands.md)
 
 ## Examples
 
