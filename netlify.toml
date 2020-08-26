@@ -19,5 +19,5 @@ from = "/blog/blog-2020-07-building-your-first-operator-2.html"
 to = "/blog/blog-2020-07-13-building-your-first-operator-2.html"
 
 [[redirects]]
-from = "/docs/cli.html
+from = "/docs/cli.html"
 to = "/docs/cli/cli.html"
