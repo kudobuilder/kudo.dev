@@ -9,6 +9,10 @@ Operator parameters are key-value pairs declared by the operator developer.
 The operator user may [override](#overriding-parameters) their values at deployment time.
 This allows customizing the behavior of an operator.
 
+::: tip Tip
+Did you know? You can list all parameters for an operator with `kubectl kudo package list parameters <operatorname>`
+:::
+
 ## Declaring parameters
 
 Operator developer declares parameters in a `params.yaml` file.
@@ -89,6 +93,12 @@ Which [plan should be triggered](#triggers) when this parameter is changed after
 If you do not specify this attribute, the `update` or `deploy` [plan will be triggered](#triggers).
 :::
 
+::: attribute immutable
+If the parameter can be changed in an update to the operator instance. Optional, false by default.
+When this attribute is set to true, the parameter must also be required or have a default value, in any way the parameter
+must have a value set when the operator instance is installed and can not be changed later on.
+:::
+
 ## Overriding parameters
 
 Parameter values may be overridden from the CLI by the operator user.
@@ -115,3 +125,18 @@ If no `update` plan exists for this operator, the `deploy` plan is triggered.
 It is currently not specified what happens when a single update changes parameters which refer
 to more than one trigger plan.
 :::
+
+## Immutability
+
+Operators may often have parameters that have to be set at installation time but can not be changed later on. For example
+the `NUM_TOKENS` parameter in the KUDO Cassandra operator defines the number of tokens that each node in a cluster manages.
+This value can not be changed in the lifetime of a Cassandra cluster; if the user wants to change this he must create a new
+cluster with a different value and migrate the data.
+
+A parameter that is defined as immutable must either have a default value, or it must be marked as required - both ways
+ensure that the parameter will have a value at installation. 
+
+When an operator instance is updated, the user can not change the value of immutable parameters or KUDO will decline the
+update.
+
+For all details on immutability, read the [KEP-30](https://github.com/kudobuilder/kudo/blob/main/keps/0030-immutable-parameters.md) 
