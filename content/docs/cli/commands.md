@@ -178,7 +178,7 @@ If set, install will create the specified namespace and will fail if it exists. 
 ::: flag -p, --parameter string=value
 The parameter name and value separated by '='. For example `-p NODE_COUNT=3`
 
-Array and map parameters can be provided as YAMl. For example `-p PORTS='[80, 443]'` for an array, `-p CUSTOM_LABELS='{ team: dev, owner: foo }'` for a map.
+Array and map parameters can be provided as YAMl. For example `-p PORTS='[80, 443]'` for an array, `-p CUSTOM_LABELS='{team: dev, owner: foo}'` for a map.
 :::
 
 ::: flag -P, --parameter-file string

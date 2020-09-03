@@ -107,7 +107,7 @@ The `install`, `upgrade` and `update` subcommands of `kubectl kudo` take the `--
 (which may be abbreviated as `-p`).
 
 The argument to that flag has the form `PARAMETER_NAME=parameter_value`.
-Arrays and maps are provided as YAML values, e.g. `PARAMETER_NAME='[array_value_1, array_value_2]'`' for arrays, `PARAMETER_NAME='map_key_1: map_value_1, map_key_2: map_value_2'` for maps.
+Arrays and maps are provided as YAML values, e.g. `PARAMETER_NAME='[array_value_1, array_value_2]'`' for arrays, `PARAMETER_NAME='{map_key_1: map_value_1, map_key_2: map_value_2}'` for maps.
 
 This flag may be specified many times to change more parameters in a single run.
 
