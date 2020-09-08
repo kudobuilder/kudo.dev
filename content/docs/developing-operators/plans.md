@@ -122,7 +122,7 @@ spec:
                 - cleanup
 ```
 
-As you see, the `cleanup` plan is basically a "negative" (`kind: Delete`) to the `deploy` (`kind: Apply`) plan - it simply deletes the previously applied resources. Note, that a `Delete` task does not fail if the resources do not exist.
+In this example the `cleanup` is of `kind: Delete` and simply removes the `database.yaml` resource. Now, this is normally *not necessary* as removing an `Instance` also deletes all its resources. We struggled to come up with a more meaningful example so there is that. Just note, that a `cleanup` plan is like any other plan except that it is being called before the `Instance` is deleted. 
 
 The `cleanup` plan is implemented using [finalizers](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers). The instance's `metadata.finalizers` contains the value "kudo.dev.instance.cleanup" while the `cleanup` plan is in progress.
 
