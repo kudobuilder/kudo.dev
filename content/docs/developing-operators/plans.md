@@ -85,7 +85,7 @@ plans:
 ## Cleanup plans
 
 If an optional `cleanup` plan is part of an operator, this plan will run as part of the deletion of an [Instance](../what-is-kudo.md#main-concepts). Once this plan completes or fails, the instance will be deleted.
-Operator developers should take care that there aren't any triggers defined for this plan. Furthermore it should be expected that the steps of this plan could fail. E.g., users may want to delete an instance because its `deploy` plan is stuck. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. The `cleanup` plan will start even if other plans are in progress.
+This plan (if exists) will be triggered by the KUDO manager automatically once the `Instance` is being deleted. Trying to trigger it during the normal life-cycle of the `Instance` will lead to an error. Furthermore, it should be expected that the steps of this plan could fail. E.g., users may want to delete an instance because its `deploy` plan is stuck. In that case resources that the `cleanup` plan tries to remove might not exist on the cluster. The `cleanup` plan will start even if other plans are in progress.
 
 ```yaml
 ...
@@ -99,7 +99,7 @@ tasks:
     kind: Apply
     spec:
       resources:
-        - remove-database.yaml
+        - cleanup-job.yaml
 spec:
   plans:
     deploy:
@@ -121,6 +121,8 @@ spec:
               tasks:
                 - cleanup
 ```
+
+Note, that it is *not necessary* to remove the `database.yaml` as all resources belonging to the `Instance` will be removed automatically when the instance is deleted. However, complex application sometimes create state which cannot be captured by Kubernetes resources. As this state may have to be removed when removing the respective operator, a `cleanup` plan can take care of that. The example above bundles that tasks needed to remove this state in a Job provided by the `cleanup-job.yaml`. In general a `cleanup` plan is like any other plan except that it is being called before the `Instance` is deleted.
 
 The `cleanup` plan is implemented using [finalizers](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#finalizers). The instance's `metadata.finalizers` contains the value "kudo.dev.instance.cleanup" while the `cleanup` plan is in progress.
 
