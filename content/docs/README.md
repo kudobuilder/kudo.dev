@@ -10,7 +10,7 @@ Before you get started using KUDO, you need to have a running Kubernetes cluster
 
 ## Install KUDO CLI
 
-Install the `kubectl kudo` plugin. To do so, please follow the [CLI plugin installation instructions](cli.md).
+Install the `kubectl kudo` plugin. To do so, please follow the [CLI plugin installation instructions](cli/installation.html#cli-installation).
 
 The KUDO CLI leverages the kubectl plugin system, which gives you all its functionality under `kubectl kudo`. This is a convenient way to install and deal with your KUDO Operators.
 
@@ -31,7 +31,7 @@ $ kubectl kudo init --dry-run -o=yaml > kudo.yaml
 $ kubectl apply -f kudo.yaml
 ```
 
-See [kudo init documentation](cli.md#kudo-init)  for more KUDO installation options.
+See [kudo init documentation](cli/installation.html#kudo-initialization)  for more KUDO installation options.
 
 ## Deploy Your First Operator
 
@@ -64,4 +64,3 @@ $ kubectl kudo init --unsafe-self-signed-webhook-ca
 ```
 
 For development, you should also take a look at [this blog post](/blog/blog-2020-07-10-webhook-development.html).
-
