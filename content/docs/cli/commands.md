@@ -132,7 +132,7 @@ Show all operator versions
 Show all KUDO objects
 :::
 
-All `get` command supports `--output yaml` option.
+All `get` commands supports `--output yaml` option.
 
 ## search
 
