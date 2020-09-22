@@ -77,12 +77,12 @@ Override KUDO controller image pull policy (default "Always")
 :::
 
 ::: flag --service-account string
-Override for the default serviceAccount. By default a service account "kudo-manager" is created with cluster-admin permissions.
+Override for the default serviceAccount. By default, a service account "kudo-manager" is created with cluster-admin permissions.
  If a custom service account is provided, it has to exist and has to have cluster-admin permissions.
 :::
 
 ::: flag --unsafe-self-signed-webhook-ca
-Use self-signed CA bundle (for testing only) for the webhooks. By default KUDO expects [cert-manager](https://cert-manager.io/) 
+Use self-signed CA bundle (for testing only) for the webhooks. By default, KUDO expects [cert-manager](https://cert-manager.io/) 
 to be installed, multiple versions are supported.
 :::
 
@@ -110,11 +110,29 @@ Wait timeout to be used (default 300) with `--wait`
 
 ## get
 
-Get information about installed instances
+Get information about installed instances, operators and operator versions.
 
 ::: tip Usage
-`kubectl kudo get instances [flags]`
+`kubectl kudo get all [flags]`
 :::
+
+::: flag instances
+Show all instances
+:::
+
+::: flag operators
+Show all operators
+:::
+
+::: flag operatorversions
+Show all operator versions
+:::
+
+::: flag all
+Show all KUDO objects
+:::
+
+All `get` commands supports `--output yaml` option.
 
 ## search
 
@@ -138,10 +156,10 @@ Return all versions of found operators.
 
 ## install
 
-Install a KUDO package from local filesystem or the official repo.
+Install a KUDO package from the local filesystem, official repo or in-cluster resources.
 
 The name argument must be a name of the package in the repository, a URL or path to package in *.tgz format,
-  or a path to an unpacked package directory.
+ path to an unpacked package directory or a name of an already installed operator (when using the `--in-cluster` option).
 
 To specify a local path as an operator, the path has to start with `./`, `../` or `/`, otherwise KUDO expects the operatorname to be a
 package from the remote repository.
@@ -203,6 +221,10 @@ Specify if the CLI should wait for the install to complete before returning (def
 
 ::: flag --wait-time int
 Specify the max wait time in seconds for CLI for the install to complete before returning (default "300")
+:::
+
+::: flag --in-cluster
+When specified, the operator is searched in the already installed in-cluster operator versions. To see already installed operator versions use the [get](#get) command. 
 :::
 
 ## plan
