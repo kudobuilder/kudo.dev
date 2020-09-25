@@ -22,7 +22,7 @@ kubectl krew install kudo
 or you can download the CLI binaries from the release page at https://github.com/kudobuilder/kudo/releases/latest and download the release for your platform and OS.  Make executable and add to your path:
 
 ```bash
-VERSION=0.12.0
+VERSION=x.y.z # look up the current stable release at https://github.com/kudobuilder/kudo/releases/latest
 OS=$(uname | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
 wget -O kubectl-kudo https://github.com/kudobuilder/kudo/releases/download/v${VERSION}/kubectl-kudo_${VERSION}_${OS}_${ARCH}
