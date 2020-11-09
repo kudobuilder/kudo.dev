@@ -75,7 +75,7 @@ You run a Kubernetes cluster with many different Operators, and are looking for 
 ```bash
 $ brew tap kudobuilder/tap
 $ brew install kudo-cli
-$ kubectl kudo init
+$ kubectl kudo init --wait
 ```
 
 It's insanely easy to get started with KUDO - follow this [handy guide](/docs/)!
