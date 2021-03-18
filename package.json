@@ -14,7 +14,7 @@
     "axios": "^0.21.1",
     "markdown-it-footnote": "^3.0.2",
     "markdown-it-imsize": "2.0.1",
-    "vuepress-plugin-container": "^2.0.2",
-    "vuepress-plugin-feed": "^0.1.7"
+    "vuepress-plugin-container": "^2.1.5",
+    "vuepress-plugin-feed": "^0.1.9"
   }
 }
