@@ -256,7 +256,7 @@ Lists history for each plan of an instance.
 Triggers a specific plan on a particular instance.
 
 ::: tip Usage
- `kubectl kudo plan trigger <planName> --instance=<instanceName> [flags]`
+ `kubectl kudo plan trigger --name=<planName> --instance=<instanceName> [flags]`
 :::
 
 ::: flag --wait
